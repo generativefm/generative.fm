@@ -1,0 +1,11 @@
+{
+  "extends": "plugin:react/recommended",
+  "env": {
+    "node": false,
+    "es6": true,
+    "browser": true
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  }
+}

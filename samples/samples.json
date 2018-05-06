@@ -1,0 +1,33 @@
+{
+  "sso-piano": {
+    "A1": "./Samples/sso-piano/a1.wav",
+    "A2": "./Samples/sso-piano/a2.wav",
+    "A3": "./Samples/sso-piano/a3.wav",
+    "A4": "./Samples/sso-piano/a4.wav",
+    "A5": "./Samples/sso-piano/a5.wav",
+    "A6": "./Samples/sso-piano/a6.wav",
+    "A7": "./Samples/sso-piano/a7.wav",
+    "C1": "./Samples/sso-piano/c1.wav",
+    "C2": "./Samples/sso-piano/c2.wav",
+    "C3": "./Samples/sso-piano/c3.wav",
+    "C4": "./Samples/sso-piano/c4.wav",
+    "C5": "./Samples/sso-piano/c5.wav",
+    "C6": "./Samples/sso-piano/c6.wav",
+    "C7": "./Samples/sso-piano/c7.wav",
+    "C8": "./Samples/sso-piano/c8.wav",
+    "D#1": "./Samples/sso-piano/dsharp1.wav",
+    "D#2": "./Samples/sso-piano/dsharp2.wav",
+    "D#3": "./Samples/sso-piano/dsharp3.wav",
+    "D#4": "./Samples/sso-piano/dsharp4.wav",
+    "D#5": "./Samples/sso-piano/dsharp5.wav",
+    "D#6": "./Samples/sso-piano/dsharp6.wav",
+    "D#7": "./Samples/sso-piano/dsharp7.wav",
+    "F#1": "./Samples/sso-piano/fsharp1.wav",
+    "F#2": "./Samples/sso-piano/fsharp2.wav",
+    "F#3": "./Samples/sso-piano/fsharp3.wav",
+    "F#4": "./Samples/sso-piano/fsharp4.wav",
+    "F#5": "./Samples/sso-piano/fsharp5.wav",
+    "F#6": "./Samples/sso-piano/fsharp6.wav",
+    "F#7": "./Samples/sso-piano/fsharp7.wav"
+  }
+}

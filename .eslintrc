@@ -1,0 +1,13 @@
+{
+  "extends": "metalex9",
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "no-magic-numbers": 0,
+    "no-mixed-operators": 0,
+    "handle-callback-err": 0,
+    "no-param-reassign": 0
+  }
+}
