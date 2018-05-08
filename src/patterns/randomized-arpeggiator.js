@@ -12,7 +12,6 @@ const randomizedArpeggiator = (
   shouldPlay = () => true
 ) =>
   getSampledInstrument(instrumentName).then(instrument => {
-    instrument.toMaster();
     notes.forEach(note => {
       const interval = getRandomBetween(intervalMinSeconds, intervalMaxSeconds);
       const delay = getRandomBetween(
@@ -37,6 +36,7 @@ const randomizedArpeggiator = (
         delay
       );
     });
+    return instrument;
   });
 
 export default randomizedArpeggiator;

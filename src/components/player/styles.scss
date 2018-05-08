@@ -1,0 +1,229 @@
+$icon-size: 30px;
+
+// $color-hover: saturate(lighten($green, 10%), 20%);
+// $color-active: desaturate(darken($green, 20%), 20%);
+
+$black: #3d463f;
+$gray: #878c88;
+$lightgray: #d3d3d3;
+$white: #fefefe;
+$blue: #0e52ce;
+$green: #72d687;
+
+$color-hover: desaturate(darken($green, 20%), 10%);
+$color-active: fade-out($color-hover, 0.5);
+
+//
+// Buttons
+//
+
+.PlayButton,
+.PauseButton,
+.PrevButton,
+.NextButton,
+.SoundOnButton,
+.SoundOffButton {
+  margin-right: 10px;
+  padding: 8px;
+  background: $white;
+  border: 2px solid $green;
+  border-radius: 100%;
+  outline: none;
+
+  &[disabled] {
+    opacity: 0.5;
+  }
+
+  &.isEnabled {
+    cursor: pointer;
+
+    &:hover {
+      border-color: $color-hover;
+
+      .Icon-shape {
+        fill: $color-hover;
+      }
+    }
+
+    &:active {
+      border-color: $color-active;
+
+      .Icon-shape {
+        fill: $color-active;
+      }
+    }
+  }
+}
+
+.Icon {
+  display: block;
+  width: $icon-size;
+  height: $icon-size;
+}
+
+.Icon-shape {
+  fill: $green;
+}
+
+//
+// Sliders
+//
+
+.ProgressBar,
+.VolumeSlider {
+  position: relative;
+  background: #eee;
+  border-radius: 4px;
+
+  &-elapsed,
+  &-value {
+    background: $gray;
+    border-radius: 4px;
+  }
+
+  &-seek {
+    position: absolute;
+    cursor: pointer;
+  }
+
+  &-handle {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: $green;
+    border-radius: 100%;
+    transform: scale(0);
+    transition: transform 0.2s;
+  }
+
+  &.isSeekable,
+  &.isEnabled {
+    &:hover {
+      .ProgressBar-handle,
+      .VolumeSlider-handle {
+        transform: scale(1);
+      }
+
+      .ProgressBar-intent,
+      .VolumeSlider-intent {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .ProgressBar-elapsed,
+    .VolumeSlider-value {
+      background: $green;
+    }
+  }
+}
+
+.ProgressBar {
+  height: 8px;
+  margin: 10px 0;
+
+  &-elapsed {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &-buffered {
+    height: 100%;
+    border-radius: 4px;
+    background: $lightgray;
+  }
+
+  &-seek {
+    top: -6px;
+    right: 0;
+    bottom: -6px;
+    left: 0;
+  }
+
+  &-handle {
+    top: 0;
+    margin: -4px 0 0 -8px;
+  }
+
+  &.isSeekable {
+    &:hover {
+      .ProgressBar-handle {
+        transform: scale(1);
+      }
+
+      .ProgressBar-intent {
+        top: 0;
+        left: 0;
+        height: 100%;
+      }
+    }
+  }
+
+  &.isLoading {
+    opacity: 0.5;
+    background: #ccc;
+    animation: barLoading 2s infinite;
+  }
+}
+
+.VolumeSlider {
+  // margin: 10px 0;
+
+  &-value {
+    position: absolute;
+  }
+
+  &.isHorizontal {
+    width: 100px;
+    height: 8px;
+    transition: width 0.3s, height 0.05s;
+  }
+
+  &.isHorizontal &-value {
+    height: 100%;
+    left: 0;
+  }
+
+  &.isHorizontal &-handle {
+    margin: -4px 0 0 -8px;
+  }
+
+  &.isVertical {
+    width: 8px;
+    height: 100px;
+    transition: width 0.05s, height 0.3s;
+  }
+
+  &.isVertical &-value {
+    bottom: 0;
+    width: 100%;
+  }
+
+  &.isVertical &-handle {
+    left: 0;
+    margin: 0 0 -8px -4px;
+  }
+
+  &-seek {
+    left: -6px;
+    top: 0;
+    right: -6px;
+    bottom: 0;
+  }
+
+  &.isEnabled {
+    &:hover {
+      .VolumeSlider-handle {
+        transform: scale(1);
+      }
+
+      .VolumeSlider-intent {
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+    }
+  }
+}

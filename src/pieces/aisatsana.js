@@ -2,7 +2,6 @@ import Tone from 'tone';
 import Chain from 'markov-chains';
 import getSampledInstrument from '../util/get-sampled-instrument';
 import instructions from '../../aisatsana.json';
-import log from '../util/log';
 
 const BPM = 102;
 const EIGTH_NOTE_INTERVAL = 60 / (2 * BPM);
@@ -35,9 +34,10 @@ const phrasesWithIndex = phrases.map(phrase =>
 );
 
 const chain = new Chain(phrasesWithIndex);
-log('aisatsana (generative mix)');
-const piece = master =>
-  getSampledInstrument('sso-piano').then(piano => {
+const piece = (master, log) => {
+  log("loading 'aisatsana (generative mix)'");
+  return getSampledInstrument('sso-piano').then(piano => {
+    log('start');
     piano.connect(master);
     const schedule = () => {
       Tone.Draw.schedule(() => log('generating new phrase'));
@@ -68,5 +68,6 @@ const piece = master =>
       '+0.1'
     );
   });
+};
 
 export default piece;
