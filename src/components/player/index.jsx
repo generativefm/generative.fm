@@ -15,10 +15,6 @@ const MIN_VOLUME = -75;
 
 const convertPctToDb = pct => pct * (MAX_VOLUME - MIN_VOLUME) + MIN_VOLUME;
 
-const start = () => {
-  Tone.Transport.start('+1');
-};
-
 class Player extends Component {
   constructor(props) {
     super(props);
@@ -53,7 +49,7 @@ class Player extends Component {
   }
   handlePlayClick() {
     this.props.piece(this.state.masterVolumeNode, this.log).then(() => {
-      Tone.Transport.start();
+      Tone.Transport.start('+1');
     });
   }
   log(message) {
