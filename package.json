@@ -41,6 +41,7 @@
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-player-controls": "^0.5.20",
+    "startaudiocontext": "^1.2.1",
     "tone": "^0.12.80"
   }
 }

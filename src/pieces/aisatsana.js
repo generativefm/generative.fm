@@ -35,14 +35,14 @@ const phrasesWithIndex = phrases.map(phrase =>
 
 const chain = new Chain(phrasesWithIndex);
 const piece = (master, log) => {
-  log("loading 'aisatsana (generative mix)'");
+  log('aisatsana (generative mix)');
   return getSampledInstrument('sso-piano').then(piano => {
-    log('start');
+    log('ready');
     piano.connect(master);
     const schedule = () => {
       Tone.Draw.schedule(() => log('generating new phrase'));
       const phrase = chain.walk();
-      Tone.Draw.schedule(() => log('phrase generated'), '+0.05');
+      Tone.Draw.schedule(() => log('phrase generated'));
       phrase.forEach(str => {
         const [time, ...names] = str.split(DELIMITER);
         names.forEach(name =>
@@ -57,7 +57,7 @@ const piece = (master, log) => {
               log(
                 `playing ${names.map(name => name.toLowerCase()).join(', ')}`
               ),
-            `+${0.6 + time * EIGTH_NOTE_INTERVAL}`
+            `+${time * EIGTH_NOTE_INTERVAL}`
           );
         }
       });

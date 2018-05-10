@@ -5,6 +5,7 @@ const getSampledInstrument = instrumentName =>
   new Promise(resolve => {
     const instrument = new Tone.Sampler(samples[instrumentName], {
       onload: () => resolve(instrument),
+      attack: 0,
     });
   });
 
