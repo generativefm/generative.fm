@@ -10,8 +10,6 @@ import {
 } from 'react-player-controls';
 import './styles.scss';
 
-startAudioContext(Tone.context);
-
 const DEFAULT_VOLUME_PCT = 0.75;
 const MAX_VOLUME = -15;
 const MIN_VOLUME = -75;
@@ -66,6 +64,7 @@ class Player extends Component {
   }
   componentDidMount() {
     this.props.piece(this.state.masterVolumeNode, this.log.bind(this));
+    startAudioContext(Tone.context);
   }
   handlePlayClick() {
     Tone.Transport.start('+1');
