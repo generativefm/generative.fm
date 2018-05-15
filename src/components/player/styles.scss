@@ -1,4 +1,4 @@
-$icon-size: 30px;
+$icon-size: 5vh;
 
 // $color-hover: saturate(lighten($green, 10%), 20%);
 // $color-active: desaturate(darken($green, 20%), 20%);
@@ -23,7 +23,6 @@ $color-active: fade-out($color-hover, 0.5);
 .NextButton,
 .SoundOnButton,
 .SoundOffButton {
-  margin-right: 10px;
   padding: 8px;
   background: $white;
   border: 2px solid $green;
@@ -86,16 +85,6 @@ $color-active: fade-out($color-hover, 0.5);
     cursor: pointer;
   }
 
-  &-handle {
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    background: $green;
-    border-radius: 100%;
-    transform: scale(0);
-    transition: transform 0.2s;
-  }
-
   &.isSeekable,
   &.isEnabled {
     &:hover {
@@ -118,76 +107,9 @@ $color-active: fade-out($color-hover, 0.5);
   }
 }
 
-.ProgressBar {
-  height: 8px;
-  margin: 10px 0;
-
-  &-elapsed {
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  &-buffered {
-    height: 100%;
-    border-radius: 4px;
-    background: $lightgray;
-  }
-
-  &-seek {
-    top: -6px;
-    right: 0;
-    bottom: -6px;
-    left: 0;
-  }
-
-  &-handle {
-    top: 0;
-    margin: -4px 0 0 -8px;
-  }
-
-  &.isSeekable {
-    &:hover {
-      .ProgressBar-handle {
-        transform: scale(1);
-      }
-
-      .ProgressBar-intent {
-        top: 0;
-        left: 0;
-        height: 100%;
-      }
-    }
-  }
-
-  &.isLoading {
-    opacity: 0.5;
-    background: #ccc;
-    animation: barLoading 2s infinite;
-  }
-}
-
 .VolumeSlider {
-  // margin: 10px 0;
-
   &-value {
     position: absolute;
-  }
-
-  &.isHorizontal {
-    width: 100px;
-    height: 8px;
-    transition: width 0.3s, height 0.05s;
-  }
-
-  &.isHorizontal &-value {
-    height: 100%;
-    left: 0;
-  }
-
-  &.isHorizontal &-handle {
-    margin: -4px 0 0 -8px;
   }
 
   &.isVertical {
@@ -201,11 +123,6 @@ $color-active: fade-out($color-hover, 0.5);
     width: 100%;
   }
 
-  &.isVertical &-handle {
-    left: 0;
-    margin: 0 0 -8px -4px;
-  }
-
   &-seek {
     left: -6px;
     top: 0;
@@ -215,15 +132,61 @@ $color-active: fade-out($color-hover, 0.5);
 
   &.isEnabled {
     &:hover {
-      .VolumeSlider-handle {
-        transform: scale(1);
-      }
-
       .VolumeSlider-intent {
         bottom: 0;
         left: 0;
         width: 100%;
       }
+    }
+  }
+}
+
+body {
+  margin: 0;
+}
+
+.player {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  &__logs {
+    font-family: 'Cutive Mono', monospace;
+    text-align: right;
+    padding-right: 5px;
+    max-height: 100vh;
+    overflow-y: hidden;
+  }
+
+  &__center {
+    text-align: center;
+    margin: 0 auto;
+    &__slider {
+      .VolumeSlider {
+        margin: 0 auto;
+        height: 80vh;
+        width: 5vh;
+      }
+    }
+  }
+
+  .side-button {
+    position: absolute;
+    top: 50%;
+    background: none;
+    border: 1px solid #eee;
+    border-radius: 100%;
+    width: 2rem;
+    height: 2rem;
+    padding: 0px;
+    vertical-align: middle;
+    margin: 1rem;
+
+    &--left {
+      left: 0;
+    }
+
+    &--right {
+      right: 0;
     }
   }
 }
