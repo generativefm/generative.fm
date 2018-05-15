@@ -1,17 +1,7 @@
-$icon-size: 5vh;
+$icon-size: 4vh;
 
-// $color-hover: saturate(lighten($green, 10%), 20%);
-// $color-active: desaturate(darken($green, 20%), 20%);
-
-$black: #3d463f;
-$gray: #878c88;
-$lightgray: #d3d3d3;
-$white: #fefefe;
-$blue: #0e52ce;
-$green: #72d687;
-
-$color-hover: desaturate(darken($green, 20%), 10%);
-$color-active: fade-out($color-hover, 0.5);
+$primary-color: black;
+$secondary-color: grey;
 
 //
 // Buttons
@@ -24,8 +14,8 @@ $color-active: fade-out($color-hover, 0.5);
 .SoundOnButton,
 .SoundOffButton {
   padding: 8px;
-  background: $white;
-  border: 2px solid $green;
+  background: white;
+  border: 2px solid $primary-color;
   border-radius: 100%;
   outline: none;
 
@@ -37,18 +27,18 @@ $color-active: fade-out($color-hover, 0.5);
     cursor: pointer;
 
     &:hover {
-      border-color: $color-hover;
+      border-color: $secondary-color;
 
       .Icon-shape {
-        fill: $color-hover;
+        fill: $secondary-color;
       }
     }
 
     &:active {
-      border-color: $color-active;
+      border-color: $primary-color;
 
       .Icon-shape {
-        fill: $color-active;
+        fill: $primary-color;
       }
     }
   }
@@ -61,7 +51,7 @@ $color-active: fade-out($color-hover, 0.5);
 }
 
 .Icon-shape {
-  fill: $green;
+  fill: black;
 }
 
 //
@@ -76,7 +66,7 @@ $color-active: fade-out($color-hover, 0.5);
 
   &-elapsed,
   &-value {
-    background: $gray;
+    background: $secondary-color;
     border-radius: 4px;
   }
 
@@ -102,7 +92,7 @@ $color-active: fade-out($color-hover, 0.5);
 
     .ProgressBar-elapsed,
     .VolumeSlider-value {
-      background: $green;
+      background: black;
     }
   }
 }
@@ -158,35 +148,45 @@ body {
   }
 
   &__center {
+    padding-top: 2vh;
     text-align: center;
     margin: 0 auto;
     &__slider {
+      padding-top: 2vh;
       .VolumeSlider {
         margin: 0 auto;
-        height: 80vh;
+        height: 85vh;
         width: 5vh;
       }
     }
   }
 
-  .side-button {
-    position: absolute;
-    top: 50%;
-    background: none;
-    border: 1px solid #eee;
-    border-radius: 100%;
-    width: 2rem;
-    height: 2rem;
-    padding: 0px;
-    vertical-align: middle;
-    margin: 1rem;
+  .vertical-center-parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
-    &--left {
-      left: 0;
+  .side-button {
+    background: none;
+    border: 2px solid $secondary-color;
+    color: $secondary-color;
+    border-radius: 100%;
+    width: 3vh;
+    height: 3vh;
+    padding: 0px;
+    margin: 1rem;
+    cursor: pointer;
+    line-height: 50%;
+    text-align: center;
+
+    &:hover {
+      color: $primary-color;
+      border-color: $primary-color;
     }
 
-    &--right {
-      right: 0;
+    &:focus {
+      outline: none;
     }
   }
 }

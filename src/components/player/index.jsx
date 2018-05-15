@@ -10,8 +10,8 @@ import {
 } from 'react-player-controls';
 import StayScrolled from 'react-stay-scrolled';
 import FontAwesome from '@fortawesome/react-fontawesome';
-import faEllipsisH from '@fortawesome/fontawesome-free-solid/faEllipsisH';
-import faEllipsisV from '@fortawesome/fontawesome-free-solid/faEllipsisV';
+import faCaretLeft from '@fortawesome/fontawesome-free-solid/faCaretLeft';
+import faCaretRight from '@fortawesome/fontawesome-free-solid/faCaretRight';
 import PropTypes from 'prop-types';
 import Log from '../log';
 import './styles.scss';
@@ -59,6 +59,17 @@ class Player extends Component {
         {this.state.showInfo && (
           <div className="player__info">Theres nothing here</div>
         )}
+        <div className="vertical-center-parent">
+          <button
+            type="button"
+            className="side-button side-button--left"
+            onClick={this.handleInfoClick}
+          >
+            <FontAwesome
+              icon={this.state.showInfo ? faCaretLeft : faCaretRight}
+            />
+          </button>
+        </div>
         <div className="player__center">
           <div className="player__center__button">
             {!this.state.isPlaying && (
@@ -82,6 +93,17 @@ class Player extends Component {
             />
           </div>
         </div>
+        <div className="vertical-center-parent">
+          <button
+            type="button"
+            className="side-button side-button--right"
+            onClick={this.handleLogsClick}
+          >
+            <FontAwesome
+              icon={this.state.showLogs ? faCaretRight : faCaretLeft}
+            />
+          </button>
+        </div>
 
         {this.state.showLogs && (
           <StayScrolled
@@ -93,21 +115,6 @@ class Player extends Component {
             ))}
           </StayScrolled>
         )}
-
-        <button
-          type="button"
-          className="side-button side-button--left"
-          onClick={this.handleInfoClick}
-        >
-          <FontAwesome icon={faEllipsisH} />
-        </button>
-        <button
-          type="button"
-          className="side-button side-button--right"
-          onClick={this.handleLogsClick}
-        >
-          <FontAwesome icon={faEllipsisV} />
-        </button>
       </div>
     );
   }
@@ -147,10 +154,10 @@ class Player extends Component {
     this.state.masterVolumeNode.set({ volume: convertPctToDb(volume) });
   }
   handleInfoClick() {
-    this.setState({ showInfo: true, showLogs: false });
+    this.setState({ showInfo: !this.state.showInfo, showLogs: false });
   }
   handleLogsClick() {
-    this.setState({ showLogs: true, showInfo: false });
+    this.setState({ showLogs: !this.state.showLogs, showInfo: false });
   }
 }
 
