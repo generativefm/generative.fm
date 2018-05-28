@@ -1,10 +1,10 @@
 import aisatsana from './aisatsana';
 import enoMachine from './eno-machine';
-import lemniscate from './lemniscate';
+//import lemniscate from './lemniscate';
 
 const piece = (title, makePiece, description) => ({
   title,
-  piece,
+  makePiece,
   description,
 });
 
@@ -16,8 +16,8 @@ const pieces = [
 This generative remix is created by splitting the original piece into 4 bar phrases.
 Each phrase is quantized such that every note in the phrase is triggered during one of the 32 eighth notes contained in each phrase.
 These phrases are then input into a Markov chain, which can be used to generate new phrases based on the probababilities of the notes which occurred in the actual piece.
-While there are only 32 phrases in the original piece, this version is capabable of creating 67,350,186 unique phrases.
-If each possible phrase were played in succession without repeating, it would take over 20 years to listen to them all.`
+While there are only 32 phrases in the original piece, this version is capabable of creating 4,147,200 unique phrases.
+If each possible phrase were played in succession without repeating, it would take over 451 days to play them all.`
   ),
   piece(
     'Eno Machine',
@@ -34,7 +34,7 @@ The piece played here uses a similar technique to generate unique music which wi
 Each of the 18 notes in the piece (which are the same ones from "2/1" on multiple octaves) are played on a random interval between 20 and 60 seconds.
 New intervals are chosen each time the piece is generated.`
   ),
-  piece('Lemniscate', lemniscate),
+  //piece('Lemniscate', lemniscate),
 ];
 
 export default pieces;

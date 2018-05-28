@@ -14,6 +14,7 @@ import faCaretLeft from '@fortawesome/fontawesome-free-solid/faCaretLeft';
 import faCaretRight from '@fortawesome/fontawesome-free-solid/faCaretRight';
 import PropTypes from 'prop-types';
 import Log from '../log';
+import Info from '../info';
 import './styles.scss';
 
 const DEFAULT_VOLUME_PCT = 0.75;
@@ -57,7 +58,9 @@ class Player extends Component {
     return (
       <div className="player">
         {this.state.showInfo && (
-          <div className="player__info">Theres nothing here</div>
+          <div className="player__info">
+            <Info {...this.props.piece} />
+          </div>
         )}
         <div className="vertical-center-parent">
           <button
@@ -119,7 +122,10 @@ class Player extends Component {
     );
   }
   componentDidMount() {
-    this.props.piece(this.state.masterVolumeNode, this.log.bind(this));
+    this.props.piece.makePiece(
+      this.state.masterVolumeNode,
+      this.log.bind(this)
+    );
     startAudioContext(Tone.context);
   }
   handlePlayClick() {
@@ -162,7 +168,11 @@ class Player extends Component {
 }
 
 Player.propTypes = {
-  piece: PropTypes.func,
+  piece: PropTypes.shape({
+    makePiece: PropTypes.func,
+    title: PropTypes.string,
+    description: PropTypes.string,
+  }),
 };
 
 export default Player;

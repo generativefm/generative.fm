@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Player from './components/player';
-import piece from './pieces/aisatsana';
+import pieces from './pieces';
 
-render(<Player piece={piece} />, document.getElementById('root'));
+render(<Player piece={pieces[0]} />, document.getElementById('root'));

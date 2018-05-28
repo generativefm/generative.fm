@@ -27,8 +27,6 @@ while (enCopy.length > 0) {
   phrases.push(enCopy.splice(0, phraseLength));
 }
 
-console.log(phraseLength * EIGTH_NOTE_INTERVAL);
-
 const phrasesWithIndex = phrases.map(phrase =>
   phrase.map(
     (names, i) => (names.length === 0 ? `${i}` : `${i}${DELIMITER}${names}`)

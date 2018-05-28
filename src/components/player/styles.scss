@@ -145,20 +145,27 @@ body {
     padding-right: 5px;
     max-height: 100vh;
     overflow-y: hidden;
+    max-width: 50vh;
   }
 
   &__center {
-    padding-top: 2vh;
+    padding-top: 10px;
     text-align: center;
     margin: 0 auto;
     &__slider {
-      padding-top: 2vh;
+      padding-top: 10px;
       .VolumeSlider {
         margin: 0 auto;
         height: 85vh;
         width: 5vh;
       }
     }
+  }
+
+  &__info {
+    padding-top: 10px;
+    padding-left: 10px;
+    max-width: 50vw;
   }
 
   .vertical-center-parent {
@@ -169,8 +176,8 @@ body {
 
   .side-button {
     background: none;
-    border: 2px solid $secondary-color;
-    color: $secondary-color;
+    border: 2px solid $primary-color;
+    color: $primary-color;
     border-radius: 100%;
     width: 3vh;
     height: 3vh;
@@ -181,8 +188,8 @@ body {
     text-align: center;
 
     &:hover {
-      color: $primary-color;
-      border-color: $primary-color;
+      color: $secondary-color;
+      border-color: $secondary-color;
     }
 
     &:focus {
