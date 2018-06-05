@@ -29,5 +29,50 @@
     "F#5": "./Samples/sso-piano/fsharp5.wav",
     "F#6": "./Samples/sso-piano/fsharp6.wav",
     "F#7": "./Samples/sso-piano/fsharp7.wav"
+  },
+  "sso-conga": {
+    "A1": "./Samples/sso-conga/conga-mut-rr1.wav",
+    "A2": "./Samples/sso-conga/conga-mut-rr2.wav",
+    "A3": "./Samples/sso-conga/conga-opn-rr1.wav",
+    "A4": "./Samples/sso-conga/conga-opn-rr2.wav",
+    "A5": "./Samples/sso-conga/conga-slp-rr1.wav",
+    "A6": "./Samples/sso-conga/conga-slp-rr2.wav"
+  },
+  "sso-bass-drum": {
+    "A1": "./Samples/sso-bass-drum/bass_drum-f.wav",
+    "A2": "./Samples/sso-bass-drum/bass_drum-p.wav"
+  },
+  "sso-cabasa": {
+    "A1": "./Samples/sso-cabasa/cabasa-a.wav",
+    "A2": "./Samples/sso-cabasa/cabasa-b.wav"
+  },
+  "sso-castanets": {
+    "A1": "./Samples/sso-castanets/castanets-rr1.wav",
+    "A2": "./Samples/sso-castanets/castanets-rr2.wav"
+  },
+  "sso-finger-cymbal": {
+    "A1": "./Samples/sso-finger-cymbal/finger_cymbal-hi.wav",
+    "A2": "./Samples/sso-finger-cymbal/finger_cymbal-lo.wav"
+  },
+  "sso-shaker": {
+    "A1": "./Samples/sso-shaker/shaker-a.wav",
+    "A2": "./Samples/sso-shaker/shaker-b.wav",
+    "A3": "./Samples/sso-shaker/shaker-c.wav",
+    "A4": "./Samples/sso-shaker/shaker-hi-a.wav",
+    "A5": "./Samples/sso-shaker/shaker-hi-b.wav",
+    "A6": "./Samples/sso-shaker/shaker-lo-a.wav",
+    "A7": "./Samples/sso-shaker/shaker-lo-b.wav"
+  },
+  "sso-sleigh-bells": {
+    "A1": "./Samples/sso-sleigh-bells/sleigh_bells-f.wav",
+    "A2": "./Samples/sso-sleigh-bells/sleigh_bells-mf.wav"
+  },
+  "sso-tambourine": {
+    "A1": "./Samples/sso-tambourine/tambourine-hit-f.wav",
+    "A2": "./Samples/sso-tambourine/tambourine-hit-mf.wav"
+  },
+  "sso-wood-block": {
+    "A1": "./Samples/sso-wood-block/wood_block-hi.wav",
+    "A2": "./Samples/sso-wood-block/wood_block-lo.wav"
   }
 }

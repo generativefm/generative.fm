@@ -45,6 +45,10 @@ class Player extends Component {
     this.storeScrolledControllers = this.storeScrolledControllers.bind(this);
     this.handleInfoClick = this.handleInfoClick.bind(this);
     this.handleLogsClick = this.handleLogsClick.bind(this);
+
+    setTimeout(() => {
+      this.handlePlayClick();
+    }, 300);
   }
   storeScrolledControllers({ scrollBottom }) {
     this.scrollBottom = scrollBottom;

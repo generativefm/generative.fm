@@ -47,6 +47,7 @@
     "react-player-controls": "^0.5.20",
     "react-render-html": "^0.6.0",
     "react-stay-scrolled": "^2.1.1",
+    "shuffle-array": "^1.0.1",
     "startaudiocontext": "^1.2.1",
     "tone": "^0.12.80"
   }
