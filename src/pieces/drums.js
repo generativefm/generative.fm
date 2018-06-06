@@ -47,39 +47,39 @@ const generateMeasures = (possibleNotes, numMeasures = 1) => {
   return beats;
 };
 
-const scheduleInstrument = (instrument, stackNum) => {
-  // const numMeasures = Math.floor(
-  //   getRandomBetween(MIN_NUM_MEASURES, MAX_NUM_MEASURES + 1)
-  // );
-  const numMeasures = 1;
-  const measure = generateMeasures(instrument.possibleNotes, numMeasures);
-  Tone.Transport.scheduleRepeat(
-    () => {
-      measure.forEach(({ note, time }) =>
-        instrument.triggerAttack(note, `+${time}`)
-      );
-    },
-    EIGHTH_NOTE_INTERVAL * EIGHTH_NOTES_PER_MEASURE * numMeasures,
-    Tone.now(),
-    `+${(instrumentNames.length - stackNum) *
-      EIGHTH_NOTE_INTERVAL *
-      EIGHTH_NOTES_PER_MEASURE *
-      4 *
-      2}`
-  );
-};
-
 const piece = (master, log) => {
   log('drums test');
+  const numMeasures = 4;
   return Promise.all(instrumentNames.map(getPercussionTrigger)).then(
     instruments => {
-      instruments.forEach((instrument, i) => {
+      instruments.forEach(instrument => {
         instrument.connect(master);
-        log('new conga');
-        Tone.Transport.scheduleOnce(() => {
-          scheduleInstrument(instrument, i);
-        }, i * EIGHTH_NOTE_INTERVAL * EIGHTH_NOTES_PER_MEASURE * 4);
       });
+      const playingInstruments = [];
+      const idleInstruments = instruments.slice(0);
+      let adding = true;
+      Tone.Transport.scheduleRepeat(() => {
+        if (adding) {
+          log('adding instrument');
+          const instrument = shuffle(idleInstruments).pop();
+          const measure = generateMeasures(
+            instrument.possibleNotes,
+            numMeasures
+          );
+          playingInstruments.push({ instrument, measure });
+          adding = idleInstruments.length > 0;
+        } else {
+          log('removing instrument');
+          const { instrument } = playingInstruments.pop();
+          idleInstruments.push(instrument);
+          adding = playingInstruments.length === 1;
+        }
+        playingInstruments.forEach(({ instrument, measure }) => {
+          measure.forEach(({ note, time }) => {
+            instrument.triggerAttack(note, `+${time}`);
+          });
+        });
+      }, EIGHTH_NOTE_INTERVAL * EIGHTH_NOTES_PER_MEASURE * numMeasures);
     }
   );
 };
