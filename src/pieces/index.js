@@ -1,19 +1,21 @@
 import aisatsana from './aisatsana';
 import enoMachine from './eno-machine';
 //import lemniscate from './lemniscate';
-import drums from './drums';
+//import drums from './drums';
 
-const piece = (title, makePiece, description) => ({
+const piece = (title, makePiece, link, description) => ({
   title,
   makePiece,
   description,
+  link,
 });
 
 const pieces = [
-  piece('drums', drums),
+  //piece('drums', drums),
   piece(
     'aisatsana [102] (Generative Remix)',
     aisatsana,
+    'aisatsana',
     `"aisatsana [102]" is the closing track from Aphex Twin's 2014 album <i>Syro</i>.
 This generative remix is created by splitting the original piece into 4 bar phrases.
 Each phrase is quantized such that every note in the phrase is triggered during one of the 32 eighth notes contained in each phrase.
@@ -24,6 +26,7 @@ If each possible phrase were played in succession without repeating, it would ta
   piece(
     'Eno Machine',
     enoMachine,
+    'eno-machine',
     `Brian Eno is credited with coining the phrase "generative music" and has used generative techniques in his compositions.
 His 1978 release <i>Ambient 1: Music for Airports</i> includes a track titled "2/1," which is a recording of a generative piece.
 "2/1" was created by simultaneously playing several loops of audio tape of different lengths, each containing a single note.

@@ -1,0 +1,38 @@
+.title {
+  font-family: 'Merriweather', serif;
+  font-weight: 300;
+}
+
+.subtitle {
+  font-family: 'Merriweather', serif;
+  font-weight: 300;
+}
+
+.track-selector {
+  padding: 5px;
+}
+
+.track-list {
+  font-family: 'Roboto', sans-serif;
+  list-style-type: none;
+
+  &__track {
+    padding-top: 5px;
+    color: #555;
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &:visited {
+        color: inherit;
+      }
+    }
+  }
+}
+
+.description {
+  font-family: 'Roboto', sans-serif;
+}

@@ -1,6 +1,25 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Player from './components/player';
+import TrackSelector from './components/track-selector';
 import pieces from './pieces';
 
-render(<Player piece={pieces[0]} />, document.getElementById('root'));
+render(
+  <div>
+    <Router>
+      <div>
+        <Route exact path="/" component={TrackSelector} />
+        {pieces.map((piece, i) => (
+          <Route
+            exact
+            path={`/${piece.link}`}
+            key={i}
+            render={() => <Player piece={piece} />}
+          />
+        ))}
+      </div>
+    </Router>
+  </div>,
+  document.getElementById('root')
+);
