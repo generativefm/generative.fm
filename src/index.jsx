@@ -1,6 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 import Player from './components/player';
 import TrackSelector from './components/track-selector';
 import pieces from './pieces';
@@ -8,7 +13,7 @@ import pieces from './pieces';
 render(
   <div>
     <Router>
-      <div>
+      <Switch>
         <Route exact path="/" component={TrackSelector} />
         {pieces.map((piece, i) => (
           <Route
@@ -18,7 +23,8 @@ render(
             render={() => <Player piece={piece} />}
           />
         ))}
-      </div>
+        <Redirect to="/" />
+      </Switch>
     </Router>
   </div>,
   document.getElementById('root')
