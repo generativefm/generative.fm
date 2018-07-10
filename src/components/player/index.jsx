@@ -18,7 +18,7 @@ import Info from './info';
 import './styles.scss';
 
 const DEFAULT_VOLUME_PCT = 0.75;
-const MAX_VOLUME = -15;
+const MAX_VOLUME = -5;
 const MIN_VOLUME = -75;
 const SAVED_VOLUME_KEY = 'volume';
 

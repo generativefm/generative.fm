@@ -35,8 +35,8 @@ const phrasesWithIndex = phrases.map(phrase =>
 
 const chain = new Chain(phrasesWithIndex);
 const piece = (master, log) => {
-  log('aisatsana (generative mix)');
-  return getSampledInstrument('sso-piano').then(piano => {
+  log('aisatsana (generative remix)');
+  return getSampledInstrument('vco2-piano-mf').then(piano => {
     log('ready');
     piano.connect(master);
     const schedule = () => {

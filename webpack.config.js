@@ -8,7 +8,7 @@ const config = {
   mode: 'development',
   devtool: 'sourcemap',
   output: {
-    path: path.join(__dirname, '../dist'),
+    path: path.join(__dirname, 'dist'),
     filename: '[name].[hash].js',
     publicPath: '/',
   },

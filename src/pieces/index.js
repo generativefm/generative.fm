@@ -1,9 +1,11 @@
 import aisatsana from './aisatsana';
 import enoMachine from './eno-machine';
 //import lemniscate from './lemniscate';
-//import drums from './drums';
+// import drums from './drums';
+// import harp from './harp';
+// import test from './test';
 
-const piece = (title, makePiece, link, description) => ({
+const piece = (title, makePiece, link = title, description = '') => ({
   title,
   makePiece,
   description,
@@ -11,7 +13,9 @@ const piece = (title, makePiece, link, description) => ({
 });
 
 const pieces = [
-  //piece('drums', drums),
+  // piece('test', test),
+  // piece('harp', harp),
+  // piece('drums', drums),
   piece(
     'aisatsana [102] (Generative Remix)',
     aisatsana,

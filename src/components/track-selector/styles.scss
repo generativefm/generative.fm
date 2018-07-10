@@ -26,8 +26,9 @@
         text-decoration: underline;
       }
 
-      &:visited {
-        color: inherit;
+      &:visited,
+      &:link {
+        color: #555;
       }
     }
   }
