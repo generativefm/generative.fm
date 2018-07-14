@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const config = {
   mode: 'development',
   devtool: 'sourcemap',
+  entry: ['babel-polyfill', './src'],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].[hash].js',

@@ -122,5 +122,13 @@
     "F7": "./samples/vco2-piano-mf/f7.wav",
     "A7": "./samples/vco2-piano-mf/a7.wav",
     "C8": "./samples/vco2-piano-mf/c8.wav"
+  },
+  "alone-guitar": {
+    "C2": "./samples/alone-guitar/c2.wav",
+    "G2": "./samples/alone-guitar/g2.wav",
+    "C3": "./samples/alone-guitar/c3.wav",
+    "G3": "./samples/alone-guitar/g3.wav",
+    "C4": "./samples/alone-guitar/c4.wav",
+    "E4": "./samples/alone-guitar/e4.wav"
   }
 }

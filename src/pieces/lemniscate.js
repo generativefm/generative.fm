@@ -1,15 +1,22 @@
 import Tone from 'tone';
 import getSampledInstrument from '../util/get-sampled-instrument';
-import log from '../util/log';
-import notes from '../note-sets/music-for-airportsish';
+import { minor7th } from '../theory/chords';
 import roundToTwo from '../util/round-to-two';
+import combineNotesWithOctaves from '../util/combine-notes-with-octaves';
 
+const TONIC = 'A#';
+const OCTAVES = [2, 3, 4, 5, 6];
+
+const notes = combineNotesWithOctaves([TONIC], OCTAVES).reduce(
+  (allNotes, note) => allNotes.concat(minor7th(note)),
+  []
+);
+
+const INSTRUMENT_NAME = 'vco2-piano-mf';
 const TICK_INTERVAL_SECONDS = 1;
 const OSCILLATION_SECONDS = 240;
 const MIN_REPEAT_S = 30;
 const MAX_REPEAT_S = 80;
-
-log('lemniscate');
 
 const timing = new Tone.CtrlRandom(MIN_REPEAT_S, MAX_REPEAT_S);
 
@@ -45,7 +52,7 @@ const makeTick = pans => () => {
 
 const formatPct = num => `${roundToTwo(num * 100)}%`;
 
-const generateTiming = (instruments, getPlayProbability, id) => {
+const generateTiming = (instruments, getPlayProbability, id, log) => {
   notes.forEach(note => {
     const interval = timing.value;
     const delay = timing.value - MIN_REPEAT_S;
@@ -69,7 +76,7 @@ const generateTiming = (instruments, getPlayProbability, id) => {
                 instruments.length === 1 ? `(panned ${probabilityPct}) ` : ' '
               }playing ${note.toLowerCase()} (${probabilityPct} chance to play)`
             );
-          }, '+1');
+          });
         }
       },
       interval,
@@ -78,24 +85,35 @@ const generateTiming = (instruments, getPlayProbability, id) => {
   });
 };
 
-const lemniscate = Promise.all([
-  getSampledInstrument('sso-piano'),
-  getSampledInstrument('sso-piano'),
-]).then(instruments => {
-  const [firstInstrument, secondInstrument] = instruments;
-  const firstPan = new Tone.Panner(-1);
-  const secondPan = new Tone.Panner(1);
-  firstInstrument.chain(firstPan, Tone.Master);
-  secondInstrument.chain(secondPan, Tone.Master);
-  const tick = makeTick([firstPan, secondPan]);
-  generateTiming(
-    [firstInstrument, secondInstrument],
-    () => centerProbability,
-    'both'
-  );
-  generateTiming([firstInstrument], () => 1 - centerProbability, 'left');
-  generateTiming([secondInstrument], () => 1 - centerProbability, 'right');
-  Tone.Transport.scheduleRepeat(tick, TICK_INTERVAL_SECONDS);
-});
+const lemniscate = (master, log) => {
+  log('lemniscate');
+  return Promise.all([
+    getSampledInstrument(INSTRUMENT_NAME),
+    getSampledInstrument(INSTRUMENT_NAME),
+  ]).then(instruments => {
+    instruments.forEach(instrument => instrument.connect(master));
+    const [firstInstrument, secondInstrument] = instruments;
+    const firstPan = new Tone.Panner(-1);
+    const secondPan = new Tone.Panner(1);
+    firstInstrument.chain(firstPan, Tone.Master);
+    secondInstrument.chain(secondPan, Tone.Master);
+    const tick = makeTick([firstPan, secondPan]);
+    generateTiming(
+      [firstInstrument, secondInstrument],
+      () => centerProbability,
+      'both',
+      log
+    );
+    generateTiming([firstInstrument], () => 1 - centerProbability, 'left', log);
+    generateTiming(
+      [secondInstrument],
+      () => 1 - centerProbability,
+      'right',
+      log
+    );
+    Tone.Transport.scheduleRepeat(tick, TICK_INTERVAL_SECONDS);
+    log('ready');
+  });
+};
 
 export default lemniscate;

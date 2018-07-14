@@ -18,7 +18,7 @@ import Info from './info';
 import './styles.scss';
 
 const DEFAULT_VOLUME_PCT = 0.75;
-const MAX_VOLUME = -5;
+const MAX_VOLUME = 0;
 const MIN_VOLUME = -75;
 const SAVED_VOLUME_KEY = 'volume';
 
@@ -50,6 +50,10 @@ class Player extends Component {
     this.storeScrolledControllers = this.storeScrolledControllers.bind(this);
     this.handleInfoClick = this.handleInfoClick.bind(this);
     this.handleLogsClick = this.handleLogsClick.bind(this);
+
+    if (process.env.NODE_ENV === 'development') {
+      setTimeout(() => this.handlePlayClick(), 1000);
+    }
   }
   storeScrolledControllers({ scrollBottom }) {
     this.scrollBottom = scrollBottom;

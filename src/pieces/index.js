@@ -1,6 +1,6 @@
 import aisatsana from './aisatsana';
 import enoMachine from './eno-machine';
-//import lemniscate from './lemniscate';
+import lemniscate from './lemniscate';
 // import drums from './drums';
 // import harp from './harp';
 // import test from './test';
@@ -43,7 +43,7 @@ The piece played here uses a similar technique to generate unique music which wi
 Each of the 18 notes in the piece (which are the same ones from "2/1" on multiple octaves) are played on a random interval between 20 and 60 seconds.
 New intervals are chosen each time the piece is generated.`
   ),
-  //piece('Lemniscate', lemniscate),
+  piece('Lemniscate', lemniscate, 'lemniscate'),
 ];
 
 export default pieces;
