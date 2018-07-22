@@ -1,9 +1,9 @@
 import aisatsana from './aisatsana';
 import enoMachine from './eno-machine';
 import lemniscate from './lemniscate';
+import sevenths from './sevenths';
 // import drums from './drums';
-// import harp from './harp';
-import test from './test';
+//import harp from './harp';
 
 const piece = (title, makePiece, link = title, description = '') => ({
   title,
@@ -13,8 +13,7 @@ const piece = (title, makePiece, link = title, description = '') => ({
 });
 
 const pieces = [
-  piece('test', test),
-  // piece('harp', harp),
+  //piece('harp', harp),
   // piece('drums', drums),
   piece(
     'aisatsana [102] (Generative Remix)',
@@ -44,6 +43,12 @@ Each of the 18 notes in the piece (which are the same ones from "2/1" on multipl
 New intervals are chosen each time the piece is generated.`
   ),
   piece('Lemniscate', lemniscate, 'lemniscate'),
+  piece(
+    'sevenths',
+    sevenths,
+    'sevenths',
+    'This piece just plays random seventh chords.'
+  ),
 ];
 
 export default pieces;
