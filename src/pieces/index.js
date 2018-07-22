@@ -3,7 +3,7 @@ import enoMachine from './eno-machine';
 import lemniscate from './lemniscate';
 // import drums from './drums';
 // import harp from './harp';
-// import test from './test';
+import test from './test';
 
 const piece = (title, makePiece, link = title, description = '') => ({
   title,
@@ -13,7 +13,7 @@ const piece = (title, makePiece, link = title, description = '') => ({
 });
 
 const pieces = [
-  // piece('test', test),
+  piece('test', test),
   // piece('harp', harp),
   // piece('drums', drums),
   piece(
