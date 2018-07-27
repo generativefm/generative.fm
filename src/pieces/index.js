@@ -4,6 +4,7 @@ import lemniscate from './lemniscate';
 import sevenths from './sevenths';
 // import drums from './drums';
 //import harp from './harp';
+import impact from './impact';
 
 const piece = (title, makePiece, link = title, description = '') => ({
   title,
@@ -44,11 +45,12 @@ New intervals are chosen each time the piece is generated.`
   ),
   piece('Lemniscate', lemniscate, 'lemniscate'),
   piece(
-    'sevenths',
+    'Sevenths',
     sevenths,
     'sevenths',
     'This piece just plays random seventh chords.'
   ),
+  piece('Impact', impact, 'impact'),
 ];
 
 export default pieces;

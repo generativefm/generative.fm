@@ -29,11 +29,11 @@ const makeScheduleChord = (instrument, log) => (tonic, next) => {
   const notes = chord.fn(note, inversion);
   const time = `+${getRandomBetween(MIN_NEXT_CHORD_TIME, MAX_NEXT_CHORD_TIME)}`;
   Transport.scheduleOnce(() => {
-    arpeggiateOnce(
+    arpeggiateOnce({
       instrument,
       notes,
-      getRandomBetween(MIN_ARRPEGGIATE_TIME, MAX_ARRPEGGIATE_TIME)
-    );
+      withinTime: getRandomBetween(MIN_ARRPEGGIATE_TIME, MAX_ARRPEGGIATE_TIME),
+    });
     const nextTonic = interval(tonic, getRandomIntBetween(0, 13));
     next(nextTonic, next);
   }, time);
