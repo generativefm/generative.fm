@@ -3,7 +3,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OfflinePlugin = require('offline-plugin');
 
 const config = {
   mode: 'development',
@@ -40,9 +39,6 @@ const config = {
     new HtmlWebpackPlugin({
       title: 'Generative Music',
       template: './index.template.html',
-    }),
-    new OfflinePlugin({
-      appShell: '/',
     }),
   ],
 };
