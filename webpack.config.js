@@ -47,6 +47,11 @@ const config = {
     new OfflinePlugin({
       appShell: '/',
       externals: Object.keys(pianoSamples).map(key => pianoSamples[key]),
+      publicPath:
+        // eslint-disable-next-line no-process-env
+        process.env.NODE_ENV === 'production'
+          ? 'https://generativemusic.alexbainter.com'
+          : '',
     }),
   ],
 };
