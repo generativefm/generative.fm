@@ -19,7 +19,7 @@ import './styles.scss';
 
 const DEFAULT_VOLUME_PCT = 0.75;
 const MAX_VOLUME = 0;
-const MIN_VOLUME = -10000;
+const MIN_VOLUME = -50;
 const SAVED_VOLUME_KEY = 'volume';
 
 const convertPctToDb = pct => pct * (MAX_VOLUME - MIN_VOLUME) + MIN_VOLUME;
@@ -54,6 +54,7 @@ class Player extends Component {
     if (process.env.NODE_ENV === 'development') {
       setTimeout(() => this.handlePlayClick(), 1000);
     }
+    window.Tone = Tone;
   }
   storeScrolledControllers({ scrollBottom }) {
     this.scrollBottom = scrollBottom;
