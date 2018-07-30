@@ -3,6 +3,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OfflinePlugin = require('offline-plugin');
+const samples = require('./samples/samples.json');
+const pianoSamples = samples['vco2-piano-mf'];
 
 const config = {
   mode: 'development',
@@ -39,6 +42,10 @@ const config = {
     new HtmlWebpackPlugin({
       title: 'Generative Music',
       template: './index.template.html',
+    }),
+    new OfflinePlugin({
+      appShell: '/',
+      externals: Object.keys(pianoSamples).map(key => pianoSamples[key]),
     }),
   ],
 };

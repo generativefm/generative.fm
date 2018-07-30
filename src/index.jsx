@@ -6,9 +6,12 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
+import { install } from 'offline-plugin/runtime';
 import Player from './components/player';
 import TrackSelector from './components/track-selector';
 import pieces from './pieces';
+
+install();
 
 render(
   <div>
