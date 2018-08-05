@@ -7,7 +7,7 @@ import getRandomElement from '../util/get-random-element';
 import getRandomIntBetween from '../util/get-random-int-between';
 import getRandomBetween from '../util/get-random-between';
 
-const INSTRUMENT = 'vco2-piano-mf';
+const INSTRUMENT = 'vsco2-piano-mf';
 const STARTING_NOTE = 'C';
 const CHORDS = [
   { name: 'minor 7th', fn: minor7th },

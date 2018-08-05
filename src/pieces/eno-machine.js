@@ -1,7 +1,7 @@
 import randomizedArpeggiator from '../patterns/randomized-arpeggiator';
 import notes from '../note-sets/music-for-airportsish';
 
-const INSTRUMENT = 'vco2-piano-mf';
+const INSTRUMENT = 'vsco2-piano-mf';
 const MIN_REPEAT_S = 20;
 const MAX_REPEAT_S = 60;
 

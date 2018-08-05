@@ -6,7 +6,7 @@ import getRandomElement from '../util/get-random-element';
 import getRandomBetween from '../util/get-random-between';
 import getRandomIntBetween from '../util/get-random-int-between';
 
-const INSTRUMENT = 'vco2-piano-mf';
+const INSTRUMENT = 'vsco2-piano-mf';
 
 const pianoSamples = samples[INSTRUMENT];
 const notes = Object.keys(pianoSamples);

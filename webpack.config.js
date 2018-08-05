@@ -6,7 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OfflinePlugin = require('offline-plugin');
 const samples = require('./samples/samples');
 
-const pianoSamples = samples['vco2-piano-mf'];
+const pianoSamples = samples['vsco2-piano-mf'];
 
 const config = {
   mode: 'development',

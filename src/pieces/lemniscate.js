@@ -12,7 +12,7 @@ const notes = combineNotesWithOctaves([TONIC], OCTAVES).reduce(
   []
 );
 
-const INSTRUMENT_NAME = 'vco2-piano-mf';
+const INSTRUMENT_NAME = 'vsco2-piano-mf';
 const TICK_INTERVAL_SECONDS = 1;
 const OSCILLATION_SECONDS = 240;
 const MIN_REPEAT_S = 30;
