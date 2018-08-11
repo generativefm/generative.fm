@@ -103,7 +103,7 @@ const makeNextNote = (
 };
 
 const piece = (master, log) => {
-  log('test');
+  log('impact');
   const noteBuffers = notes.map(note => getBuffer(pianoSamples[note]));
   return Promise.all(noteBuffers).then(buffers => {
     const bufferCopies = buffers.map(buffer =>
