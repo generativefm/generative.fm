@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 class Log extends Component {
   render() {
-    return <div>{this.props.message}</div>;
+    return <div>{this.props.message.toLowerCase()}</div>;
   }
 }
 
