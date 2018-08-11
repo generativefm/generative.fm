@@ -76,6 +76,7 @@ const startPinwheelChain = (instrument, log) => {
 export default (master, log) => {
   log('pinwheels');
   return getSampledInstrument('vsco2-piano-mf').then(instrument => {
+    log('ready');
     instrument.connect(master);
     startPinwheelChain(instrument, log);
   });
