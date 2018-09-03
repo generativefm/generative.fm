@@ -1,19 +1,4 @@
-import randomizedArpeggiator from '../patterns/randomized-arpeggiator';
-import notes from '../note-sets/music-for-airportsish';
+import piece from '@generative-music/piece-eno-machine';
+import makeMakeSinglePianoPiece from '../util/make-make-single-piano-piece';
 
-const INSTRUMENT = 'vsco2-piano-mf';
-const MIN_REPEAT_S = 20;
-const MAX_REPEAT_S = 60;
-
-export default (master, log) => {
-  log('eno machine');
-  return randomizedArpeggiator(
-    notes,
-    INSTRUMENT,
-    MIN_REPEAT_S,
-    MAX_REPEAT_S,
-    log
-  )
-    .then(instrument => instrument.connect(master))
-    .then(() => log('ready'));
-};
+export default makeMakeSinglePianoPiece(piece);

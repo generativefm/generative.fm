@@ -1,11 +1,12 @@
-import aisatsana from './aisatsana';
-import enoMachine from './eno-machine';
+import aisatsana from '@generative-music/piece-aisatsana';
+import enoMachine from '@generative-music/piece-eno-machine';
+import sevenths from '@generative-music/piece-sevenths';
+import pinwheels from '@generative-music/piece-pinwheels';
+import makeMakeSinglePianoPiece from '../util/make-make-single-piano-piece';
 import lemniscate from './lemniscate';
-import sevenths from './sevenths';
+import impact from './impact';
 // import drums from './drums';
 //import harp from './harp';
-import impact from './impact';
-import pinwheels from './pinwheels';
 
 const piece = (title, makePiece, link = title, description = '') => ({
   title,
@@ -18,10 +19,10 @@ const pieces = [
   //piece('harp', harp),
   // piece('drums', drums),
   piece(
-    'aisatsana [102] (Generative Remix)',
-    aisatsana,
+    'aisatsana (Generative Remix)',
+    makeMakeSinglePianoPiece(aisatsana),
     'aisatsana',
-    `"aisatsana [102]" is the closing track from Aphex Twin's 2014 album <i>Syro</i>.
+    `"aisatsana" is the closing track from Aphex Twin's 2014 album <i>Syro</i>.
 This generative remix is created by splitting the original piece into 4 bar phrases.
 Each phrase is quantized such that every note in the phrase is triggered during one of the 32 eighth notes contained in each phrase.
 These phrases are then input into a Markov chain, which can be used to generate new phrases based on the probababilities of the notes which occurred in the actual piece.
@@ -30,7 +31,7 @@ If each possible phrase were played in succession without repeating, it would ta
   ),
   piece(
     'Eno Machine',
-    enoMachine,
+    makeMakeSinglePianoPiece(enoMachine),
     'eno-machine',
     `Brian Eno is credited with coining the phrase "generative music" and has used generative techniques in his compositions.
 His 1978 release <i>Ambient 1: Music for Airports</i> includes a track titled "2/1," which is a recording of a generative piece.
@@ -47,12 +48,12 @@ New intervals are chosen each time the piece is generated.`
   piece('Lemniscate', lemniscate, 'lemniscate'),
   piece(
     'Sevenths',
-    sevenths,
+    makeMakeSinglePianoPiece(sevenths),
     'sevenths',
     'This piece just plays random seventh chords.'
   ),
   piece('Impact', impact, 'impact'),
-  piece('Pinwheels', pinwheels, 'pinwheels'),
+  piece('Pinwheels', makeMakeSinglePianoPiece(pinwheels), 'pinwheels'),
 ];
 
 export default pieces;
