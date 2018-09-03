@@ -22,6 +22,7 @@ const config = {
   },
   devServer: {
     historyApiFallback: true,
+    port: 9999,
   },
   module: {
     rules: [
