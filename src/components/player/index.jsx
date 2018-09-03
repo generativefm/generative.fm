@@ -8,12 +8,10 @@ import {
   SoundOffButton,
   ControlDirection,
 } from 'react-player-controls';
-import StayScrolled from 'react-stay-scrolled';
-import FontAwesome from '@fortawesome/react-fontawesome';
-import faCaretLeft from '@fortawesome/fontawesome-free-solid/faCaretLeft';
-import faCaretRight from '@fortawesome/fontawesome-free-solid/faCaretRight';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInfo } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-import Log from './log';
 import Info from './info';
 import './styles.scss';
 
@@ -23,6 +21,8 @@ const MIN_VOLUME = -50;
 const SAVED_VOLUME_KEY = 'volume';
 
 const convertPctToDb = pct => pct * (MAX_VOLUME - MIN_VOLUME) + MIN_VOLUME;
+
+library.add(faInfo);
 
 class Player extends Component {
   constructor(props) {
@@ -35,8 +35,6 @@ class Player extends Component {
       volume: startingVolume,
       sliderVolume: startingVolume,
       isMuted: false,
-      logs: [],
-      showLogs: false,
       showInfo: false,
       ready: false,
       masterVolumeNode: new Tone.Volume(
@@ -47,22 +45,13 @@ class Player extends Component {
     this.handlePlayClick = this.handlePlayClick.bind(this);
     this.handleMuteClick = this.handleMuteClick.bind(this);
     this.handleUnmuteClick = this.handleUnmuteClick.bind(this);
-    this.storeScrolledControllers = this.storeScrolledControllers.bind(this);
     this.handleInfoClick = this.handleInfoClick.bind(this);
-    this.handleLogsClick = this.handleLogsClick.bind(this);
 
+    //eslint-disable-next-line
     if (process.env.NODE_ENV === 'development') {
       setTimeout(() => this.handlePlayClick(), 1000);
     }
     window.Tone = Tone;
-  }
-  storeScrolledControllers({ scrollBottom }) {
-    this.scrollBottom = scrollBottom;
-  }
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.logs.length < this.state.logs.length && this.state.showLogs) {
-      this.scrollBottom();
-    }
   }
   render() {
     return (
@@ -72,17 +61,15 @@ class Player extends Component {
             <Info {...this.props.piece} />
           </div>
         )}
-        <div className="vertical-center-parent">
+        {/* <div className="vertical-center-parent">
           <button
             type="button"
             className="side-button side-button--left"
             onClick={this.handleInfoClick}
           >
-            <FontAwesome
-              icon={this.state.showInfo ? faCaretLeft : faCaretRight}
-            />
+            <FontAwesomeIcon icon="info" />
           </button>
-        </div>
+        </div> */}
         <div className="player__center">
           <div className="player__center__button">
             {!this.state.ready && <span>loading...</span>}
@@ -108,34 +95,13 @@ class Player extends Component {
             />
           </div>
         </div>
-        <div className="vertical-center-parent">
-          <button
-            type="button"
-            className="side-button side-button--right"
-            onClick={this.handleLogsClick}
-          >
-            <FontAwesome
-              icon={this.state.showLogs ? faCaretRight : faCaretLeft}
-            />
-          </button>
-        </div>
-
-        {this.state.showLogs && (
-          <StayScrolled
-            className="player__logs"
-            provideControllers={this.storeScrolledControllers}
-          >
-            {this.state.logs.map((message, i) => (
-              <Log key={i} message={message} />
-            ))}
-          </StayScrolled>
-        )}
       </div>
     );
   }
   componentDidMount() {
     this.props.piece
-      .makePiece(this.state.masterVolumeNode, this.log.bind(this))
+      //eslint-disable-next-line no-empty-function
+      .makePiece(this.state.masterVolumeNode, () => {})
       .then(() => {
         this.setState({ ready: true });
       });
@@ -157,11 +123,6 @@ class Player extends Component {
     });
     this.updateVolume(this.state.sliderVolume, false);
   }
-  log(message) {
-    this.setState({
-      logs: this.state.logs.concat(message),
-    });
-  }
   handleSliderChange(volume) {
     this.setState({ sliderVolume: volume });
     if (!this.state.isMuted) {
@@ -176,10 +137,7 @@ class Player extends Component {
     this.state.masterVolumeNode.set({ volume: convertPctToDb(volume) });
   }
   handleInfoClick() {
-    this.setState({ showInfo: !this.state.showInfo, showLogs: false });
-  }
-  handleLogsClick() {
-    this.setState({ showLogs: !this.state.showLogs, showInfo: false });
+    this.setState({ showInfo: !this.state.showInfo });
   }
   //eslint-disable-next-line class-methods-use-this
   componentWillUnmount() {

@@ -46,8 +46,9 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
-    "@fortawesome/fontawesome-free-solid": "^5.0.13",
-    "@fortawesome/react-fontawesome": "0.0.19",
+    "@fortawesome/fontawesome-svg-core": "^1.2.4",
+    "@fortawesome/free-solid-svg-icons": "^5.3.1",
+    "@fortawesome/react-fontawesome": "^0.1.2",
     "@generative-music/instrument-tonejs": "^0.1.0",
     "@generative-music/piece-aisatsana": "^0.1.0",
     "@generative-music/piece-eno-machine": "^0.1.0",
@@ -60,7 +61,6 @@
     "react-player-controls": "^0.5.20",
     "react-render-html": "^0.6.0",
     "react-router-dom": "^4.3.1",
-    "react-stay-scrolled": "^2.1.1",
     "shuffle-array": "^1.0.1",
     "startaudiocontext": "^1.2.1",
     "tone": "^0.12.80"
