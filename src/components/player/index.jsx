@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import Tone from 'tone';
 import startAudioContext from 'startaudiocontext';
-import {
-  VolumeSlider,
-  PlayButton,
-  SoundOnButton,
-  SoundOffButton,
-  ControlDirection,
-} from 'react-player-controls';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfo } from '@fortawesome/free-solid-svg-icons';
+import {
+  faPlay,
+  faVolumeOff,
+  faVolumeUp,
+} from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
-import Info from './info';
+import VolumeControl from './volume-control';
 import './styles.scss';
 
 const DEFAULT_VOLUME_PCT = 0.75;
@@ -21,8 +17,6 @@ const MIN_VOLUME = -50;
 const SAVED_VOLUME_KEY = 'volume';
 
 const convertPctToDb = pct => pct * (MAX_VOLUME - MIN_VOLUME) + MIN_VOLUME;
-
-library.add(faInfo);
 
 class Player extends Component {
   constructor(props) {
@@ -35,7 +29,6 @@ class Player extends Component {
       volume: startingVolume,
       sliderVolume: startingVolume,
       isMuted: false,
-      showInfo: false,
       ready: false,
       masterVolumeNode: new Tone.Volume(
         convertPctToDb(startingVolume)
@@ -45,56 +38,15 @@ class Player extends Component {
     this.handlePlayClick = this.handlePlayClick.bind(this);
     this.handleMuteClick = this.handleMuteClick.bind(this);
     this.handleUnmuteClick = this.handleUnmuteClick.bind(this);
-    this.handleInfoClick = this.handleInfoClick.bind(this);
-
-    //eslint-disable-next-line
-    if (process.env.NODE_ENV === 'development') {
-      setTimeout(() => this.handlePlayClick(), 1000);
-    }
-    window.Tone = Tone;
   }
   render() {
     return (
       <div className="player">
-        {this.state.showInfo && (
-          <div className="player__info">
-            <Info {...this.props.piece} />
-          </div>
-        )}
-        {/* <div className="vertical-center-parent">
-          <button
-            type="button"
-            className="side-button side-button--left"
-            onClick={this.handleInfoClick}
-          >
-            <FontAwesomeIcon icon="info" />
-          </button>
-        </div> */}
-        <div className="player__center">
-          <div className="player__center__button">
-            {!this.state.ready && <span>loading...</span>}
-            {this.state.ready &&
-              !this.state.isPlaying && (
-                <PlayButton onClick={this.handlePlayClick} isEnabled />
-              )}
-            {this.state.isPlaying &&
-              !this.state.isMuted && (
-                <SoundOffButton onClick={this.handleMuteClick} isEnabled />
-              )}
-            {this.state.isPlaying &&
-              this.state.isMuted && (
-                <SoundOnButton onClick={this.handleUnmuteClick} isEnabled />
-              )}
-          </div>
-          <div className="player__center__slider">
-            <VolumeSlider
-              direction={ControlDirection.Vertical}
-              volume={this.state.sliderVolume}
-              onVolumeChange={this.handleSliderChange}
-              isEnabled
-            />
-          </div>
+        <div className="player__title">Title</div>
+        <div className="player__volume">
+          <VolumeControl />
         </div>
+        <div className="player__controls">Controls</div>
       </div>
     );
   }
@@ -135,9 +87,6 @@ class Player extends Component {
       localStorage.setItem(SAVED_VOLUME_KEY, volume);
     }
     this.state.masterVolumeNode.set({ volume: convertPctToDb(volume) });
-  }
-  handleInfoClick() {
-    this.setState({ showInfo: !this.state.showInfo });
   }
   //eslint-disable-next-line class-methods-use-this
   componentWillUnmount() {

@@ -1,0 +1,28 @@
+.volume-control {
+  background: #eee;
+  width: 5rem;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+}
+
+.volume-level {
+  position: absolute;
+  width: 5rem;
+  background: black;
+  bottom: 0;
+  cursor: pointer;
+}
+
+.volume-control:active {
+  cursor: grabbing;
+}
+
+.volume-level:active {
+  cursor: grabbing;
+}
+
+.overflow-zone {
+  width: 5rem;
+  height: 1.5rem;
+}

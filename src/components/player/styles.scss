@@ -1,199 +1,29 @@
-$icon-size: 4vh;
-
-$primary-color: black;
-$secondary-color: grey;
-
-//
-// Buttons
-//
-
-.PlayButton,
-.PauseButton,
-.PrevButton,
-.NextButton,
-.SoundOnButton,
-.SoundOffButton {
-  padding: 8px;
-  background: white;
-  border: 2px solid $primary-color;
-  border-radius: 100%;
-  outline: none;
-
-  &[disabled] {
-    opacity: 0.5;
-  }
-
-  &.isEnabled {
-    cursor: pointer;
-
-    &:hover {
-      border-color: $secondary-color;
-
-      .Icon-shape {
-        fill: $secondary-color;
-      }
-    }
-
-    &:active {
-      border-color: $primary-color;
-
-      .Icon-shape {
-        fill: $primary-color;
-      }
-    }
-  }
-}
-
-.Icon {
-  display: block;
-  width: $icon-size;
-  height: $icon-size;
-}
-
-.Icon-shape {
-  fill: black;
-}
-
-//
-// Sliders
-//
-
-.ProgressBar,
-.VolumeSlider {
-  position: relative;
-  background: #eee;
-  border-radius: 4px;
-
-  &-elapsed,
-  &-value {
-    background: $secondary-color;
-    border-radius: 4px;
-  }
-
-  &-seek {
-    position: absolute;
-    cursor: pointer;
-  }
-
-  &.isSeekable,
-  &.isEnabled {
-    &:hover {
-      .ProgressBar-handle,
-      .VolumeSlider-handle {
-        transform: scale(1);
-      }
-
-      .ProgressBar-intent,
-      .VolumeSlider-intent {
-        position: absolute;
-        background: rgba(0, 0, 0, 0.1);
-      }
-    }
-
-    .ProgressBar-elapsed,
-    .VolumeSlider-value {
-      background: black;
-    }
-  }
-}
-
-.VolumeSlider {
-  &-value {
-    position: absolute;
-  }
-
-  &.isVertical {
-    width: 8px;
-    height: 100px;
-    transition: width 0.05s, height 0.3s;
-  }
-
-  &.isVertical &-value {
-    bottom: 0;
-    width: 100%;
-  }
-
-  &-seek {
-    left: -6px;
-    top: 0;
-    right: -6px;
-    bottom: 0;
-  }
-
-  &.isEnabled {
-    &:hover {
-      .VolumeSlider-intent {
-        bottom: 0;
-        left: 0;
-        width: 100%;
-      }
-    }
-  }
-}
-
 body {
   margin: 0;
 }
 
 .player {
+  height: 100vh;
+  max-width: 100vw;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  &__logs {
-    font-family: 'Cutive Mono', monospace;
-    text-align: right;
-    padding-right: 5px;
-    max-height: 100vh;
-    overflow-y: hidden;
-    max-width: 50vh;
-  }
+  justify-content: space-evenly;
+  align-items: center;
 
-  &__center {
-    padding-top: 10px;
-    text-align: center;
-    margin: 0 auto;
-    &__slider {
-      padding-top: 10px;
-      .VolumeSlider {
-        margin: 0 auto;
-        height: 85vh;
-        width: 5vh;
-      }
-    }
-  }
-
-  &__info {
-    padding-top: 10px;
-    padding-left: 10px;
-    max-width: 50vw;
-  }
-
-  .vertical-center-parent {
+  & > div {
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    flex: 1;
   }
 
-  .side-button {
-    background: none;
-    border: 2px solid $primary-color;
-    color: $primary-color;
-    border-radius: 100%;
-    width: 3vh;
-    height: 3vh;
-    padding: 0px;
-    margin: 1rem;
-    cursor: pointer;
-    line-height: 50%;
-    text-align: center;
+  &__title {
+    font-size: 40px;
+    word-wrap: normal;
+  }
 
-    &:hover {
-      color: $secondary-color;
-      border-color: $secondary-color;
-    }
+  &__volume {
+    height: 85vh;
+  }
 
-    &:focus {
-      outline: none;
-    }
+  &__controls {
   }
 }
