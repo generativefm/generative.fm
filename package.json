@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --open",
-    "build": "webpack-cli --mode production",
+    "build": "webpack-cli --mode production --config webpack.prod.config.js",
     "clean": "rimraf dist",
     "deploy": "npm run clean && npm run build && node node-scripts/deploy.js"
   },
@@ -48,7 +48,7 @@
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-svg-core": "^1.2.4",
     "@fortawesome/free-solid-svg-icons": "^5.3.1",
-    "@fortawesome/react-fontawesome": "^0.1.2",
+    "@fortawesome/react-fontawesome": "^0.1.3",
     "@generative-music/instrument-tonejs": "^0.1.0",
     "@generative-music/piece-aisatsana": "^0.1.0",
     "@generative-music/piece-eno-machine": "^0.1.1",
@@ -58,7 +58,6 @@
     "markov-chains": "^1.0.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "react-player-controls": "^0.5.20",
     "react-render-html": "^0.6.0",
     "react-router-dom": "^4.3.1",
     "shuffle-array": "^1.0.1",

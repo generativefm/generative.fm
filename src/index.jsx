@@ -11,7 +11,9 @@ import Player from './components/player';
 import TrackSelector from './components/track-selector';
 import pieces from './pieces';
 
-install();
+if (process.env.NODE_ENV === 'production') {
+  install();
+}
 
 render(
   <div>
