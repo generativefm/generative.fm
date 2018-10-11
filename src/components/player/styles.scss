@@ -16,8 +16,11 @@ body {
   }
 
   &__title {
-    font-size: 40px;
+    font-size: 1.5rem;
     word-wrap: normal;
+    text-align: center;
+    font-family: 'Merriweather', serif;
+    font-weight: 300;
   }
 
   &__volume {

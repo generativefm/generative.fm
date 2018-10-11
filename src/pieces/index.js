@@ -19,7 +19,7 @@ const pieces = [
   //piece('harp', harp),
   // piece('drums', drums),
   piece(
-    'aisatsana (Generative Remix)',
+    'aisatsana (generative remix)',
     makeMakeSinglePianoPiece(aisatsana),
     'aisatsana',
     `"aisatsana" is the closing track from Aphex Twin's 2014 album <i>Syro</i>.

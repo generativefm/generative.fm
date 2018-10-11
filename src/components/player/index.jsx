@@ -11,19 +11,22 @@ import PropTypes from 'prop-types';
 import VolumeControl from './volume-control';
 import './styles.scss';
 
-const DEFAULT_VOLUME_PCT = 0.75;
+const DEFAULT_VOLUME_PCT = 75;
 const MAX_VOLUME = 0;
 const MIN_VOLUME = -50;
 const SAVED_VOLUME_KEY = 'volume';
 
-const convertPctToDb = pct => pct * (MAX_VOLUME - MIN_VOLUME) + MIN_VOLUME;
+const convertPctToDb = pct =>
+  (pct / 100) * (MAX_VOLUME - MIN_VOLUME) + MIN_VOLUME;
 
 class Player extends Component {
   constructor(props) {
     super(props);
     const savedVolume = localStorage.getItem(SAVED_VOLUME_KEY);
     const startingVolume =
-      savedVolume === null ? DEFAULT_VOLUME_PCT : savedVolume;
+      savedVolume === null
+        ? DEFAULT_VOLUME_PCT
+        : Number.parseFloat(savedVolume);
     this.state = {
       isPlaying: false,
       volume: startingVolume,
@@ -42,9 +45,12 @@ class Player extends Component {
   render() {
     return (
       <div className="player">
-        <div className="player__title">Title</div>
+        <div className="player__title">{this.props.piece.title}</div>
         <div className="player__volume">
-          <VolumeControl />
+          <VolumeControl
+            pctFilled={this.state.sliderVolume}
+            onChange={this.handleSliderChange}
+          />
         </div>
         <div className="player__controls">Controls</div>
       </div>
@@ -76,7 +82,7 @@ class Player extends Component {
     this.updateVolume(this.state.sliderVolume, false);
   }
   handleSliderChange(volume) {
-    this.setState({ sliderVolume: volume });
+    this.setState({ sliderVolume: Number.parseFloat(volume) });
     if (!this.state.isMuted) {
       this.updateVolume(volume);
     }
