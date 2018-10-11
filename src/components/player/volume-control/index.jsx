@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
+import OverflowZone from './overflow-zone';
 import './styles.scss';
 
 const makeGetVolumePctForClientY = controlRef => clientY => {
   const { clientHeight, offsetTop } = controlRef.current;
   const controlY = clientY - offsetTop;
-  const pct = (clientHeight - controlY) / clientHeight;
-  return pct > 0.005 ? 100 * pct : 0;
+  const pct = ((clientHeight - controlY) / clientHeight) * 100;
+  return Math.min(100, Math.max(0, pct));
 };
-
-const alwaysFalse = () => false;
 
 class VolumeControl extends Component {
   constructor(props) {
@@ -18,44 +17,53 @@ class VolumeControl extends Component {
     this.getVolumePctForClientY = makeGetVolumePctForClientY(this.controlRef);
 
     this.handleMouseDown = this.handleMouseDown.bind(this);
-    this.handleMouseMove = this.handleMouseMove.bind(this);
     this.handleMouseUp = this.handleMouseUp.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    this.handleMaxZoneMouseUp = this.handleMaxZoneMouseUp.bind(this);
-    this.handleMinZoneMouseUp = this.handleMinZoneMouseUp.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.activate = this.activate.bind(this);
+    this.handleDragEvent = this.handleDragEvent.bind(this);
   }
   render() {
     return (
       <div>
-        <div className="overflow-zone" onMouseUp={this.handleMaxZoneMouseUp} />
+        <OverflowZone
+          handleMouseDown={this.handleMouseDown}
+          handleDragEvent={this.handleDragEvent}
+        />
         <div
           className="volume-control"
           onMouseDown={this.handleMouseDown}
-          onMouseMove={this.handleMouseMove}
-          onMouseUp={this.handleMouseUp}
-          onMouseLeave={this.handleMouseLeave}
+          onDragStart={this.handleDragEvent}
+          onDrag={this.handleDragEvent}
           ref={this.controlRef}
+          title="Volume"
         >
           <div
-            onDragStart={alwaysFalse}
             className="volume-level"
             style={{ height: `${this.state.pctFilled}%` }}
+            onDragStart={this.handleDragEvent}
+            onDrag={this.handleDragEvent}
           />
         </div>
-        <div className="overflow-zone" onMouseUp={this.handleMinZoneMouseUp} />
+        <OverflowZone
+          handleMouseDown={this.handleMouseDown}
+          handleDragEvent={this.handleDragEvent}
+        />
       </div>
     );
   }
-  handleMaxZoneMouseUp() {
-    this.setState({ pctFilled: 100 });
-  }
-  handleMinZoneMouseUp() {
-    this.setState({ pctFilled: 0 });
-  }
   handleMouseDown(event) {
     if (event.button === 0) {
-      this.setState({ mouseDown: true });
+      this.activate();
     }
+  }
+  handleDragEvent(event) {
+    event.preventDefault();
+    this.activate();
+  }
+  activate() {
+    this.setState({ mouseDown: true });
+    window.addEventListener('mouseup', this.handleMouseUp);
+    window.addEventListener('mousemove', this.handleMouseMove);
   }
   handleMouseMove(event) {
     if (this.state.mouseDown) {
@@ -64,12 +72,8 @@ class VolumeControl extends Component {
   }
   handleMouseUp(event) {
     if (event.button === 0) {
-      this.setVolumePctForEvent(event);
-      this.setState({ mouseDown: false });
-    }
-  }
-  handleMouseLeave(event) {
-    if (this.state.mouseDown) {
+      window.removeEventListener('mouseup', this.handleMouseUp);
+      window.removeEventListener('mousemove', this.handleMouseMove);
       this.setVolumePctForEvent(event);
       this.setState({ mouseDown: false });
     }

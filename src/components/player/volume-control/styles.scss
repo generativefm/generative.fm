@@ -1,6 +1,8 @@
+@import '_variables';
+
 .volume-control {
   background: #eee;
-  width: 5rem;
+  width: $volumeControlWidth;
   height: 100%;
   position: relative;
   cursor: pointer;
@@ -8,7 +10,7 @@
 
 .volume-level {
   position: absolute;
-  width: 5rem;
+  width: $volumeControlWidth;
   background: black;
   bottom: 0;
   cursor: pointer;
@@ -20,9 +22,4 @@
 
 .volume-level:active {
   cursor: grabbing;
-}
-
-.overflow-zone {
-  width: 5rem;
-  height: 1.5rem;
 }
