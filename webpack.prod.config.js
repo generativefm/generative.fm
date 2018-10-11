@@ -13,7 +13,6 @@ config.plugins.push(
   new OfflinePlugin({
     appShell: '/',
     externals: Object.keys(pianoSamples).map(key => pianoSamples[key]),
-    publicPath: 'test/',
   })
 );
 
