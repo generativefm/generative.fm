@@ -12,7 +12,6 @@ config.plugins.push(
   new OfflinePlugin({
     appShell: '/',
     externals: Object.keys(pianoSamples).map(key => pianoSamples[key]),
-    publicPath: 'https://generativemusic.alexbainter.com',
   }),
   new EnvironmentPlugin(['NODE_ENV'])
 );
