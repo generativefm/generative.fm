@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import OverflowZone from './overflow-zone';
+import noop from '../../../util/noop';
 import './styles.scss';
 
 const makeGetVolumePctForClientY = controlRef => clientY => {
@@ -93,8 +94,7 @@ VolumeControl.propTypes = {
 };
 
 VolumeControl.defaultProps = {
-  //eslint-disable-next-line no-empty-function
-  onChange: () => {},
+  onChange: noop,
   pctFilled: 0,
 };
 

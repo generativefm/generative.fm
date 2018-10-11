@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import Tone from 'tone';
 import startAudioContext from 'startaudiocontext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faPlay,
-  faVolumeOff,
-  faVolumeUp,
-} from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import VolumeControl from './volume-control';
+import Controls from './controls';
 import './styles.scss';
 
 const DEFAULT_VOLUME_PCT = 75;
@@ -32,12 +27,13 @@ class Player extends Component {
       volume: startingVolume,
       sliderVolume: startingVolume,
       isMuted: false,
-      ready: false,
+      isReady: false,
       masterVolumeNode: new Tone.Volume(
         convertPctToDb(startingVolume)
       ).toMaster(),
     };
-    this.handleSliderChange = this.handleSliderChange.bind(this);
+    this.handleVolumeChange = this.handleVolumeChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handlePlayClick = this.handlePlayClick.bind(this);
     this.handleMuteClick = this.handleMuteClick.bind(this);
     this.handleUnmuteClick = this.handleUnmuteClick.bind(this);
@@ -49,10 +45,17 @@ class Player extends Component {
         <div className="player__volume">
           <VolumeControl
             pctFilled={this.state.sliderVolume}
-            onChange={this.handleSliderChange}
+            onChange={this.handleVolumeChange}
           />
         </div>
-        <div className="player__controls">Controls</div>
+        <div className="player__controls">
+          <Controls
+            isReady={this.state.isReady}
+            isPlaying={this.state.isPlaying}
+            isMuted={this.state.isMuted}
+            onClick={this.handleClick}
+          />
+        </div>
       </div>
     );
   }
@@ -61,9 +64,20 @@ class Player extends Component {
       //eslint-disable-next-line no-empty-function
       .makePiece(this.state.masterVolumeNode, () => {})
       .then(() => {
-        this.setState({ ready: true });
+        this.setState({ isReady: true });
       });
     startAudioContext(Tone.context);
+  }
+  handleClick() {
+    if (this.state.isReady) {
+      if (!this.state.isPlaying) {
+        this.handlePlayClick();
+      } else if (this.state.isMuted) {
+        this.handleUnmuteClick();
+      } else {
+        this.handleMuteClick();
+      }
+    }
   }
   handlePlayClick() {
     Tone.Transport.start('+1');
@@ -81,7 +95,7 @@ class Player extends Component {
     });
     this.updateVolume(this.state.sliderVolume, false);
   }
-  handleSliderChange(volume) {
+  handleVolumeChange(volume) {
     this.setState({ sliderVolume: Number.parseFloat(volume) });
     if (!this.state.isMuted) {
       this.updateVolume(volume);

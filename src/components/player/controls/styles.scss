@@ -1,0 +1,24 @@
+.control-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    color: #999;
+    .inactive {
+      color: #ddd;
+    }
+  }
+
+  .inactive {
+    color: #aaa;
+  }
+}
