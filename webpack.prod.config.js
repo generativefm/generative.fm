@@ -9,11 +9,12 @@ const pianoSamples = samples['vsco2-piano-mf'];
 const config = require('./webpack.config');
 
 config.plugins.push(
+  new EnvironmentPlugin(['NODE_ENV']),
   new OfflinePlugin({
     appShell: '/',
     externals: Object.keys(pianoSamples).map(key => pianoSamples[key]),
-  }),
-  new EnvironmentPlugin(['NODE_ENV'])
+    publicPath: 'test/',
+  })
 );
 
 module.exports = config;
