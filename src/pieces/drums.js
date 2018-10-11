@@ -8,8 +8,8 @@ const EIGHTH_NOTE_INTERVAL = 60 / (2 * BPM);
 const QUARTER_NOTE_CHANCE = 0.75;
 const EIGHTH_NOTE_CHANCE = 0.5;
 const EIGHTH_NOTES_PER_MEASURE = 8; // 4/4 time
-const MIN_NUM_MEASURES = 1;
-const MAX_NUM_MEASURES = 4;
+// const MIN_NUM_MEASURES = 1;
+// const MAX_NUM_MEASURES = 4;
 
 const instrumentNames = shuffle([
   'sso-bass-drum',

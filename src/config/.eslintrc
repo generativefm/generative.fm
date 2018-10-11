@@ -1,0 +1,8 @@
+{
+  rules: {
+    no-process-env: 0
+  },
+  globals: {
+    process: true
+  }
+}

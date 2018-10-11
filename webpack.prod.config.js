@@ -1,5 +1,6 @@
 'use strict';
 
+const { EnvironmentPlugin } = require('webpack');
 const OfflinePlugin = require('offline-plugin');
 const samples = require('./samples/samples');
 
@@ -12,7 +13,8 @@ config.plugins.push(
     appShell: '/',
     externals: Object.keys(pianoSamples).map(key => pianoSamples[key]),
     publicPath: 'https://generativemusic.alexbainter.com',
-  })
+  }),
+  new EnvironmentPlugin(['NODE_ENV'])
 );
 
 module.exports = config;

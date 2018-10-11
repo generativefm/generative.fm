@@ -1,5 +1,5 @@
 import chord from './chord';
-import { m3, M3, P5, m7, M7, m9, P8 } from './intervals';
+import { m3, M3, P5, m7, M7, P8 } from './intervals';
 
 const makeChord = (intervals, inversion = 0) => (
   tonic,

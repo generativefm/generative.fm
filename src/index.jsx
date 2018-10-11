@@ -10,8 +10,9 @@ import { install } from 'offline-plugin/runtime';
 import Player from './components/player';
 import TrackSelector from './components/track-selector';
 import pieces from './pieces';
+import isProduction from './config/is-production';
 
-if (process.env.NODE_ENV === 'production') {
+if (isProduction) {
   install();
 }
 

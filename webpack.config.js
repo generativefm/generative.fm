@@ -3,6 +3,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const config = {
   mode: 'development',
@@ -41,6 +42,7 @@ const config = {
       title: 'Generative Music',
       template: './index.template.html',
     }),
+    new CleanWebpackPlugin(['dist']),
   ],
 };
 
