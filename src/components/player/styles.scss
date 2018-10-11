@@ -3,7 +3,7 @@ body {
 }
 
 .player {
-  height: 100vh;
+  height: 90vh;
   max-width: 100vw;
   display: flex;
   justify-content: space-evenly;
@@ -24,9 +24,6 @@ body {
   }
 
   &__volume {
-    height: 85vh;
-  }
-
-  &__controls {
+    height: 80vh;
   }
 }

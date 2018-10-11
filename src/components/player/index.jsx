@@ -17,11 +17,12 @@ const convertPctToDb = pct =>
 class Player extends Component {
   constructor(props) {
     super(props);
-    const savedVolume = localStorage.getItem(SAVED_VOLUME_KEY);
-    const startingVolume =
-      savedVolume === null
-        ? DEFAULT_VOLUME_PCT
-        : Number.parseFloat(savedVolume);
+    const savedVolume = Number.parseFloat(
+      localStorage.getItem(SAVED_VOLUME_KEY)
+    );
+    const startingVolume = Number.isNaN(savedVolume)
+      ? DEFAULT_VOLUME_PCT
+      : savedVolume;
     this.state = {
       isPlaying: false,
       volume: startingVolume,
@@ -46,6 +47,7 @@ class Player extends Component {
           <VolumeControl
             pctFilled={this.state.sliderVolume}
             onChange={this.handleVolumeChange}
+            isMuted={this.state.isMuted}
           />
         </div>
         <div className="player__controls">

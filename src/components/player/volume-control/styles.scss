@@ -14,6 +14,10 @@
   background: black;
   bottom: 0;
   cursor: pointer;
+
+  &--is-muted {
+    background: #aaa;
+  }
 }
 
 .volume-control:active {
