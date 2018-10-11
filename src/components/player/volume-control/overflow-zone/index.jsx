@@ -12,8 +12,8 @@ const OverFlowZone = ({ handleMouseDown, handleDragEvent }) => (
 );
 
 OverFlowZone.propTypes = {
-  handleMouseDown: PropTypes.func,
-  handleDragEvent: PropTypes.func,
+  handleMouseDown: PropTypes.func.isRequired,
+  handleDragEvent: PropTypes.func.isRequired,
 };
 
 export default OverFlowZone;

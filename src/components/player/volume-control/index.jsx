@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import OverflowZone from './overflow-zone';
 import './styles.scss';
 
@@ -12,9 +13,12 @@ const makeGetVolumePctForClientY = controlRef => clientY => {
 class VolumeControl extends Component {
   constructor(props) {
     super(props);
-    this.state = { pctFilled: 75, mouseDown: false };
+    this.state = { mouseDown: false };
     this.controlRef = React.createRef();
-    this.getVolumePctForClientY = makeGetVolumePctForClientY(this.controlRef);
+    this.getVolumePctForClientY = makeGetVolumePctForClientY(
+      this.controlRef,
+      this.props.onChange
+    );
 
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleMouseUp = this.handleMouseUp.bind(this);
@@ -39,7 +43,7 @@ class VolumeControl extends Component {
         >
           <div
             className="volume-level"
-            style={{ height: `${this.state.pctFilled}%` }}
+            style={{ height: `${this.props.pctFilled}%` }}
             onDragStart={this.handleDragEvent}
             onDrag={this.handleDragEvent}
           />
@@ -79,8 +83,19 @@ class VolumeControl extends Component {
     }
   }
   setVolumePctForEvent(event) {
-    this.setState({ pctFilled: this.getVolumePctForClientY(event.clientY) });
+    this.props.onChange(this.getVolumePctForClientY(event.clientY));
   }
 }
+
+VolumeControl.propTypes = {
+  onChange: PropTypes.func,
+  pctFilled: PropTypes.number,
+};
+
+VolumeControl.defaultProps = {
+  //eslint-disable-next-line no-empty-function
+  onChange: () => {},
+  pctFilled: 0,
+};
 
 export default VolumeControl;
