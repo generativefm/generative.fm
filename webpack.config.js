@@ -12,7 +12,7 @@ const config = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].[hash].js',
-    publicPath: '/',
+    //publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],

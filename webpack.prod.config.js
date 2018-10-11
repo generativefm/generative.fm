@@ -9,12 +9,11 @@ const pianoSamples = samples['vsco2-piano-mf'];
 const config = require('./webpack.config');
 
 config.plugins.push(
+  new EnvironmentPlugin(['NODE_ENV']),
   new OfflinePlugin({
     appShell: '/',
     externals: Object.keys(pianoSamples).map(key => pianoSamples[key]),
-    publicPath: 'https://generativemusic.alexbainter.com',
-  }),
-  new EnvironmentPlugin(['NODE_ENV'])
+  })
 );
 
 module.exports = config;
