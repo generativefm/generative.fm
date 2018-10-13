@@ -21,12 +21,14 @@ const MAX_REPEAT_S = 80;
 const timing = new Tone.CtrlRandom(MIN_REPEAT_S, MAX_REPEAT_S);
 
 function* oscillate(min, max, start, divisor, additionFirst = true) {
-  const difference = Math.abs(max) + Math.abs(min);
+  const difference = max - min;
   let addition = additionFirst;
   const delta = difference / divisor;
   let value = start;
   while (true) {
-    value = value += addition ? delta : -delta;
+    value = addition
+      ? Math.min(value + delta, max)
+      : Math.max(value - delta, min);
     addition = value >= max || value <= min ? !addition : addition;
     yield value;
   }
@@ -41,13 +43,17 @@ const probabilityGenerator = oscillate(
   false
 );
 
-const makeTick = pans => () => {
-  centerProbability = probabilityGenerator.next().value;
-  const outsideProbability = 1 - centerProbability;
-  const pan1 = outsideProbability;
-  const pan2 = -outsideProbability;
-  pans[0].set({ pan: pan1 });
-  pans[1].set({ pan: pan2 });
+const makeTick = pans => {
+  const tick = () => {
+    centerProbability = probabilityGenerator.next().value;
+    const outsideProbability = 1 - centerProbability;
+    const pan1 = outsideProbability;
+    const pan2 = -outsideProbability;
+    pans[0].set({ pan: pan1 });
+    pans[1].set({ pan: pan2 });
+    Tone.Transport.scheduleOnce(tick, `+${TICK_INTERVAL_SECONDS}`);
+  };
+  return tick;
 };
 
 const formatPct = num => `${roundToTwo(num * 100)}%`;
@@ -91,12 +97,11 @@ const lemniscate = (master, log) => {
     getSampledInstrument(INSTRUMENT_NAME),
     getSampledInstrument(INSTRUMENT_NAME),
   ]).then(instruments => {
-    instruments.forEach(instrument => instrument.connect(master));
     const [firstInstrument, secondInstrument] = instruments;
     const firstPan = new Tone.Panner(-1);
     const secondPan = new Tone.Panner(1);
-    firstInstrument.chain(firstPan, Tone.Master);
-    secondInstrument.chain(secondPan, Tone.Master);
+    firstInstrument.chain(firstPan, master);
+    secondInstrument.chain(secondPan, master);
     const tick = makeTick([firstPan, secondPan]);
     generateTiming(
       [firstInstrument, secondInstrument],
@@ -111,7 +116,7 @@ const lemniscate = (master, log) => {
       'right',
       log
     );
-    Tone.Transport.scheduleRepeat(tick, TICK_INTERVAL_SECONDS);
+    Tone.Transport.scheduleOnce(tick, TICK_INTERVAL_SECONDS);
     log('ready');
   });
 };

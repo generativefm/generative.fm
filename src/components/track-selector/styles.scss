@@ -1,3 +1,5 @@
+@import '../../_global-mixins';
+
 .title {
   font-family: 'Merriweather', serif;
   font-weight: 300;
@@ -19,18 +21,7 @@
   &__track {
     padding-top: 5px;
     color: #555;
-    a {
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-
-      &:visited,
-      &:link {
-        color: #555;
-      }
-    }
+    @include link();
   }
 }
 

@@ -5,13 +5,14 @@ import {
   faPlay,
   faVolumeOff,
   faVolumeUp,
+  faCircleNotch,
 } from '@fortawesome/free-solid-svg-icons';
 import noop from '../../../util/noop';
 import './styles.scss';
 
 const Controls = ({ isReady, isPlaying, isMuted, onClick }) => {
   if (!isReady) {
-    return <div>...</div>;
+    return <FontAwesomeIcon icon={faCircleNotch} spin size="2x" />;
   }
   const buttonContents = isPlaying ? (
     <div>

@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Tone from 'tone';
 import startAudioContext from 'startaudiocontext';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretLeft } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import VolumeControl from './volume-control';
 import Controls from './controls';
 import './styles.scss';
@@ -25,13 +28,10 @@ class Player extends Component {
       : savedVolume;
     this.state = {
       isPlaying: false,
-      volume: startingVolume,
       sliderVolume: startingVolume,
       isMuted: false,
       isReady: false,
-      masterVolumeNode: new Tone.Volume(
-        convertPctToDb(startingVolume)
-      ).toMaster(),
+      masterVolumeNode: null,
     };
     this.handleVolumeChange = this.handleVolumeChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -42,6 +42,15 @@ class Player extends Component {
   render() {
     return (
       <div className="player">
+        <div className="player__back-btn">
+          <Link to="/">
+            <FontAwesomeIcon
+              icon={faCaretLeft}
+              className="player__back-btn__icon"
+            />
+            <span className="player__back-btn__text">Piece Selection</span>
+          </Link>
+        </div>
         <div className="player__title">{this.props.piece.title}</div>
         <div className="player__volume">
           <VolumeControl
@@ -62,11 +71,14 @@ class Player extends Component {
     );
   }
   componentDidMount() {
+    const masterVolumeNode = new Tone.Volume(
+      convertPctToDb(this.state.sliderVolume)
+    ).toMaster();
     this.props.piece
       //eslint-disable-next-line no-empty-function
-      .makePiece(this.state.masterVolumeNode, () => {})
+      .makePiece(masterVolumeNode, () => {})
       .then(() => {
-        this.setState({ isReady: true });
+        this.setState({ isReady: true, masterVolumeNode });
       });
     startAudioContext(Tone.context);
   }
@@ -89,32 +101,34 @@ class Player extends Component {
     this.setState({
       isMuted: true,
     });
-    this.updateVolume(0, false);
+    //eslint-disable-next-line react/no-direct-mutation-state
+    this.state.masterVolumeNode.mute = true;
   }
   handleUnmuteClick() {
     this.setState({
       isMuted: false,
     });
-    this.updateVolume(this.state.sliderVolume, false);
+    //eslint-disable-next-line react/no-direct-mutation-state
+    this.state.masterVolumeNode.mute = false;
+    this.state.masterVolumeNode.set({
+      volume: convertPctToDb(this.state.sliderVolume),
+    });
   }
   handleVolumeChange(volume) {
     this.setState({ sliderVolume: Number.parseFloat(volume) });
-    if (!this.state.isMuted) {
-      this.updateVolume(volume);
+    localStorage.setItem(SAVED_VOLUME_KEY, volume);
+    if (
+      this.state.masterVolumeNode !== null &&
+      !this.state.masterVolumeNode.mute
+    ) {
+      this.state.masterVolumeNode.set({ volume: convertPctToDb(volume) });
     }
-  }
-  updateVolume(volume, save = true) {
-    this.setState({ volume });
-    if (save) {
-      localStorage.setItem(SAVED_VOLUME_KEY, volume);
-    }
-    this.state.masterVolumeNode.set({ volume: convertPctToDb(volume) });
   }
   //eslint-disable-next-line class-methods-use-this
   componentWillUnmount() {
     Tone.Transport.stop();
-    Tone.context.close();
-    Tone.context = new AudioContext();
+    Tone.Transport.cancel();
+    this.setState({ isReady: false, isPlaying: false });
   }
 }
 
