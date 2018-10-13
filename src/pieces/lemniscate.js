@@ -26,7 +26,9 @@ function* oscillate(min, max, start, divisor, additionFirst = true) {
   const delta = difference / divisor;
   let value = start;
   while (true) {
-    value = value += addition ? delta : -delta;
+    value = addition
+      ? Math.min(value + delta, max)
+      : Math.max(value - delta, min);
     addition = value >= max || value <= min ? !addition : addition;
     yield value;
   }
@@ -91,12 +93,11 @@ const lemniscate = (master, log) => {
     getSampledInstrument(INSTRUMENT_NAME),
     getSampledInstrument(INSTRUMENT_NAME),
   ]).then(instruments => {
-    instruments.forEach(instrument => instrument.connect(master));
     const [firstInstrument, secondInstrument] = instruments;
     const firstPan = new Tone.Panner(-1);
     const secondPan = new Tone.Panner(1);
-    firstInstrument.chain(firstPan, Tone.Master);
-    secondInstrument.chain(secondPan, Tone.Master);
+    firstInstrument.chain(firstPan, master);
+    secondInstrument.chain(secondPan, master);
     const tick = makeTick([firstPan, secondPan]);
     generateTiming(
       [firstInstrument, secondInstrument],
