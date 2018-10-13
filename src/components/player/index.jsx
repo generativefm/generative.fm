@@ -25,7 +25,6 @@ class Player extends Component {
       : savedVolume;
     this.state = {
       isPlaying: false,
-      volume: startingVolume,
       sliderVolume: startingVolume,
       isMuted: false,
       isReady: false,
@@ -97,11 +96,17 @@ class Player extends Component {
       isMuted: false,
     });
     this.state.masterVolumeNode.mute = false;
+    this.state.masterVolumeNode.set({
+      volume: convertPctToDb(this.state.sliderVolume),
+    });
   }
   handleVolumeChange(volume) {
     this.setState({ sliderVolume: Number.parseFloat(volume) });
     localStorage.setItem(SAVED_VOLUME_KEY, volume);
-    if (this.state.masterVolumeNode !== null) {
+    if (
+      this.state.masterVolumeNode !== null &&
+      !this.state.masterVolumeNode.mute
+    ) {
       this.state.masterVolumeNode.set({ volume: convertPctToDb(volume) });
     }
   }
