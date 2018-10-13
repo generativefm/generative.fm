@@ -29,9 +29,7 @@ class Player extends Component {
       sliderVolume: startingVolume,
       isMuted: false,
       isReady: false,
-      masterVolumeNode: new Tone.Volume(
-        convertPctToDb(startingVolume)
-      ).toMaster(),
+      masterVolumeNode: null,
     };
     this.handleVolumeChange = this.handleVolumeChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -62,11 +60,14 @@ class Player extends Component {
     );
   }
   componentDidMount() {
+    const masterVolumeNode = new Tone.Volume(
+      convertPctToDb(this.state.sliderVolume)
+    ).toMaster();
     this.props.piece
       //eslint-disable-next-line no-empty-function
-      .makePiece(this.state.masterVolumeNode, () => {})
+      .makePiece(masterVolumeNode, () => {})
       .then(() => {
-        this.setState({ isReady: true });
+        this.setState({ isReady: true, masterVolumeNode });
       });
     startAudioContext(Tone.context);
   }
@@ -89,32 +90,26 @@ class Player extends Component {
     this.setState({
       isMuted: true,
     });
-    this.updateVolume(0, false);
+    this.state.masterVolumeNode.mute = true;
   }
   handleUnmuteClick() {
     this.setState({
       isMuted: false,
     });
-    this.updateVolume(this.state.sliderVolume, false);
+    this.state.masterVolumeNode.mute = false;
   }
   handleVolumeChange(volume) {
     this.setState({ sliderVolume: Number.parseFloat(volume) });
-    if (!this.state.isMuted) {
-      this.updateVolume(volume);
+    localStorage.setItem(SAVED_VOLUME_KEY, volume);
+    if (this.state.masterVolumeNode !== null) {
+      this.state.masterVolumeNode.set({ volume: convertPctToDb(volume) });
     }
-  }
-  updateVolume(volume, save = true) {
-    this.setState({ volume });
-    if (save) {
-      localStorage.setItem(SAVED_VOLUME_KEY, volume);
-    }
-    this.state.masterVolumeNode.set({ volume: convertPctToDb(volume) });
   }
   //eslint-disable-next-line class-methods-use-this
   componentWillUnmount() {
     Tone.Transport.stop();
-    Tone.context.close();
-    Tone.context = new AudioContext();
+    Tone.Transport.cancel();
+    this.setState({ isReady: false, isPlaying: false });
   }
 }
 
