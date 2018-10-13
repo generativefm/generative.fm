@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Tone from 'tone';
 import startAudioContext from 'startaudiocontext';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretLeft } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import VolumeControl from './volume-control';
 import Controls from './controls';
 import './styles.scss';
@@ -39,6 +42,15 @@ class Player extends Component {
   render() {
     return (
       <div className="player">
+        <div className="player__back-btn">
+          <Link to="/">
+            <FontAwesomeIcon
+              icon={faCaretLeft}
+              className="player__back-btn__icon"
+            />
+            <span className="player__back-btn__text">Piece Selection</span>
+          </Link>
+        </div>
         <div className="player__title">{this.props.piece.title}</div>
         <div className="player__volume">
           <VolumeControl
