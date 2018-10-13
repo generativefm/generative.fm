@@ -89,12 +89,14 @@ class Player extends Component {
     this.setState({
       isMuted: true,
     });
+    //eslint-disable-next-line react/no-direct-mutation-state
     this.state.masterVolumeNode.mute = true;
   }
   handleUnmuteClick() {
     this.setState({
       isMuted: false,
     });
+    //eslint-disable-next-line react/no-direct-mutation-state
     this.state.masterVolumeNode.mute = false;
     this.state.masterVolumeNode.set({
       volume: convertPctToDb(this.state.sliderVolume),
