@@ -21,7 +21,7 @@ const MAX_REPEAT_S = 80;
 const timing = new Tone.CtrlRandom(MIN_REPEAT_S, MAX_REPEAT_S);
 
 function* oscillate(min, max, start, divisor, additionFirst = true) {
-  const difference = Math.abs(max) + Math.abs(min);
+  const difference = max - min;
   let addition = additionFirst;
   const delta = difference / divisor;
   let value = start;
@@ -43,13 +43,17 @@ const probabilityGenerator = oscillate(
   false
 );
 
-const makeTick = pans => () => {
-  centerProbability = probabilityGenerator.next().value;
-  const outsideProbability = 1 - centerProbability;
-  const pan1 = outsideProbability;
-  const pan2 = -outsideProbability;
-  pans[0].set({ pan: pan1 });
-  pans[1].set({ pan: pan2 });
+const makeTick = pans => {
+  const tick = () => {
+    centerProbability = probabilityGenerator.next().value;
+    const outsideProbability = 1 - centerProbability;
+    const pan1 = outsideProbability;
+    const pan2 = -outsideProbability;
+    pans[0].set({ pan: pan1 });
+    pans[1].set({ pan: pan2 });
+    Tone.Transport.scheduleOnce(tick, `+${TICK_INTERVAL_SECONDS}`);
+  };
+  return tick;
 };
 
 const formatPct = num => `${roundToTwo(num * 100)}%`;
@@ -112,7 +116,7 @@ const lemniscate = (master, log) => {
       'right',
       log
     );
-    Tone.Transport.scheduleRepeat(tick, TICK_INTERVAL_SECONDS);
+    Tone.Transport.scheduleOnce(tick, TICK_INTERVAL_SECONDS);
     log('ready');
   });
 };
