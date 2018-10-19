@@ -5,13 +5,11 @@
   font-weight: 300;
 }
 
-.subtitle {
-  font-family: 'Merriweather', serif;
-  font-weight: 300;
-}
-
 .track-selector {
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .track-list {
@@ -27,4 +25,21 @@
 
 .description {
   font-family: 'Roboto', sans-serif;
+}
+
+.alex-bainter-link {
+  @include link();
+  font-family: 'Merriweather', serif;
+  font-weight: 300;
+  position: absolute;
+  bottom: 5px;
+  font-size: 0.75rem;
+  a {
+    &:link {
+      color: black;
+    }
+    &:visited {
+      color: black;
+    }
+  }
 }
