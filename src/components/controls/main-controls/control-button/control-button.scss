@@ -32,11 +32,6 @@
     margin-bottom: 0.7rem;
   }
 
-  &--is-disabled {
-    cursor: default;
-    pointer-events: none;
-  }
-
   &:hover {
     border-color: $interactColor;
 

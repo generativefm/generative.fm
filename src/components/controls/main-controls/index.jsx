@@ -8,10 +8,11 @@ import {
   faRandom,
 } from '@fortawesome/free-solid-svg-icons';
 import ControlButtonComponent from './control-button';
+import ButtonSpacerComponent from './button-spacer';
 import './main-controls.scss';
 
 const makePrimaryButton = (faIcon, onClick) =>
-  function PrimaryButton() {
+  function PrimaryButtonComponent() {
     return (
       <ControlButtonComponent
         faIcon={faIcon}
@@ -22,17 +23,21 @@ const makePrimaryButton = (faIcon, onClick) =>
   };
 
 const MainControlsComponent = ({ isPlaying, hasSelection }) => {
-  const PrimaryButton = isPlaying
+  const PrimaryButtonComponent = isPlaying
     ? makePrimaryButton(faStop, () => ({}))
     : makePrimaryButton(faPlay, () => ({}));
   return (
     <div className="main-controls">
-      <ControlButtonComponent
-        faIcon={faStepBackward}
-        onClick={() => ({})}
-        isDisabled={!hasSelection}
-      />
-      <PrimaryButton />
+      {hasSelection ? (
+        <ControlButtonComponent
+          faIcon={faStepBackward}
+          onClick={() => ({})}
+          isDisabled={!hasSelection}
+        />
+      ) : (
+        <ButtonSpacerComponent />
+      )}
+      <PrimaryButtonComponent />
       <ControlButtonComponent faIcon={faStepForward} onClick={() => ({})} />
       <ControlButtonComponent
         faIcon={faRandom}
