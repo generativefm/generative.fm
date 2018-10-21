@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MainControlsComponent from './main-controls';
 import CurrentlyPlayingComponent from './currently-playing';
+import VolumeComponent from './volume';
 import './controls.scss';
 
 class ControlsComponent extends Component {
@@ -11,11 +12,17 @@ class ControlsComponent extends Component {
   render() {
     return (
       <div className="controls">
-        <CurrentlyPlayingComponent trackTitle={'Eno Machine'} />
+        <div className="controls__currently-playing">
+          <CurrentlyPlayingComponent trackTitle={'Eno Machine'} />
+        </div>
         <MainControlsComponent
+          className="controls__main-controls"
           hasSelection={this.state.hasSelection}
           isPlaying={this.state.isPlaying}
         />
+        <div className="controls__volume">
+          <VolumeComponent />
+        </div>
       </div>
     );
   }

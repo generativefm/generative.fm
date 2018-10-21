@@ -11,7 +11,12 @@ class VisualizerComponent extends Component {
     return <div className="visualizer" ref={this.containerElement} />;
   }
   componentDidMount() {
-    createVisualization(this.containerElement.current);
+    this.setState({
+      visualization: createVisualization(this.containerElement.current),
+    });
+  }
+  componentWillUnmount() {
+    this.state.visualization.stop();
   }
 }
 

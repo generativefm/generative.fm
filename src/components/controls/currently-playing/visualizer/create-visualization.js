@@ -151,7 +151,11 @@ const createVisualization = containerElement => {
     }
   };
 
-  const running = setInterval(() => makeNext(), INTERVAL_TIME_MS);
+  const interval = setInterval(() => makeNext(), INTERVAL_TIME_MS);
+
+  return {
+    stop: () => clearInterval(interval),
+  };
 };
 
 export default createVisualization;

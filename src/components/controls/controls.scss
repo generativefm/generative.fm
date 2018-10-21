@@ -1,5 +1,7 @@
 @import '_colors.scss';
 
+$sideControlWidth: 33%;
+
 .controls {
   height: 5em;
   width: 100%;
@@ -7,4 +9,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  &__currently-playing {
+    width: $sideControlWidth;
+  }
+
+  &__volume {
+    width: $sideControlWidth;
+  }
 }
