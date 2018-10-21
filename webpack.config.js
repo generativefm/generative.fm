@@ -30,7 +30,16 @@ const config = {
       },
       {
         test: [/\.css$/, /\.scss$/],
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: ['./src/styles'],
+            },
+          },
+        ],
       },
     ],
   },

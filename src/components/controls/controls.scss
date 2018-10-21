@@ -1,0 +1,10 @@
+@import '_colors.scss';
+
+.controls {
+  height: 5em;
+  width: 100%;
+  border-top: 1px solid $primaryColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

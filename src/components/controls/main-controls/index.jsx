@@ -1,0 +1,51 @@
+import React from 'react';
+import propTypes from 'prop-types';
+import {
+  faPlay,
+  faStop,
+  faStepForward,
+  faStepBackward,
+  faRandom,
+} from '@fortawesome/free-solid-svg-icons';
+import ControlButtonComponent from './control-button';
+import './main-controls.scss';
+
+const makePrimaryButton = (faIcon, onClick) =>
+  function PrimaryButton() {
+    return (
+      <ControlButtonComponent
+        faIcon={faIcon}
+        onClick={onClick}
+        hasBorder={true}
+      />
+    );
+  };
+
+const MainControlsComponent = ({ isPlaying, hasSelection }) => {
+  const PrimaryButton = isPlaying
+    ? makePrimaryButton(faStop, () => ({}))
+    : makePrimaryButton(faPlay, () => ({}));
+  return (
+    <div className="main-controls">
+      <ControlButtonComponent
+        faIcon={faStepBackward}
+        onClick={() => ({})}
+        isDisabled={!hasSelection}
+      />
+      <PrimaryButton />
+      <ControlButtonComponent faIcon={faStepForward} onClick={() => ({})} />
+      <ControlButtonComponent
+        faIcon={faRandom}
+        onClick={() => ({})}
+        isActive={true}
+      />
+    </div>
+  );
+};
+
+MainControlsComponent.propTypes = {
+  isPlaying: propTypes.bool.isRequired,
+  hasSelection: propTypes.bool.isRequired,
+};
+
+export default MainControlsComponent;

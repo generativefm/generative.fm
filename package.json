@@ -58,6 +58,7 @@
     "@generative-music/piece-pinwheels": "^0.1.1",
     "@generative-music/piece-sevenths": "^0.1.1",
     "@generative-music/time-tonejs": "^1.0.0",
+    "classnames": "^2.2.6",
     "markov-chains": "^1.0.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
