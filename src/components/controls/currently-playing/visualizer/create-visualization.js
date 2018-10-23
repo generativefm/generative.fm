@@ -151,10 +151,24 @@ const createVisualization = containerElement => {
     }
   };
 
-  const interval = setInterval(() => makeNext(), INTERVAL_TIME_MS);
+  let interval;
 
   return {
-    stop: () => clearInterval(interval),
+    start: () => {
+      interval = setInterval(() => makeNext(), INTERVAL_TIME_MS);
+    },
+    stop: () => {
+      allShapes.concat([group]).forEach(s => s.finish());
+      allShapes.forEach(s => {
+        s.attr({
+          'fill-opacity': 0,
+          'stroke-width': 0,
+        });
+      });
+      if (interval) {
+        clearInterval(interval);
+      }
+    },
   };
 };
 
