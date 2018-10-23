@@ -155,6 +155,7 @@ const createVisualization = containerElement => {
 
   return {
     start: () => {
+      makeNext();
       interval = setInterval(() => makeNext(), INTERVAL_TIME_MS);
     },
     stop: () => {
