@@ -6,6 +6,7 @@ import {
   faStepForward,
   faStepBackward,
   faRandom,
+  faSyncAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import ControlButtonComponent from '../control-button';
 import ButtonSpacerComponent from './button-spacer';
@@ -22,24 +23,38 @@ const makePrimaryButton = (faIcon, onClick) =>
     );
   };
 
-const MainControlsComponent = ({ isPlaying, hasSelection }) => {
+const MainControlsComponent = ({
+  isPlaying,
+  hasSelection,
+  onRepeatClick,
+  onShuffleClick,
+  onBackClick,
+  onForwardClick,
+  onPrimaryClick,
+  isRepeatActive,
+  isShuffleActive,
+}) => {
   const PrimaryButtonComponent = isPlaying
-    ? makePrimaryButton(faStop, () => ({}))
-    : makePrimaryButton(faPlay, () => ({}));
+    ? makePrimaryButton(faStop, onPrimaryClick)
+    : makePrimaryButton(faPlay, onPrimaryClick);
   return (
     <div className="main-controls">
-      <ButtonSpacerComponent />
+      <ControlButtonComponent
+        faIcon={faSyncAlt}
+        onClick={onRepeatClick}
+        isActive={isRepeatActive}
+      />
       {hasSelection ? (
-        <ControlButtonComponent faIcon={faStepBackward} onClick={() => ({})} />
+        <ControlButtonComponent faIcon={faStepBackward} onClick={onBackClick} />
       ) : (
         <ButtonSpacerComponent />
       )}
       <PrimaryButtonComponent />
-      <ControlButtonComponent faIcon={faStepForward} onClick={() => ({})} />
+      <ControlButtonComponent faIcon={faStepForward} onClick={onForwardClick} />
       <ControlButtonComponent
         faIcon={faRandom}
-        onClick={() => ({})}
-        isActive={true}
+        onClick={onShuffleClick}
+        isActive={isShuffleActive}
       />
     </div>
   );
@@ -48,6 +63,13 @@ const MainControlsComponent = ({ isPlaying, hasSelection }) => {
 MainControlsComponent.propTypes = {
   isPlaying: propTypes.bool.isRequired,
   hasSelection: propTypes.bool.isRequired,
+  onRepeatClick: propTypes.func.isRequired,
+  onShuffleClick: propTypes.func.isRequired,
+  onBackClick: propTypes.func.isRequired,
+  onForwardClick: propTypes.func.isRequired,
+  onPrimaryClick: propTypes.func.isRequired,
+  isRepeatActive: propTypes.bool.isRequired,
+  isShuffleActive: propTypes.bool.isRequired,
 };
 
 export default MainControlsComponent;

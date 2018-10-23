@@ -13,6 +13,8 @@ class ControlsComponent extends Component {
       pct: 75,
       displayPct: 75,
       isMuted: false,
+      isShuffleActive: false,
+      isRepeatActive: false,
     };
     this.onVolumeChange = pct =>
       this.setState({ pct, displayPct: pct, isMuted: false });
@@ -22,6 +24,15 @@ class ControlsComponent extends Component {
         displayPct: this.state.isMuted ? this.state.pct : 0,
       });
     };
+    this.onPrimaryClick = () => {
+      this.setState({ isPlaying: !this.state.isPlaying });
+    };
+    this.onForwardClick = () => {};
+    this.onBackClick = () => {};
+    this.onShuffleClick = () =>
+      this.setState({ isShuffleActive: !this.state.isShuffleActive });
+    this.onRepeatClick = () =>
+      this.setState({ isRepeatActive: !this.state.isRepeatActive });
   }
   render() {
     return (
@@ -37,6 +48,13 @@ class ControlsComponent extends Component {
           className="controls__main-controls"
           hasSelection={this.state.hasSelection}
           isPlaying={this.state.isPlaying}
+          onForwardClick={this.onForwardClick}
+          onBackClick={this.onBackClick}
+          onPrimaryClick={this.onPrimaryClick}
+          onRepeatClick={this.onRepeatClick}
+          onShuffleClick={this.onShuffleClick}
+          isShuffleActive={this.state.isShuffleActive}
+          isRepeatActive={this.state.isRepeatActive}
         />
         <div className="controls__volume">
           <VolumeComponent
