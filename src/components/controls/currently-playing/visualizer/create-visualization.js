@@ -14,7 +14,7 @@ const createVisualization = containerElement => {
   const HALF_STROKE_WIDTH = STROKE_WIDTH / TWO;
   const ANIMATION_TIME_MS = 10000;
   const TRI_CLIP_SIZE = HALF_LENGTH + STROKE_WIDTH;
-  const P_ROTATE = 0.25;
+  const P_ROTATE = 0.0375;
   const P_RECT = 0.4;
   const P_SQR = 0.2;
   const P_TRI = 0.1;
