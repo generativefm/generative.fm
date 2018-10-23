@@ -7,7 +7,7 @@ import {
   faStepBackward,
   faRandom,
 } from '@fortawesome/free-solid-svg-icons';
-import ControlButtonComponent from './control-button';
+import ControlButtonComponent from '../control-button';
 import ButtonSpacerComponent from './button-spacer';
 import './main-controls.scss';
 

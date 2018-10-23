@@ -1,5 +1,5 @@
 @import '_colors.scss';
-@import '../_variables.scss';
+@import '_variables.scss';
 
 .control-button {
   width: $buttonWidth;
@@ -42,6 +42,10 @@
     &::after {
       background: $interactColor;
     }
+  }
+
+  &:focus {
+    outline: none;
   }
 
   & > .svg-inline--fa {

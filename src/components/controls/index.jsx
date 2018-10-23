@@ -7,14 +7,31 @@ import './controls.scss';
 class ControlsComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { hasSelection: true, isPlaying: true, pct: 75 };
-    this.onVolumeChange = pct => this.setState({ pct });
+    this.state = {
+      hasSelection: true,
+      isPlaying: true,
+      pct: 75,
+      displayPct: 75,
+      isMuted: false,
+    };
+    this.onVolumeChange = pct =>
+      this.setState({ pct, displayPct: pct, isMuted: false });
+    this.onVolumeIconClick = () => {
+      this.setState({
+        isMuted: !this.state.isMuted,
+        displayPct: this.state.isMuted ? this.state.pct : 0,
+      });
+    };
   }
   render() {
     return (
       <div className="controls">
         <div className="controls__currently-playing">
-          <CurrentlyPlayingComponent trackTitle={'Eno Machine'} />
+          <CurrentlyPlayingComponent
+            trackTitle={'Eno Machine'}
+            isPlaying={this.state.isPlaying}
+            hasSelection={this.state.hasSelection}
+          />
         </div>
         <MainControlsComponent
           className="controls__main-controls"
@@ -23,8 +40,11 @@ class ControlsComponent extends Component {
         />
         <div className="controls__volume">
           <VolumeComponent
-            pct={this.state.pct}
+            pct={this.state.displayPct}
             onChange={this.onVolumeChange}
+            onIconClick={this.onVolumeIconClick}
+            isPlaying={this.state.isPlaying}
+            hasSelection={this.state.hasSelection}
           />
         </div>
       </div>
