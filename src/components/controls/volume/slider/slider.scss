@@ -22,9 +22,13 @@ $overflow: 1em;
 
     &__level {
       height: $sliderHeight;
-      background: black;
+      background: $primaryColor;
       cursor: inherit;
       display: inline-block;
+
+      &--active {
+        background: $highlightColor;
+      }
     }
 
     &__indicator {
@@ -32,12 +36,20 @@ $overflow: 1em;
       width: 0.1em;
       background: $primaryColor;
       display: none;
+
+      &--active {
+        display: inline-block;
+      }
     }
   }
 
   &:hover {
     .slider__bar__indicator {
       display: inline-block;
+    }
+
+    .slider__bar__level {
+      background: $highlightColor;
     }
   }
 }

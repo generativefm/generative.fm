@@ -1,5 +1,6 @@
 import React, { Component, createRef } from 'react';
 import propTypes from 'prop-types';
+import classnames from 'classnames';
 import './slider.scss';
 
 const preventDefault = event => event.preventDefault();
@@ -15,7 +16,7 @@ const calculatePct = (mouseEvent, el) => {
 class SliderComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { mouseDown: false };
+    this.state = { isMouseDown: false };
     this.sliderBar = createRef();
 
     this.handleMouseDown = this.handleMouseDown.bind(this);
@@ -37,13 +38,17 @@ class SliderComponent extends Component {
           onDragStart={preventDefault}
         >
           <div
-            className="slider__bar__level"
+            className={classnames('slider__bar__level', {
+              'slider__bar__level--active': this.state.isMouseDown,
+            })}
             style={{ width: `${this.props.pct}%` }}
             onDrag={preventDefault}
             onDragStart={preventDefault}
           />
           <div
-            className="slider__bar__indicator"
+            className={classnames('slider__bar__indicator', {
+              'slider__bar__indicator--active': this.state.isMouseDown,
+            })}
             onDrag={preventDefault}
             onDragStart={preventDefault}
           />
@@ -53,7 +58,7 @@ class SliderComponent extends Component {
   }
   handleMouseDown(event) {
     if (event.button === 0) {
-      this.setState({ mouseDown: true });
+      this.setState({ isMouseDown: true });
       window.addEventListener('mousemove', this.handleMouseMove);
       window.addEventListener('mouseup', this.handleMouseUp);
     }
@@ -63,7 +68,7 @@ class SliderComponent extends Component {
   }
   handleMouseUp(event) {
     if (event.button === 0) {
-      this.setState({ mouseDown: false });
+      this.setState({ isMouseDown: false });
       this.handleMouseMove(event);
       window.removeEventListener('mouseup', this.handleMouseUp);
       window.removeEventListener('mousemove', this.handleMouseMove);
