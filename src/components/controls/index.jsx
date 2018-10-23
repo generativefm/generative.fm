@@ -7,7 +7,8 @@ import './controls.scss';
 class ControlsComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { hasSelection: false, isPlaying: false };
+    this.state = { hasSelection: true, isPlaying: true, pct: 75 };
+    this.onVolumeChange = pct => this.setState({ pct });
   }
   render() {
     return (
@@ -21,7 +22,10 @@ class ControlsComponent extends Component {
           isPlaying={this.state.isPlaying}
         />
         <div className="controls__volume">
-          <VolumeComponent />
+          <VolumeComponent
+            pct={this.state.pct}
+            onChange={this.onVolumeChange}
+          />
         </div>
       </div>
     );

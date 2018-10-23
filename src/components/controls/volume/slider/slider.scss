@@ -1,0 +1,43 @@
+@import '_colors.scss';
+
+$sliderHeight: 0.5em;
+$sliderWidth: 5em;
+$overflow: 1em;
+
+.slider {
+  cursor: pointer;
+  height: $sliderHeight + $overflow;
+  width: $sliderWidth + $overflow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__bar {
+    width: $sliderWidth;
+    height: $sliderHeight;
+    background: $secondaryColor;
+    cursor: inherit;
+    display: flex;
+    align-items: center;
+
+    &__level {
+      height: $sliderHeight;
+      background: black;
+      cursor: inherit;
+      display: inline-block;
+    }
+
+    &__indicator {
+      height: $sliderHeight + $overflow / 2;
+      width: 0.1em;
+      background: $primaryColor;
+      display: none;
+    }
+  }
+
+  &:hover {
+    .slider__bar__indicator {
+      display: inline-block;
+    }
+  }
+}

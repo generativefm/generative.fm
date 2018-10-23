@@ -29,11 +29,7 @@ const MainControlsComponent = ({ isPlaying, hasSelection }) => {
   return (
     <div className="main-controls">
       {hasSelection ? (
-        <ControlButtonComponent
-          faIcon={faStepBackward}
-          onClick={() => ({})}
-          isDisabled={!hasSelection}
-        />
+        <ControlButtonComponent faIcon={faStepBackward} onClick={() => ({})} />
       ) : (
         <ButtonSpacerComponent />
       )}
