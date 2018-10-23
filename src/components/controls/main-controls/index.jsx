@@ -28,6 +28,7 @@ const MainControlsComponent = ({ isPlaying, hasSelection }) => {
     : makePrimaryButton(faPlay, () => ({}));
   return (
     <div className="main-controls">
+      <ButtonSpacerComponent />
       {hasSelection ? (
         <ControlButtonComponent faIcon={faStepBackward} onClick={() => ({})} />
       ) : (
