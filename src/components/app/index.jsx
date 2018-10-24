@@ -19,22 +19,24 @@ class AppComponent extends Component {
     const Content = tabs[this.state.activeTabId];
     return (
       <div className="app">
-        <nav>
-          <TitleNav
-            activeTabId={this.state.activeTabId}
-            onTabClick={this.handleTabClick}
-          />
-        </nav>
-        <main className="app__content">
-          {Content && (
-            <Content
-              onTrackClick={this.handleTrackClick}
-              selectedTrackId={this.state.selectedTrackId}
-              isPlaying={this.state.isPlaying}
+        <div className="app__content">
+          <nav>
+            <TitleNav
+              activeTabId={this.state.activeTabId}
+              onTabClick={this.handleTabClick}
             />
-          )}
-        </main>
-        <footer>
+          </nav>
+          <main>
+            {Content && (
+              <Content
+                onTrackClick={this.handleTrackClick}
+                selectedTrackId={this.state.selectedTrackId}
+                isPlaying={this.state.isPlaying}
+              />
+            )}
+          </main>
+        </div>
+        <footer className="app__controls">
           <Controls
             selectedTrackId={this.state.selectedTrackId}
             isPlaying={this.state.isPlaying}
