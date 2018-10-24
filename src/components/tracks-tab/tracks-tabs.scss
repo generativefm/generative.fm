@@ -1,0 +1,55 @@
+@import '_colors.scss';
+
+.tracks-tab {
+  height: 100%;
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+
+  &__table-container {
+    padding: 2em 0;
+
+    &__table {
+      width: 95%;
+      margin: auto;
+      text-align: left;
+      border-collapse: collapse;
+
+      th {
+        font-weight: inherit;
+      }
+
+      td,
+      th {
+        height: 2em;
+        border-bottom: 1px solid $secondaryColor;
+
+        &:first-of-type {
+          padding-left: 1em;
+        }
+
+        &:last-of-type {
+          text-align: right;
+          padding-right: 1em;
+        }
+      }
+
+      tbody {
+        tr {
+          cursor: pointer;
+
+          &:hover {
+            background: $secondaryColor;
+          }
+        }
+
+        .is-selected {
+          color: $highlightColor;
+        }
+      }
+
+      .index-column {
+        width: 3em;
+      }
+    }
+  }
+}

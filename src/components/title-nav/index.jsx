@@ -1,11 +1,7 @@
 import React from 'react';
 import propTypes from 'prop-types';
+import tabs from '../tabs';
 import './title-nav.scss';
-
-const tabs = {
-  tracks: <div>Tracks</div>,
-  about: <div>About</div>,
-};
 
 const TitleNavComponent = ({ activeTabId, onTabClick }) => {
   return (

@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import MainControlsComponent from './main-controls';
 import CurrentlyPlayingComponent from './currently-playing';
 import VolumeComponent from './volume';
+import pieces from '../../pieces';
 import './controls.scss';
 
 class ControlsComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hasSelection: true,
-      isPlaying: true,
       pct: 75,
       displayPct: 75,
       isMuted: false,
@@ -39,15 +38,20 @@ class ControlsComponent extends Component {
       <div className="controls">
         <div className="controls__currently-playing">
           <CurrentlyPlayingComponent
-            trackTitle={'Eno Machine'}
-            isPlaying={this.state.isPlaying}
-            hasSelection={this.state.hasSelection}
+            trackTitle={
+              pieces.some(({ link }) => link === this.props.selectedTrackId)
+                ? pieces.find(({ link }) => link === this.props.selectedTrackId)
+                    .title
+                : 'Untitled'
+            }
+            isPlaying={this.props.isPlaying}
+            hasSelection={this.props.hasSelection}
           />
         </div>
         <MainControlsComponent
           className="controls__main-controls"
-          hasSelection={this.state.hasSelection}
-          isPlaying={this.state.isPlaying}
+          hasSelection={this.props.hasSelection}
+          isPlaying={this.props.isPlaying}
           onForwardClick={this.onForwardClick}
           onBackClick={this.onBackClick}
           onPrimaryClick={this.onPrimaryClick}
@@ -61,8 +65,8 @@ class ControlsComponent extends Component {
             pct={this.state.displayPct}
             onChange={this.onVolumeChange}
             onIconClick={this.onVolumeIconClick}
-            isPlaying={this.state.isPlaying}
-            hasSelection={this.state.hasSelection}
+            isPlaying={this.props.isPlaying}
+            hasSelection={this.props.hasSelection}
           />
         </div>
       </div>
