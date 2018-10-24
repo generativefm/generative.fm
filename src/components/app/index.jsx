@@ -8,7 +8,7 @@ class AppComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeTabId: 'tracks',
+      activeTabId: 'about',
       selectedTrackId: undefined,
       isPlaying: false,
     };
