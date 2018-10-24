@@ -1,0 +1,48 @@
+@import '_colors.scss';
+
+.title-nav {
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  padding: 0 1em;
+
+  &__main-title {
+    font-size: 1.75em;
+    font-weight: inherit;
+  }
+
+  &__tab-list {
+    list-style: none;
+    padding: 0;
+
+    &__item {
+      display: inline-block;
+      font-size: 0.8em;
+      padding: 0 1em;
+
+      &:first-of-type {
+        padding-left: 0;
+      }
+
+      &__button {
+        border: none;
+        background: $backgroundColor;
+        cursor: pointer;
+
+        &:hover {
+          color: $interactColor;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      &__active-indicator {
+        width: 3em;
+        height: 0.2em;
+        background: $highlightColor;
+        margin: 0 auto;
+      }
+    }
+  }
+}

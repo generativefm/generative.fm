@@ -9,11 +9,11 @@ import { render } from 'react-dom';
 import { install } from 'offline-plugin/runtime';
 import pieces from './pieces';
 import isProduction from './config/is-production';
-import ControlsComponent from './components/controls';
+import App from './components/app';
 import './styles/base-styles.scss';
 
 if (isProduction) {
   install();
 }
 
-render(<ControlsComponent />, document.getElementById('root'));
+render(<App />, document.getElementById('root'));
