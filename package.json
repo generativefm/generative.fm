@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --config webpack.prod.config.js",
+    "start": "webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack-cli --mode production --config webpack.prod.config.js",
     "deploy": "npm run lint && npm run build && node node-scripts/deploy.js",
     "lint": "eslint ."
