@@ -4,23 +4,24 @@ import stopPiece from './stop-piece';
 //eslint-disable-next-line no-empty-function
 const noop = () => {};
 
-let currentPiece;
-let currentPieceBuild = Promise.resolve();
+let buildingPiece = false;
+let queuedPiece;
 
 const playPiece = (piece, getState) => {
-  console.log(`Play ${piece.id}`);
-  currentPiece = piece;
-  currentPieceBuild.then(() => {
-    currentPieceBuild = piece.makePiece(Tone.Master, noop).then(() => {
-      const { selectedPieceId, isPlaying } = getState();
-      if (selectedPieceId !== piece.id) {
-        stopPiece();
-        playPiece(currentPiece, getState);
-      } else if (isPlaying) {
+  queuedPiece = piece;
+  if (!buildingPiece) {
+    buildingPiece = true;
+    piece.makePiece(Tone.Master, noop).then(() => {
+      buildingPiece = false;
+      const { selectedPieceId } = getState();
+      if (selectedPieceId === piece.id) {
         Tone.Transport.start('+0.1');
+      } else {
+        stopPiece();
+        playPiece(queuedPiece, getState);
       }
     });
-  });
+  }
 };
 
 export default playPiece;
