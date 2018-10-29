@@ -1,19 +1,19 @@
 import React from 'react';
 import { render } from 'react-dom';
-// import {
-//   BrowserRouter as Router,
-//   Route,
-//   Switch,
-//   Redirect,
-// } from 'react-router-dom';
 import { install } from 'offline-plugin/runtime';
-import pieces from './pieces';
+import { Provider } from 'react-redux';
+import store from './store';
 import isProduction from './config/is-production';
-import App from './components/app';
+import App from './containers/app.container';
 import './styles/base-styles.scss';
 
 if (isProduction) {
   install();
 }
 
-render(<App />, document.getElementById('root'));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+);
