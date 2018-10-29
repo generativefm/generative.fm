@@ -18,7 +18,7 @@ import convertPctToDb from './convert-pct-to-db';
 import stopPiece from './stop-piece';
 
 const piecesMiddleware = store => next => action => {
-  const { selectedPieceId, isPlaying } = store.getState();
+  const { selectedPieceId, isPlaying, isRepeatActive } = store.getState();
   if (action.type === UPDATE_VOLUME_PCT) {
     Tone.Master.volume.value = convertPctToDb(action.payload);
     Tone.Master.mute = false;
@@ -29,6 +29,10 @@ const piecesMiddleware = store => next => action => {
     const nextPieceIndex = currentPieceIndex + (action.type === NEXT ? 1 : -1);
     if (nextPieceIndex >= 0 && nextPieceIndex < pieces.length) {
       const { id } = pieces[nextPieceIndex];
+      store.dispatch(selectPiece(id));
+    } else if (isRepeatActive) {
+      const loopedPieceIndex = nextPieceIndex < 0 ? pieces.length - 1 : 0;
+      const { id } = pieces[loopedPieceIndex];
       store.dispatch(selectPiece(id));
     } else {
       store.dispatch(selectPiece(null));
