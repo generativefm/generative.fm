@@ -1,14 +1,28 @@
 @import '_colors.scss';
 
 .title-nav {
-  font-family: Roboto, sans-serif;
-  font-weight: 400;
   padding: 0 1em;
   border-bottom: 1px solid $primaryColor;
 
-  &__main-title {
-    font-size: 1.75em;
+  &__title {
     font-weight: inherit;
+    margin: 0.375em 0;
+
+    &--primary {
+      font-size: 1.5em;
+    }
+
+    &--secondary {
+      font-size: 1em;
+    }
+
+    &__secret-link {
+      text-decoration: none;
+      color: $highlightColor;
+      &:hover {
+        color: $highlightInteractColor;
+      }
+    }
   }
 
   &__tab-list {
@@ -28,6 +42,7 @@
         border: none;
         background: $backgroundColor;
         cursor: pointer;
+        padding: 0;
 
         &:hover {
           color: $interactColor;
@@ -39,8 +54,8 @@
       }
 
       &__active-indicator {
-        width: 3em;
-        height: 0.2em;
+        width: 2.5em;
+        height: 0.15em;
         background: $highlightColor;
         margin: 0 auto;
       }
