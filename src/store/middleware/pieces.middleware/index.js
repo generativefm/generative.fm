@@ -14,93 +14,100 @@ import playPiece from './play-piece';
 import convertPctToDb from './convert-pct-to-db';
 import stopPiece from './stop-piece';
 
-const piecesMiddleware = store => next => action => {
-  const {
-    selectedPieceId,
-    isPlaying,
-    isShuffleActive,
-    pieceHistory,
-    isMuted,
-  } = store.getState();
-  if (action.type === UPDATE_VOLUME_PCT) {
-    Tone.Master.volume.value = convertPctToDb(action.payload);
-    Tone.Master.mute = false;
-  } else if (action.type === NEXT) {
-    let nextPieceId;
-    if (isShuffleActive) {
-      const unselectedPieces = pieces.filter(
-        ({ id }) => id !== selectedPieceId
-      );
-      nextPieceId =
-        unselectedPieces[Math.floor(Math.random() * unselectedPieces.length)]
-          .id;
-    } else {
-      const selectedPieceIndex = pieces.findIndex(
-        ({ id }) => id === selectedPieceId
-      );
-      if (
-        selectedPieceIndex === -1 ||
-        selectedPieceIndex === pieces.length - 1
-      ) {
-        nextPieceId = pieces[0].id;
+const piecesMiddleware = store => next => {
+  const initialState = store.getState();
+  Tone.Master.volume.value = convertPctToDb(initialState.volumePct);
+  if (initialState.isMuted) {
+    Tone.Master.mute = true;
+  }
+  return action => {
+    const {
+      selectedPieceId,
+      isPlaying,
+      isShuffleActive,
+      pieceHistory,
+      isMuted,
+    } = store.getState();
+    if (action.type === UPDATE_VOLUME_PCT) {
+      Tone.Master.volume.value = convertPctToDb(action.payload);
+      Tone.Master.mute = false;
+    } else if (action.type === NEXT) {
+      let nextPieceId;
+      if (isShuffleActive) {
+        const unselectedPieces = pieces.filter(
+          ({ id }) => id !== selectedPieceId
+        );
+        nextPieceId =
+          unselectedPieces[Math.floor(Math.random() * unselectedPieces.length)]
+            .id;
       } else {
-        nextPieceId = pieces[selectedPieceIndex + 1].id;
+        const selectedPieceIndex = pieces.findIndex(
+          ({ id }) => id === selectedPieceId
+        );
+        if (
+          selectedPieceIndex === -1 ||
+          selectedPieceIndex === pieces.length - 1
+        ) {
+          nextPieceId = pieces[0].id;
+        } else {
+          nextPieceId = pieces[selectedPieceIndex + 1].id;
+        }
       }
-    }
-    store.dispatch(selectPiece(nextPieceId));
-  } else if (action.type === PREVIOUS) {
-    let nextPieceId = null;
-    if (isShuffleActive) {
-      //the last entry in pieceHistory is the current piece
-      if (pieceHistory.length > 1) {
-        nextPieceId = pieceHistory[pieceHistory.length - 2];
+      store.dispatch(selectPiece(nextPieceId));
+    } else if (action.type === PREVIOUS) {
+      let nextPieceId = null;
+      if (isShuffleActive) {
+        //the last entry in pieceHistory is the current piece
+        if (pieceHistory.length > 1) {
+          nextPieceId = pieceHistory[pieceHistory.length - 2];
+        } else {
+          nextPieceId = pieces[Math.floor(Math.random() * pieces.length)].id;
+        }
       } else {
-        nextPieceId = pieces[Math.floor(Math.random() * pieces.length)].id;
+        const selectedPieceIndex = pieces.findIndex(
+          ({ id }) => id === selectedPieceId
+        );
+        if (selectedPieceIndex <= 0) {
+          nextPieceId = pieces[pieces.length - 1].id;
+        } else {
+          nextPieceId = pieces[selectedPieceIndex - 1].id;
+        }
       }
-    } else {
-      const selectedPieceIndex = pieces.findIndex(
-        ({ id }) => id === selectedPieceId
-      );
-      if (selectedPieceIndex <= 0) {
-        nextPieceId = pieces[pieces.length - 1].id;
+      store.dispatch(selectPiece(nextPieceId));
+    } else if (action.type === SELECT_PIECE) {
+      if (isPlaying && action.payload !== selectedPieceId) {
+        if (action.payload === null) {
+          store.dispatch(stop());
+        } else {
+          const piece = pieces.find(({ id }) => id === action.payload);
+          stopPiece();
+          playPiece(piece, store.getState);
+        }
+      }
+    } else if (action.type === PLAY) {
+      if (!isMuted) {
+        Tone.Master.mute = false;
+      }
+      let piece;
+      if (selectedPieceId === null) {
+        piece = isShuffleActive
+          ? pieces[Math.floor(Math.random() * pieces.length)]
+          : pieces[0];
+        store.dispatch(selectPiece(piece.id));
       } else {
-        nextPieceId = pieces[selectedPieceIndex - 1].id;
+        piece = pieces.find(({ id }) => id === selectedPieceId);
       }
-    }
-    store.dispatch(selectPiece(nextPieceId));
-  } else if (action.type === SELECT_PIECE) {
-    if (isPlaying && action.payload !== selectedPieceId) {
-      if (action.payload === null) {
-        store.dispatch(stop());
-      } else {
-        const piece = pieces.find(({ id }) => id === action.payload);
-        stopPiece();
-        playPiece(piece, store.getState);
-      }
-    }
-  } else if (action.type === PLAY) {
-    if (!isMuted) {
+      playPiece(piece, store.getState);
+    } else if (action.type === STOP) {
+      Tone.Master.mute = true;
+      stopPiece();
+    } else if (action.type === MUTE) {
+      Tone.Master.mute = true;
+    } else if (action.type === UNMUTE && isPlaying) {
       Tone.Master.mute = false;
     }
-    let piece;
-    if (selectedPieceId === null) {
-      piece = isShuffleActive
-        ? pieces[Math.floor(Math.random() * pieces.length)]
-        : pieces[0];
-      store.dispatch(selectPiece(piece.id));
-    } else {
-      piece = pieces.find(({ id }) => id === selectedPieceId);
-    }
-    playPiece(piece, store.getState);
-  } else if (action.type === STOP) {
-    Tone.Master.mute = true;
-    stopPiece();
-  } else if (action.type === MUTE) {
-    Tone.Master.mute = true;
-  } else if (action.type === UNMUTE && isPlaying) {
-    Tone.Master.mute = false;
-  }
-  return next(action);
+    return next(action);
+  };
 };
 
 export default piecesMiddleware;
