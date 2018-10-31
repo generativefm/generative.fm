@@ -6,7 +6,6 @@ import {
   faStepForward,
   faStepBackward,
   faRandom,
-  faSyncAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import ControlButtonComponent from '../control-button';
 import ButtonSpacerComponent from './button-spacer';
@@ -26,36 +25,23 @@ const makePrimaryButton = (faIcon, onClick) =>
 const MainControlsComponent = ({
   isPlaying,
   isShuffleActive,
-  isRepeatActive,
-  selectedPieceId,
   enableShuffle,
   disableShuffle,
-  enableRepeat,
-  disableRepeat,
   onPreviousClick,
   onNextClick,
   onStopClick,
   onPlayClick,
 }) => {
-  const hasSelection = selectedPieceId !== null;
   const PrimaryButtonComponent = isPlaying
     ? makePrimaryButton(faStop, onStopClick)
     : makePrimaryButton(faPlay, onPlayClick);
   return (
     <div className="main-controls">
+      <ButtonSpacerComponent />
       <ControlButtonComponent
-        faIcon={faSyncAlt}
-        onClick={isRepeatActive ? disableRepeat : enableRepeat}
-        isActive={isRepeatActive}
+        faIcon={faStepBackward}
+        onClick={onPreviousClick}
       />
-      {hasSelection ? (
-        <ControlButtonComponent
-          faIcon={faStepBackward}
-          onClick={onPreviousClick}
-        />
-      ) : (
-        <ButtonSpacerComponent />
-      )}
       <PrimaryButtonComponent />
       <ControlButtonComponent faIcon={faStepForward} onClick={onNextClick} />
       <ControlButtonComponent
@@ -69,13 +55,9 @@ const MainControlsComponent = ({
 
 MainControlsComponent.propTypes = {
   isPlaying: propTypes.bool.isRequired,
-  isRepeatActive: propTypes.bool.isRequired,
   isShuffleActive: propTypes.bool.isRequired,
-  selectedPieceId: propTypes.string,
   enableShuffle: propTypes.func.isRequired,
   disableShuffle: propTypes.func.isRequired,
-  enableRepeat: propTypes.func.isRequired,
-  disableRepeat: propTypes.func.isRequired,
   onPreviousClick: propTypes.func.isRequired,
   onNextClick: propTypes.func.isRequired,
   onStopClick: propTypes.func.isRequired,

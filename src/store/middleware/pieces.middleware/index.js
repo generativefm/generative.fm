@@ -1,7 +1,4 @@
 import Tone from 'tone';
-// import shuffleArray from 'shuffle-array';
-// import ENABLE_SHUFFLE from '../actions/types/enable-shuffle.type';
-// import DISABLE_SHUFFLE from '../actions/types/disable-shuffle.type';
 import MUTE from '../../actions/types/mute.type';
 import UNMUTE from '../../actions/types/unmute.type';
 import NEXT from '../../actions/types/next.type';
@@ -18,41 +15,89 @@ import convertPctToDb from './convert-pct-to-db';
 import stopPiece from './stop-piece';
 
 const piecesMiddleware = store => next => action => {
-  const { selectedPieceId, isPlaying, isRepeatActive } = store.getState();
+  const {
+    selectedPieceId,
+    isPlaying,
+    isShuffleActive,
+    pieceHistory,
+    isMuted,
+  } = store.getState();
   if (action.type === UPDATE_VOLUME_PCT) {
     Tone.Master.volume.value = convertPctToDb(action.payload);
     Tone.Master.mute = false;
-  } else if (action.type === NEXT || action.type === PREVIOUS) {
-    const currentPieceIndex = pieces.findIndex(
-      ({ id }) => id === selectedPieceId
-    );
-    const nextPieceIndex = currentPieceIndex + (action.type === NEXT ? 1 : -1);
-    if (nextPieceIndex >= 0 && nextPieceIndex < pieces.length) {
-      const { id } = pieces[nextPieceIndex];
-      store.dispatch(selectPiece(id));
-    } else if (isRepeatActive) {
-      const loopedPieceIndex = nextPieceIndex < 0 ? pieces.length - 1 : 0;
-      const { id } = pieces[loopedPieceIndex];
-      store.dispatch(selectPiece(id));
+  } else if (action.type === NEXT) {
+    let nextPieceId;
+    if (isShuffleActive) {
+      const unselectedPieces = pieces.filter(
+        ({ id }) => id !== selectedPieceId
+      );
+      nextPieceId =
+        unselectedPieces[Math.floor(Math.random() * unselectedPieces.length)]
+          .id;
     } else {
-      store.dispatch(selectPiece(null));
+      const selectedPieceIndex = pieces.findIndex(
+        ({ id }) => id === selectedPieceId
+      );
+      if (
+        selectedPieceIndex === -1 ||
+        selectedPieceIndex === pieces.length - 1
+      ) {
+        nextPieceId = pieces[0].id;
+      } else {
+        nextPieceId = pieces[selectedPieceIndex + 1].id;
+      }
     }
-  } else if (action.type === SELECT_PIECE && isPlaying) {
-    if (action.payload === null) {
-      store.dispatch(stop());
+    store.dispatch(selectPiece(nextPieceId));
+  } else if (action.type === PREVIOUS) {
+    let nextPieceId = null;
+    if (isShuffleActive) {
+      //the last entry in pieceHistory is the current piece
+      if (pieceHistory.length > 1) {
+        nextPieceId = pieceHistory[pieceHistory.length - 2];
+      } else {
+        nextPieceId = pieces[Math.floor(Math.random() * pieces.length)].id;
+      }
     } else {
-      const piece = pieces.find(({ id }) => id === action.payload);
-      stopPiece();
-      playPiece(piece, store.getState);
+      const selectedPieceIndex = pieces.findIndex(
+        ({ id }) => id === selectedPieceId
+      );
+      if (selectedPieceIndex <= 0) {
+        nextPieceId = pieces[pieces.length - 1].id;
+      } else {
+        nextPieceId = pieces[selectedPieceIndex - 1].id;
+      }
     }
-  } else if (action.type === PLAY && selectedPieceId !== null) {
-    const piece = pieces.find(({ id }) => id === selectedPieceId);
+    store.dispatch(selectPiece(nextPieceId));
+  } else if (action.type === SELECT_PIECE) {
+    if (isPlaying && action.payload !== selectedPieceId) {
+      if (action.payload === null) {
+        store.dispatch(stop());
+      } else {
+        const piece = pieces.find(({ id }) => id === action.payload);
+        stopPiece();
+        playPiece(piece, store.getState);
+      }
+    }
+  } else if (action.type === PLAY) {
+    if (!isMuted) {
+      Tone.Master.mute = false;
+    }
+    let piece;
+    if (selectedPieceId === null) {
+      piece = isShuffleActive
+        ? pieces[Math.floor(Math.random() * pieces.length)]
+        : pieces[0];
+      store.dispatch(selectPiece(piece.id));
+    } else {
+      piece = pieces.find(({ id }) => id === selectedPieceId);
+    }
     playPiece(piece, store.getState);
   } else if (action.type === STOP) {
+    Tone.Master.mute = true;
     stopPiece();
   } else if (action.type === MUTE) {
     Tone.Master.mute = true;
-  } else if (action.type === UNMUTE) {
+  } else if (action.type === UNMUTE && isPlaying) {
     Tone.Master.mute = false;
   }
   return next(action);

@@ -5,7 +5,7 @@ import selectedPieceId from './selected-piece-id.reducer';
 import volumePct from './volume-pct.reducer';
 import activeTabId from './active-tab-id.reducer';
 import isShuffleActive from './is-shuffle-active.reducer';
-import isRepeatActive from './is-repeat-active.reducer';
+import pieceHistory from './piece-history.reducer';
 
 const rootReducer = combineReducers({
   isMuted,
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
   volumePct,
   activeTabId,
   isShuffleActive,
-  isRepeatActive,
+  pieceHistory,
 });
 
 export default rootReducer;
