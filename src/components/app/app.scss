@@ -1,0 +1,18 @@
+@import '_variables.scss';
+
+.app {
+  height: 100%;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $controlsHeight;
+  }
+
+  &__controls {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+}

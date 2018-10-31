@@ -8,11 +8,11 @@ import impact from './impact';
 // import drums from './drums';
 //import harp from './harp';
 
-const piece = (title, makePiece, link = title, description = '') => ({
+const piece = (title, makePiece, id = title, description = '') => ({
   title,
   makePiece,
   description,
-  link,
+  id,
 });
 
 const pieces = [

@@ -1,0 +1,22 @@
+@import '_colors.scss';
+@import '_variables.scss';
+
+$sideControlWidth: 33%;
+
+.controls {
+  background: $backgroundColor;
+  height: $controlsHeight;
+  width: 100%;
+  border-top: 1px solid $primaryColor;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__currently-playing {
+    width: $sideControlWidth;
+  }
+
+  &__volume {
+    width: $sideControlWidth;
+  }
+}

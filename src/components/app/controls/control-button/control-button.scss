@@ -1,0 +1,73 @@
+@import '_colors.scss';
+@import '_variables.scss';
+
+.control-button {
+  width: $buttonWidth;
+  height: $buttonWidth;
+  background: $backgroundColor;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  margin: 0.25rem;
+
+  &:hover {
+    border-color: $interactColor;
+
+    & > .svg-inline--fa {
+      color: $interactColor;
+    }
+
+    &::after {
+      background: $interactColor;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &--has-border {
+    border: 1px solid $primaryColor;
+    border-radius: 50%;
+  }
+
+  &--is-active {
+    color: $highlightColor;
+
+    &:hover {
+      & > .svg-inline--fa {
+        color: $highlightInteractColor;
+      }
+
+      &::after {
+        background: $highlightInteractColor;
+      }
+    }
+  }
+
+  &--is-active::after {
+    content: '';
+    height: 0.35em;
+    width: 0.35em;
+    background: $highlightColor;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-bottom: 0.8rem;
+  }
+
+  & > .svg-inline--fa {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 1.5em;
+    transform: translate(-50%, -50%);
+  }
+
+  // Optically center the "play" icon
+  & > .fa-play {
+    transform: translate(-33%, -50%);
+  }
+}

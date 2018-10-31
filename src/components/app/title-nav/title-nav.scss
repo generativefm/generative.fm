@@ -1,0 +1,64 @@
+@import '_colors.scss';
+
+.title-nav {
+  padding: 0 1em;
+  border-bottom: 1px solid $primaryColor;
+
+  &__title {
+    font-weight: inherit;
+    margin: 0.375em 0;
+
+    &--primary {
+      font-size: 1.5em;
+    }
+
+    &--secondary {
+      font-size: 1em;
+    }
+
+    &__secret-link {
+      text-decoration: none;
+      color: $highlightColor;
+      &:hover {
+        color: $highlightInteractColor;
+      }
+    }
+  }
+
+  &__tab-list {
+    list-style: none;
+    padding: 0;
+
+    &__item {
+      display: inline-block;
+      font-size: 0.8em;
+      padding: 0 1em;
+
+      &:first-of-type {
+        padding-left: 0;
+      }
+
+      &__button {
+        border: none;
+        background: $backgroundColor;
+        cursor: pointer;
+        padding: 0;
+
+        &:hover {
+          color: $interactColor;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      &__active-indicator {
+        width: 2.5em;
+        height: 0.15em;
+        background: $highlightColor;
+        margin: 0 auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@import '_colors.scss';
+
+.currently-playing {
+  display: flex;
+  align-items: center;
+
+  &__title {
+    margin-left: 0.5rem;
+    font-size: 0.9em;
+  }
+}

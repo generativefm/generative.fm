@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --config webpack.prod.config.js",
+    "start": "webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack-cli --mode production --config webpack.prod.config.js",
     "deploy": "npm run lint && npm run build && node node-scripts/deploy.js",
     "lint": "eslint ."
@@ -50,7 +50,7 @@
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-svg-core": "^1.2.4",
-    "@fortawesome/free-solid-svg-icons": "^5.3.1",
+    "@fortawesome/free-solid-svg-icons": "^5.4.1",
     "@fortawesome/react-fontawesome": "^0.1.3",
     "@generative-music/instrument-tonejs": "^0.1.0",
     "@generative-music/piece-aisatsana": "^0.1.0",
@@ -58,13 +58,18 @@
     "@generative-music/piece-pinwheels": "^0.1.1",
     "@generative-music/piece-sevenths": "^0.1.1",
     "@generative-music/time-tonejs": "^1.0.0",
+    "classnames": "^2.2.6",
     "markov-chains": "^1.0.2",
+    "nice-color-palettes": "^2.0.0",
     "react": "^16.3.2",
+    "react-device-detect": "^1.6.1",
     "react-dom": "^16.3.2",
+    "react-redux": "^5.1.0",
     "react-render-html": "^0.6.0",
     "react-router-dom": "^4.3.1",
-    "shuffle-array": "^1.0.1",
+    "redux": "^4.0.1",
     "startaudiocontext": "^1.2.1",
+    "svg.js": "^2.6.6",
     "tone": "^0.12.80"
   }
 }
