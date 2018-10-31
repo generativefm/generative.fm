@@ -62,6 +62,7 @@
     "markov-chains": "^1.0.2",
     "nice-color-palettes": "^2.0.0",
     "react": "^16.3.2",
+    "react-device-detect": "^1.6.1",
     "react-dom": "^16.3.2",
     "react-redux": "^5.1.0",
     "react-render-html": "^0.6.0",

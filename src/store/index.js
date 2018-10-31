@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
+import { isMobile } from 'react-device-detect';
 import rootReducer from './reducers/root.reducer';
 import piecesMiddleware from './middleware/pieces.middleware';
 import localStorageMiddleware from './middleware/local-storage.middleware';
@@ -9,6 +10,11 @@ const storedState =
   typeof storedStateJSON === 'undefined' ? {} : JSON.parse(storedStateJSON);
 
 const initialState = Object.assign({}, storedState, { isPlaying: false });
+
+if (isMobile) {
+  initialState.volumePct = 100;
+  initialState.isMuted = false;
+}
 
 const store = createStore(
   rootReducer,

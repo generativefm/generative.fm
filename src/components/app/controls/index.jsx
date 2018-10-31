@@ -1,4 +1,5 @@
 import React from 'react';
+import { isMobile } from 'react-device-detect';
 import MainControlsContainer from '../../../containers/main-controls.container';
 import CurrentlyPlayingContainer from '../../../containers/currently-playing.container';
 import VolumeContainer from '../../../containers/volume.container';
@@ -11,9 +12,11 @@ const ControlsComponent = () => {
         <CurrentlyPlayingContainer />
       </div>
       <MainControlsContainer className="controls__main-controls" />
-      <div className="controls__volume">
-        <VolumeContainer />
-      </div>
+      {!isMobile && (
+        <div className="controls__volume">
+          <VolumeContainer />
+        </div>
+      )}
     </div>
   );
 };
