@@ -4,9 +4,9 @@ import './about.scss';
 const AboutTabComponent = () => (
   <div className="about-tab">
     <p>
-      This site is a collection of generative music pieces which can be played.
-      The term &quot;generative music&quot; has been used especially by Brian
-      Eno to describe music which changes continously and is created by a
+      This site is a collection of generative music pieces which can be listened
+      to. The term &quot;generative music&quot; has been used especially by
+      Brian Eno to describe music which changes continously and is created by a
       system. Such systems often generate music for as long as one is willing to
       listen.
     </p>
@@ -24,17 +24,12 @@ const AboutTabComponent = () => (
       obscuring other sonic aspects of the environment.
     </p>
     <p>
-      Personally, I find this music ideal for listening to during long sessions
-      of concentration, like while working or reading. I often have one of the
-      pieces playing for an entire workday. I prefer not having to fuss with
-      playlists, and the uniformity of each piece means there are no distracting
-      song changes.
+      If you have questions or feedback, send an email to{' '}
+      <a href="mailto:alex@alexbainter.com?Subject=Generative Music">
+        alex@alexbainter.com
+      </a>
+      .
     </p>
-    <p>
-      If you have feedback or questions, please email me at{' '}
-      <a href="mailto:alex@alexbainter.com">alex@alexbainter.com</a>.
-    </p>
-    <p>- Alex Bainter</p>
   </div>
 );
 
