@@ -5,8 +5,9 @@ import arpeggiateOnce from '../patterns/arpeggiate-once';
 import getRandomElement from '../util/get-random-element';
 import getRandomBetween from '../util/get-random-between';
 import getRandomIntBetween from '../util/get-random-int-between';
+import pianoSamplesName from '../config/piano-samples-name';
 
-const INSTRUMENT = 'vsco2-piano-mf';
+const INSTRUMENT = pianoSamplesName;
 
 const pianoSamples = samples[INSTRUMENT];
 const notes = Object.keys(pianoSamples);

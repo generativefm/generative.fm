@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack-cli --mode production --config webpack.prod.config.js",
-    "deploy": "npm run lint && npm run build && node node-scripts/deploy.js",
+    "deploy": "npm run lint && npm run build && node node_scripts/deploy.js",
     "lint": "eslint ."
   },
   "repository": {
@@ -38,6 +38,7 @@
     "mime-types": "^2.1.20",
     "mini-css-extract-plugin": "^0.4.0",
     "node-gzip": "^1.1.2",
+    "node-lame": "^1.1.0",
     "node-sass": "^4.9.3",
     "offline-plugin": "^5.0.5",
     "prettier": "^1.14.2",

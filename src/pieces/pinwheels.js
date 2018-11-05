@@ -8,6 +8,7 @@ import allLetters from '../note-sets/all-letters';
 import getRandomElement from '../util/get-random-element';
 import pipe from '../util/pipe';
 import getRandomIntBetween from '../util/get-random-int-between';
+import pianoSamplesName from '../config/piano-samples-name';
 
 const SPAWN_TWO_P = 0.33;
 const OCTAVES = [3, 4, 5];
@@ -75,7 +76,7 @@ const startPinwheelChain = (instrument, log) => {
 
 export default (master, log) => {
   log('pinwheels');
-  return getSampledInstrument('vsco2-piano-mf').then(instrument => {
+  return getSampledInstrument(pianoSamplesName).then(instrument => {
     log('ready');
     instrument.connect(master);
     startPinwheelChain(instrument, log);
