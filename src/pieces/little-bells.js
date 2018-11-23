@@ -8,7 +8,11 @@ import time from '@generative-music/time-tonejs';
 import makeInstrument from '@generative-music/instrument-tonejs';
 import getSampledInstrument from '../util/get-sampled-instrument';
 
-const glockDelay = new FeedbackDelay(delayTimeInSeconds, delayFeedback);
+const glockDelay = new FeedbackDelay({
+  delayTime: delayTimeInSeconds,
+  feedback: delayFeedback,
+  wet: 0.5,
+});
 const glockVerb = new Freeverb(freeverbRoomSize, freeverbDampening);
 
 const makePiece = master =>
