@@ -3,7 +3,6 @@ import getSampledInstrument from '../util/get-sampled-instrument';
 import { minor7th } from '../theory/chords';
 import roundToTwo from '../util/round-to-two';
 import combineNotesWithOctaves from '../util/combine-notes-with-octaves';
-import pianoSamplesName from '../config/piano-samples-name';
 
 const TONIC = 'A#';
 const OCTAVES = [2, 3, 4, 5, 6];
@@ -13,7 +12,7 @@ const notes = combineNotesWithOctaves([TONIC], OCTAVES).reduce(
   []
 );
 
-const INSTRUMENT_NAME = pianoSamplesName;
+const INSTRUMENT_NAME = 'vsco2-piano-mf';
 const TICK_INTERVAL_SECONDS = 1;
 const OSCILLATION_SECONDS = 240;
 const MIN_REPEAT_S = 30;

@@ -79,9 +79,10 @@ const piecesMiddleware = store => next => {
         if (action.payload === null) {
           store.dispatch(stop());
         } else {
-          const piece = pieces.find(({ id }) => id === action.payload);
-          stopPiece();
-          playPiece(piece, store.getState);
+          const oldPiece = pieces.find(({ id }) => id === selectedPieceId);
+          const newPiece = pieces.find(({ id }) => id === action.payload);
+          stopPiece(oldPiece);
+          playPiece(newPiece, store.getState);
         }
       }
     } else if (action.type === PLAY) {
@@ -100,7 +101,8 @@ const piecesMiddleware = store => next => {
       playPiece(piece, store.getState);
     } else if (action.type === STOP) {
       Tone.Master.mute = true;
-      stopPiece();
+      const piece = pieces.find(({ id }) => id === selectedPieceId);
+      stopPiece(piece);
     } else if (action.type === MUTE) {
       Tone.Master.mute = true;
     } else if (action.type === UNMUTE && isPlaying) {

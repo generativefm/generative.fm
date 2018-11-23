@@ -1,6 +1,8 @@
 import Tone from 'tone';
 
-const stop = () => {
+const stop = piece => {
+  piece.volumeNode.mute = true;
+  piece.volumeNode.dispose();
   Tone.Transport.stop();
   Tone.Transport.cancel();
 };

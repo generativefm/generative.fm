@@ -4,7 +4,12 @@ const { EnvironmentPlugin } = require('webpack');
 const OfflinePlugin = require('offline-plugin');
 const samples = require('./samples/samples');
 
-const pianoSamples = ['vsco2-piano-mf-ogg', 'vsco2-piano-mf-mp3'].reduce(
+const sampleFilenames = [
+  'vsco2-piano-mf-ogg',
+  'vsco2-piano-mf-mp3',
+  'vsco2-glock-ogg',
+  'vsco2-glock-mp3',
+].reduce(
   (sampleFiles, samplesName) =>
     sampleFiles.concat(
       Object.keys(samples[samplesName]).map(key => samples[samplesName][key])
@@ -18,7 +23,7 @@ config.plugins.push(
   new EnvironmentPlugin(['NODE_ENV']),
   new OfflinePlugin({
     appShell: '/',
-    externals: pianoSamples,
+    externals: sampleFilenames,
   })
 );
 

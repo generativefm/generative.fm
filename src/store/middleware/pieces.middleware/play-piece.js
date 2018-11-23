@@ -11,13 +11,15 @@ const playPiece = (piece, getState) => {
   queuedPiece = piece;
   if (!buildingPiece) {
     buildingPiece = true;
-    piece.makePiece(Tone.Master, noop).then(() => {
+    const pieceVol = new Tone.Volume().toMaster();
+    piece.volumeNode = pieceVol;
+    piece.makePiece(pieceVol, noop).then(() => {
       buildingPiece = false;
       const { selectedPieceId } = getState();
       if (selectedPieceId === piece.id) {
         Tone.Transport.start('+0.1');
       } else {
-        stopPiece();
+        stopPiece(piece);
         playPiece(queuedPiece, getState);
       }
     });

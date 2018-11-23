@@ -5,6 +5,7 @@ import pinwheels from '@generative-music/piece-pinwheels';
 import makeMakeSinglePianoPiece from '../util/make-make-single-piano-piece';
 import lemniscate from './lemniscate';
 import impact from './impact';
+import littleBells from './little-bells';
 // import drums from './drums';
 //import harp from './harp';
 
@@ -54,6 +55,7 @@ New intervals are chosen each time the piece is generated.`
   ),
   piece('Impact', impact, 'impact'),
   piece('Pinwheels', makeMakeSinglePianoPiece(pinwheels), 'pinwheels'),
+  piece('Little Bells', littleBells, 'little-bells'),
 ];
 
 export default pieces;

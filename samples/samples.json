@@ -154,5 +154,13 @@
     "G3": "./samples/alone-guitar/g3.wav",
     "C4": "./samples/alone-guitar/c4.wav",
     "E4": "./samples/alone-guitar/e4.wav"
+  },
+  "vsco2-glock-ogg": {
+    "C5": "./samples/vsco2-glock-ogg/c5.ogg",
+    "C6": "./samples/vsco2-glock-ogg/c6.ogg",
+    "C7": "./samples/vsco2-glock-ogg/c7.ogg",
+    "G4": "./samples/vsco2-glock-ogg/g4.ogg",
+    "G5": "./samples/vsco2-glock-ogg/g5.ogg",
+    "G6": "./samples/vsco2-glock-ogg/g6.ogg"
   }
 }

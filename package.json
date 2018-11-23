@@ -56,6 +56,7 @@
     "@generative-music/instrument-tonejs": "^0.1.0",
     "@generative-music/piece-aisatsana": "^0.1.0",
     "@generative-music/piece-eno-machine": "^0.1.1",
+    "@generative-music/piece-little-bells": "^0.1.0",
     "@generative-music/piece-pinwheels": "^0.1.1",
     "@generative-music/piece-sevenths": "^0.1.1",
     "@generative-music/time-tonejs": "^1.0.0",
