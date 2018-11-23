@@ -9,6 +9,8 @@ const sampleFilenames = [
   'vsco2-piano-mf-mp3',
   'vsco2-glock-ogg',
   'vsco2-glock-mp3',
+  'kasper-singing-bowls-ogg',
+  'kasper-singing-bowls-mp3',
 ].reduce(
   (sampleFiles, samplesName) =>
     sampleFiles.concat(

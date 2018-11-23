@@ -162,5 +162,17 @@
     "G4": "./samples/vsco2-glock-ogg/g4.ogg",
     "G5": "./samples/vsco2-glock-ogg/g5.ogg",
     "G6": "./samples/vsco2-glock-ogg/g6.ogg"
+  },
+  "kasper-singing-bowls-ogg": {
+    "F#2": "./samples/kasper-singing-bowls-ogg/articulation1/fsharp2-1.ogg",
+    "B2": "./samples/kasper-singing-bowls-ogg/articulation1/b2.ogg",
+    "F#3": "./samples/kasper-singing-bowls-ogg/articulation1/fsharp3-1.ogg",
+    "A3": "./samples/kasper-singing-bowls-ogg/articulation1/a3.ogg"
+  },
+  "kasper-singing-bowls-mp3": {
+    "F#2": "./samples/kasper-singing-bowls-mp3/articulation1/fsharp2-1.mp3",
+    "B2": "./samples/kasper-singing-bowls-mp3/articulation1/b2.mp3",
+    "F#3": "./samples/kasper-singing-bowls-mp3/articulation1/fsharp3-1.mp3",
+    "A3": "./samples/kasper-singing-bowls-mp3/articulation1/a3.mp3"
   }
 }

@@ -8,16 +8,15 @@ import time from '@generative-music/time-tonejs';
 import makeInstrument from '@generative-music/instrument-tonejs';
 import getSampledInstrument from '../util/get-sampled-instrument';
 
-const glockDelay = new FeedbackDelay({
-  delayTime: delayTimeInSeconds,
-  feedback: delayFeedback,
-  wet: 0.5,
-});
-const glockVerb = new Freeverb(freeverbRoomSize, freeverbDampening);
-
 const makePiece = master =>
   getSampledInstrument('vsco2-glock').then(glock => {
-    glock.chain(glockDelay, glockVerb, master);
+    const delay = new FeedbackDelay({
+      delayTime: delayTimeInSeconds,
+      feedback: delayFeedback,
+      wet: 0.5,
+    });
+    const verb = new Freeverb(freeverbRoomSize, freeverbDampening);
+    glock.chain(delay, verb, master);
     const instruments = [makeInstrument({ toneInstrument: glock })];
     piece({ instruments, time });
   });
