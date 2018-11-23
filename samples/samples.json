@@ -163,6 +163,14 @@
     "G5": "./samples/vsco2-glock-ogg/g5.ogg",
     "G6": "./samples/vsco2-glock-ogg/g6.ogg"
   },
+  "vsco2-glock-mp3": {
+    "C5": "./samples/vsco2-glock-mp3/c5.mp3",
+    "C6": "./samples/vsco2-glock-mp3/c6.mp3",
+    "C7": "./samples/vsco2-glock-mp3/c7.mp3",
+    "G4": "./samples/vsco2-glock-mp3/g4.mp3",
+    "G5": "./samples/vsco2-glock-mp3/g5.mp3",
+    "G6": "./samples/vsco2-glock-mp3/g6.mp3"
+  },
   "kasper-singing-bowls-ogg": {
     "F#2": "./samples/kasper-singing-bowls-ogg/articulation1/fsharp2-1.ogg",
     "B2": "./samples/kasper-singing-bowls-ogg/articulation1/b2.ogg",
