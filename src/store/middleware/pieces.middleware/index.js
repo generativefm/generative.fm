@@ -13,6 +13,7 @@ import pieces from '../../../pieces';
 import playPiece from './play-piece';
 import convertPctToDb from './convert-pct-to-db';
 import stopPiece from './stop-piece';
+import startAudioContext from './start-context';
 
 const piecesMiddleware = store => next => {
   const initialState = store.getState();
@@ -86,6 +87,7 @@ const piecesMiddleware = store => next => {
         }
       }
     } else if (action.type === PLAY) {
+      startAudioContext();
       if (!isMuted) {
         Tone.Master.mute = false;
       }
