@@ -26,6 +26,7 @@ config.plugins.push(
   new OfflinePlugin({
     appShell: '/',
     externals: sampleFilenames,
+    autoUpdate: true,
   })
 );
 
