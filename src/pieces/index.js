@@ -7,6 +7,7 @@ import lemniscate from './lemniscate';
 import impact from './impact';
 import littleBells from './little-bells';
 import meditation from './meditation';
+import timbralOscillations from './timbral-oscillations';
 // import drums from './drums';
 //import harp from './harp';
 
@@ -18,19 +19,6 @@ const piece = (title, makePiece, id = title, description = '') => ({
 });
 
 const pieces = [
-  //piece('harp', harp),
-  // piece('drums', drums),
-  piece(
-    'aisatsana (generative remix)',
-    makeMakeSinglePianoPiece(aisatsana),
-    'aisatsana',
-    `"aisatsana" is the closing track from Aphex Twin's 2014 album <i>Syro</i>.
-This generative remix is created by splitting the original piece into 4 bar phrases.
-Each phrase is quantized such that every note in the phrase is triggered during one of the 32 eighth notes contained in each phrase.
-These phrases are then input into a Markov chain, which can be used to generate new phrases based on the probababilities of the notes which occurred in the actual piece.
-While there are only 32 phrases in the original piece, this version is capabable of creating 4,147,200 unique phrases.
-If each possible phrase were played in succession without repeating, it would take over 451 days to play them all.`
-  ),
   piece(
     'Eno Machine',
     makeMakeSinglePianoPiece(enoMachine),
@@ -49,6 +37,17 @@ New intervals are chosen each time the piece is generated.`
   ),
   piece('Lemniscate', lemniscate, 'lemniscate'),
   piece(
+    'aisatsana (generative remix)',
+    makeMakeSinglePianoPiece(aisatsana),
+    'aisatsana',
+    `"aisatsana" is the closing track from Aphex Twin's 2014 album <i>Syro</i>.
+This generative remix is created by splitting the original piece into 4 bar phrases.
+Each phrase is quantized such that every note in the phrase is triggered during one of the 32 eighth notes contained in each phrase.
+These phrases are then input into a Markov chain, which can be used to generate new phrases based on the probababilities of the notes which occurred in the actual piece.
+While there are only 32 phrases in the original piece, this version is capabable of creating 4,147,200 unique phrases.
+If each possible phrase were played in succession without repeating, it would take over 451 days to play them all.`
+  ),
+  piece(
     'Sevenths',
     makeMakeSinglePianoPiece(sevenths),
     'sevenths',
@@ -58,6 +57,7 @@ New intervals are chosen each time the piece is generated.`
   piece('Pinwheels', makeMakeSinglePianoPiece(pinwheels), 'pinwheels'),
   piece('Little Bells', littleBells, 'little-bells'),
   piece('Meditation', meditation, 'meditation'),
-];
+  piece('Timbral Oscillations', timbralOscillations, 'timbral-oscillations')
+].reverse();
 
 export default pieces;
