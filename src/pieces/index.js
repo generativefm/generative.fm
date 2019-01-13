@@ -8,6 +8,7 @@ import impact from './impact';
 import littleBells from './little-bells';
 import meditation from './meditation';
 import timbralOscillations from './timbral-oscillations';
+import otherness from './otherness';
 // import drums from './drums';
 //import harp from './harp';
 
@@ -57,7 +58,8 @@ If each possible phrase were played in succession without repeating, it would ta
   piece('Pinwheels', makeMakeSinglePianoPiece(pinwheels), 'pinwheels'),
   piece('Little Bells', littleBells, 'little-bells'),
   piece('Meditation', meditation, 'meditation'),
-  piece('Timbral Oscillations', timbralOscillations, 'timbral-oscillations')
+  piece('Timbral Oscillations', timbralOscillations, 'timbral-oscillations'),
+  piece('Otherness', otherness, 'otherness'),
 ].reverse();
 
 export default pieces;

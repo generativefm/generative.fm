@@ -182,5 +182,35 @@
     "B2": "./samples/kasper-singing-bowls-mp3/articulation1/b2.mp3",
     "F#3": "./samples/kasper-singing-bowls-mp3/articulation1/fsharp3-1.mp3",
     "A3": "./samples/kasper-singing-bowls-mp3/articulation1/a3.mp3"
+  },
+  "otherness-ogg": {
+    "D#2": "./samples/otherness-ogg/dsharp2.ogg",
+    "F2": "./samples/otherness-ogg/f2.ogg",
+    "G2": "./samples/otherness-ogg/g2.ogg",
+    "A#2": "./samples/otherness-ogg/asharp2.ogg",
+    "C3": "./samples/otherness-ogg/c3.ogg",
+    "D#3": "./samples/otherness-ogg/dsharp3.ogg",
+    "F3": "./samples/otherness-ogg/f3.ogg",
+    "G3": "./samples/otherness-ogg/g3.ogg",
+    "A#3": "./samples/otherness-ogg/asharp3.ogg",
+    "C4": "./samples/otherness-ogg/c4.ogg",
+    "D#4": "./samples/otherness-ogg/dsharp4.ogg",
+    "F4": "./samples/otherness-ogg/f4.ogg",
+    "G4": "./samples/otherness-ogg/g4.ogg"
+  },
+  "otherness-mp3": {
+    "D#2": "./samples/otherness-mp3/dsharp2.mp3",
+    "F2": "./samples/otherness-mp3/f2.mp3",
+    "G2": "./samples/otherness-mp3/g2.mp3",
+    "A#2": "./samples/otherness-mp3/asharp2.mp3",
+    "C3": "./samples/otherness-mp3/c3.mp3",
+    "D#3": "./samples/otherness-mp3/dsharp3.mp3",
+    "F3": "./samples/otherness-mp3/f3.mp3",
+    "G3": "./samples/otherness-mp3/g3.mp3",
+    "A#3": "./samples/otherness-mp3/asharp3.mp3",
+    "C4": "./samples/otherness-mp3/c4.mp3",
+    "D#4": "./samples/otherness-mp3/dsharp4.mp3",
+    "F4": "./samples/otherness-mp3/f4.mp3",
+    "G4": "./samples/otherness-mp3/g4.mp3"
   }
 }
