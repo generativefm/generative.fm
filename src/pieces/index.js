@@ -9,6 +9,7 @@ import littleBells from './little-bells';
 import meditation from './meditation';
 import timbralOscillations from './timbral-oscillations';
 import otherness from './otherness';
+import trees from './trees';
 // import drums from './drums';
 //import harp from './harp';
 
@@ -60,6 +61,7 @@ If each possible phrase were played in succession without repeating, it would ta
   piece('Meditation', meditation, 'meditation'),
   piece('Timbral Oscillations', timbralOscillations, 'timbral-oscillations'),
   piece('Otherness', otherness, 'otherness'),
+  piece('Trees', trees, 'trees'),
 ].reverse();
 
 export default pieces;
