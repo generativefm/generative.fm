@@ -52,8 +52,8 @@ const getContentType = (filename = '') => {
 
 const uploadDistItems = () =>
   Promise.all(
-    [`${DIST_DIR}/!(*.map)`, 'samples/**/*.+(ogg|mp3)'].map(pattern =>
-      globPromise(pattern)
+    [`${DIST_DIR}/!(*.map)`, 'samples/**/*.+(ogg|mp3)', 'icons/**/*.png'].map(
+      pattern => globPromise(pattern)
     )
   )
     .then(([distFiles, sampleFiles]) => distFiles.concat(sampleFiles))

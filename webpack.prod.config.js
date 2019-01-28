@@ -32,7 +32,7 @@ delete config.devtool;
 config.plugins.push(
   new OfflinePlugin({
     appShell: '/',
-    externals: sampleFilenames,
+    externals: sampleFilenames.concat(['favicon.ico']),
     autoUpdate: true,
   })
 );
