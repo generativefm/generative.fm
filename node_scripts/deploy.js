@@ -11,7 +11,7 @@ const DIST_DIR = 'dist';
 const S3_API_VERSION = '2006-03-01';
 const BUCKET_NAME = 'generativemusic.alexbainter.com';
 
-const NON_DIST_FILENAMES = ['favicon.ico'];
+const NON_DIST_FILENAMES = ['favicon.ico', 'manifest.json'];
 
 const globPromise = (pattern, opts) =>
   new Promise((resolve, reject) => {
