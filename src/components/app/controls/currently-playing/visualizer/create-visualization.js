@@ -118,6 +118,7 @@ const createVisualization = containerElement => {
     if (changeScheme) {
       setNewColorScheme();
     }
+    allShapes.concat([group]).forEach(s => s.finish());
     if (Math.random() >= P_ROTATE || !animate) {
       [[rectangles, P_RECT], [squares, P_SQR], [triangles, P_TRI]].forEach(
         ([shapes, p]) => {
