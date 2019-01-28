@@ -56,7 +56,9 @@ const uploadDistItems = () =>
       pattern => globPromise(pattern)
     )
   )
-    .then(([distFiles, sampleFiles]) => distFiles.concat(sampleFiles))
+    .then(fileGroups =>
+      fileGroups.reduce((allFiles, fileGroup) => allFiles.concat(fileGroup), [])
+    )
     .then(filenames => {
       if (filenames.length === 0) {
         console.log(`No files found in "${DIST_DIR}!"`);
