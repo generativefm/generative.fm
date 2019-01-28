@@ -12,7 +12,6 @@ const config = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].[hash].js',
-    //publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -48,7 +47,6 @@ const config = {
       filename: '[name].[hash].css',
     }),
     new HtmlWebpackPlugin({
-      title: 'Generative Music',
       template: './index.template.html',
     }),
     new CleanWebpackPlugin(['dist']),

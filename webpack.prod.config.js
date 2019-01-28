@@ -1,6 +1,5 @@
 'use strict';
 
-const { EnvironmentPlugin } = require('webpack');
 const OfflinePlugin = require('offline-plugin');
 const samples = require('./samples/samples');
 
@@ -27,8 +26,10 @@ const sampleFilenames = [
 
 const config = require('./webpack.config');
 
+config.mode = 'production';
+delete config.devtool;
+
 config.plugins.push(
-  new EnvironmentPlugin(['NODE_ENV']),
   new OfflinePlugin({
     appShell: '/',
     externals: sampleFilenames,
