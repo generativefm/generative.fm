@@ -34,6 +34,12 @@ config.plugins.push(
     appShell: '/',
     externals: sampleFilenames.concat(['favicon.ico', 'manifest.json']),
     autoUpdate: true,
+    ServiceWorker: {
+      events: true,
+    },
+    AppCache: {
+      events: true,
+    },
   })
 );
 

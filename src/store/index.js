@@ -9,7 +9,10 @@ const storedStateJSON = window.localStorage.getItem(STATE_STORAGE_KEY);
 const storedState =
   typeof storedStateJSON === 'undefined' ? {} : JSON.parse(storedStateJSON);
 
-const initialState = Object.assign({}, storedState, { isPlaying: false });
+const initialState = Object.assign({}, storedState, {
+  isPlaying: false,
+  isUpdateAvailable: false,
+});
 
 if (isMobile) {
   initialState.volumePct = 100;

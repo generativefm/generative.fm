@@ -1,9 +1,9 @@
 import PiecesTabContainer from '../../containers/pieces-tab.container';
-import AboutTabComponent from './about-tab';
+import AboutTabContainer from '../../containers/about-tab.container';
 
 const tabs = {
   pieces: PiecesTabContainer,
-  about: AboutTabComponent,
+  about: AboutTabContainer,
 };
 
 export default tabs;
