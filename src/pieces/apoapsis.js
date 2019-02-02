@@ -87,7 +87,6 @@ const makePiece = master => {
           const buffer = new Tone.Buffer(pianoSamples[note], () =>
             resolve(buffer)
           );
-          nodesToDispose.push(buffer);
         })
     )
   )
