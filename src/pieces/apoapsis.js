@@ -34,6 +34,10 @@ const makePiece = master => {
   widenerLfo.connect(stereoWidener.width);
   reverb.chain(delay1, delay2, stereoWidener, master);
 
+  const timeoutsToClear = [];
+  const intervalsToClear = [];
+
+  const violinReverb = new Tone.Freeverb({ roomSize: 0.8, wet: 0.5 });
   const violins = new Tone.Sampler(
     samples[`vsco2-violins-susvib-${sampleFormat}`],
     {
@@ -49,16 +53,31 @@ const makePiece = master => {
           const playNote = () => {
             violins.triggerAttack(note, '+1');
           };
-          setTimeout(() => {
-            setInterval(() => {
+          const timeout = setTimeout(() => {
+            const interval = setInterval(() => {
               playNote();
             }, Math.random() * 120000 + 60000);
+            intervalsToClear.push(interval);
           }, 30000);
+          timeoutsToClear.push(timeout);
         });
       },
       volume: -35,
     }
-  ).chain(new Tone.Freeverb({ roomSize: 0.8, wet: 0.5 }), reverb);
+  ).chain(violinReverb, reverb);
+
+  const nodesToDispose = [
+    noise,
+    eq,
+    lfo,
+    delay1,
+    delay2,
+    reverb,
+    stereoWidener,
+    widenerLfo,
+    violinReverb,
+    violins,
+  ];
 
   const pianoSamples = samples[`vsco2-piano-mf-${sampleFormat}`];
   return Promise.all(
@@ -68,6 +87,7 @@ const makePiece = master => {
           const buffer = new Tone.Buffer(pianoSamples[note], () =>
             resolve(buffer)
           );
+          nodesToDispose.push(buffer);
         })
     )
   )
@@ -81,6 +101,7 @@ const makePiece = master => {
       ).chain(reverb)
     )
     .then(reversePiano => {
+      nodesToDispose.push(reversePiano);
       const notes = Chord.notes('C', 'maj7').reduce(
         (allNotes, pc) =>
           allNotes.concat([3, 4, 5].map(octave => `${pc}${octave}`)),
@@ -89,15 +110,22 @@ const makePiece = master => {
       const intervals = notes.map(() => Math.random() * 30000 + 30000);
       const minInterval = Math.min(...intervals);
       notes.forEach((note, i) => {
-        const interval = intervals[i];
+        const intervalTime = intervals[i];
         const playNote = () => {
           reversePiano.triggerAttack(note, '+1');
         };
-        setTimeout(() => {
+        const timeout = setTimeout(() => {
           playNote();
-          setInterval(() => playNote(), interval);
-        }, interval - minInterval);
+          const interval = setInterval(() => playNote(), intervalTime);
+          intervalsToClear.push(interval);
+        }, intervalTime - minInterval);
+        timeoutsToClear.push(timeout);
       });
+    })
+    .then(() => () => {
+      nodesToDispose.forEach(node => node.dispose());
+      timeoutsToClear.forEach(timeout => clearTimeout(timeout));
+      intervalsToClear.forEach(interval => clearInterval(interval));
     });
 };
 

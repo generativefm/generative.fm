@@ -13,7 +13,8 @@ const playPiece = (piece, getState) => {
     buildingPiece = true;
     const pieceVol = new Tone.Volume().toMaster();
     piece.volumeNode = pieceVol;
-    piece.makePiece(pieceVol, noop).then(() => {
+    piece.makePiece(pieceVol, noop).then(cleanUp => {
+      piece.cleanUp = cleanUp;
       buildingPiece = false;
       const { selectedPieceId } = getState();
       if (selectedPieceId === piece.id) {
