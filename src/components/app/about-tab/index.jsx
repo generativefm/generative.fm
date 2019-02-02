@@ -10,7 +10,7 @@ const handleUpdateClick = e => {
   });
 };
 
-const AboutTabComponent = ({ version, isUpdateAvailable }) => (
+const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => (
   <div className="about-tab">
     <p>
       This site is a collection of generative music pieces which can be listened
@@ -40,15 +40,16 @@ const AboutTabComponent = ({ version, isUpdateAvailable }) => (
     </p>
     <p>
       {`v${version}`}
-      {isUpdateAvailable && (
-        <span>
-          {' '}
-          -{' '}
-          <a href="/" onClick={handleUpdateClick}>
-            Load latest version
-          </a>
-        </span>
-      )}
+      {isUpdateAvailable &&
+        isOnline && (
+          <span>
+            {' '}
+            -{' '}
+            <a href="/" onClick={handleUpdateClick}>
+              Load latest version
+            </a>
+          </span>
+        )}
     </p>
   </div>
 );
@@ -56,6 +57,7 @@ const AboutTabComponent = ({ version, isUpdateAvailable }) => (
 AboutTabComponent.propTypes = {
   version: propTypes.string,
   isUpdateAvailable: propTypes.bool,
+  isOnline: propTypes.bool,
 };
 
 export default AboutTabComponent;
