@@ -22,14 +22,6 @@ window.addEventListener('offline', () =>
   store.dispatch(setOnlineStatus(false))
 );
 
-setTimeout(() => {
-  store.dispatch(indicateUpdateAvailable());
-}, 1000);
-
-setTimeout(() => {
-  store.dispatch(setOnlineStatus(false));
-}, 3000);
-
 render(
   <Provider store={store}>
     <App />
