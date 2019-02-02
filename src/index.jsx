@@ -17,10 +17,11 @@ if (isProduction) {
   });
 }
 
-window.addEventListener('online', () => store.dispatch(setOnlineStatus(true)));
-window.addEventListener('offline', () =>
-  store.dispatch(setOnlineStatus(false))
-);
+const makeSetOnlineStatus = online => () =>
+  store.dispatch(setOnlineStatus(online));
+
+window.addEventListener('online', makeSetOnlineStatus(true));
+window.addEventListener('offline', makeSetOnlineStatus(false));
 
 render(
   <Provider store={store}>
