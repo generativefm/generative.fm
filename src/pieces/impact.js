@@ -103,8 +103,7 @@ const makeNextNote = (
   return nextNote;
 };
 
-const piece = (master, log) => {
-  log('impact');
+const piece = master => {
   const noteBuffers = notes.map(note => getBuffer(pianoSamples[note]));
   return Promise.all(noteBuffers).then(buffers => {
     const bufferCopies = buffers.map(buffer =>
@@ -123,7 +122,11 @@ const piece = (master, log) => {
     );
     nextNote();
     [reverseInstrument, regularInstrument].forEach(i => i.connect(master));
-    log('ready');
+    return () => {
+      [regularInstrument, reverseInstrument].forEach(instrument =>
+        instrument.dispose()
+      );
+    };
   });
 };
 
