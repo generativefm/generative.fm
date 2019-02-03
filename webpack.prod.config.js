@@ -39,8 +39,9 @@ config.plugins.push(
     ServiceWorker: {
       events: true,
     },
-    AppCache: {
-      events: true,
+    caches: {
+      main: [':rest:'],
+      optional: sampleFilenames,
     },
   })
 );
