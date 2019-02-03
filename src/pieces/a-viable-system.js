@@ -97,13 +97,15 @@ const makeInstrumentComponent = (instrumentName, connectToNode) => {
     };
 
     playPhrase();
-    setInterval(() => {
+    const interval = setInterval(() => {
       playPhrase();
     }, Math.random() * 10000 + 10000);
+    return interval;
   };
-  return getSampledInstrument(instrumentName).then(instrument =>
-    start(instrument)
-  );
+  return getSampledInstrument(instrumentName).then(instrument => {
+    const interval = start(instrument);
+    return [instrument, interval];
+  });
 };
 
 const makePiece = master => {
@@ -117,7 +119,17 @@ const makePiece = master => {
     Reflect.ownKeys(instrumentConfigs).map(instrumentName =>
       makeInstrumentComponent(instrumentName, reverb)
     )
-  );
+  ).then(resources => () => {
+    const [samplers, intervals] = resources.reduce(
+      ([allSamplers, allIntervals], [sampler, interval]) => [
+        allSamplers.concat([sampler]),
+        allIntervals.concat([interval]),
+      ],
+      [[], []]
+    );
+    samplers.concat(delay, reverb).forEach(node => node.dispose());
+    intervals.forEach(interval => clearInterval(interval));
+  });
 };
 
 export default makePiece;

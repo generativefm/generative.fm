@@ -4,11 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import './control-button.scss';
 
-const ControlButtonComponent = ({ onClick, faIcon, hasBorder, isActive }) => (
+const ControlButtonComponent = ({ onClick, faIcon, isPrimary, isActive }) => (
   <button
     type="button"
     className={classnames('control-button', {
-      'control-button--has-border': hasBorder,
+      'control-button--is-primary': isPrimary,
       'control-button--is-active': isActive,
     })}
     onClick={onClick}
@@ -20,12 +20,12 @@ const ControlButtonComponent = ({ onClick, faIcon, hasBorder, isActive }) => (
 ControlButtonComponent.propTypes = {
   onClick: propTypes.func.isRequired,
   faIcon: propTypes.object.isRequired,
-  hasBorder: propTypes.bool,
+  isPrimary: propTypes.bool,
   isActive: propTypes.bool,
 };
 
 ControlButtonComponent.defaultProps = {
-  hasBorder: false,
+  isPrimary: false,
   isActive: false,
 };
 

@@ -1,6 +1,6 @@
 {
   "name": "generative-music",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Plays generative music in the browser.",
   "main": "index.js",
   "scripts": {
@@ -73,6 +73,7 @@
     "redux": "^4.0.1",
     "svg.js": "^2.6.6",
     "tonal-range": "^2.1.2",
-    "tone": "^0.12.80"
+    "tone": "^0.12.80",
+    "uuid": "^3.3.2"
   }
 }

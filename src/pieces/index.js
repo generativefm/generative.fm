@@ -11,6 +11,7 @@ import timbralOscillations from './timbral-oscillations';
 import otherness from './otherness';
 import trees from './trees';
 import aViableSystem from './a-viable-system';
+import apoapsis from './apoapsis';
 // import drums from './drums';
 //import harp from './harp';
 
@@ -64,6 +65,7 @@ If each possible phrase were played in succession without repeating, it would ta
   piece('Otherness', otherness, 'otherness'),
   piece('Trees', trees, 'trees'),
   piece('A Viable System', aViableSystem, 'a-viable-system'),
+  piece('Apoapsis', apoapsis, 'apoapsis'),
 ].reverse();
 
 export default pieces;

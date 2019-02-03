@@ -9,15 +9,16 @@ const notes = OCTAVES.reduce(
   []
 );
 
-const playNote = (instrument, sineSynth, lastNoteMidi) => {
+const playNote = (instrument, sineSynth, onTimeoutCreated, lastNoteMidi) => {
   const newNotes = notes.filter(n => Note.midi(n) !== lastNoteMidi);
   const note = newNotes[Math.floor(Math.random() * newNotes.length)];
   instrument.triggerAttack(note, '+1.5');
   const pitchClass = Note.pc(note);
   sineSynth.triggerAttackRelease(`${pitchClass}1`, 5, '+1.5');
-  setTimeout(() => {
-    playNote(instrument, sineSynth, Note.midi(note));
+  const timeout = setTimeout(() => {
+    playNote(instrument, sineSynth, onTimeoutCreated, Note.midi(note));
   }, Math.random() * 10000 + 10000);
+  onTimeoutCreated(timeout);
 };
 
 const makePiece = master =>
@@ -35,7 +36,19 @@ const makePiece = master =>
     sineSynth.volume.value = -25;
     instrument.volume.value = -5;
 
-    playNote(instrument, sineSynth);
+    let lastTimeout;
+    const onTimeoutCreated = timeout => {
+      lastTimeout = timeout;
+    };
+
+    playNote(instrument, sineSynth, onTimeoutCreated);
+
+    return () => {
+      if (lastTimeout) {
+        clearTimeout(lastTimeout);
+      }
+      [sineSynth, instrument].forEach(node => node.dispose());
+    };
   });
 
 export default makePiece;

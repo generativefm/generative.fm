@@ -53,7 +53,7 @@ const getProgression = () =>
     indiciesProgressionToNoteProgression
   )();
 
-const playProgression = piano => {
+const playProgression = (piano, onTimeoutCreated) => {
   const progression = getProgression();
   const perChordDelay = Math.random() * 3 + 2;
   progression.forEach((chord, i) => {
@@ -61,16 +61,27 @@ const playProgression = piano => {
       piano.triggerAttack(note, `+${i * perChordDelay + Math.random() / 10}`)
     );
   });
-  setTimeout(() => {
-    playProgression(piano);
+  const timeout = setTimeout(() => {
+    playProgression(piano, onTimeoutCreated);
   }, (Math.random() * 3 + (progression.length + 1) * perChordDelay) * 1000);
+  onTimeoutCreated(timeout);
 };
 
 const makePiece = master =>
   getSampledInstrument('vsco2-piano-mf').then(piano => {
     const reverb = new Tone.Freeverb({ roomSize: 0.6 });
     piano.chain(reverb, master);
-    playProgression(piano);
+    let lastTimeout;
+    const onTimeoutCreated = timeout => {
+      lastTimeout = timeout;
+    };
+    playProgression(piano, onTimeoutCreated);
+    return () => {
+      if (lastTimeout) {
+        clearTimeout(lastTimeout);
+      }
+      [reverb, piano].forEach(node => node.dispose());
+    };
   });
 
 export default makePiece;

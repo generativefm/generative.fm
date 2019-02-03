@@ -104,7 +104,9 @@ const piecesMiddleware = store => next => {
     } else if (action.type === STOP) {
       Tone.Master.mute = true;
       const piece = pieces.find(({ id }) => id === selectedPieceId);
-      stopPiece(piece);
+      if (piece.ready) {
+        stopPiece(piece);
+      }
     } else if (action.type === MUTE) {
       Tone.Master.mute = true;
     } else if (action.type === UNMUTE && isPlaying) {

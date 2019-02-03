@@ -18,6 +18,9 @@ const makePiece = master =>
     bowls.chain(delay, master);
     const instruments = [makeInstrument({ toneInstrument: bowls })];
     piece({ instruments, time });
+    return () => {
+      [(bowls, delay)].forEach(node => node.dispose());
+    };
   });
 
 export default makePiece;

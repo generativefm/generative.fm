@@ -16,6 +16,8 @@ const sampleFilenames = [
   'vsco2-violin-arcvib-mp3',
   'vsco2-contrabass-susvib-ogg',
   'vsco2-contrabass-susvib-mp3',
+  'vsco2-violins-susvib-ogg',
+  'vsco2-violins-susvib-mp3',
 ].reduce(
   (sampleFiles, samplesName) =>
     sampleFiles.concat(
@@ -34,6 +36,12 @@ config.plugins.push(
     appShell: '/',
     externals: sampleFilenames.concat(['favicon.ico', 'manifest.json']),
     autoUpdate: true,
+    ServiceWorker: {
+      events: true,
+    },
+    AppCache: {
+      events: true,
+    },
   })
 );
 

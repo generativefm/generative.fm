@@ -6,6 +6,9 @@ import volumePct from './volume-pct.reducer';
 import activeTabId from './active-tab-id.reducer';
 import isShuffleActive from './is-shuffle-active.reducer';
 import pieceHistory from './piece-history.reducer';
+import isUpdateAvailable from './is-update-available.reducer';
+import version from './version.reducer';
+import isOnline from './is-online.reducer';
 
 const rootReducer = combineReducers({
   isMuted,
@@ -15,6 +18,9 @@ const rootReducer = combineReducers({
   activeTabId,
   isShuffleActive,
   pieceHistory,
+  isUpdateAvailable,
+  version,
+  isOnline,
 });
 
 export default rootReducer;

@@ -276,5 +276,31 @@
     "G4": "./samples/vsco2-violin-arcvib-mp3/g4.mp3",
     "G5": "./samples/vsco2-violin-arcvib-mp3/g5.mp3",
     "G6": "./samples/vsco2-violin-arcvib-mp3/g6.mp3"
+  },
+  "vsco2-violins-susvib-ogg": {
+    "A2": "./samples/vsco2-violins-susvib-ogg/a2.ogg",
+    "A3": "./samples/vsco2-violins-susvib-ogg/a3.ogg",
+    "B2": "./samples/vsco2-violins-susvib-ogg/b2.ogg",
+    "B4": "./samples/vsco2-violins-susvib-ogg/b4.ogg",
+    "C4": "./samples/vsco2-violins-susvib-ogg/c4.ogg",
+    "C3": "./samples/vsco2-violins-susvib-ogg/d3.ogg",
+    "D5": "./samples/vsco2-violins-susvib-ogg/d5.ogg",
+    "E4": "./samples/vsco2-violins-susvib-ogg/e4.ogg",
+    "F#3": "./samples/vsco2-violins-susvib-ogg/fsharp3.ogg",
+    "G2": "./samples/vsco2-violins-susvib-ogg/g2.ogg",
+    "G4": "./samples/vsco2-violins-susvib-ogg/g4.ogg"
+  },
+  "vsco2-violins-susvib-mp3": {
+    "A2": "./samples/vsco2-violins-susvib-mp3/a2.mp3",
+    "A3": "./samples/vsco2-violins-susvib-mp3/a3.mp3",
+    "B2": "./samples/vsco2-violins-susvib-mp3/b2.mp3",
+    "B4": "./samples/vsco2-violins-susvib-mp3/b4.mp3",
+    "C4": "./samples/vsco2-violins-susvib-mp3/c4.mp3",
+    "C3": "./samples/vsco2-violins-susvib-mp3/d3.mp3",
+    "D5": "./samples/vsco2-violins-susvib-mp3/d5.mp3",
+    "E4": "./samples/vsco2-violins-susvib-mp3/e4.mp3",
+    "F#3": "./samples/vsco2-violins-susvib-mp3/fsharp3.mp3",
+    "G2": "./samples/vsco2-violins-susvib-mp3/g2.mp3",
+    "G4": "./samples/vsco2-violins-susvib-mp3/g4.mp3"
   }
 }

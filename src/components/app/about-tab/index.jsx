@@ -1,7 +1,16 @@
 import React from 'react';
+import propTypes from 'prop-types';
+import { applyUpdate } from 'offline-plugin/runtime';
 import './about.scss';
 
-const AboutTabComponent = () => (
+const handleUpdateClick = e => {
+  e.preventDefault();
+  applyUpdate(() => {
+    window.location.reload();
+  });
+};
+
+const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => (
   <div className="about-tab">
     <p>
       This site is a collection of generative music pieces which can be listened
@@ -28,9 +37,27 @@ const AboutTabComponent = () => (
       <a href="mailto:alex@alexbainter.com?Subject=Generative Music">
         alex@alexbainter.com
       </a>
-      .
+    </p>
+    <p>
+      {`v${version}`}
+      {isUpdateAvailable &&
+        isOnline && (
+          <span>
+            {' '}
+            -{' '}
+            <a href="/" onClick={handleUpdateClick}>
+              Load latest version
+            </a>
+          </span>
+        )}
     </p>
   </div>
 );
+
+AboutTabComponent.propTypes = {
+  version: propTypes.string,
+  isUpdateAvailable: propTypes.bool,
+  isOnline: propTypes.bool,
+};
 
 export default AboutTabComponent;
