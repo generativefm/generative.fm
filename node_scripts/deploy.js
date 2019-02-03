@@ -3,15 +3,17 @@
 const path = require('path');
 const fs = require('fs').promises;
 const S3 = require('aws-sdk/clients/s3');
+const CloudFront = require('aws-sdk/clients/cloudfront');
 const glob = require('glob');
 const { gzip } = require('node-gzip');
 const { lookup } = require('mime-types');
+const { BUCKET_NAME, CLOUDFRONT_DISTRIBUTION_ID } = require('./secrets');
 
 const DIST_DIR = 'dist';
 const S3_API_VERSION = '2006-03-01';
-const BUCKET_NAME = 'generativemusic.alexbainter.com';
-
+const CLOUDFRONT_API_VERSION = '2018-11-05';
 const NON_DIST_FILENAMES = ['favicon.ico', 'manifest.json'];
+const INVALIDATED_CACHE_FILES = ['/index.html', '/sw.js'];
 
 const globPromise = (pattern, opts) =>
   new Promise((resolve, reject) => {
@@ -27,6 +29,11 @@ const globPromise = (pattern, opts) =>
 const s3 = new S3({
   apiVersion: S3_API_VERSION,
   params: { Bucket: BUCKET_NAME },
+});
+
+const cloudfront = new CloudFront({
+  apiVersion: CLOUDFRONT_API_VERSION,
+  params: { DistributionId: CLOUDFRONT_DISTRIBUTION_ID },
 });
 
 const listRootObjs = () => s3.listObjectsV2().promise();
@@ -99,6 +106,19 @@ const uploadDistItems = () =>
       );
     });
 
+const invalidateCFCache = () =>
+  cloudfront
+    .createInvalidation({
+      InvalidationBatch: {
+        CallerReference: Date.now().toString(),
+        Paths: {
+          Quantity: INVALIDATED_CACHE_FILES.length,
+          Items: INVALIDATED_CACHE_FILES,
+        },
+      },
+    })
+    .promise();
+
 listRootObjs()
   .then(({ Contents }) => {
     console.log(`Removing files from ${BUCKET_NAME}`);
@@ -107,5 +127,12 @@ listRootObjs()
   .then(() => {
     console.log('Uploading files...');
     return uploadDistItems();
+  })
+  .then(() => {
+    console.log('Invalidating CloudFront edge cache...');
+    return invalidateCFCache();
+  })
+  .then(() => {
+    console.log('Deployment complete');
   })
   .catch(err => console.log(err));
