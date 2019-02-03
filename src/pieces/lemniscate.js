@@ -1,7 +1,6 @@
 import Tone from 'tone';
 import getSampledInstrument from '../util/get-sampled-instrument';
 import { minor7th } from '../theory/chords';
-import roundToTwo from '../util/round-to-two';
 import combineNotesWithOctaves from '../util/combine-notes-with-octaves';
 
 const TONIC = 'A#';
@@ -56,17 +55,10 @@ const makeTick = pans => {
   return tick;
 };
 
-const formatPct = num => `${roundToTwo(num * 100)}%`;
-
-const generateTiming = (instruments, getPlayProbability, id, log) => {
+const generateTiming = (instruments, getPlayProbability) => {
   notes.forEach(note => {
     const interval = timing.value;
     const delay = timing.value - MIN_REPEAT_S;
-    log(
-      `${id}: scheduling ${note.toLowerCase()} every ${roundToTwo(
-        interval
-      )} seconds starting in ${roundToTwo(delay)} seconds`
-    );
     Tone.Transport.scheduleRepeat(
       () => {
         const random = Math.random();
@@ -75,14 +67,6 @@ const generateTiming = (instruments, getPlayProbability, id, log) => {
           instruments.forEach(instrument =>
             instrument.triggerAttackRelease(note, '+1')
           );
-          Tone.Draw.schedule(() => {
-            const probabilityPct = formatPct(probability);
-            log(
-              `${id} ${
-                instruments.length === 1 ? `(panned ${probabilityPct}) ` : ' '
-              }playing ${note.toLowerCase()} (${probabilityPct} chance to play)`
-            );
-          });
         }
       },
       interval,
@@ -91,33 +75,28 @@ const generateTiming = (instruments, getPlayProbability, id, log) => {
   });
 };
 
-const lemniscate = (master, log) => {
-  log('lemniscate');
+const lemniscate = master => {
+  const firstPan = new Tone.Panner(-1).connect(master);
+  const secondPan = new Tone.Panner(1).connect(master);
   return Promise.all([
     getSampledInstrument(INSTRUMENT_NAME),
     getSampledInstrument(INSTRUMENT_NAME),
   ]).then(instruments => {
     const [firstInstrument, secondInstrument] = instruments;
-    const firstPan = new Tone.Panner(-1);
-    const secondPan = new Tone.Panner(1);
-    firstInstrument.chain(firstPan, master);
-    secondInstrument.chain(secondPan, master);
+    firstInstrument.chain(firstPan);
+    secondInstrument.chain(secondPan);
     const tick = makeTick([firstPan, secondPan]);
     generateTiming(
       [firstInstrument, secondInstrument],
       () => centerProbability,
-      'both',
-      log
+      'both'
     );
-    generateTiming([firstInstrument], () => 1 - centerProbability, 'left', log);
-    generateTiming(
-      [secondInstrument],
-      () => 1 - centerProbability,
-      'right',
-      log
-    );
+    generateTiming([firstInstrument], () => 1 - centerProbability);
+    generateTiming([secondInstrument], () => 1 - centerProbability);
     Tone.Transport.scheduleOnce(tick, TICK_INTERVAL_SECONDS);
-    log('ready');
+    return () => {
+      instruments.concat([firstPan, secondPan]).forEach(node => node.dispose());
+    };
   });
 };
 
