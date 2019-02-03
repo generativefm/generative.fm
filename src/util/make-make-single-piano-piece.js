@@ -7,6 +7,9 @@ const makeMakeSinglePianoPiece = piece => master =>
     toneInstrument.connect(master);
     const instruments = [makeInstrument({ toneInstrument })];
     piece({ instruments, time });
+    return () => {
+      toneInstrument.dispose();
+    };
   });
 
 export default makeMakeSinglePianoPiece;
