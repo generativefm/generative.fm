@@ -1,7 +1,7 @@
 import Tone from 'tone';
 
 const stop = piece => {
-  if (!piece.stopped) {
+  if (piece.played) {
     piece.volumeNode.mute = true;
     piece.volumeNode.dispose();
     Tone.Transport.stop();
@@ -9,7 +9,6 @@ const stop = piece => {
     if (typeof piece.cleanUp === 'function') {
       piece.cleanUp();
     }
-    piece.stopped = true;
   }
 };
 
