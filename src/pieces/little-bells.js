@@ -19,6 +19,9 @@ const makePiece = master =>
     glock.chain(delay, verb, master);
     const instruments = [makeInstrument({ toneInstrument: glock })];
     piece({ instruments, time });
+    return () => {
+      [(glock, delay, verb)].forEach(node => node.dispose());
+    };
   });
 
 export default makePiece;
