@@ -17,7 +17,7 @@ const makePrimaryButton = (faIcon, onClick) =>
       <ControlButtonComponent
         faIcon={faIcon}
         onClick={onClick}
-        hasBorder={true}
+        isPrimary={true}
       />
     );
   };

@@ -11,8 +11,6 @@
   margin: 0.25rem;
 
   &:hover {
-    border-color: $interactColor;
-
     & > .svg-inline--fa {
       color: $interactColor;
     }
@@ -26,9 +24,18 @@
     outline: none;
   }
 
-  &--has-border {
-    border: 1px solid $primaryColor;
+  &--is-primary {
+    background-color: $primaryColor;
+    color: white;
     border-radius: 50%;
+
+    &:hover {
+      background-color: $interactColor;
+
+      & > .svg-inline--fa {
+        color: white;
+      }
+    }
   }
 
   &--is-active {
