@@ -16,6 +16,8 @@ const sampleFilenames = [
   'vsco2-violin-arcvib-mp3',
   'vsco2-contrabass-susvib-ogg',
   'vsco2-contrabass-susvib-mp3',
+  'vsco2-violins-susvib-ogg',
+  'vsco2-violins-susvib-mp3',
 ].reduce(
   (sampleFiles, samplesName) =>
     sampleFiles.concat(
