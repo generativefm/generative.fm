@@ -5,7 +5,7 @@ import samples from '../../samples/samples.json';
 
 const makePiece = master => {
   const noise = new Tone.Noise('brown');
-  const eq = new Tone.EQ3(-15, -Infinity, -Infinity).toMaster();
+  const eq = new Tone.EQ3(-15, -Infinity, -Infinity).connect(master);
   eq.lowFrequency.value = Note.freq('C1');
   const lfo = new Tone.LFO({
     min: -50,
