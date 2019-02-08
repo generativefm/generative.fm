@@ -12,14 +12,18 @@ import otherness from './otherness';
 import trees from './trees';
 import aViableSystem from './a-viable-system';
 import apoapsis from './apoapsis';
+import enoMachineImage from './images/eno-machine.png';
+import pinwheelsImage from './images/pinwheels.png';
+import seventhsImage from './images/sevenths.png';
 // import drums from './drums';
 //import harp from './harp';
 
-const piece = (title, makePiece, id = title, description = '') => ({
+const piece = (title, makePiece, id = title, description = '', image) => ({
   title,
   makePiece,
   description,
   id,
+  image,
 });
 
 const pieces = [
@@ -37,7 +41,8 @@ As more loops of different lengths are added, it requires more and more time for
 Using this technique, even with relatively few loops, the time required for the piece to repeat itself can quickly grow to more than the average lifetime.
 The piece played here uses a similar technique to generate unique music which will not repeat itself for a very long time.
 Each of the 18 notes in the piece (which are the same ones from "2/1" on multiple octaves) are played on a random interval between 20 and 60 seconds.
-New intervals are chosen each time the piece is generated.`
+New intervals are chosen each time the piece is generated.`,
+    enoMachineImage
   ),
   piece('Lemniscate', lemniscate, 'lemniscate'),
   piece(
@@ -55,10 +60,17 @@ If each possible phrase were played in succession without repeating, it would ta
     'Sevenths',
     makeMakeSinglePianoPiece(sevenths),
     'sevenths',
-    'This piece just plays random seventh chords.'
+    'This piece just plays random seventh chords.',
+    seventhsImage
   ),
   piece('Impact', impact, 'impact'),
-  piece('Pinwheels', makeMakeSinglePianoPiece(pinwheels), 'pinwheels'),
+  piece(
+    'Pinwheels',
+    makeMakeSinglePianoPiece(pinwheels),
+    'pinwheels',
+    '',
+    pinwheelsImage
+  ),
   piece('Little Bells', littleBells, 'little-bells'),
   piece('Meditation', meditation, 'meditation'),
   piece('Timbral Oscillations', timbralOscillations, 'timbral-oscillations'),

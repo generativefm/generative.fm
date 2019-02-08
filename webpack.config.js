@@ -40,6 +40,10 @@ const config = {
           },
         ],
       },
+      {
+        test: /\.png$/,
+        use: ['file-loader', 'image-webpack-loader'],
+      },
     ],
   },
   plugins: [
