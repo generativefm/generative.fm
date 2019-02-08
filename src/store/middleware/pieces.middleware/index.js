@@ -14,6 +14,7 @@ import playPiece from './play-piece';
 import convertPctToDb from './convert-pct-to-db';
 import stopPiece from './stop-piece';
 import startAudioContext from './start-context';
+import updatePlayTime from '../../actions/creators/update-play-time.creator';
 
 const piecesMiddleware = store => next => {
   const initialState = store.getState();
@@ -21,6 +22,7 @@ const piecesMiddleware = store => next => {
   if (initialState.isMuted) {
     Tone.Master.mute = true;
   }
+  let playTimeInterval;
   return action => {
     const {
       selectedPieceId,
@@ -28,6 +30,7 @@ const piecesMiddleware = store => next => {
       isShuffleActive,
       pieceHistory,
       isMuted,
+      playTime,
     } = store.getState();
     if (action.type === UPDATE_VOLUME_PCT) {
       Tone.Master.volume.value = convertPctToDb(action.payload);
@@ -101,12 +104,22 @@ const piecesMiddleware = store => next => {
         piece = pieces.find(({ id }) => id === selectedPieceId);
       }
       playPiece(piece, store.getState);
+      const adjustedStartTime = Date.now() - playTime[piece.id];
+      playTimeInterval = setInterval(() => {
+        store.dispatch(
+          updatePlayTime({
+            selectedPieceId: piece.id,
+            playTime: Date.now() - adjustedStartTime,
+          })
+        );
+      }, 5000);
     } else if (action.type === STOP) {
       Tone.Master.mute = true;
       const piece = pieces.find(({ id }) => id === selectedPieceId);
       if (piece.ready) {
         stopPiece(piece);
       }
+      clearInterval(playTimeInterval);
     } else if (action.type === MUTE) {
       Tone.Master.mute = true;
     } else if (action.type === UNMUTE && isPlaying) {
