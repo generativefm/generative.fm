@@ -5,10 +5,16 @@ import piecesMiddleware from './middleware/pieces.middleware';
 import localStorageMiddleware from './middleware/local-storage.middleware';
 import STATE_STORAGE_KEY from './middleware/local-storage.middleware/key';
 import getOnlineStatus from './get-online-status';
+import localStateTransformations from './local-state-transformations';
 
 const storedStateJSON = window.localStorage.getItem(STATE_STORAGE_KEY);
 const storedState =
-  typeof storedStateJSON === 'undefined' ? {} : JSON.parse(storedStateJSON);
+  typeof storedStateJSON === 'undefined'
+    ? {}
+    : localStateTransformations.reduce(
+        (transformedState, transformation) => transformation(transformedState),
+        JSON.parse(storedStateJSON)
+      );
 
 const initialState = Object.assign({}, storedState, {
   isPlaying: false,
