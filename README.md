@@ -2,7 +2,7 @@
 
 A collection of [generative music](https://medium.com/@metalex9/introduction-to-generative-music-91e00e4dba11) pieces played in the browser.
 
-https://generativemusic.alexbainter.com/
+https://generative.fm
 
 ## Overview
 
