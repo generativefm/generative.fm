@@ -9,6 +9,7 @@ import pieceHistory from './piece-history.reducer';
 import isUpdateAvailable from './is-update-available.reducer';
 import version from './version.reducer';
 import isOnline from './is-online.reducer';
+import playTime from './play-time.reducer';
 
 const rootReducer = combineReducers({
   isMuted,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   isUpdateAvailable,
   version,
   isOnline,
+  playTime,
 });
 
 export default rootReducer;

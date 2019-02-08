@@ -7,6 +7,7 @@ import {
   faStepBackward,
   faRandom,
 } from '@fortawesome/free-solid-svg-icons';
+import { isMobile } from 'react-device-detect';
 import ControlButtonComponent from '../control-button';
 import ButtonSpacerComponent from './button-spacer';
 import './main-controls.scss';
@@ -37,7 +38,7 @@ const MainControlsComponent = ({
     : makePrimaryButton(faPlay, onPlayClick);
   return (
     <div className="main-controls">
-      <ButtonSpacerComponent />
+      {!isMobile && <ButtonSpacerComponent />}
       <ControlButtonComponent
         faIcon={faStepBackward}
         onClick={onPreviousClick}

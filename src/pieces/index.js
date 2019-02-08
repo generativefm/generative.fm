@@ -12,14 +12,27 @@ import otherness from './otherness';
 import trees from './trees';
 import aViableSystem from './a-viable-system';
 import apoapsis from './apoapsis';
-// import drums from './drums';
-//import harp from './harp';
+import enoMachineImage from './images/eno-machine.png';
+import pinwheelsImage from './images/pinwheels.png';
+import seventhsImage from './images/sevenths.png';
+import lemniscateImage from './images/lemniscate.png';
+import aisatsanaImage from './images/aisatsana.png';
+import impactImage from './images/impact.png';
+import littleBellsImage from './images/little-bells.png';
+import meditationImage from './images/meditation.png';
+import timbralOscillationsImage from './images/timbral-oscillations.png';
+import othernessImage from './images/otherness.png';
+import treesImage from './images/trees.png';
+import aViableSystemImage from './images/a-viable-system.png';
+import apoapsisImage from './images/apoapsis.png';
 
-const piece = (title, makePiece, id = title, description = '') => ({
+const piece = (title, makePiece, id = title, description = '', image) => ({
   title,
   makePiece,
   description,
   id,
+  image,
+  artist: 'Alex Bainter',
 });
 
 const pieces = [
@@ -37,9 +50,10 @@ As more loops of different lengths are added, it requires more and more time for
 Using this technique, even with relatively few loops, the time required for the piece to repeat itself can quickly grow to more than the average lifetime.
 The piece played here uses a similar technique to generate unique music which will not repeat itself for a very long time.
 Each of the 18 notes in the piece (which are the same ones from "2/1" on multiple octaves) are played on a random interval between 20 and 60 seconds.
-New intervals are chosen each time the piece is generated.`
+New intervals are chosen each time the piece is generated.`,
+    enoMachineImage
   ),
-  piece('Lemniscate', lemniscate, 'lemniscate'),
+  piece('Lemniscate', lemniscate, 'lemniscate', '', lemniscateImage),
   piece(
     'aisatsana (generative remix)',
     makeMakeSinglePianoPiece(aisatsana),
@@ -49,23 +63,43 @@ This generative remix is created by splitting the original piece into 4 bar phra
 Each phrase is quantized such that every note in the phrase is triggered during one of the 32 eighth notes contained in each phrase.
 These phrases are then input into a Markov chain, which can be used to generate new phrases based on the probababilities of the notes which occurred in the actual piece.
 While there are only 32 phrases in the original piece, this version is capabable of creating 4,147,200 unique phrases.
-If each possible phrase were played in succession without repeating, it would take over 451 days to play them all.`
+If each possible phrase were played in succession without repeating, it would take over 451 days to play them all.`,
+    aisatsanaImage
   ),
   piece(
     'Sevenths',
     makeMakeSinglePianoPiece(sevenths),
     'sevenths',
-    'This piece just plays random seventh chords.'
+    'This piece just plays random seventh chords.',
+    seventhsImage
   ),
-  piece('Impact', impact, 'impact'),
-  piece('Pinwheels', makeMakeSinglePianoPiece(pinwheels), 'pinwheels'),
-  piece('Little Bells', littleBells, 'little-bells'),
-  piece('Meditation', meditation, 'meditation'),
-  piece('Timbral Oscillations', timbralOscillations, 'timbral-oscillations'),
-  piece('Otherness', otherness, 'otherness'),
-  piece('Trees', trees, 'trees'),
-  piece('A Viable System', aViableSystem, 'a-viable-system'),
-  piece('Apoapsis', apoapsis, 'apoapsis'),
+  piece('Impact', impact, 'impact', '', impactImage),
+  piece(
+    'Pinwheels',
+    makeMakeSinglePianoPiece(pinwheels),
+    'pinwheels',
+    '',
+    pinwheelsImage
+  ),
+  piece('Little Bells', littleBells, 'little-bells', '', littleBellsImage),
+  piece('Meditation', meditation, 'meditation', '', meditationImage),
+  piece(
+    'Timbral Oscillations',
+    timbralOscillations,
+    'timbral-oscillations',
+    '',
+    timbralOscillationsImage
+  ),
+  piece('Otherness', otherness, 'otherness', '', othernessImage),
+  piece('Trees', trees, 'trees', '', treesImage),
+  piece(
+    'A Viable System',
+    aViableSystem,
+    'a-viable-system',
+    '',
+    aViableSystemImage
+  ),
+  piece('Apoapsis', apoapsis, 'apoapsis', '', apoapsisImage),
 ].reverse();
 
 export default pieces;

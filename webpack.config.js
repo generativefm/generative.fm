@@ -40,6 +40,13 @@ const config = {
           },
         ],
       },
+      {
+        test: /\.png$/,
+        use: [
+          { loader: 'url-loader', options: { limit: 10 * 1024 } },
+          'image-webpack-loader',
+        ],
+      },
     ],
   },
   plugins: [

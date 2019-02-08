@@ -1,11 +1,28 @@
 @import '_colors.scss';
 
+@mixin textEllipsisOverflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .currently-playing {
   display: flex;
   align-items: center;
 
-  &__title {
-    margin-left: 0.5rem;
-    font-size: 0.9em;
+  &__info {
+    max-width: 100%;
+    white-space: nowrap;
+    line-height: 1.5;
+
+    &__title {
+      margin-left: 0.5em;
+      font-size: 0.9em;
+      @include textEllipsisOverflow;
+    }
+    &__artist {
+      margin-left: 0.5em;
+      font-size: 0.8em;
+      @include textEllipsisOverflow;
+    }
   }
 }

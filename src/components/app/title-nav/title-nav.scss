@@ -15,14 +15,6 @@
     &--secondary {
       font-size: 1em;
     }
-
-    &__secret-link {
-      text-decoration: none;
-      color: $highlightColor;
-      &:hover {
-        color: $highlightInteractColor;
-      }
-    }
   }
 
   &__tab-list {
