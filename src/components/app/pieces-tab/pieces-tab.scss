@@ -48,6 +48,7 @@ $pieceWidth: 10em;
       width: $pieceWidth;
       height: $pieceWidth;
       position: relative;
+      background-color: #eee;
       & > img {
         max-width: 100%;
       }
