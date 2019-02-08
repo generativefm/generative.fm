@@ -25,6 +25,19 @@ const piecesMiddleware = store => next => {
     Tone.Master.mute = true;
   }
   let playTimeInterval;
+
+  const startTrackingPlayTimeForPieceId = pieceId => {
+    if (playTimeInterval) {
+      clearInterval(playTimeInterval);
+    }
+    const { playTime } = store.getState();
+    const adjustedStartTime =
+      Date.now() - (playTime[pieceId] ? playTime[pieceId] : 0);
+    playTimeInterval = setInterval(() => {
+      store.dispatch(updatePlayTime(pieceId, Date.now() - adjustedStartTime));
+    }, UPDATE_PLAY_TIME_INTERVAL_MS);
+  };
+
   return action => {
     const {
       selectedPieceId,
@@ -32,7 +45,6 @@ const piecesMiddleware = store => next => {
       isShuffleActive,
       pieceHistory,
       isMuted,
-      playTime,
     } = store.getState();
     if (action.type === UPDATE_VOLUME_PCT) {
       Tone.Master.volume.value = convertPctToDb(action.payload);
@@ -89,6 +101,7 @@ const piecesMiddleware = store => next => {
           const newPiece = pieces.find(({ id }) => id === action.payload);
           stopPiece(oldPiece);
           playPiece(newPiece, store.getState);
+          startTrackingPlayTimeForPieceId(newPiece.id);
         }
       }
     } else if (action.type === PLAY) {
@@ -106,13 +119,7 @@ const piecesMiddleware = store => next => {
         piece = pieces.find(({ id }) => id === selectedPieceId);
       }
       playPiece(piece, store.getState);
-      const adjustedStartTime =
-        Date.now() - (playTime[piece.id] ? playTime[piece.id] : 0);
-      playTimeInterval = setInterval(() => {
-        store.dispatch(
-          updatePlayTime(piece.id, Date.now() - adjustedStartTime)
-        );
-      }, UPDATE_PLAY_TIME_INTERVAL_MS);
+      startTrackingPlayTimeForPieceId(piece.id);
     } else if (action.type === STOP) {
       clearInterval(playTimeInterval);
       Tone.Master.mute = true;
