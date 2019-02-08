@@ -2,7 +2,6 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfinity, faPlay, faStop } from '@fortawesome/free-solid-svg-icons';
-import classnames from 'classnames';
 import pieces from '../../../pieces';
 import defaultImage from '../../../pieces/images/default.png';
 import './pieces-tab.scss';

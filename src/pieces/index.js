@@ -34,6 +34,7 @@ const piece = (title, makePiece, id = title, description = '', image) => ({
   description,
   id,
   image,
+  playedDurationMS: 0,
 });
 
 const pieces = [

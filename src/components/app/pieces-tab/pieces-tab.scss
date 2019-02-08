@@ -5,6 +5,8 @@
   text-overflow: ellipsis;
 }
 
+$pieceWidth: 10em;
+
 @mixin statusIndicator {
   position: absolute;
   top: 50%;
@@ -29,21 +31,22 @@
 
 .pieces-tab {
   height: 100%;
+  padding: 2em;
   display: flex;
   flex-wrap: wrap;
-  padding: 2em;
+  justify-content: center;
 
   .piece {
     border: 1px solid #999;
     overflow: hidden;
-    width: 200px;
+    width: $pieceWidth;
     cursor: pointer;
     margin: 0.5em;
     transition: box-shadow 150ms;
 
     &__image {
-      width: 200px;
-      height: 200px;
+      width: $pieceWidth;
+      height: $pieceWidth;
       position: relative;
       & > img {
         max-width: 100%;
@@ -106,5 +109,11 @@
         visibility: hidden;
       }
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .pieces-tab {
+    padding: 0.5em;
   }
 }
