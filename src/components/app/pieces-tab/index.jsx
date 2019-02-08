@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfinity, faPlay, faStop } from '@fortawesome/free-solid-svg-icons';
 import pieces from '../../../pieces';
+import formatPlayTime from './format-play-time';
 import defaultImage from '../../../pieces/images/default.png';
 import './pieces-tab.scss';
 
@@ -12,6 +13,7 @@ const PiecesTabComponent = ({
   onPieceClick,
   onStopClick,
   onPlayClick,
+  playTime,
 }) => {
   return (
     <div className="pieces-tab">
@@ -57,7 +59,9 @@ const PiecesTabComponent = ({
             <div className="piece__info">
               <div className="piece__info__title">{piece.title}</div>
               <div className="piece__info__artist">Alex Bainter</div>
-              <div className="piece__info__playtime">Played for 3 hours</div>
+              <div className="piece__info__playtime">
+                {formatPlayTime(playTime[piece.id])}
+              </div>
             </div>
           </div>
         );
@@ -72,6 +76,7 @@ PiecesTabComponent.propTypes = {
   onPieceClick: propTypes.func.isRequired,
   onPlayClick: propTypes.func.isRequired,
   onStopClick: propTypes.func.isRequired,
+  playTime: propTypes.object.isRequired,
 };
 
 export default PiecesTabComponent;
