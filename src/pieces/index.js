@@ -25,8 +25,6 @@ import othernessImage from './images/otherness.png';
 import treesImage from './images/trees.png';
 import aViableSystemImage from './images/a-viable-system.png';
 import apoapsisImage from './images/apoapsis.png';
-// import drums from './drums';
-//import harp from './harp';
 
 const piece = (title, makePiece, id = title, description = '', image) => ({
   title,
@@ -34,6 +32,7 @@ const piece = (title, makePiece, id = title, description = '', image) => ({
   description,
   id,
   image,
+  artist: 'Alex Bainter',
 });
 
 const pieces = [

@@ -6,15 +6,17 @@ import './currently-playing.scss';
 
 const CurrentlyPlayingComponent = ({ selectedPieceId }) => {
   const hasSelection = selectedPieceId !== null;
+  const { artist, title } = hasSelection
+    ? pieces.find(({ id }) => id === selectedPieceId)
+    : { artist: '', title: '' };
   return (
     <div className="currently-playing">
       <div className="currently-playing__visualizer">
         {hasSelection && <VisualizerContainer />}
       </div>
-      <div className="currently-playing__title">
-        {hasSelection
-          ? pieces.find(({ id }) => id === selectedPieceId).title
-          : ''}
+      <div className="currently-playing__info">
+        <div className="currently-playing__info__title">{title}</div>
+        <div className="currently-playing__info__artist">{artist}</div>
       </div>
     </div>
   );

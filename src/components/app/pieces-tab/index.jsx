@@ -58,7 +58,7 @@ const PiecesTabComponent = ({
             </div>
             <div className="piece__info">
               <div className="piece__info__title">{piece.title}</div>
-              <div className="piece__info__artist">Alex Bainter</div>
+              <div className="piece__info__artist">{piece.artist}</div>
               <div className="piece__info__playtime">
                 {formatPlayTime(playTime[piece.id])}
               </div>
