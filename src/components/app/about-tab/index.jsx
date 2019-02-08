@@ -28,9 +28,7 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => (
     <p>
       Though not a requirement of generative music, most of the pieces featured
       are quite minimal and ambient. Here &quot;ambient&quot; means the music is
-      intended to enhance one&apos;s environment but not demand attention. The
-      music can be played as a background element without interrupting or
-      obscuring other sonic aspects of the environment.
+      intended to enhance one&apos;s environment but not demand attention.
     </p>
     <p>
       If you have questions or feedback, send an email to{' '}
@@ -38,6 +36,7 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => (
         alex@alexbainter.com
       </a>
     </p>
+    <br />
     <p>
       {`v${version}`}
       {isUpdateAvailable &&
@@ -50,6 +49,12 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => (
             </a>
           </span>
         )}
+    </p>
+    <p>
+      Made by{' '}
+      <a href="https://alexbainter" target="_noblank">
+        Alex Bainter
+      </a>
     </p>
   </div>
 );

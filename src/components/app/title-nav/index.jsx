@@ -7,18 +7,10 @@ const TitleNavComponent = ({ activeTabId, onTabClick }) => {
   return (
     <div className="title-nav">
       <h1 className="title-nav__title title-nav__title--primary">
-        Generative Music
+        Generative.fm
       </h1>
       <h2 className="title-nav__title title-nav__title--secondary">
-        By{' '}
-        <a
-          className="title-nav__title__secret-link"
-          href="https://alexbainter.com"
-          //eslint-disable-next-line react/jsx-no-target-blank
-          target="_blank"
-        >
-          Alex Bainter
-        </a>
+        Endlessly unique ambient music
       </h2>
       <ul className="title-nav__tab-list">
         {Reflect.ownKeys(tabs).map(tabId => (
