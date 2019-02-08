@@ -9,7 +9,7 @@ import localStateTransformations from './local-state-transformations';
 
 const storedStateJSON = window.localStorage.getItem(STATE_STORAGE_KEY);
 const storedState =
-  typeof storedStateJSON === 'undefined'
+  typeof storedStateJSON === 'undefined' || storedStateJSON === null
     ? {}
     : localStateTransformations.reduce(
         (transformedState, transformation) => transformation(transformedState),

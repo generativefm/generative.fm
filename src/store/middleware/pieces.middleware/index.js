@@ -16,6 +16,8 @@ import stopPiece from './stop-piece';
 import startAudioContext from './start-context';
 import updatePlayTime from '../../actions/creators/update-play-time.creator';
 
+const UPDATE_PLAY_TIME_INTERVAL_MS = 5000;
+
 const piecesMiddleware = store => next => {
   const initialState = store.getState();
   Tone.Master.volume.value = convertPctToDb(initialState.volumePct);
@@ -104,22 +106,20 @@ const piecesMiddleware = store => next => {
         piece = pieces.find(({ id }) => id === selectedPieceId);
       }
       playPiece(piece, store.getState);
-      const adjustedStartTime = Date.now() - playTime[piece.id];
+      const adjustedStartTime =
+        Date.now() - (playTime[piece.id] ? playTime[piece.id] : 0);
       playTimeInterval = setInterval(() => {
         store.dispatch(
-          updatePlayTime({
-            selectedPieceId: piece.id,
-            playTime: Date.now() - adjustedStartTime,
-          })
+          updatePlayTime(piece.id, Date.now() - adjustedStartTime)
         );
-      }, 5000);
+      }, UPDATE_PLAY_TIME_INTERVAL_MS);
     } else if (action.type === STOP) {
+      clearInterval(playTimeInterval);
       Tone.Master.mute = true;
       const piece = pieces.find(({ id }) => id === selectedPieceId);
       if (piece.ready) {
         stopPiece(piece);
       }
-      clearInterval(playTimeInterval);
     } else if (action.type === MUTE) {
       Tone.Master.mute = true;
     } else if (action.type === UNMUTE && isPlaying) {
