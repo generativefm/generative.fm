@@ -15,6 +15,16 @@ import apoapsis from './apoapsis';
 import enoMachineImage from './images/eno-machine.png';
 import pinwheelsImage from './images/pinwheels.png';
 import seventhsImage from './images/sevenths.png';
+import lemniscateImage from './images/lemniscate.png';
+import aisatsanaImage from './images/aisatsana.png';
+import impactImage from './images/impact.png';
+import littleBellsImage from './images/little-bells.png';
+import meditationImage from './images/meditation.png';
+import timbralOscillationsImage from './images/timbral-oscillations.png';
+import othernessImage from './images/otherness.png';
+import treesImage from './images/trees.png';
+import aViableSystemImage from './images/a-viable-system.png';
+import apoapsisImage from './images/apoapsis.png';
 // import drums from './drums';
 //import harp from './harp';
 
@@ -44,7 +54,7 @@ Each of the 18 notes in the piece (which are the same ones from "2/1" on multipl
 New intervals are chosen each time the piece is generated.`,
     enoMachineImage
   ),
-  piece('Lemniscate', lemniscate, 'lemniscate'),
+  piece('Lemniscate', lemniscate, 'lemniscate', '', lemniscateImage),
   piece(
     'aisatsana (generative remix)',
     makeMakeSinglePianoPiece(aisatsana),
@@ -54,7 +64,8 @@ This generative remix is created by splitting the original piece into 4 bar phra
 Each phrase is quantized such that every note in the phrase is triggered during one of the 32 eighth notes contained in each phrase.
 These phrases are then input into a Markov chain, which can be used to generate new phrases based on the probababilities of the notes which occurred in the actual piece.
 While there are only 32 phrases in the original piece, this version is capabable of creating 4,147,200 unique phrases.
-If each possible phrase were played in succession without repeating, it would take over 451 days to play them all.`
+If each possible phrase were played in succession without repeating, it would take over 451 days to play them all.`,
+    aisatsanaImage
   ),
   piece(
     'Sevenths',
@@ -63,7 +74,7 @@ If each possible phrase were played in succession without repeating, it would ta
     'This piece just plays random seventh chords.',
     seventhsImage
   ),
-  piece('Impact', impact, 'impact'),
+  piece('Impact', impact, 'impact', '', impactImage),
   piece(
     'Pinwheels',
     makeMakeSinglePianoPiece(pinwheels),
@@ -71,13 +82,25 @@ If each possible phrase were played in succession without repeating, it would ta
     '',
     pinwheelsImage
   ),
-  piece('Little Bells', littleBells, 'little-bells'),
-  piece('Meditation', meditation, 'meditation'),
-  piece('Timbral Oscillations', timbralOscillations, 'timbral-oscillations'),
-  piece('Otherness', otherness, 'otherness'),
-  piece('Trees', trees, 'trees'),
-  piece('A Viable System', aViableSystem, 'a-viable-system'),
-  piece('Apoapsis', apoapsis, 'apoapsis'),
+  piece('Little Bells', littleBells, 'little-bells', '', littleBellsImage),
+  piece('Meditation', meditation, 'meditation', '', meditationImage),
+  piece(
+    'Timbral Oscillations',
+    timbralOscillations,
+    'timbral-oscillations',
+    '',
+    timbralOscillationsImage
+  ),
+  piece('Otherness', otherness, 'otherness', '', othernessImage),
+  piece('Trees', trees, 'trees', '', treesImage),
+  piece(
+    'A Viable System',
+    aViableSystem,
+    'a-viable-system',
+    '',
+    aViableSystemImage
+  ),
+  piece('Apoapsis', apoapsis, 'apoapsis', '', apoapsisImage),
 ].reverse();
 
 export default pieces;
