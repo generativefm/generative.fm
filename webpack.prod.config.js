@@ -1,30 +1,25 @@
 'use strict';
 
 const OfflinePlugin = require('offline-plugin');
-const samples = require('./samples/samples');
+const prependEndpointToSampleFilename = require('./src/util/prepend-endpoint-to-sample-filename');
+const { samples } = require('../samples.generative.fm/public/index.0.0.3.json');
 
-const sampleFilenames = [
-  'vsco2-piano-mf-ogg',
-  'vsco2-piano-mf-mp3',
-  'vsco2-glock-ogg',
-  'vsco2-glock-mp3',
-  'kasper-singing-bowls-ogg',
-  'kasper-singing-bowls-mp3',
-  'otherness-ogg',
-  'otherness-mp3',
-  'vsco2-violin-arcvib-ogg',
-  'vsco2-violin-arcvib-mp3',
-  'vsco2-contrabass-susvib-ogg',
-  'vsco2-contrabass-susvib-mp3',
-  'vsco2-violins-susvib-ogg',
-  'vsco2-violins-susvib-mp3',
-].reduce(
-  (sampleFiles, samplesName) =>
-    sampleFiles.concat(
-      Object.keys(samples[samplesName]).map(key => samples[samplesName][key])
-    ),
-  []
-);
+const instrumentNames = Reflect.ownKeys(samples);
+
+const sampleFilenames = instrumentNames.reduce((filenames, instrumentName) => {
+  const instrumentSamples = samples[instrumentName];
+  return filenames.concat(
+    Reflect.ownKeys(instrumentSamples).reduce(
+      (instrumentFilenames, format) =>
+        instrumentFilenames.concat(
+          Object.values(instrumentSamples[format]).map(filename =>
+            prependEndpointToSampleFilename(instrumentName, format, filename)
+          )
+        ),
+      []
+    )
+  );
+}, []);
 
 const config = require('./webpack.config');
 

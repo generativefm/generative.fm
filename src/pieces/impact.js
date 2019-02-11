@@ -1,16 +1,12 @@
 import Tone, { Transport, Sampler, Frequency, now } from 'tone';
-import samples from '../../samples/samples.json';
+import getSamples from '../util/get-samples';
 import { minor7th } from '../theory/chords';
 import arpeggiateOnce from '../patterns/arpeggiate-once';
 import getRandomElement from '../util/get-random-element';
 import getRandomBetween from '../util/get-random-between';
 import getRandomIntBetween from '../util/get-random-int-between';
-import sampleFormat from '../config/sample-format';
 
-const INSTRUMENT = `vsco2-piano-mf-${sampleFormat}`;
-
-const pianoSamples = samples[INSTRUMENT];
-const notes = Object.keys(pianoSamples);
+const INSTRUMENT = `vsco2-piano-mf`;
 
 const TONIC = 'A#';
 const CHORD = minor7th(TONIC);
@@ -31,7 +27,7 @@ const getBuffer = url =>
     });
   });
 
-const buffersToObj = buffers =>
+const buffersToObj = (buffers, notes) =>
   buffers.reduce((o, buffer, i) => {
     const note = notes[i];
     o[note] = buffer;
@@ -103,31 +99,38 @@ const makeNextNote = (
   return nextNote;
 };
 
-const piece = master => {
-  const noteBuffers = notes.map(note => getBuffer(pianoSamples[note]));
-  return Promise.all(noteBuffers).then(buffers => {
-    const bufferCopies = buffers.map(buffer =>
-      new Tone.Buffer().fromArray(buffer.toArray())
-    );
-    const regularInstrument = new Sampler(buffersToObj(bufferCopies));
-    buffers.forEach(buffer => {
-      buffer.reverse = true;
-    });
-    const reverseInstrument = new Sampler(buffersToObj(buffers));
-    const durationsByMidi = {};
-    const nextNote = makeNextNote(
-      reverseInstrument,
-      regularInstrument,
-      durationsByMidi
-    );
-    nextNote();
-    [reverseInstrument, regularInstrument].forEach(i => i.connect(master));
-    return () => {
-      [regularInstrument, reverseInstrument].forEach(instrument =>
-        instrument.dispose()
-      );
-    };
+const piece = master =>
+  getSamples().then(samples => {
+    {
+      const pianoSamples = samples[INSTRUMENT];
+      const notes = Object.keys(pianoSamples);
+      const noteBuffers = notes.map(note => getBuffer(pianoSamples[note]));
+      return Promise.all(noteBuffers).then(buffers => {
+        const bufferCopies = buffers.map(buffer =>
+          new Tone.Buffer().fromArray(buffer.toArray())
+        );
+        const regularInstrument = new Sampler(
+          buffersToObj(bufferCopies, notes)
+        );
+        buffers.forEach(buffer => {
+          buffer.reverse = true;
+        });
+        const reverseInstrument = new Sampler(buffersToObj(buffers, notes));
+        const durationsByMidi = {};
+        const nextNote = makeNextNote(
+          reverseInstrument,
+          regularInstrument,
+          durationsByMidi
+        );
+        nextNote();
+        [reverseInstrument, regularInstrument].forEach(i => i.connect(master));
+        return () => {
+          [regularInstrument, reverseInstrument].forEach(instrument =>
+            instrument.dispose()
+          );
+        };
+      });
+    }
   });
-};
 
 export default piece;

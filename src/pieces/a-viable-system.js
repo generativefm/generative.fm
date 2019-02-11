@@ -2,8 +2,7 @@ import Tone from 'tone';
 import { Note } from 'tonal';
 import * as Range from 'tonal-range';
 import getSampledInstrument from '../util/get-sampled-instrument';
-import sampleFormat from '../config/sample-format';
-import samples from '../../samples/samples.json';
+import getSamples from '../util/get-samples';
 
 const MAX_STEP_DISTANCE = 3;
 const MAX_PHRASE_LENGTH = 3;
@@ -41,11 +40,10 @@ const generatePhrase = (
 
 const getPossibleNotesForInstrument = (
   instrumentName,
+  samples,
   octaves = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 ) => {
-  const sampledNotes = Object.keys(
-    samples[`${instrumentName}-${sampleFormat}`]
-  );
+  const sampledNotes = Object.keys(samples[instrumentName]);
   const lowestNote = sampledNotes.reduce(
     (currentLowest, note) =>
       Note.freq(note) < Note.freq(currentLowest) ? note : currentLowest,
@@ -66,16 +64,14 @@ const instrumentConfigs = {
   'vsco2-piano-mf': {
     isSingleNote: false,
     secondsBetweenNotes: 2,
-    notes: getPossibleNotesForInstrument('vsco2-piano-mf', [2, 3, 4, 5, 6]),
+    octaves: [2, 3, 4, 5, 6],
   },
   'vsco2-contrabass-susvib': {
     isSingleNote: true,
-    notes: getPossibleNotesForInstrument('vsco2-contrabass-susvib'),
   },
   'vsco2-violin-arcvib': {
     isSingleNote: false,
     secondsBetweenNotes: 8,
-    notes: getPossibleNotesForInstrument('vsco2-violin-arcvib'),
   },
 };
 
@@ -108,28 +104,34 @@ const makeInstrumentComponent = (instrumentName, connectToNode) => {
   });
 };
 
-const makePiece = master => {
-  const delay = new Tone.FeedbackDelay({
-    feedback: 0.3 + Math.random() / 30,
-    wet: 0.5,
-    delayTime: 10 + Math.random() * 2,
-  }).connect(master);
-  const reverb = new Tone.Freeverb({ roomSize: 0.6 }).connect(delay);
-  return Promise.all(
-    Reflect.ownKeys(instrumentConfigs).map(instrumentName =>
-      makeInstrumentComponent(instrumentName, reverb)
-    )
-  ).then(resources => () => {
-    const [samplers, intervals] = resources.reduce(
-      ([allSamplers, allIntervals], [sampler, interval]) => [
-        allSamplers.concat([sampler]),
-        allIntervals.concat([interval]),
-      ],
-      [[], []]
-    );
-    samplers.concat(delay, reverb).forEach(node => node.dispose());
-    intervals.forEach(interval => clearInterval(interval));
+const makePiece = master =>
+  getSamples().then(samples => {
+    const delay = new Tone.FeedbackDelay({
+      feedback: 0.3 + Math.random() / 30,
+      wet: 0.5,
+      delayTime: 10 + Math.random() * 2,
+    }).connect(master);
+    const reverb = new Tone.Freeverb({ roomSize: 0.6 }).connect(delay);
+    return Promise.all(
+      Reflect.ownKeys(instrumentConfigs).map(instrumentName => {
+        instrumentConfigs[instrumentName].notes = getPossibleNotesForInstrument(
+          instrumentName,
+          samples,
+          instrumentConfigs[instrumentName].octaves
+        );
+        return makeInstrumentComponent(instrumentName, reverb);
+      })
+    ).then(resources => () => {
+      const [samplers, intervals] = resources.reduce(
+        ([allSamplers, allIntervals], [sampler, interval]) => [
+          allSamplers.concat([sampler]),
+          allIntervals.concat([interval]),
+        ],
+        [[], []]
+      );
+      samplers.concat(delay, reverb).forEach(node => node.dispose());
+      intervals.forEach(interval => clearInterval(interval));
+    });
   });
-};
 
 export default makePiece;
