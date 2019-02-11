@@ -23,13 +23,11 @@ const playPiece = (piece, getState) => {
       buildingPiece = false;
       piece.ready = true;
       const { selectedPieceId, isPlaying } = getState();
-      if (
-        lastBuildId === buildId &&
-        selectedPieceId === piece.id &&
-        isPlaying
-      ) {
-        piece.played = true;
-        Tone.Transport.start('+0.1');
+      if (lastBuildId === buildId && selectedPieceId === piece.id) {
+        if (isPlaying) {
+          piece.played = true;
+          Tone.Transport.start('+0.1');
+        }
       } else {
         stopPiece(piece);
         playPiece(queuedPiece, getState);
