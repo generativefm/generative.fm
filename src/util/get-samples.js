@@ -1,8 +1,8 @@
 import sampleFormat from '../config/sample-format';
 import prependEndpointToSampleFilename from './prepend-endpoint-to-sample-filename';
 
-const DEFAULT_ENDPOINT = 'https://samples.generative.fm.s3.amazonaws.com';
-const VERSION = '0.0.3';
+const DEFAULT_ENDPOINT = 'https://samples.generative.fm';
+const VERSION = '0.0.5';
 
 const specFile = `${DEFAULT_ENDPOINT}/index.${VERSION}.json`;
 

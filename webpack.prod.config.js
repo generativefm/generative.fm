@@ -2,7 +2,7 @@
 
 const OfflinePlugin = require('offline-plugin');
 const prependEndpointToSampleFilename = require('./src/util/prepend-endpoint-to-sample-filename');
-const { samples } = require('../samples.generative.fm/public/index.0.0.3.json');
+const { samples } = require('../samples.generative.fm/public/index.0.0.5.json');
 
 const instrumentNames = Reflect.ownKeys(samples);
 

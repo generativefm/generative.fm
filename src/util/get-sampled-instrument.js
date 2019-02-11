@@ -1,14 +1,16 @@
 import Tone from 'tone';
 import getSamples from './get-samples';
 
-const getSampledInstrument = instrumentName =>
+const getSampledInstrument = (instrumentName, options) =>
   getSamples().then(
     samples =>
       new Promise(resolve => {
-        const instrument = new Tone.Sampler(samples[instrumentName], {
-          onload: () => resolve(instrument),
-          attack: 0,
-        });
+        const instrument = new Tone.Sampler(
+          samples[instrumentName],
+          Object.assign({}, options, {
+            onload: () => resolve(instrument),
+          })
+        );
       })
   );
 

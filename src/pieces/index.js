@@ -12,6 +12,7 @@ import otherness from './otherness';
 import trees from './trees';
 import aViableSystem from './a-viable-system';
 import apoapsis from './apoapsis';
+import observableStreams from './observable-streams';
 import enoMachineImage from './images/eno-machine.png';
 import pinwheelsImage from './images/pinwheels.png';
 import seventhsImage from './images/sevenths.png';
@@ -25,6 +26,7 @@ import othernessImage from './images/otherness.png';
 import treesImage from './images/trees.png';
 import aViableSystemImage from './images/a-viable-system.png';
 import apoapsisImage from './images/apoapsis.png';
+import observableStreamsImage from './images/observable-streams.png';
 
 const piece = (title, makePiece, id = title, description = '', image) => ({
   title,
@@ -100,6 +102,13 @@ If each possible phrase were played in succession without repeating, it would ta
     aViableSystemImage
   ),
   piece('Apoapsis', apoapsis, 'apoapsis', '', apoapsisImage),
+  piece(
+    'Observable Streams',
+    observableStreams,
+    'observable-streams',
+    '',
+    observableStreamsImage
+  ),
 ].reverse();
 
 export default pieces;

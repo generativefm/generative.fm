@@ -1,4 +1,4 @@
-const ENDPOINT = 'https://samples.generative.fm.s3.amazonaws.com';
+const ENDPOINT = 'https://samples.generative.fm';
 
 const prependEndpointToSampleFilename = (instrumentName, format, filename) =>
   `${ENDPOINT}/${instrumentName}/${format}/${filename}`;

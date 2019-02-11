@@ -27,10 +27,14 @@ const PiecesTabComponent = ({
             } else {
               onPlayClick();
             }
+          } else if (isPlaying) {
+            onPieceClick(piece);
           } else {
             onPieceClick(piece);
+            onPlayClick();
           }
         };
+
         return (
           <div
             className="piece"
