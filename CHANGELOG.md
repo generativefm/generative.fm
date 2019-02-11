@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [0.3.0] - 2019-02-11
 
 ### Fixed
 
@@ -20,13 +20,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - New piece: "Observable Streams"
 
-## [0.2.1] - 2018-02-08
+## [0.2.1] - 2019-02-08
 
 ### Fixed
 
 - Play time tracking properly switches when a different piece is selected during playback
 
-## [0.2.0] - 2018-02-07
+## [0.2.0] - 2019-02-07
 
 ### Changed
 
@@ -42,19 +42,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Artist is displayed in the currently playing area
 - Play time is now tracked and stored in the browser
 
-## [0.1.2] - 2018-02-03
+## [0.1.2] - 2019-02-03
 
 ### Fixed
 
 - Single piano pieces will now release resources when they're stopped.
 
-## [0.1.1] - 2018-02-03
+## [0.1.1] - 2019-02-03
 
 ### Changed
 
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
-[0.3.0][0.2.1]: https://github.com/generative-music/site/compare/v0.2.0...v0.2.1
+[0.3.0]: https://github.com/generative-music/site/compare/v0.2.1...v0.3.0
+[0.2.1]: https://github.com/generative-music/site/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/generative-music/site/compare/v0.1.2...v0.2.0
 [0.1.2]: https://github.com/generative-music/site/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/generative-music/site/compare/v0.1.0...v0.1.1
