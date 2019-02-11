@@ -29,7 +29,6 @@ const PiecesTabComponent = ({
             }
           } else {
             onPieceClick(piece);
-            onPlayClick();
           }
         };
         return (
