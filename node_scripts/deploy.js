@@ -59,8 +59,8 @@ const getContentType = (filename = '') => {
 
 const uploadDistItems = () =>
   Promise.all(
-    [`${DIST_DIR}/!(*.map)`, 'samples/**/*.+(ogg|mp3)', 'icons/**/*.png'].map(
-      pattern => globPromise(pattern)
+    [`${DIST_DIR}/!(*.map)`, 'icons/**/*.png'].map(pattern =>
+      globPromise(pattern)
     )
   )
     .then(fileGroups =>
