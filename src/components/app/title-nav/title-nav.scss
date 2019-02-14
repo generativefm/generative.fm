@@ -30,11 +30,14 @@
         padding-left: 0;
       }
 
-      &__button {
+      &__link {
         border: none;
         background: $backgroundColor;
         cursor: pointer;
         padding: 0;
+        color: $primaryColor;
+        text-decoration: none;
+        font-size: 1.1em;
 
         &:hover {
           color: $interactColor;
@@ -43,6 +46,12 @@
         &:focus {
           outline: none;
         }
+
+        &--is-active {
+          .title-nav__tab-list__item__active-indicator {
+            visibility: visible;
+          }
+        }
       }
 
       &__active-indicator {
@@ -50,6 +59,7 @@
         height: 0.15em;
         background: $highlightColor;
         margin: 0 auto;
+        visibility: hidden;
       }
     }
   }

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Cleanup of "Observable Streams" won't crash
+- Lowered volume of pieces which were significantly louder than others
 
 ## UNRELEASED
 
