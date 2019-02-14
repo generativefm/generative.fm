@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import TitleNavComponent from './title-nav';
 import Controls from './controls';
 import AboutTabContainer from '../../containers/about-tab.container';
@@ -18,7 +18,12 @@ const AppComponent = () => {
             <main>
               <Route exact path="/" component={PiecesTabContainer} />
               <Route exact path="/about" component={AboutTabContainer} />
-              <Route path="/music/:pieceId" />
+              <Route
+                path="/music/:filter"
+                render={({ match }) => (
+                  <PiecesTabContainer filter={match.params.filter} />
+                )}
+              />
             </main>
           </div>
         </Router>

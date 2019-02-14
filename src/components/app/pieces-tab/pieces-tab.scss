@@ -29,6 +29,21 @@ $pieceWidth: 10em;
   }
 }
 
+.music-link {
+  height: 100%;
+  width: $pieceWidth;
+  margin: 0.5em;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $primaryColor;
+
+  &__icon {
+    margin-right: 5px;
+  }
+}
+
 .pieces-tab {
   height: 100%;
   padding: 2em;
