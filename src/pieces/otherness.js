@@ -23,15 +23,16 @@ const playNote = (instrument, sineSynth, onTimeoutCreated, lastNoteMidi) => {
 
 const makePiece = master =>
   getSampledInstrument('otherness').then(instrument => {
+    const volume = new Tone.Volume(-5).connect(master);
     const sineSynth = new Tone.MonoSynth({
       oscillator: { type: 'sine' },
       envelope: {
         attack: 3,
         release: 10,
       },
-    }).connect(master);
+    }).connect(volume);
 
-    instrument.connect(master);
+    instrument.connect(volume);
 
     sineSynth.volume.value = -25;
     instrument.volume.value = -5;
@@ -47,7 +48,7 @@ const makePiece = master =>
       if (lastTimeout) {
         clearTimeout(lastTimeout);
       }
-      [sineSynth, instrument].forEach(node => node.dispose());
+      [sineSynth, instrument, volume].forEach(node => node.dispose());
     };
   });
 
