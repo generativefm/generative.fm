@@ -5,6 +5,7 @@ import { faInfinity, faPlay, faStop } from '@fortawesome/free-solid-svg-icons';
 import pieces from '../../../pieces';
 import formatPlayTime from './format-play-time';
 import defaultImage from '../../../pieces/images/default.png';
+import artists from '../../../data/artists';
 import './pieces-tab.scss';
 
 const PiecesTabComponent = ({
@@ -61,7 +62,7 @@ const PiecesTabComponent = ({
             </div>
             <div className="piece__info">
               <div className="piece__info__title">{piece.title}</div>
-              <div className="piece__info__artist">{piece.artist}</div>
+              <div className="piece__info__artist">{artists[piece.artist]}</div>
               <div className="piece__info__playtime">
                 {formatPlayTime(playTime[piece.id])}
               </div>

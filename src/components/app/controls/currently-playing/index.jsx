@@ -2,6 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import VisualizerContainer from '../../../../containers/visualizer.container';
 import pieces from '../../../../pieces';
+import artists from '../../../../data/artists';
 import './currently-playing.scss';
 
 const CurrentlyPlayingComponent = ({ selectedPieceId }) => {
@@ -9,6 +10,7 @@ const CurrentlyPlayingComponent = ({ selectedPieceId }) => {
   const { artist, title } = hasSelection
     ? pieces.find(({ id }) => id === selectedPieceId)
     : { artist: '', title: '' };
+
   return (
     <div className="currently-playing">
       <div className="currently-playing__visualizer">
@@ -16,7 +18,9 @@ const CurrentlyPlayingComponent = ({ selectedPieceId }) => {
       </div>
       <div className="currently-playing__info">
         <div className="currently-playing__info__title">{title}</div>
-        <div className="currently-playing__info__artist">{artist}</div>
+        <div className="currently-playing__info__artist">
+          {artist !== '' ? artists[artist] : artist}
+        </div>
       </div>
     </div>
   );
