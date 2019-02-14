@@ -50,8 +50,10 @@ const makeNextNote = (
       //eslint-disable-next-line new-cap
       const midi = Frequency(reverseNote).toMidi();
       if (typeof durationsByMidi[midi] === 'undefined') {
-        durationsByMidi[midi] =
-          reverseInstrument._activeSources[midi][0].source.buffer.duration;
+        const [{ _stopTime, _startTime }] = reverseInstrument._activeSources[
+          midi
+        ];
+        durationsByMidi[midi] = _stopTime - _startTime;
       }
       Transport.scheduleOnce(() => {
         arpeggiateOnce({
