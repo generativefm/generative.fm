@@ -198,7 +198,7 @@ const makePiece = master =>
       ].forEach(node => node.dispose());
       timeoutsToClear.forEach(timeout => clearTimeout(timeout));
       intervalsToClear.forEach(interval => clearInterval(interval));
-      noteSubscription();
+      noteSubscription.unsubscribe();
     };
   });
 
