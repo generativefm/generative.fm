@@ -43,58 +43,62 @@ const PiecesTabComponent = ({
           All Music
         </Link>
       )}
-      {filteredPieces.map(piece => {
-        const isSelected = piece.id === selectedPieceId;
-        const handleButtonClick = event => {
-          event.stopPropagation();
-          if (isSelected) {
-            if (isPlaying) {
-              onStopClick();
+      <div className="pieces">
+        {filteredPieces.map(piece => {
+          const isSelected = piece.id === selectedPieceId;
+          const handleButtonClick = event => {
+            event.stopPropagation();
+            if (isSelected) {
+              if (isPlaying) {
+                onStopClick();
+              } else {
+                onPlayClick();
+              }
+            } else if (isPlaying) {
+              onPieceClick(piece);
             } else {
+              onPieceClick(piece);
               onPlayClick();
             }
-          } else if (isPlaying) {
-            onPieceClick(piece);
-          } else {
-            onPieceClick(piece);
-            onPlayClick();
-          }
-        };
+          };
 
-        return (
-          <div
-            className="piece"
-            key={piece.id}
-            onClick={() => onPieceClick(piece)}
-            title={`${isPlaying ? 'Play' : 'Select'} ${piece.title}`}
-          >
-            <div className="piece__image">
-              <img src={piece.image ? piece.image : defaultImage} />
-              <button
-                className="piece__image__button"
-                onClick={handleButtonClick}
-              >
-                <FontAwesomeIcon
-                  icon={isPlaying && isSelected ? faStop : faPlay}
-                />
-              </button>
-              {isSelected &&
-                isPlaying && (
-                  <div className="piece__image__is-playing-indicator">
-                    <FontAwesomeIcon icon={faInfinity} />
-                  </div>
-                )}
-            </div>
-            <div className="piece__info">
-              <div className="piece__info__title">{piece.title}</div>
-              <div className="piece__info__artist">{artists[piece.artist]}</div>
-              <div className="piece__info__playtime">
-                {formatPlayTime(playTime[piece.id])}
+          return (
+            <div
+              className="piece"
+              key={piece.id}
+              onClick={() => onPieceClick(piece)}
+              title={`${isPlaying ? 'Play' : 'Select'} ${piece.title}`}
+            >
+              <div className="piece__image">
+                <img src={piece.image ? piece.image : defaultImage} />
+                <button
+                  className="piece__image__button"
+                  onClick={handleButtonClick}
+                >
+                  <FontAwesomeIcon
+                    icon={isPlaying && isSelected ? faStop : faPlay}
+                  />
+                </button>
+                {isSelected &&
+                  isPlaying && (
+                    <div className="piece__image__is-playing-indicator">
+                      <FontAwesomeIcon icon={faInfinity} />
+                    </div>
+                  )}
+              </div>
+              <div className="piece__info">
+                <div className="piece__info__title">{piece.title}</div>
+                <div className="piece__info__artist">
+                  {artists[piece.artist]}
+                </div>
+                <div className="piece__info__playtime">
+                  {formatPlayTime(playTime[piece.id])}
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   ) : (
     <Redirect to="/" />
