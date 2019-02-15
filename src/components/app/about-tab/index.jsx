@@ -52,7 +52,7 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => (
     </p>
     <p>
       Made by{' '}
-      <a href="https://alexbainter" target="_noblank">
+      <a href="https://alexbainter.com" target="_noblank">
         Alex Bainter
       </a>
     </p>
