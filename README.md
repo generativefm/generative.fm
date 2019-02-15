@@ -1,6 +1,6 @@
-# Generative Music by Alex Bainter
+# generative.fm
 
-A collection of [generative music](https://medium.com/@metalex9/introduction-to-generative-music-91e00e4dba11) pieces played in the browser.
+A platform for playing [generative music](https://medium.com/@metalex9/introduction-to-generative-music-91e00e4dba11) in the browser.
 
 https://generative.fm
 
@@ -8,15 +8,11 @@ https://generative.fm
 
 ### Audio
 
-This site uses [Tone.js](https://tonejs.github.io/) to play audio in the browser through the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API). Most of the samples are provided by the [Versilian Studios Chamber Orchestra 2 Community Edition](https://vis.versilstudios.com/vsco-community.html). The [singing bowl samples](https://kasper.bandcamp.com/album/singing-bowls) were provided by [Kasper](https://kasper.bandcamp.com/). All other samples were recorded for the site.
+This site uses [Tone.js](https://tonejs.github.io/) to play audio in the browser through the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API). Most of the samples are provided by the [Versilian Studios Chamber Orchestra 2 Community Edition](https://vis.versilstudios.com/vsco-community.html). Other samples provided by the [Sonatina Symphonic Orchestra](https://github.com/peastman/sso). The [singing bowl samples](https://kasper.bandcamp.com/album/singing-bowls) were provided by [Kasper](https://kasper.bandcamp.com/). All other samples were specially recorded for the site.
 
-### Music Creation
+### Music
 
 Code for each piece can be found in [src/pieces](src/pieces). A few pieces are defined in separate [npm](https://www.npmjs.com/) packages; code for these pieces can by found by inspecting the `import` statements in [src/pieces/index.js](src/pieces/index.js) and locating the piece's repository [here](https://github.com/generative-music?utf8=%E2%9C%93&q=piece&type=&language=).
-
-### UI
-
-The interface uses [React](https://reactjs.org/) and [Redux](https://redux.js.org/).
 
 ## Installation
 
