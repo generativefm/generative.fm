@@ -28,6 +28,13 @@ const PiecesTabComponent = ({
     ({ id, artist }) =>
       typeof filter !== 'string' || (id === filter || artist === filter)
   );
+  if (
+    !isPlaying &&
+    filteredPieces.length === 1 &&
+    filteredPieces[0].id !== selectedPieceId
+  ) {
+    onPieceClick(filteredPieces[0]);
+  }
   return filteredPieces.length > 0 ? (
     <div className="pieces-tab">
       {typeof filter === 'string' && (
