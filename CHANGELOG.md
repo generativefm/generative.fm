@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Link to alexbainter.com works
+- Link to alexbainter.com will actually work
 
 ### Added
 
@@ -79,6 +79,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
+[0.5.0]: https://github.com/generative-music/site/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/generative-music/site/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/generative-music/site/compare/v0.2.1...v0.3.0
 [0.2.1]: https://github.com/generative-music/site/compare/v0.2.0...v0.2.1
