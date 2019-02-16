@@ -38,10 +38,15 @@ const PiecesTabComponent = ({
   return filteredPieces.length > 0 ? (
     <div className="pieces-tab">
       {typeof filter === 'string' && (
-        <Link className="music-link" to="/">
-          <FontAwesomeIcon icon={faChevronLeft} className="music-link__icon" />
-          All Music
-        </Link>
+        <div className="music-link">
+          <Link to="/">
+            <FontAwesomeIcon
+              icon={faChevronLeft}
+              className="music-link__icon"
+            />
+            All Music
+          </Link>
+        </div>
       )}
       <div className="pieces">
         {filteredPieces.map(piece => {
