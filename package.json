@@ -1,6 +1,6 @@
 {
   "name": "generative-music",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Plays generative music in the browser.",
   "main": "index.js",
   "scripts": {
