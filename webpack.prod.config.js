@@ -33,9 +33,6 @@ const getConfig = fetchSampleSpec().then(spec => {
     [`https://samples.generative.fm/index.${version}.json`]
   );
 
-  console.log(sampleFilenames);
-  return process.exit(0);
-
   config.plugins.push(
     new OfflinePlugin({
       appShell: '/',
