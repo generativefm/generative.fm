@@ -13,6 +13,7 @@ import trees from './trees';
 import aViableSystem from './a-viable-system';
 import apoapsis from './apoapsis';
 import observableStreams from './observable-streams';
+import townsend from './townsend';
 import enoMachineImage from './images/eno-machine.png';
 import pinwheelsImage from './images/pinwheels.png';
 import seventhsImage from './images/sevenths.png';
@@ -27,6 +28,7 @@ import treesImage from './images/trees.png';
 import aViableSystemImage from './images/a-viable-system.png';
 import apoapsisImage from './images/apoapsis.png';
 import observableStreamsImage from './images/observable-streams.png';
+import townsendImage from './images/townsend.png';
 
 const ARTIST_ID = 'alex-bainter';
 
@@ -88,6 +90,7 @@ const pieces = [
     'observable-streams',
     observableStreamsImage
   ),
+  piece('Townsend', townsend, 'townsend', townsendImage),
 ].reverse();
 
 export default pieces;

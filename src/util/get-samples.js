@@ -2,7 +2,7 @@ import sampleFormat from '../config/sample-format';
 import prependEndpointToSampleFilename from './prepend-endpoint-to-sample-filename';
 
 const DEFAULT_ENDPOINT = 'https://samples.generative.fm';
-const VERSION = '0.0.5';
+const VERSION = '0.2.0';
 
 const specFile = `${DEFAULT_ENDPOINT}/index.${VERSION}.json`;
 
@@ -12,16 +12,27 @@ const samplePromise = fetch(specFile)
     Reflect.ownKeys(spec.samples).reduce(
       (specWithEndpoints, instrumentName) => {
         const instrumentSamples = spec.samples[instrumentName][sampleFormat];
-        specWithEndpoints[instrumentName] = Reflect.ownKeys(
-          instrumentSamples
-        ).reduce((samplesWithEndpoint, note) => {
-          samplesWithEndpoint[note] = prependEndpointToSampleFilename(
-            instrumentName,
-            sampleFormat,
-            instrumentSamples[note]
+        if (Array.isArray(instrumentSamples)) {
+          specWithEndpoints[instrumentName] = instrumentSamples.map(filename =>
+            prependEndpointToSampleFilename(
+              instrumentName,
+              sampleFormat,
+              filename
+            )
           );
-          return samplesWithEndpoint;
-        }, {});
+        } else {
+          specWithEndpoints[instrumentName] = Reflect.ownKeys(
+            instrumentSamples
+          ).reduce((samplesWithEndpoint, note) => {
+            samplesWithEndpoint[note] = prependEndpointToSampleFilename(
+              instrumentName,
+              sampleFormat,
+              instrumentSamples[note]
+            );
+            return samplesWithEndpoint;
+          }, {});
+        }
+
         return specWithEndpoints;
       },
       {}
