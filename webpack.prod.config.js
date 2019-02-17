@@ -1,7 +1,7 @@
 'use strict';
 
 const OfflinePlugin = require('offline-plugin');
-const fetchSampleSpec = require('@generative-music/samples.generative.fm/node');
+const fetchSampleSpec = require('@generative-music/samples.generative.fm/node-client');
 const {
   version,
 } = require('@generative-music/samples.generative.fm/package.json');

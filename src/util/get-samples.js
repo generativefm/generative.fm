@@ -1,4 +1,4 @@
-import fetchSampleSpec from '@generative-music/samples.generative.fm/dist/browser';
+import fetchSampleSpec from '@generative-music/samples.generative.fm/browser-client';
 import sampleFormat from '../config/sample-format';
 
 const samplePromise = fetchSampleSpec().then(spec =>
