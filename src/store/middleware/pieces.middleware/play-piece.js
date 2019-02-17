@@ -20,21 +20,22 @@ const playPiece = (piece, getState) => {
     piece.volumeNode = pieceVol;
 
     // METERING
-    const meter = new Tone.Meter();
-    pieceVol.connect(meter);
-    let maxDb = -Infinity;
-    const updateMaxDb = () => {
-      const db = meter.getValue();
-      if (db > maxDb) {
-        maxDb = db;
-      }
-    };
-    setInterval(() => {
-      updateMaxDb();
-    }, 0);
-    setInterval(() => {
-      console.log(maxDb);
-    }, 1000);
+    // most pieces between 0.1 and 0.3
+    // const meter = new Tone.Meter();
+    // pieceVol.connect(meter);
+    // let maxDb = -Infinity;
+    // const updateMaxDb = () => {
+    //   const db = meter.getValue();
+    //   if (db > maxDb) {
+    //     maxDb = db;
+    //   }
+    // };
+    // setInterval(() => {
+    //   updateMaxDb();
+    // }, 0);
+    // setInterval(() => {
+    //   console.log(maxDb);
+    // }, 1000);
 
     piece.makePiece(pieceVol, noop).then(cleanUp => {
       piece.cleanUp = cleanUp;
