@@ -40,6 +40,7 @@
     "image-webpack-loader": "^4.6.0",
     "mime-types": "^2.1.20",
     "mini-css-extract-plugin": "^0.4.0",
+    "node-fetch": "^2.3.0",
     "node-gzip": "^1.1.2",
     "node-lame": "^1.1.0",
     "node-sass": "^4.9.3",
