@@ -16,7 +16,7 @@
     "url": "git+https://github.com/metalex9/generative-music.git"
   },
   "author": "Alex Bainter <alexbainter+github@gmail.com> (http://github.com/metalex9)",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/metalex9/generative-music/issues"
   },
