@@ -1,9 +1,7 @@
 import Tone from 'tone';
 import uuid from 'uuid';
 import stopPiece from './stop-piece';
-
-//eslint-disable-next-line no-empty-function
-const noop = () => {};
+import sampleFormat from '../../../config/sample-format';
 
 let lastBuildId;
 let buildingPiece = false;
@@ -21,37 +19,43 @@ const playPiece = (piece, getState) => {
 
     // METERING
     // most pieces between 0.1 and 0.3
-    // const meter = new Tone.Meter();
-    // pieceVol.connect(meter);
-    // let maxDb = -Infinity;
-    // const updateMaxDb = () => {
-    //   const db = meter.getValue();
-    //   if (db > maxDb) {
-    //     maxDb = db;
-    //   }
-    // };
-    // setInterval(() => {
-    //   updateMaxDb();
-    // }, 0);
-    // setInterval(() => {
-    //   console.log(maxDb);
-    // }, 1000);
-
-    piece.makePiece(pieceVol, noop).then(cleanUp => {
-      piece.cleanUp = cleanUp;
-      buildingPiece = false;
-      piece.ready = true;
-      const { selectedPieceId, isPlaying } = getState();
-      if (lastBuildId === buildId && selectedPieceId === piece.id) {
-        if (isPlaying) {
-          piece.played = true;
-          Tone.Transport.start('+0.1');
-        }
-      } else {
-        stopPiece(piece);
-        playPiece(queuedPiece, getState);
+    const meter = new Tone.Meter();
+    pieceVol.connect(meter);
+    let maxDb = -Infinity;
+    const updateMaxDb = () => {
+      const db = meter.getValue();
+      if (db > maxDb) {
+        maxDb = db;
       }
-    });
+    };
+    setInterval(() => {
+      updateMaxDb();
+    }, 0);
+    setInterval(() => {
+      console.log(maxDb);
+    }, 1000);
+
+    piece
+      .makePiece({
+        destination: pieceVol,
+        audioContext: Tone.context,
+        preferredFormat: sampleFormat,
+      })
+      .then(cleanUp => {
+        piece.cleanUp = cleanUp;
+        buildingPiece = false;
+        piece.ready = true;
+        const { selectedPieceId, isPlaying } = getState();
+        if (lastBuildId === buildId && selectedPieceId === piece.id) {
+          if (isPlaying) {
+            piece.played = true;
+            Tone.Transport.start();
+          }
+        } else {
+          stopPiece(piece);
+          playPiece(queuedPiece, getState);
+        }
+      });
   }
 };
 

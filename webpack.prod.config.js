@@ -1,14 +1,16 @@
 'use strict';
 
-const fetch = require('node-fetch');
 const OfflinePlugin = require('offline-plugin');
+const fetchSampleSpec = require('@generative-music/samples.generative.fm/node-client');
+const {
+  version,
+} = require('@generative-music/samples.generative.fm/package.json');
 const config = require('./webpack.config');
-const fetchSampleSpec = require('./src/util/sample-client/fetch-sample-spec');
 
 config.mode = 'production';
 delete config.devtool;
 
-const getConfig = fetchSampleSpec(fetch).then(spec => {
+const getConfig = fetchSampleSpec().then(spec => {
   const { samples } = spec;
   const sampleFilenames = Reflect.ownKeys(samples).reduce(
     (filenames, instrumentName) => {
@@ -28,7 +30,7 @@ const getConfig = fetchSampleSpec(fetch).then(spec => {
         )
       );
     },
-    []
+    [`https://samples.generative.fm/index.${version}.json`]
   );
 
   config.plugins.push(
