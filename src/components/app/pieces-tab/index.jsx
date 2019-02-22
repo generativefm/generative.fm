@@ -11,7 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import pieces from '../../../pieces';
 import formatPlayTime from './format-play-time';
-import defaultImage from '../../../pieces/images/default.png';
+import defaultImage from './default.png';
 import artists from '../../../data/artists';
 import './pieces-tab.scss';
 

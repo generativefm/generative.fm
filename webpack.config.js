@@ -15,6 +15,7 @@ const config = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
+    mainFields: ['generativeFmManifest', 'browser', 'module', 'main'],
   },
   devServer: {
     historyApiFallback: true,
@@ -46,6 +47,11 @@ const config = {
           { loader: 'url-loader', options: { limit: 10 * 1024 } },
           'image-webpack-loader',
         ],
+      },
+      {
+        test: /\.gfm\.manifest\.json/,
+        use: path.resolve('./piece-loader.js'),
+        type: 'javascript/auto',
       },
     ],
   },
