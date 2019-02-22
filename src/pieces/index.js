@@ -13,6 +13,7 @@ import aViableSystem from '@generative-music/piece-a-viable-system';
 import apoapsis from '@generative-music/piece-apoapsis';
 import observableStreams from '@generative-music/piece-observable-streams';
 import townsend from '@generative-music/piece-townsend';
+import springAgain from '@generative-music/piece-spring-again';
 
 const pieces = [
   enoMachine,
@@ -30,6 +31,7 @@ const pieces = [
   apoapsis,
   observableStreams,
   townsend,
+  springAgain,
 ].reverse();
 
 export default pieces;
