@@ -12,7 +12,7 @@ This site uses [Tone.js](https://tonejs.github.io/) to play audio in the browser
 
 ### Music
 
-Code for each piece can be found in [src/pieces](src/pieces). A few pieces are defined in separate [npm](https://www.npmjs.com/) packages; code for these pieces can by found by inspecting the `import` statements in [src/pieces/index.js](src/pieces/index.js) and locating the piece's repository [here](https://github.com/generative-music?utf8=%E2%9C%93&q=piece&type=&language=).
+Source code for the music generators can be found in the [generative-music/pieces-alex-bainter](https://github.com/generative-music/pieces-alex-bainter) repository.
 
 ## Installation
 
