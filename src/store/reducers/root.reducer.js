@@ -9,7 +9,7 @@ import isUpdateAvailable from './is-update-available.reducer';
 import version from './version.reducer';
 import isOnline from './is-online.reducer';
 import playTime from './play-time.reducer';
-import id from './id.reducer';
+import stateId from './state-id.reducer';
 
 const rootReducer = combineReducers({
   isMuted,
@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
   version,
   isOnline,
   playTime,
-  id,
+  stateId,
 });
 
 export default rootReducer;
