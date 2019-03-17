@@ -44,6 +44,7 @@ const TitleNavComponent = () => (
     <ul className="title-nav__tab-list">
       <TitleNavLink text="MUSIC" linkTo="/" isActive={matchRootOrMusic} />
       <TitleNavLink text="ABOUT" linkTo="/about" />
+      <TitleNavLink text="ISSUES?" linkTo="/audio-issues" />
     </ul>
   </div>
 );
