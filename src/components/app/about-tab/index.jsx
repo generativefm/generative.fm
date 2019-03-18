@@ -15,11 +15,13 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
   useEffect(
     () => {
       if (window.twttr && followBtnRef.current) {
-        window.twttr.widgets.createFollowButton(
-          'alex_bainter',
-          followBtnRef.current,
-          { showCount: false }
-        );
+        window.twttr.ready(twttr => {
+          twttr.widgets.createFollowButton(
+            'alex_bainter',
+            followBtnRef.current,
+            { showCount: false }
+          );
+        });
       }
     },
     window.twttr,
@@ -28,6 +30,14 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
 
   return (
     <div className="about-tab">
+      {isUpdateAvailable && isOnline && (
+        <p className="update-alert">
+          <a href="/" onClick={handleUpdateClick}>
+            <span className="update-alert__dot" />
+            New Version Available
+          </a>
+        </p>
+      )}
       <p>
         This site is a collection of generative music pieces which can be
         listened to. The term &quot;generative music&quot; has been used
@@ -56,21 +66,15 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
       <p>
         Follow on Twitter for app news and updates: <span ref={followBtnRef} />
       </p>
-      <p>
-        {`v${version}`}
-        {isUpdateAvailable && isOnline && (
-          <span>
-            {' '}
-            -{' '}
-            <a href="/" onClick={handleUpdateClick}>
-              Load latest version
-            </a>
-          </span>
-        )}
-      </p>
+      <br />
+      <p>{`v${version}`}</p>
       <p>
         Made by{' '}
-        <a href="https://alexbainter.com" target="_blank">
+        <a
+          href="https://alexbainter.com"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
           Alex Bainter
         </a>
       </p>

@@ -1,4 +1,5 @@
 @import '_colors';
+@import '_mixins';
 
 .about-tab {
   padding: 1em;
@@ -7,5 +8,16 @@
 
   h2 {
     font-weight: inherit;
+  }
+
+  .update-alert {
+    display: flex;
+    align-items: center;
+    font-style: italic;
+    &__dot {
+      @include dot();
+      display: inline-block;
+      margin-right: 0.5em;
+    }
   }
 }

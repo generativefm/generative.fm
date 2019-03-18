@@ -5,8 +5,8 @@ import {
   Switch,
   Redirect,
 } from 'react-router-dom';
-import TitleNavComponent from './title-nav';
 import Controls from './controls';
+import TitleNavContainer from '../../containers/title-nav.container';
 import AboutTabContainer from '../../containers/about-tab.container';
 import PiecesTabContainer from '../../containers/pieces-tab.container';
 import './app.scss';
@@ -18,7 +18,7 @@ const AppComponent = () => {
         <Router>
           <div>
             <nav>
-              <TitleNavComponent />
+              <TitleNavContainer />
             </nav>
             <main>
               <Switch>

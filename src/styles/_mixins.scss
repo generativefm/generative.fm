@@ -1,0 +1,6 @@
+@mixin dot() {
+  width: 0.5em;
+  height: 0.5em;
+  background-color: $highlightColor;
+  border-radius: 50%;
+}
