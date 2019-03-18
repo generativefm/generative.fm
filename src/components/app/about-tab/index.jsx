@@ -40,10 +40,9 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
       )}
       <p>
         This site is a collection of generative music pieces which can be
-        listened to. The term &quot;generative music&quot; has been used to
-        describe music which changes continuously and is created by a system.
-        Such systems often generate music for as long as one is willing to
-        listen.
+        listened to. The term &quot;generative music&quot; describes music which
+        changes continuously and is created by a system. Such systems often
+        generate music for as long as one is willing to listen.
       </p>
       <p>
         The pieces featured on this site are not recordings. The music is
