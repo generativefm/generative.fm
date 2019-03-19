@@ -27,3 +27,6 @@ You will need [Node.js](https://nodejs.org/en/) installed on your machine.
 ## Issues and Feedback
 
 Problems or general feedback can be reported [here on Github](https://github.com/generative-music/site/issues) or by sending an email to alex@alexbainter.com. Thanks!
+
+## Contributing
+See [CONTRIBUTING.md](.github/CONTRIBUTING.md).
