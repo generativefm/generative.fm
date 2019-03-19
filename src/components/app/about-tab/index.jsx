@@ -29,7 +29,7 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
   );
 
   return (
-    <div className="about-tab">
+    <div className="about-tab info-tab">
       {isUpdateAvailable && isOnline && (
         <p className="update-alert">
           <a href="/" onClick={handleUpdateClick}>

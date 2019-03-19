@@ -2,14 +2,6 @@
 @import '_mixins';
 
 .about-tab {
-  padding: 1em;
-  max-width: 700px;
-  margin: 0 auto;
-
-  h2 {
-    font-weight: inherit;
-  }
-
   .update-alert {
     display: flex;
     align-items: center;

@@ -47,6 +47,7 @@ const TitleNavComponent = ({ isUpdateAvailable }) => (
     <ul className="title-nav__tab-list">
       <TitleNavLink text="MUSIC" linkTo="/" isActive={matchRootOrMusic} />
       <TitleNavLink text="ABOUT" linkTo="/about" hasDot={isUpdateAvailable} />
+      <TitleNavLink text="HELP" linkTo="/help" />
     </ul>
   </div>
 );

@@ -6,6 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import Controls from './controls';
+import HelpTabComponent from './help-tab';
 import TitleNavContainer from '../../containers/title-nav.container';
 import AboutTabContainer from '../../containers/about-tab.container';
 import PiecesTabContainer from '../../containers/pieces-tab.container';
@@ -24,6 +25,7 @@ const AppComponent = () => {
               <Switch>
                 <Route exact path="/" component={PiecesTabContainer} />
                 <Route exact path="/about" component={AboutTabContainer} />
+                <Route exact path="/help" component={HelpTabComponent} />
                 <Route
                   path="/music/:filter"
                   render={({ match }) => (

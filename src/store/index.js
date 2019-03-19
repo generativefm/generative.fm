@@ -7,6 +7,8 @@ import STATE_STORAGE_KEY from './middleware/local-storage.middleware/key';
 import getOnlineStatus from './get-online-status';
 import pieces from '../pieces/index';
 
+const MOBILE_VOLUME_PCT = 95;
+
 const storedStateJSON = window.localStorage.getItem(STATE_STORAGE_KEY);
 const storedState =
   typeof storedStateJSON === 'undefined' || storedStateJSON === null
@@ -24,7 +26,7 @@ const initialState = Object.assign({}, storedState, {
 });
 
 if (isMobile) {
-  initialState.volumePct = 100;
+  initialState.volumePct = MOBILE_VOLUME_PCT;
   initialState.isMuted = false;
 }
 
