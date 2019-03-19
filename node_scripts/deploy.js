@@ -9,7 +9,10 @@ const { gzip } = require('node-gzip');
 const { lookup } = require('mime-types');
 const envs = require('./secrets');
 
-const { bucketName, cloudfrontDistributionId } = envs.staging;
+const { bucketName, cloudfrontDistributionId } =
+  process.argv.length >= 3 && process.argv[2] === '-p'
+    ? envs.production
+    : envs.staging;
 
 const DIST_DIR = 'dist';
 const S3_API_VERSION = '2006-03-01';
