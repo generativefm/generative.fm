@@ -5,12 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.10.0] - 2019-03-19
+
+### Fixed
+
+- Pieces tab is styled as intended on mobile
+
 ### Added
+
 - Add id to state
+- Help tab
+- Better signifiers for available updates
+- CONTRIBUTING.md
+- Log link to Github repository in console (production only)
+
+### Changed
+
+- Reworded "about" tab
+- Mobile volume is now 95% instead of 100% to help with audio issues
+- Deployment supports multiple environments
 
 ## [0.9.0] - 2019-03-13
+
 ### Added
+
 - New piece: Drones
 
 ## [0.8.1] - 2019-02-22
@@ -134,7 +152,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
-[unreleased]: https://github.com/generative-music/generative.fm/compare/v0.9.0...HEAD
+[unreleased]: https://github.com/generative-music/generative.fm/compare/v0.10.0...HEAD
+[0.10.0]: https://github.com/generative-music/generative.fm/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/generative-music/generative.fm/compare/v0.8.1...v0.9.0
 [0.8.1]: https://github.com/generative-music/generative.fm/compare/v0.8.0...v0.8.1
 [0.8.0]: https://github.com/generative-music/generative.fm/compare/v0.7.0...v0.8.0
