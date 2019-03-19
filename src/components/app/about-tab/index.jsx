@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
 import { applyUpdate } from 'offline-plugin/runtime';
 import './about.scss';
@@ -11,23 +11,13 @@ const handleUpdateClick = e => {
 };
 
 const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
-  const followBtnRef = useRef(null);
-  useEffect(
-    () => {
-      if (window.twttr && followBtnRef.current) {
-        window.twttr.ready(twttr => {
-          twttr.widgets.createFollowButton(
-            'alex_bainter',
-            followBtnRef.current,
-            { showCount: false }
-          );
-        });
-      }
-    },
-    window.twttr,
-    followBtnRef.current
-  );
-
+  useEffect(() => {
+    if (window.twttr) {
+      window.twttr.ready(twttr => {
+        twttr.widgets.load();
+      });
+    }
+  }, [window.twttr]);
   return (
     <div className="about-tab info-tab">
       {isUpdateAvailable && isOnline && (
@@ -63,7 +53,14 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
         </a>
       </p>
       <p>
-        Follow on Twitter for app news and updates: <span ref={followBtnRef} />
+        <a
+          href="https://twitter.com/alex_bainter?ref_src=twsrc%5Etfw"
+          className="twitter-follow-button"
+          data-show-count="false"
+        >
+          Follow @alex_bainter
+        </a>{' '}
+        on Twitter for app news and updates.{' '}
       </p>
       <br />
       <p>{`v${version}`}</p>

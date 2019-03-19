@@ -12,4 +12,12 @@
       margin-right: 0.5em;
     }
   }
+
+  .follow-btn {
+    display: none;
+
+    &--rendered {
+      display: inline;
+    }
+  }
 }
