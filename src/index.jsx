@@ -15,6 +15,9 @@ if (isProduction) {
       store.dispatch(indicateUpdateAvailable());
     },
   });
+
+  //eslint-disable-next-line no-console
+  console.log('https://github.com/generative-music/generative.fm');
 }
 
 const makeSetOnlineStatus = online => () =>
