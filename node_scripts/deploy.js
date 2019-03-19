@@ -7,13 +7,18 @@ const CloudFront = require('aws-sdk/clients/cloudfront');
 const glob = require('glob');
 const { gzip } = require('node-gzip');
 const { lookup } = require('mime-types');
-const { BUCKET_NAME, CLOUDFRONT_DISTRIBUTION_ID } = require('./secrets');
+const envs = require('./secrets');
+
+const { bucketName, cloudfrontDistributionId } =
+  process.argv.length >= 3 && process.argv[2] === '-p'
+    ? envs.production
+    : envs.staging;
 
 const DIST_DIR = 'dist';
 const S3_API_VERSION = '2006-03-01';
 const CLOUDFRONT_API_VERSION = '2018-11-05';
 const NON_DIST_FILENAMES = ['favicon.ico', 'manifest.json'];
-const INVALIDATED_CACHE_FILES = ['/index.html', '/sw.js'];
+const INVALIDATED_CACHE_FILES = ['/index.html', '/sw.js', '/'];
 
 const globPromise = (pattern, opts) =>
   new Promise((resolve, reject) => {
@@ -28,12 +33,12 @@ const globPromise = (pattern, opts) =>
 
 const s3 = new S3({
   apiVersion: S3_API_VERSION,
-  params: { Bucket: BUCKET_NAME },
+  params: { Bucket: bucketName },
 });
 
 const cloudfront = new CloudFront({
   apiVersion: CLOUDFRONT_API_VERSION,
-  params: { DistributionId: CLOUDFRONT_DISTRIBUTION_ID },
+  params: { DistributionId: cloudfrontDistributionId },
 });
 
 const listRootObjs = () => s3.listObjectsV2().promise();
@@ -122,7 +127,7 @@ const invalidateCFCache = () =>
 
 listRootObjs()
   .then(({ Contents }) => {
-    console.log(`Removing files from ${BUCKET_NAME}`);
+    console.log(`Removing files from ${bucketName}`);
     return deleteObjs(Contents.map(({ Key }) => ({ Key })));
   })
   .then(() => {

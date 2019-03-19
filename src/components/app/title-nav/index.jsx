@@ -6,10 +6,12 @@ import './title-nav.scss';
 const TitleNavLink = ({
   text,
   linkTo,
+  hasDot = false,
   exact = false,
   isActive = match => match && match.url === linkTo,
 }) => (
-  <li className="title-nav__tab-list__item">
+  <li className="title-nav__tab-list__item title-nav__tab-list__item--has-dot">
+    {hasDot && <div className="title-nav__tab-list__item__dot" />}
     <NavLink
       className="title-nav__tab-list__item__link"
       activeClassName="title-nav__tab-list__item__link--is-active"
@@ -26,6 +28,7 @@ const TitleNavLink = ({
 TitleNavLink.propTypes = {
   text: propTypes.string,
   linkTo: propTypes.string,
+  hasDot: propTypes.bool,
   exact: propTypes.bool,
   isActive: propTypes.func,
 };
@@ -33,7 +36,7 @@ TitleNavLink.propTypes = {
 const matchRootOrMusic = (match, location) =>
   location.pathname === '/' || location.pathname.startsWith('/music');
 
-const TitleNavComponent = () => (
+const TitleNavComponent = ({ isUpdateAvailable }) => (
   <div className="title-nav">
     <h1 className="title-nav__title title-nav__title--primary">
       Generative.fm
@@ -43,9 +46,14 @@ const TitleNavComponent = () => (
     </h2>
     <ul className="title-nav__tab-list">
       <TitleNavLink text="MUSIC" linkTo="/" isActive={matchRootOrMusic} />
-      <TitleNavLink text="ABOUT" linkTo="/about" />
+      <TitleNavLink text="ABOUT" linkTo="/about" hasDot={isUpdateAvailable} />
+      <TitleNavLink text="HELP" linkTo="/help" />
     </ul>
   </div>
 );
+
+TitleNavComponent.propTypes = {
+  isUpdateAvailable: propTypes.bool,
+};
 
 export default TitleNavComponent;

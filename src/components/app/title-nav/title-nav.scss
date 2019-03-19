@@ -1,4 +1,5 @@
 @import '_colors.scss';
+@import '_mixins.scss';
 
 .title-nav {
   padding: 0 1em;
@@ -25,6 +26,7 @@
       display: inline-block;
       font-size: 0.8em;
       padding: 0 1em;
+      position: relative;
 
       &:first-of-type {
         padding-left: 0;
@@ -41,6 +43,14 @@
 
         &:hover {
           color: $interactColor;
+
+          .title-nav__tab-list__item__active-indicator {
+            background-color: $highlightInteractColor;
+          }
+
+          .title-nav__tab-list__item__dot {
+            background-color: $highlightInteractColor;
+          }
         }
 
         &:focus {
@@ -57,9 +67,17 @@
       &__active-indicator {
         width: 2.5em;
         height: 0.15em;
-        background: $highlightColor;
+        background-color: $highlightColor;
         margin: 0 auto;
         visibility: hidden;
+      }
+
+      &__dot {
+        @include dot();
+        position: absolute;
+        top: -0.6em;
+        left: 50%;
+        transform: translate(-50%);
       }
     }
   }

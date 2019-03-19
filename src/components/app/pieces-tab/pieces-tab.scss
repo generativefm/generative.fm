@@ -132,10 +132,10 @@ $pieceWidth: 10em;
       }
     }
   }
-}
 
-@media (max-width: 768px) {
-  .pieces {
-    padding: 0.5em;
+  @media (max-width: 768px) {
+    .pieces {
+      padding: 0.5em;
+    }
   }
 }

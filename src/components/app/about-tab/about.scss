@@ -1,11 +1,23 @@
 @import '_colors';
+@import '_mixins';
 
 .about-tab {
-  padding: 1em;
-  max-width: 700px;
-  margin: 0 auto;
+  .update-alert {
+    display: flex;
+    align-items: center;
+    font-style: italic;
+    &__dot {
+      @include dot();
+      display: inline-block;
+      margin-right: 0.5em;
+    }
+  }
 
-  h2 {
-    font-weight: inherit;
+  .follow-btn {
+    display: none;
+
+    &--rendered {
+      display: inline;
+    }
   }
 }
