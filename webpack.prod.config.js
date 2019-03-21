@@ -36,7 +36,11 @@ const getConfig = configPromise.then(config => {
     config.plugins.push(
       new OfflinePlugin({
         appShell: '/',
-        externals: sampleFilenames.concat(['favicon.ico', 'manifest.json']),
+        externals: sampleFilenames.concat([
+          'favicon.ico',
+          'manifest.json',
+          'https://platform.twitter.com/widgets.js',
+        ]),
         autoUpdate: true,
         ServiceWorker: {
           events: true,
