@@ -8,6 +8,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const adjacentSamplePath = path.resolve('../samples.generative.fm/public');
 
+//eslint-disable-next-line no-console
+const log = msg => console.log(msg);
+
 const config = {
   mode: 'development',
   devtool: 'sourcemap',
@@ -73,13 +76,13 @@ const config = {
 const configPromise = new Promise(resolve => {
   fs.access(adjacentSamplePath, fs.constants.R_OK, err => {
     if (err) {
-      console.log(
+      log(
         `Local sample files not found (looked for ${adjacentSamplePath}). Music will not be playable!`
       );
-      console.log(
+      log(
         'To fix, clone https://github.com/generative-music/samples.generative.fm to a directory adjacent to this one and run its "build:samples" npm script.'
       );
-      console.log('Then, run this script again.');
+      log('Then, run this script again.');
     }
     resolve(config);
   });
