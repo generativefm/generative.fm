@@ -4,13 +4,6 @@ import './help-tab.scss';
 
 const HelpTabComponent = () => (
   <div className="info-tab help-tab">
-    <h2 className="help-tab__topic">
-      I'm on an iOS device and I can't hear anything
-    </h2>
-    <p>
-      Some iOS devices require silent mode to be off in order to hear the music.
-      This might be resolved in a future update.
-    </p>
     <h2 className="help-tab__topic">The audio pops, crackles, or snaps</h2>
     Here's some steps you can try:
     <ol>

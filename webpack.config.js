@@ -1,9 +1,15 @@
 'use strict';
 
 const path = require('path');
+const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+const adjacentSamplePath = path.resolve('../samples.generative.fm/public');
+
+//eslint-disable-next-line no-console
+const log = msg => console.log(msg);
 
 const config = {
   mode: 'development',
@@ -20,6 +26,7 @@ const config = {
   devServer: {
     historyApiFallback: true,
     port: 9999,
+    contentBase: [path.resolve(), adjacentSamplePath],
   },
   module: {
     rules: [
@@ -66,4 +73,19 @@ const config = {
   ],
 };
 
-module.exports = config;
+const configPromise = new Promise(resolve => {
+  fs.access(adjacentSamplePath, fs.constants.R_OK, err => {
+    if (err) {
+      log(
+        `Local sample files not found (looked for ${adjacentSamplePath}). Music will not be playable!`
+      );
+      log(
+        'To fix, clone https://github.com/generative-music/samples.generative.fm to a directory adjacent to this one and run its "build:samples" npm script.'
+      );
+      log('Then, run this script again.');
+    }
+    resolve(config);
+  });
+});
+
+module.exports = configPromise;
