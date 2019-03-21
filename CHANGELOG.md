@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.1] - 2019-03-20
+
+### Fixed
+
+- Sound will play on iOS devices even when the device is in silent mode
+- Sound will play on iOS devices even when the app is not the currently active view
+- Improved Progressive Web App support in Safari on iOS devices
+- Twitter follow button code is cached for offline usage
+
+### Added
+
+- Support for using local sample files during development
+
 ## [0.10.0] - 2019-03-19
 
 ### Fixed
