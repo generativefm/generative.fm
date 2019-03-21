@@ -1,16 +1,30 @@
-import React from 'react';
-import propTypes from 'prop-types';
 import {
   faPlay,
-  faStop,
-  faStepForward,
-  faStepBackward,
   faRandom,
+  faStepBackward,
+  faStepForward,
+  faStop,
 } from '@fortawesome/free-solid-svg-icons';
+import propTypes from 'prop-types';
+import React, { useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
 import ControlButtonComponent from '../control-button';
 import ButtonSpacerComponent from './button-spacer';
 import './main-controls.scss';
+
+function useKeyboardEvent(key, callback) {
+  useEffect(() => {
+    const handler = event => {
+      if (event.key === key) {
+        callback();
+      }
+    };
+    window.addEventListener('keydown', handler);
+    return () => {
+      window.removeEventListener('keydown', handler);
+    };
+  },[callback]);
+}
 
 const makePrimaryButton = (faIcon, onClick) =>
   function PrimaryButtonComponent() {
@@ -36,6 +50,9 @@ const MainControlsComponent = ({
   const PrimaryButtonComponent = isPlaying
     ? makePrimaryButton(faStop, onStopClick)
     : makePrimaryButton(faPlay, onPlayClick);
+  useKeyboardEvent(' ', isPlaying ? onStopClick : onPlayClick);
+  useKeyboardEvent('ArrowLeft', onPreviousClick);
+  useKeyboardEvent('ArrowRight', onNextClick);
   return (
     <div className="main-controls">
       {!isMobile && <ButtonSpacerComponent />}
