@@ -7,6 +7,13 @@ let lastBuildId;
 let buildingPiece = false;
 let queuedPiece;
 
+const sampleSource =
+  location.hostname === 'localhost'
+    ? {
+        baseUrl: './',
+      }
+    : {};
+
 const playPiece = (piece, getState) => {
   queuedPiece = piece;
   const buildId = uuid();
@@ -40,6 +47,7 @@ const playPiece = (piece, getState) => {
         destination: pieceVol,
         audioContext: Tone.context,
         preferredFormat: sampleFormat,
+        sampleSource,
       })
       .then(cleanUp => {
         piece.cleanUp = cleanUp;
