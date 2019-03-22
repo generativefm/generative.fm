@@ -3,6 +3,7 @@ import { isMobile } from 'react-device-detect';
 import rootReducer from './reducers/root.reducer';
 import piecesMiddleware from './middleware/pieces.middleware';
 import localStorageMiddleware from './middleware/local-storage.middleware';
+import beforeUnloadMiddleware from './middleware/before-unload.middleware';
 import STATE_STORAGE_KEY from './middleware/local-storage.middleware/key';
 import getOnlineStatus from './get-online-status';
 import pieces from '../pieces/index';
@@ -33,7 +34,11 @@ if (isMobile) {
 const store = createStore(
   rootReducer,
   initialState,
-  applyMiddleware(piecesMiddleware, localStorageMiddleware)
+  applyMiddleware(
+    piecesMiddleware,
+    localStorageMiddleware,
+    beforeUnloadMiddleware
+  )
 );
 
 export default store;
