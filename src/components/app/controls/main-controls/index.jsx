@@ -43,7 +43,7 @@ const MainControlsComponent = ({
     [NEXT_KEY]: onNextClick,
   };
 
-  const onKeydown = keyEvent => {
+  const handleKeydown = keyEvent => {
     const keyHandler = keyHandlers[keyEvent.key];
     if (typeof keyHandler === 'function') {
       keyHandler();
@@ -51,8 +51,8 @@ const MainControlsComponent = ({
   };
 
   useEffect(() => {
-    window.addEventListener('keydown', onKeydown);
-    return () => window.removeEventListener('keydown', onKeydown);
+    window.addEventListener('keydown', handleKeydown);
+    return () => window.removeEventListener('keydown', handleKeydown);
   });
 
   const PrimaryButtonComponent = isPlaying
