@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import propTypes from 'prop-types';
 import classnames from 'classnames';
 import './slider.scss';
@@ -13,68 +13,90 @@ const calculatePct = (mouseEvent, el) => {
   return pct;
 };
 
-class SliderComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isMouseDown: false };
-    this.sliderBar = createRef();
+const SliderComponent = ({ pct, onChange }) => {
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const isMouseOverRef = useRef(false);
+  const sliderBarRef = useRef(null);
 
-    this.handleMouseDown = this.handleMouseDown.bind(this);
-    this.handleMouseMove = this.handleMouseMove.bind(this);
-    this.handleMouseUp = this.handleMouseUp.bind(this);
-  }
-  render() {
-    return (
+  const handleScroll = event => {
+    if (isMouseOverRef.current) {
+      preventDefault(event);
+      if (event.deltaY < 0 || event.deltaX < 0) {
+        onChange(Math.min(pct + 5, 100));
+      } else if (event.deltaY > 0 || event.deltaX > 0) {
+        onChange(Math.max(pct - 5, 0));
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('wheel', handleScroll);
+    return () => window.removeEventListener('wheel', handleScroll);
+  });
+
+  const handleMouseMove = event => {
+    onChange(calculatePct(event, sliderBarRef.current));
+  };
+
+  const handleMouseUp = event => {
+    if (event.button === 0) {
+      setIsMouseDown(false);
+      handleMouseMove(event);
+      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('mousemove', handleMouseMove);
+    }
+  };
+
+  const handleMouseDown = event => {
+    if (event.button === 0) {
+      setIsMouseDown(true);
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    }
+  };
+
+  const handleMouseOver = () => {
+    isMouseOverRef.current = true;
+  };
+
+  const handleMouseLeave = () => {
+    isMouseOverRef.current = false;
+  };
+
+  return (
+    <div
+      className="slider"
+      onMouseDown={handleMouseDown}
+      onDrag={preventDefault}
+      onDragStart={preventDefault}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}
+    >
       <div
-        className="slider"
-        onMouseDown={this.handleMouseDown}
+        className="slider__bar"
+        ref={sliderBarRef}
         onDrag={preventDefault}
         onDragStart={preventDefault}
       >
         <div
-          className="slider__bar"
-          ref={this.sliderBar}
+          className={classnames('slider__bar__level', {
+            'slider__bar__level--active': isMouseDown,
+          })}
+          style={{ width: `${pct}%` }}
           onDrag={preventDefault}
           onDragStart={preventDefault}
-        >
-          <div
-            className={classnames('slider__bar__level', {
-              'slider__bar__level--active': this.state.isMouseDown,
-            })}
-            style={{ width: `${this.props.pct}%` }}
-            onDrag={preventDefault}
-            onDragStart={preventDefault}
-          />
-          <div
-            className={classnames('slider__bar__indicator', {
-              'slider__bar__indicator--active': this.state.isMouseDown,
-            })}
-            onDrag={preventDefault}
-            onDragStart={preventDefault}
-          />
-        </div>
+        />
+        <div
+          className={classnames('slider__bar__indicator', {
+            'slider__bar__indicator--active': isMouseDown,
+          })}
+          onDrag={preventDefault}
+          onDragStart={preventDefault}
+        />
       </div>
-    );
-  }
-  handleMouseDown(event) {
-    if (event.button === 0) {
-      this.setState({ isMouseDown: true });
-      window.addEventListener('mousemove', this.handleMouseMove);
-      window.addEventListener('mouseup', this.handleMouseUp);
-    }
-  }
-  handleMouseMove(event) {
-    this.props.onChange(calculatePct(event, this.sliderBar.current));
-  }
-  handleMouseUp(event) {
-    if (event.button === 0) {
-      this.setState({ isMouseDown: false });
-      this.handleMouseMove(event);
-      window.removeEventListener('mouseup', this.handleMouseUp);
-      window.removeEventListener('mousemove', this.handleMouseMove);
-    }
-  }
-}
+    </div>
+  );
+};
 
 SliderComponent.propTypes = {
   pct: propTypes.number.isRequired,
