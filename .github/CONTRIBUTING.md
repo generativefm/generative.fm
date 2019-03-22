@@ -10,7 +10,7 @@ In addition to my desire for absolute creative control, this project is special 
 
 For these reasons, while I'm grateful for the generosity of those who willing to spend their time writing code for the site, **for the time being it's unlikely I will be accepting any outside pull requests. See below for better ways you can contribute.**
 
-This project is a learning experience for me, and one thing I'd love to learn is how to manage an open source project. Eventually I will be more open to outside contributions, but not at the moment. If you like, keep an eye out for [issues tagged "accepting pull requests,"](https://github.com/generative-music/generative.fm/labels/accepting%20pull%20requests) but no promises.
+This project is a learning experience for me, and one thing I'd love to learn is how to manage an open source project. Eventually I will be more open to outside contributions, but not at the moment. If you like, keep an eye out for [issues labeled "help wanted,"](https://github.com/generative-music/generative.fm/labels/help%20wanted) but no promises.
 
 Thanks for understanding.
 
