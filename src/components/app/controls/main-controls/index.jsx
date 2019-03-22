@@ -1,3 +1,6 @@
+import React, { useEffect } from 'react';
+import propTypes from 'prop-types';
+import { isMobile } from 'react-device-detect';
 import {
   faPlay,
   faRandom,
@@ -5,26 +8,13 @@ import {
   faStepForward,
   faStop,
 } from '@fortawesome/free-solid-svg-icons';
-import propTypes from 'prop-types';
-import React, { useEffect } from 'react';
-import { isMobile } from 'react-device-detect';
 import ControlButtonComponent from '../control-button';
 import ButtonSpacerComponent from './button-spacer';
 import './main-controls.scss';
 
-function useKeyboardEvent(key, callback) {
-  useEffect(() => {
-    const handler = event => {
-      if (event.key === key) {
-        callback();
-      }
-    };
-    window.addEventListener('keydown', handler);
-    return () => {
-      window.removeEventListener('keydown', handler);
-    };
-  },[callback]);
-}
+const PREVIOUS_KEY = 'ArrowLeft';
+const NEXT_KEY = 'ArrowRight';
+const PLAY_STOP_KEY = ' ';
 
 const makePrimaryButton = (faIcon, onClick) =>
   function PrimaryButtonComponent() {
@@ -47,12 +37,27 @@ const MainControlsComponent = ({
   onStopClick,
   onPlayClick,
 }) => {
+  const keyHandlers = {
+    [PLAY_STOP_KEY]: isPlaying ? onStopClick : onPlayClick,
+    [PREVIOUS_KEY]: onPreviousClick,
+    [NEXT_KEY]: onNextClick,
+  };
+
+  const onKeydown = keyEvent => {
+    const keyHandler = keyHandlers[keyEvent.key];
+    if (typeof keyHandler === 'function') {
+      keyHandler();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', onKeydown);
+    return () => window.removeEventListener('keydown', onKeydown);
+  });
+
   const PrimaryButtonComponent = isPlaying
     ? makePrimaryButton(faStop, onStopClick)
     : makePrimaryButton(faPlay, onPlayClick);
-  useKeyboardEvent(' ', isPlaying ? onStopClick : onPlayClick);
-  useKeyboardEvent('ArrowLeft', onPreviousClick);
-  useKeyboardEvent('ArrowRight', onNextClick);
   return (
     <div className="main-controls">
       {!isMobile && <ButtonSpacerComponent />}
