@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Space bar will play/stop music ([@rossvz])
 - Right arrow key will select next track ([@rossvz])
 - Left arrow key will select previous track ([@rossvz])
+- Scroll wheel will adjust volume when the mouse is over the volume slider
 
 ## [0.10.1] - 2019-03-20
 
