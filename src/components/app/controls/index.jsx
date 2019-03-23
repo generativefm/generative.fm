@@ -1,5 +1,5 @@
 import React from 'react';
-import { isMobile } from '@config/is-mobile';
+import isMobile from '@config/is-mobile';
 import MainControlsContainer from '../../../containers/main-controls.container';
 import CurrentlyPlayingContainer from '../../../containers/currently-playing.container';
 import VolumeContainer from '../../../containers/volume.container';

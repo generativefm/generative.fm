@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
-import { isMobile } from '@config/is-mobile';
+import isMobile from '@config/is-mobile';
 import {
   faPlay,
   faRandom,
