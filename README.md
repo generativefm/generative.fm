@@ -14,9 +14,16 @@ This site uses [Tone.js](https://tonejs.github.io/) to play audio in the browser
 
 Source code for the music generators can be found in the [generative-music/pieces-alex-bainter](https://github.com/generative-music/pieces-alex-bainter) repository.
 
+## Release Schedule
+See [milestones](https://github.com/generative-music/generative.fm/milestones) for scheduled releases and to see which features and bug fixes will be included in each.
+
 ## Issues and Feedback
 
-Problems or general feedback can be reported [here on Github](https://github.com/generative-music/site/issues) or by sending an email to alex@alexbainter.com. Thanks!
+Problems or general feedback can be reported [here on Github](https://github.com/generative-music/site/issues) or by sending an email to [alex@alexbainter.com](mailto:alex@alexbainter.com?subject="Generative.fm"). Thanks!
+
+### Status
+
+You can view which new features and bug fixes are currently planned, in progress, or waiting to be deployed to the site by visiting the [Generative.fm project board](https://github.com/orgs/generative-music/projects/2).
 
 ## Installation
 
