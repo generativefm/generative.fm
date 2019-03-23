@@ -31,14 +31,13 @@ if (isMobile) {
   initialState.isMuted = false;
 }
 
+const allMiddlewares = [piecesMiddleware, localStorageMiddleware];
+const desktopMiddlewares = allMiddlewares.concat([beforeUnloadMiddleware]);
+
 const store = createStore(
   rootReducer,
   initialState,
-  applyMiddleware(
-    piecesMiddleware,
-    localStorageMiddleware,
-    beforeUnloadMiddleware
-  )
+  applyMiddleware(...(isMobile ? allMiddlewares : desktopMiddlewares))
 );
 
 export default store;
