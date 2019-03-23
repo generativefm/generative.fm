@@ -95,6 +95,10 @@ $pieceWidth: 10em;
 
         &__is-playing-indicator {
           @include statusIndicator;
+
+          &--is-spinning {
+            animation: 1s linear infinite spin;
+          }
         }
       }
 
@@ -129,6 +133,10 @@ $pieceWidth: 10em;
         .piece__image__is-playing-indicator {
           visibility: hidden;
         }
+
+        .piece__image__is-playing-indicator--is-spinning {
+          visibility: visible;
+        }
       }
     }
   }
@@ -137,5 +145,14 @@ $pieceWidth: 10em;
     .pieces {
       padding: 0.5em;
     }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(359deg);
   }
 }
