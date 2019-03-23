@@ -79,7 +79,7 @@ const PiecesTabComponent = ({
             >
               <div className="piece__image">
                 <img src={piece.image ? piece.image : defaultImage} />
-                {(!isLoading || isSelected) && (
+                {(!isLoading || !isSelected) && (
                   <button
                     className="piece__image__button"
                     onClick={handleButtonClick}
