@@ -1,10 +1,12 @@
 import Tone from 'tone';
 import sampleFormat from '@config/sample-format';
+import markPieceBuildLoading from '../../actions/creators/mark-piece-build-loading.creator';
+import markPieceBuildLoaded from '../../actions/creators/mark-piece-build-loaded.creator';
 import performance from './performance';
 import stopPerformances from './stop-performances';
 
 let lastBuildId;
-let buildingPiece = false;
+let isPerformanceBuilding = false;
 let queuedPiece = null;
 
 const sampleSource =
@@ -16,13 +18,14 @@ const sampleSource =
 
 const makePlayPiece = (store, performances) => {
   const playPiece = piece => {
-    if (!buildingPiece) {
+    if (!isPerformanceBuilding) {
       queuedPiece = null;
-      buildingPiece = true;
+      isPerformanceBuilding = true;
       const pieceVol = new Tone.Volume().toMaster();
       const piecePerformance = performance(piece, pieceVol);
       performances.push(piecePerformance);
-      lastBuildId = performance.buildId;
+      lastBuildId = piecePerformance.performanceId;
+      store.dispatch(markPieceBuildLoading(piecePerformance.performanceId));
 
       // METERING
       // most pieces between 0.1 and 0.3
@@ -52,10 +55,11 @@ const makePlayPiece = (store, performances) => {
         .then(cleanUp => {
           piecePerformance.addCleanupFn(cleanUp);
           piecePerformance.isLoaded = true;
-          buildingPiece = false;
+          isPerformanceBuilding = false;
           const { selectedPieceId, isPlaying } = store.getState();
+          store.dispatch(markPieceBuildLoaded(piecePerformance.performanceId));
           if (
-            lastBuildId === performance.buildId &&
+            lastBuildId === piecePerformance.performanceId &&
             selectedPieceId === piece.id &&
             isPlaying
           ) {
