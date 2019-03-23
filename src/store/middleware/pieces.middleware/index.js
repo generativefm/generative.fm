@@ -10,10 +10,10 @@ import SELECT_PIECE from '../../actions/types/select-piece.type';
 import selectPiece from '../../actions/creators/select-piece.creator';
 import stop from '../../actions/creators/stop.creator';
 import pieces from '../../../pieces';
-import playPiece from './play-piece';
+import makePlayPiece from './make-play-piece';
 import convertPctToDb from './convert-pct-to-db';
-import stopPiece from './stop-piece';
 import startAudioContext from './start-context';
+import stopPerformances from './stop-performances';
 import updatePlayTime from '../../actions/creators/update-play-time.creator';
 
 const UPDATE_PLAY_TIME_INTERVAL_MS = 5000;
@@ -37,6 +37,9 @@ const piecesMiddleware = store => next => {
       store.dispatch(updatePlayTime(pieceId, Date.now() - adjustedStartTime));
     }, UPDATE_PLAY_TIME_INTERVAL_MS);
   };
+
+  const performances = [];
+  const playPiece = makePlayPiece(store, performances);
 
   return action => {
     const {
@@ -97,10 +100,9 @@ const piecesMiddleware = store => next => {
         if (action.payload === null) {
           store.dispatch(stop());
         } else {
-          const oldPiece = pieces.find(({ id }) => id === selectedPieceId);
           const newPiece = pieces.find(({ id }) => id === action.payload);
-          stopPiece(oldPiece);
-          playPiece(newPiece, store.getState);
+          stopPerformances(performances, true);
+          playPiece(newPiece);
           startTrackingPlayTimeForPieceId(newPiece.id);
         }
       }
@@ -118,15 +120,12 @@ const piecesMiddleware = store => next => {
       } else {
         piece = pieces.find(({ id }) => id === selectedPieceId);
       }
-      playPiece(piece, store.getState);
+      playPiece(piece);
       startTrackingPlayTimeForPieceId(piece.id);
     } else if (action.type === STOP) {
       clearInterval(playTimeInterval);
       Tone.Master.mute = true;
-      const piece = pieces.find(({ id }) => id === selectedPieceId);
-      if (piece.ready) {
-        stopPiece(piece);
-      }
+      stopPerformances(performances, true);
     } else if (action.type === MUTE) {
       Tone.Master.mute = true;
     } else if (action.type === UNMUTE && isPlaying) {

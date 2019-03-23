@@ -15,6 +15,7 @@ This site uses [Tone.js](https://tonejs.github.io/) to play audio in the browser
 Source code for the music generators can be found in the [generative-music/pieces-alex-bainter](https://github.com/generative-music/pieces-alex-bainter) repository.
 
 ## Release Schedule
+
 See [milestones](https://github.com/generative-music/generative.fm/milestones) for scheduled releases and to see which features and bug fixes will be included in each.
 
 ## Issues and Feedback
@@ -48,6 +49,6 @@ This will create the sample files on your machine to be served during local deve
 
 ## Contributing
 
-See [CONTRIBUTING.md](.github/CONTRIBUTING.md).
+See [CONTRIBUTING.md](docs/CONTRIBUTING.md).
 
 [generative-music/samples.generative.fm]: https://github.com/generative-music/samples.generative.fm

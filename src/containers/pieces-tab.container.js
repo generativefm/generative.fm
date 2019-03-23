@@ -4,10 +4,16 @@ import selectPiece from '../store/actions/creators/select-piece.creator';
 import stop from '../store/actions/creators/stop.creator';
 import play from '../store/actions/creators/play.creator';
 
-const mapStateToProps = ({ selectedPieceId, isPlaying, playTime }) => ({
+const mapStateToProps = ({
   selectedPieceId,
   isPlaying,
   playTime,
+  loadingPieceBuildId,
+}) => ({
+  selectedPieceId,
+  isPlaying,
+  playTime,
+  isLoading: loadingPieceBuildId !== '',
 });
 
 const mapDispatchToProps = {

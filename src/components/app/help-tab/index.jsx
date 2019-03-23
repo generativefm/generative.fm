@@ -1,5 +1,5 @@
 import React from 'react';
-import { isMobile } from 'react-device-detect';
+import isMobile from '@config/is-mobile';
 import './help-tab.scss';
 
 const HelpTabComponent = () => (

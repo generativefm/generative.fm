@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- Quickly switching between pieces while music is playing should no longer allow multiple pieces to play simultaneously
+
+### Added
+
+- Space bar will play/stop music ([@rossvz])
+- Right arrow key will select next track ([@rossvz])
+- Left arrow key will select previous track ([@rossvz])
+- Scroll wheel will adjust volume when the mouse is over the volume slider
+- Desktop users will be prompted to confirm when attempting to navigate away while music is playing
+- Pieces will display an animated spinner when loading
+
 ## [0.10.1] - 2019-03-20
 
 ### Fixed
@@ -180,3 +195,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.2.0]: https://github.com/generative-music/generative.fm/compare/v0.1.2...v0.2.0
 [0.1.2]: https://github.com/generative-music/generative.fm/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/generative-music/generative.fm/compare/v0.1.0...v0.1.1
+[@rossvz]: https://github.com/rossvz

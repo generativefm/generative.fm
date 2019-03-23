@@ -8,7 +8,9 @@ import {
   faPlay,
   faStop,
   faChevronLeft,
+  faCircleNotch,
 } from '@fortawesome/free-solid-svg-icons';
+import classNames from 'classnames';
 import pieces from '../../../pieces';
 import formatPlayTime from './format-play-time';
 import defaultImage from './default.png';
@@ -23,6 +25,7 @@ const PiecesTabComponent = ({
   onPlayClick,
   playTime,
   filter,
+  isLoading,
 }) => {
   const filteredPieces = pieces.filter(
     ({ id, artist }) =>
@@ -76,20 +79,31 @@ const PiecesTabComponent = ({
             >
               <div className="piece__image">
                 <img src={piece.image ? piece.image : defaultImage} />
-                <button
-                  className="piece__image__button"
-                  onClick={handleButtonClick}
-                >
-                  <FontAwesomeIcon
-                    icon={isPlaying && isSelected ? faStop : faPlay}
-                  />
-                </button>
-                {isSelected &&
-                  isPlaying && (
-                    <div className="piece__image__is-playing-indicator">
-                      <FontAwesomeIcon icon={faInfinity} />
-                    </div>
-                  )}
+                {(!isLoading || !isSelected) && (
+                  <button
+                    className="piece__image__button"
+                    onClick={handleButtonClick}
+                  >
+                    <FontAwesomeIcon
+                      icon={isPlaying && isSelected ? faStop : faPlay}
+                    />
+                  </button>
+                )}
+
+                {isSelected && (isPlaying || isLoading) && (
+                  <div
+                    className={classNames(
+                      'piece__image__is-playing-indicator',
+                      {
+                        'piece__image__is-playing-indicator--is-spinning': isLoading,
+                      }
+                    )}
+                  >
+                    <FontAwesomeIcon
+                      icon={isLoading ? faCircleNotch : faInfinity}
+                    />
+                  </div>
+                )}
               </div>
               <div className="piece__info">
                 <div className="piece__info__title">{piece.title}</div>
@@ -117,6 +131,7 @@ PiecesTabComponent.propTypes = {
   onPlayClick: propTypes.func.isRequired,
   onStopClick: propTypes.func.isRequired,
   playTime: propTypes.object.isRequired,
+  isLoading: propTypes.bool.isRequired,
   filter: propTypes.string,
 };
 
