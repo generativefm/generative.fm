@@ -46,6 +46,7 @@ const MainControlsComponent = ({
   const handleKeydown = keyEvent => {
     const keyHandler = keyHandlers[keyEvent.key];
     if (typeof keyHandler === 'function') {
+      keyEvent.preventDefault();
       keyHandler();
     }
   };
