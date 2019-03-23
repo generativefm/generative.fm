@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Quickly switching between pieces while music is playing should no longer allow multiple pieces to play simultaneously
+
 ### Added
 
 - Space bar will play/stop music ([@rossvz])
