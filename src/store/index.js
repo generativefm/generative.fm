@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { isMobile } from 'react-device-detect';
+import { isMobile } from '@config/is-mobile';
 import rootReducer from './reducers/root.reducer';
 import piecesMiddleware from './middleware/pieces.middleware';
 import localStorageMiddleware from './middleware/local-storage.middleware';
