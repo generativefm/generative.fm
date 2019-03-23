@@ -10,6 +10,7 @@ import version from './version.reducer';
 import isOnline from './is-online.reducer';
 import playTime from './play-time.reducer';
 import stateId from './state-id.reducer';
+import loadingPieceBuildId from './loading-piece-build-id.reducer';
 
 const rootReducer = combineReducers({
   isMuted,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   isOnline,
   playTime,
   stateId,
+  loadingPieceBuildId,
 });
 
 export default rootReducer;

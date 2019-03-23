@@ -24,6 +24,7 @@ const initialState = Object.assign({}, storedState, {
   isPlaying: false,
   isUpdateAvailable: false,
   isOnline: getOnlineStatus(),
+  loadingPieceBuildId: '',
 });
 
 if (isMobile) {

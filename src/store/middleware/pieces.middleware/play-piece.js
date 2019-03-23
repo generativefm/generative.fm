@@ -1,7 +1,9 @@
 import Tone from 'tone';
 import uuid from 'uuid';
+import sampleFormat from '@config/sample-format';
+import markPieceBuildLoading from '../../actions/creators/mark-piece-build-loading.creator';
+import markPieceBuildLoaded from '../../actions/creators/mark-piece-build-loaded.creator';
 import stopPiece from './stop-piece';
-import sampleFormat from '../../../config/sample-format';
 
 let lastBuildId;
 let buildingPiece = false;
@@ -14,11 +16,12 @@ const sampleSource =
       }
     : {};
 
-const playPiece = (piece, getState) => {
+const playPiece = (piece, store) => {
   queuedPiece = piece;
   const buildId = uuid();
   lastBuildId = buildId.slice(0);
   if (!buildingPiece) {
+    store.dispatch(markPieceBuildLoading(buildId));
     piece.ready = false;
     buildingPiece = true;
     const pieceVol = new Tone.Volume().toMaster();
@@ -53,15 +56,16 @@ const playPiece = (piece, getState) => {
         piece.cleanUp = cleanUp;
         buildingPiece = false;
         piece.ready = true;
-        const { selectedPieceId, isPlaying } = getState();
+        const { selectedPieceId, isPlaying } = store.getState();
         if (lastBuildId === buildId && selectedPieceId === piece.id) {
           if (isPlaying) {
+            store.dispatch(markPieceBuildLoaded(lastBuildId));
             piece.played = true;
             Tone.Transport.start();
           }
         } else {
           stopPiece(piece);
-          playPiece(queuedPiece, getState);
+          playPiece(queuedPiece, store);
         }
       });
   }
