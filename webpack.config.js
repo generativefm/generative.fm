@@ -1,7 +1,8 @@
 'use strict';
 
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs').promises;
+const { R_OK } = require('fs').constants;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -11,7 +12,7 @@ const adjacentSamplePath = path.resolve('../samples.generative.fm/public');
 //eslint-disable-next-line no-console
 const log = msg => console.log(msg);
 
-const config = {
+const makeConfig = alias => ({
   mode: 'development',
   devtool: 'sourcemap',
   entry: ['babel-polyfill', './src'],
@@ -20,6 +21,7 @@ const config = {
     filename: '[name].[hash].js',
   },
   resolve: {
+    alias,
     extensions: ['.js', '.jsx', '.json'],
     mainFields: ['generativeFmManifest', 'browser', 'module', 'main'],
   },
@@ -71,21 +73,34 @@ const config = {
     }),
     new CleanWebpackPlugin(['dist']),
   ],
-};
-
-const configPromise = new Promise(resolve => {
-  fs.access(adjacentSamplePath, fs.constants.R_OK, err => {
-    if (err) {
-      log(
-        `Local sample files not found (looked for ${adjacentSamplePath}). Music will not be playable!`
-      );
-      log(
-        'To fix, clone https://github.com/generative-music/samples.generative.fm to a directory adjacent to this one and run its "build:samples" npm script.'
-      );
-      log('Then, run this script again.');
-    }
-    resolve(config);
-  });
 });
+
+const aliasPromise = fs
+  .readdir(path.resolve('./src'))
+  .then(filenames =>
+    Promise.all(
+      filenames.map(filename => fs.lstat(path.resolve(`./src/${filename}`)))
+    ).then(stats => filenames.filter((_, i) => stats[i].isDirectory()))
+  )
+  .then(dirnames =>
+    dirnames.reduce((alias, dirname) => {
+      alias[`@${dirname}`] = path.resolve(`./src/${dirname}`);
+      return alias;
+    }, {})
+  );
+
+const checkSamplesPromise = fs.access(adjacentSamplePath, R_OK).catch(() => {
+  log(
+    `Local sample files not found (looked for ${adjacentSamplePath}). Music will not be playable!`
+  );
+  log(
+    'To fix, clone https://github.com/generative-music/samples.generative.fm to a directory adjacent to this one and run its "build:samples" npm script.'
+  );
+  log('Then, run this script again.');
+});
+
+const configPromise = Promise.all([aliasPromise, checkSamplesPromise]).then(
+  ([alias]) => makeConfig(alias)
+);
 
 module.exports = configPromise;
