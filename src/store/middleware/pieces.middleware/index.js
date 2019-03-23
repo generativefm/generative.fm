@@ -100,7 +100,7 @@ const piecesMiddleware = store => next => {
           const oldPiece = pieces.find(({ id }) => id === selectedPieceId);
           const newPiece = pieces.find(({ id }) => id === action.payload);
           stopPiece(oldPiece);
-          playPiece(newPiece, store.getState);
+          playPiece(newPiece, store);
           startTrackingPlayTimeForPieceId(newPiece.id);
         }
       }
@@ -118,7 +118,7 @@ const piecesMiddleware = store => next => {
       } else {
         piece = pieces.find(({ id }) => id === selectedPieceId);
       }
-      playPiece(piece, store.getState);
+      playPiece(piece, store);
       startTrackingPlayTimeForPieceId(piece.id);
     } else if (action.type === STOP) {
       clearInterval(playTimeInterval);
