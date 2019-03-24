@@ -5,18 +5,18 @@ import './help-tab.scss';
 const HelpTabComponent = () => (
   <div className="info-tab help-tab">
     <h2 className="help-tab__topic">The audio pops, crackles, or snaps</h2>
-    Here's some steps you can try:
+    Here&apos;s some steps you can try:
     <ol>
       {!isMobile && (
         <li>
-          Try turning the site volume down and using your computer's volume
+          Try turning the site volume down and using your computer&apos;s volume
           instead.
         </li>
       )}
       {isMobile && (
         <li>
-          If you're using external speakers, try turning your device's volume
-          down and using your speakers' volume instead.
+          If you&apos;re using external speakers, try turning your device&apos;s
+          volume down and using your speakers&apos; volume instead.
         </li>
       )}
       <li>
