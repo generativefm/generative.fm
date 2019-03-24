@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Desktop users will be prompted to confirm when attempting to navigate away while music is playing
 - Pieces will display an animated spinner when loading
 - Paypal link in "About" tab so nice people can support the site
+- New piece: Didgeridoobeats
 
 ## [0.10.1] - 2019-03-20
 
