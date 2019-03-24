@@ -15,6 +15,7 @@ import observableStreams from '@generative-music/piece-observable-streams';
 import townsend from '@generative-music/piece-townsend';
 import springAgain from '@generative-music/piece-spring-again';
 import drones from '@generative-music/piece-drones';
+import didgeridooBeats from '@generative-music/piece-didgeridoobeats';
 
 const pieces = [
   enoMachine,
@@ -34,6 +35,7 @@ const pieces = [
   townsend,
   springAgain,
   drones,
+  didgeridooBeats,
 ].reverse();
 
 export default pieces;

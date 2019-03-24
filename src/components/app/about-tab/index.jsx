@@ -46,11 +46,13 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
         the music is intended to enhance one&apos;s environment but not demand
         attention.
       </p>
+      <br />
       <p>
         If you have questions or feedback, send an email to{' '}
         <a href="mailto:alex@alexbainter.com?Subject=Generative Music">
           alex@alexbainter.com
         </a>
+        .
       </p>
       <p>
         <a
@@ -61,6 +63,17 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
           Follow @alex_bainter
         </a>{' '}
         on Twitter for app news and updates.{' '}
+      </p>
+      <p>
+        If you&apos;re feeling generous, you can support this project via{' '}
+        <a
+          href="https://paypal.me/alexbainter"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          paypal.me/alexbainter
+        </a>
+        .
       </p>
       <br />
       <p>{`v${version}`}</p>
