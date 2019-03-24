@@ -60,7 +60,6 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
-    "@generative-music/instrument-tonejs": "^0.1.0",
     "@generative-music/piece-a-viable-system": "^2.1.0",
     "@generative-music/piece-aisatsana": "^2.1.0",
     "@generative-music/piece-apoapsis": "^2.1.0",
