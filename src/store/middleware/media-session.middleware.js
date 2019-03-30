@@ -1,4 +1,5 @@
 import pieces from '@pieces';
+import artists from '@data/artists';
 import play from '../actions/creators/play.creator';
 import stop from '../actions/creators/stop.creator';
 import next from '../actions/creators/next.creator';
@@ -18,7 +19,7 @@ const updateMetadata = selectedPieceId => {
     const { title, artist, image } = selectedPiece;
     navigator.mediaSession.metadata = new MediaMetadata({
       title,
-      artist,
+      artist: artists[artist],
       album: 'Generative.fm',
       artwork: [{ src: image, type: 'image/png' }],
     });
