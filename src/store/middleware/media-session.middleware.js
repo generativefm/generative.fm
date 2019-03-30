@@ -40,6 +40,7 @@ const mediaSessionMiddleware = store => nextMiddleware => {
       if (action.type === SELECT_PIECE) {
         updateMetadata(action.payload);
       }
+      return nextMiddleware(action);
     };
   }
   return action => nextMiddleware(action);
