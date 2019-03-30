@@ -5,6 +5,7 @@ import piecesMiddleware from './middleware/pieces.middleware';
 import localStorageMiddleware from './middleware/local-storage.middleware';
 import beforeUnloadMiddleware from './middleware/before-unload.middleware';
 import silentHtml5AudioMiddleware from './middleware/silent-html5-audio.middleware';
+import mediaSessionMiddleware from './middleware/media-session.middleware';
 import STATE_STORAGE_KEY from './middleware/local-storage.middleware/key';
 import getOnlineStatus from './get-online-status';
 import pieces from '../pieces/index';
@@ -36,6 +37,7 @@ if (isMobile) {
 const allMiddlewares = [
   piecesMiddleware,
   silentHtml5AudioMiddleware,
+  mediaSessionMiddleware,
   localStorageMiddleware,
 ];
 const desktopMiddlewares = allMiddlewares.concat([beforeUnloadMiddleware]);
