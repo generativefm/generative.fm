@@ -62,6 +62,10 @@ const makeConfig = alias => ({
         use: path.resolve('./piece-loader.js'),
         type: 'javascript/auto',
       },
+      {
+        test: /\.mp3$/,
+        use: 'file-loader',
+      },
     ],
   },
   plugins: [

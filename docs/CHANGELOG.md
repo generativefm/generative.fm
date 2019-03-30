@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Implement the [Media Session API](https://developer.mozilla.org/en-US/docs/Web/API/Media_Session_API) which adds better control integration for Android Chrome users (including bluetooth)
+
+## [0.11.0] - 2019-03-24
+
 ### Fixed
 
 - Quickly switching between pieces while music is playing should no longer allow multiple pieces to play simultaneously
@@ -179,7 +185,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
-[unreleased]: https://github.com/generative-music/generative.fm/compare/v0.10.1...HEAD
+[unreleased]: https://github.com/generative-music/generative.fm/compare/v0.11.0...HEAD
+[0.11.0]: https://github.com/generative-music/generative.fm/compare/v0.10.1...v0.11.0
 [0.10.1]: https://github.com/generative-music/generative.fm/compare/v0.9.0...v0.10.1
 [0.10.0]: https://github.com/generative-music/generative.fm/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/generative-music/generative.fm/compare/v0.8.1...v0.9.0
