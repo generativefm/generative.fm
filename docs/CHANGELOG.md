@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Controls overlapped last row of pieces in Safari
+
 ### Added
 
 - Implement the [Media Session API](https://developer.mozilla.org/en-US/docs/Web/API/Media_Session_API) which adds better control integration for Android Chrome users (including bluetooth)
