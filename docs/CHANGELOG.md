@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.12.0] - 2019-03-31
+
+### Fixed
+
+- Controls overlapping last row of pieces in Safari
+
+### Added
+
+- Implement the [Media Session API](https://developer.mozilla.org/en-US/docs/Web/API/Media_Session_API) which adds better control integration for Android Chrome users (including bluetooth)
+- New piece: Buttafingers
+- 'm' key will mute/unmute
+
+### Changed
+
+- (dev) Keyboard shortcuts refactored into a Redux middleware
+- (dev) Online status refactored into a Redux middleware
+
 ## [0.11.0] - 2019-03-24
 
 ### Fixed
@@ -182,6 +199,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
 [unreleased]: https://github.com/generative-music/generative.fm/compare/v0.11.0...HEAD
+[0.12.0]: https://github.com/generative-music/generative.fm/compare/v0.11.1...v0.12.0
 [0.11.0]: https://github.com/generative-music/generative.fm/compare/v0.10.1...v0.11.0
 [0.10.1]: https://github.com/generative-music/generative.fm/compare/v0.9.0...v0.10.1
 [0.10.0]: https://github.com/generative-music/generative.fm/compare/v0.9.0...v0.10.0

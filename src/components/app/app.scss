@@ -6,7 +6,7 @@
   &__content {
     display: flex;
     flex-direction: column;
-    margin-bottom: $controlsHeight;
+    padding-bottom: $controlsHeight;
   }
 
   &__controls {

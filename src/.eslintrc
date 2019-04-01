@@ -8,5 +8,8 @@
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 7
+  },
+  "globals": {
+    "MediaMetadata": true
   }
 }

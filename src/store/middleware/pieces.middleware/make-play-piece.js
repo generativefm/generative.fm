@@ -10,7 +10,8 @@ let isPerformanceBuilding = false;
 let queuedPiece = null;
 
 const sampleSource =
-  location.hostname === 'localhost'
+  location.hostname !== 'generative.fm' &&
+  location.hostname !== 'staging.generative.fm'
     ? {
         baseUrl: './',
       }
