@@ -1,6 +1,6 @@
 import setOnlineStatus from '../actions/creators/set-online-status.creator';
 
-const setOnlineStatusMiddleware = store => next => {
+const onlineStatusMiddleware = store => next => {
   const makeSetOnlineStatus = online => () =>
     store.dispatch(setOnlineStatus(online));
 
@@ -10,4 +10,4 @@ const setOnlineStatusMiddleware = store => next => {
   return action => next(action);
 };
 
-export default setOnlineStatusMiddleware;
+export default onlineStatusMiddleware;
