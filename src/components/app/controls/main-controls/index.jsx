@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import isMobile from '@config/is-mobile';
 import {
@@ -11,10 +11,6 @@ import {
 import ControlButtonComponent from '../control-button';
 import ButtonSpacerComponent from './button-spacer';
 import './main-controls.scss';
-
-const PREVIOUS_KEY = 'ArrowLeft';
-const NEXT_KEY = 'ArrowRight';
-const PLAY_STOP_KEY = ' ';
 
 const makePrimaryButton = (faIcon, onClick) =>
   function PrimaryButtonComponent() {
@@ -37,25 +33,6 @@ const MainControlsComponent = ({
   onStopClick,
   onPlayClick,
 }) => {
-  const keyHandlers = {
-    [PLAY_STOP_KEY]: isPlaying ? onStopClick : onPlayClick,
-    [PREVIOUS_KEY]: onPreviousClick,
-    [NEXT_KEY]: onNextClick,
-  };
-
-  const handleKeydown = keyEvent => {
-    const keyHandler = keyHandlers[keyEvent.key];
-    if (typeof keyHandler === 'function') {
-      keyEvent.preventDefault();
-      keyHandler();
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleKeydown);
-    return () => window.removeEventListener('keydown', handleKeydown);
-  });
-
   const PrimaryButtonComponent = isPlaying
     ? makePrimaryButton(faStop, onStopClick)
     : makePrimaryButton(faPlay, onPlayClick);
