@@ -73,13 +73,13 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
         >
           becoming a Patron
         </a>{' '}
-        or with a{' '}
+        or with{' '}
         <a
           href="https://paypal.me/alexbainter"
           target="_blank"
           rel="noreferrer noopener"
         >
-          PayPal donation
+          PayPal
         </a>
         .
       </p>
