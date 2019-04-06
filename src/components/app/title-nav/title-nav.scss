@@ -78,7 +78,26 @@
         top: -0.6em;
         left: 50%;
         transform: translate(-50%);
+        animation: 1s ease 1s 3 bounce;
       }
     }
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translate(-50%);
+  }
+  20% {
+    transform: translate(-50%, -13px);
+  }
+  30% {
+    transform: translate(-50%);
+  }
+  40% {
+    transform: translate(-50%, -5px);
+  }
+  50% {
+    transform: translate(-50%);
   }
 }

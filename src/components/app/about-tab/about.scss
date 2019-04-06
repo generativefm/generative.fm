@@ -5,7 +5,6 @@
   .update-alert {
     display: flex;
     align-items: center;
-    font-style: italic;
     &__dot {
       @include dot();
       display: inline-block;
