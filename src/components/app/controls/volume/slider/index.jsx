@@ -30,8 +30,9 @@ const SliderComponent = ({ pct, onChange }) => {
   };
 
   useEffect(() => {
-    window.addEventListener('wheel', handleScroll);
-    return () => window.removeEventListener('wheel', handleScroll);
+    window.addEventListener('wheel', handleScroll, { passive: false });
+    return () =>
+      window.removeEventListener('wheel', handleScroll, { passive: false });
   });
 
   const handleMouseMove = event => {
