@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update indicator dot bounces
 - Patreon link to about page
 
+### Changed
+
+- Set `Tone.context.latencyHint` to `'balanced'` to hopefully reduce crackling and such
+
 ## [0.12.0] - 2019-03-31
 
 ### Fixed
