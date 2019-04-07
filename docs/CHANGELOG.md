@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [0.13.1] - 2019-04-06
+
+### Fixed
+
+- Improve Didgeridoobeats timing accuracy
+
 ## [0.13.0] - 2019-04-06
 
 ### Fixed
@@ -216,8 +222,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
-[unreleased]: https://github.com/generative-music/generative.fm/compare/v0.13.0...HEAD
-[0.13.0]: https://github.com/generative-music/generative.fm/compare/v0.12.1...v0.13.0
+[unreleased]: https://github.com/generative-music/generative.fm/compare/v0.13.1...HEAD
+[0.13.1]: https://github.com/generative-music/generative.fm/compare/v0.13.0...v0.13.1
+[0.13.0]: https://github.com/generative-music/generative.fm/compare/v0.12.0...v0.13.0
 [0.12.0]: https://github.com/generative-music/generative.fm/compare/v0.11.1...v0.12.0
 [0.11.0]: https://github.com/generative-music/generative.fm/compare/v0.10.1...v0.11.0
 [0.10.1]: https://github.com/generative-music/generative.fm/compare/v0.9.0...v0.10.1
