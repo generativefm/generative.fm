@@ -19,7 +19,7 @@ import updatePlayTime from '../../actions/creators/update-play-time.creator';
 const UPDATE_PLAY_TIME_INTERVAL_MS = 5000;
 
 const piecesMiddleware = store => next => {
-  Tone.context.latencyHint = 'playback';
+  Tone.context.latencyHint = 'balanced';
   const initialState = store.getState();
   Tone.Master.volume.value = convertPctToDb(initialState.volumePct);
   if (initialState.isMuted) {
