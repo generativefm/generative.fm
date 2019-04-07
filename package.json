@@ -74,6 +74,7 @@
     "@generative-music/piece-observable-streams": "^2.3.0",
     "@generative-music/piece-otherness": "^2.3.0",
     "@generative-music/piece-pinwheels": "^2.3.0",
+    "@generative-music/piece-return-to-form": "^2.4.0",
     "@generative-music/piece-sevenths": "^2.3.0",
     "@generative-music/piece-spring-again": "^2.3.0",
     "@generative-music/piece-timbral-oscillations": "^2.3.0",
