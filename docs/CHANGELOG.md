@@ -7,20 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Page will not scroll when adjusting the volume by using a mouse wheel while the mouse is hovering over the volume slider
+
 ### Added
 
-- Update indicator dot bounces
-- Patreon link to about page
+- Patreon link in about page
 
 ### Changed
 
+- Update indicator dot bounces
 - Set `Tone.context.latencyHint` to `'balanced'` to hopefully reduce crackling and such
 
 ## [0.12.0] - 2019-03-31
 
 ### Fixed
 
-- Controls overlapping last row of pieces in Safari
+- Controls no longer overlap the last row of pieces in Safari
 
 ### Added
 
