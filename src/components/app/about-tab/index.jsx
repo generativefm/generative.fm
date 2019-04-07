@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
 import { applyUpdate } from 'offline-plugin/runtime';
+import patronImage from '@images/patron.png';
 import './about.scss';
 
 const handleUpdateClick = e => {
@@ -46,7 +47,6 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
         the music is intended to enhance one&apos;s environment but not demand
         attention.
       </p>
-      <br />
       <p>
         If you have questions or feedback, send an email to{' '}
         <a href="mailto:alex@alexbainter.com?Subject=Generative Music">
@@ -65,15 +65,32 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
         on Twitter for app news and updates.{' '}
       </p>
       <p>
-        If you&apos;re feeling generous, you can support this project via{' '}
+        If you&apos;re feeling generous, you can support this project by{' '}
+        <a
+          href="https://www.patreon.com/bePatron?u=2484731"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          becoming a Patron
+        </a>{' '}
+        or with{' '}
         <a
           href="https://paypal.me/alexbainter"
           target="_blank"
           rel="noreferrer noopener"
         >
-          paypal.me/alexbainter
+          PayPal
         </a>
         .
+      </p>
+      <p>
+        <a
+          href="https://www.patreon.com/bePatron?u=2484731"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <img src={patronImage} width="150" />
+        </a>
       </p>
       <br />
       <p>{`v${version}`}</p>
