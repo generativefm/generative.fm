@@ -3,7 +3,7 @@ import isMobile from '@config/is-mobile';
 import './help-tab.scss';
 
 const HelpTabComponent = () => (
-  <div className="info-tab help-tab">
+  <div className="centered-tab help-tab">
     <h2 className="help-tab__topic">The audio pops, crackles, or snaps</h2>
     Here&apos;s some steps you can try:
     <ol>

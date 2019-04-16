@@ -20,7 +20,7 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
     }
   }, [window.twttr]);
   return (
-    <div className="about-tab info-tab">
+    <div className="about-tab centered-tab">
       {isUpdateAvailable && isOnline && (
         <p className="update-alert">
           <a href="/" onClick={handleUpdateClick}>
