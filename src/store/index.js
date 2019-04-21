@@ -8,6 +8,7 @@ import silentHtml5AudioMiddleware from './middleware/silent-html5-audio.middlewa
 import mediaSessionMiddleware from './middleware/media-session.middleware';
 import shortcutsMiddleware from './middleware/shortcuts.middleware';
 import onlineStatusMiddleware from './middleware/online-status.middleware';
+import recordingGenerationMiddleware from './middleware/recording-generation.middleware';
 import STATE_STORAGE_KEY from './middleware/local-storage.middleware/key';
 import getOnlineStatus from './get-online-status';
 import pieces from '../pieces/index';
@@ -29,6 +30,22 @@ const initialState = Object.assign({}, storedState, {
   isUpdateAvailable: false,
   isOnline: getOnlineStatus(),
   loadingPieceBuildId: '',
+  generatedRecordings:
+    typeof storedState.generatedRecordings === 'object'
+      ? Reflect.ownKeys(storedState.generatedRecordings)
+          .filter(
+            recordingId =>
+              storedState.generatedRecordings[recordingId].url === ''
+          )
+          .reduce((generatedRecordings, recordingId) => {
+            const recording = storedState.generatedRecordings[recordingId];
+            generatedRecordings[recordingId] = Object.assign(recording, {
+              url: '',
+              isInProgress: false,
+            });
+            return generatedRecordings;
+          }, {})
+      : {},
 });
 
 if (isMobile) {
@@ -38,6 +55,7 @@ if (isMobile) {
 
 const allMiddlewares = [
   piecesMiddleware,
+  recordingGenerationMiddleware,
   silentHtml5AudioMiddleware,
   mediaSessionMiddleware,
   shortcutsMiddleware,

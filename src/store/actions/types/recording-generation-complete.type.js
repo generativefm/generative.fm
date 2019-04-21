@@ -1,0 +1,1 @@
+export default 'RECORDING_GENERATION_COMPLETE';
