@@ -182,13 +182,15 @@ const RecordTabComponent = ({
           </ul>
         </div>
       </form>
-      {selectedPieceId && (
+      {selectedPiece.isRecordable && (
         <span>
+          <br />
           <br />
           <a
             rel="license noreferrer noopener"
             href="http://creativecommons.org/licenses/by/4.0/"
             target="_blank"
+            className="centered-content"
           >
             <img
               alt="Creative Commons License"
@@ -197,23 +199,25 @@ const RecordTabComponent = ({
             />
           </a>
           <br />
-          {selectedPiece.title} (Excerpt) by{' '}
-          <a
-            href="https://alexbainter.com"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            Alex Bainter
-          </a>{' '}
-          is licensed under a{' '}
-          <a
-            rel="license noreferrer noopener"
-            href="http://creativecommons.org/licenses/by/4.0/"
-            target="_blank"
-          >
-            Creative Commons Attribution 4.0 International License
-          </a>
-          .
+          <span className="centered-content">
+            {selectedPiece.title} (Excerpt) by{' '}
+            <a
+              href="https://alexbainter.com"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Alex Bainter
+            </a>{' '}
+            is licensed under a{' '}
+            <a
+              rel="license noreferrer noopener"
+              href="http://creativecommons.org/licenses/by/4.0/"
+              target="_blank"
+            >
+              Creative Commons Attribution 4.0 International License
+            </a>
+            .
+          </span>
         </span>
       )}
     </div>
