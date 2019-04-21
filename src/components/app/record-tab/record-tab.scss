@@ -1,16 +1,25 @@
 @import '_colors';
+@import '_variables';
 
 .record-tab {
-  label {
-    margin-right: 0.5em;
-  }
-
   input:invalid {
-    border: 1px solid red;
+    border: 1px solid $highlightColor;
   }
 
   .form-group {
     margin-top: 1em;
+  }
+
+  .recording-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.5em;
+
+    input,
+    select {
+      margin: 0 1em;
+    }
   }
 
   .generated-recordings-queue {
@@ -18,7 +27,7 @@
     padding: 0;
 
     &__item {
-      padding: 0.25em 0.5em;
+      padding: 0 0.5em;
       border-top: 1px solid $secondaryColor;
       border-left: 1px solid $secondaryColor;
       border-right: 1px solid $secondaryColor;
@@ -30,5 +39,25 @@
         border-bottom: 1px solid $secondaryColor;
       }
     }
+  }
+
+  .btn {
+    background: $backgroundColor;
+    border: 1px solid $primaryColor;
+    cursor: pointer;
+    padding: 0.5em 1em;
+
+    &:hover {
+      background: #ddd;
+    }
+  }
+
+  .btn-spacer {
+    height: $buttonWidth;
+  }
+
+  .invalid-msg {
+    font-style: italic;
+    color: $highlightColor;
   }
 }

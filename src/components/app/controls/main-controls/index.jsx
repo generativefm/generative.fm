@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import isMobile from '@config/is-mobile';
 import {
@@ -32,7 +32,12 @@ const MainControlsComponent = ({
   onNextClick,
   onStopClick,
   onPlayClick,
+  isRecordingGenerationInProgress,
 }) => {
+  if (isRecordingGenerationInProgress) {
+    return <div className="main-controls">Generating recording...</div>;
+  }
+
   const PrimaryButtonComponent = isPlaying
     ? makePrimaryButton(faStop, onStopClick)
     : makePrimaryButton(faPlay, onPlayClick);
@@ -57,6 +62,7 @@ const MainControlsComponent = ({
 MainControlsComponent.propTypes = {
   isPlaying: propTypes.bool.isRequired,
   isShuffleActive: propTypes.bool.isRequired,
+  isRecordingGenerationInProgress: propTypes.bool.isRequired,
   enableShuffle: propTypes.func.isRequired,
   disableShuffle: propTypes.func.isRequired,
   onPreviousClick: propTypes.func.isRequired,

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
 import pieces from '@pieces';
 import piecesById from '@pieces/by-id';
 import ControlButtonComponent from '../controls/control-button';
 import './record-tab.scss';
 
-const DEFAULT_RECORDING_LENGTH_MINUTES = 10;
+const MAX_RECORDING_LENGTH_MINUTES = 240;
 
 const getGeneratedRecordingsQueue = generatedRecordings =>
   Reflect.ownKeys(generatedRecordings)
@@ -17,10 +17,15 @@ const RecordTabComponent = ({
   selectPiece,
   queueRecordingGeneration,
   generatedRecordings,
+  lastRecordingGenerationLength,
   removeRecordingGeneration,
+  startRecordingGeneration,
 }) => {
+  if (selectedPieceId === null) {
+    selectPiece(pieces[0].id);
+  }
   const [recordingLengthInMinutes, setRecordingLengthInMinutes] = useState(
-    DEFAULT_RECORDING_LENGTH_MINUTES
+    lastRecordingGenerationLength
   );
 
   const selectedPiece = useMemo(() => piecesById[selectedPieceId], [
@@ -39,50 +44,95 @@ const RecordTabComponent = ({
     setIsGenerationInProgress(queue.some(({ isInProgress }) => isInProgress));
   }, [generatedRecordings]);
 
+  const getIsRecordingValid = () =>
+    selectedPiece.isRecordable &&
+    recordingLengthInMinutes > 0 &&
+    recordingLengthInMinutes <= MAX_RECORDING_LENGTH_MINUTES;
+
+  const [isRecordingValid, setIsRecordingValid] = useState(
+    getIsRecordingValid()
+  );
+
+  useEffect(() => {
+    setIsRecordingValid(getIsRecordingValid());
+  }, [selectedPiece, recordingLengthInMinutes]);
+
   const handleSubmit = event => {
-    queueRecordingGeneration({
-      pieceId: selectedPieceId,
-      lengthInMinutes: recordingLengthInMinutes,
-    });
     event.preventDefault();
   };
 
   return (
     <div className="centered-tab record-tab">
-      Generate a recording of a piece.
+      This page enables you to generate and download recordings. Recording
+      generation may take a while, and longer recordings require more time to
+      generate. Music playback is not supported while recording generation is in
+      progress.
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="piece-select">Piece:</label>
-          <select
-            id="piece-select"
-            value={selectedPieceId}
-            onChange={event => selectPiece(event.target.value)}
-          >
-            {pieces.map(({ title, id }) => (
-              <option key={id} value={id}>
-                {title}
-              </option>
-            ))}
-          </select>
+        <div className="form-group recording-entry">
+          <span>
+            Record
+            <input
+              type="number"
+              id="length-input"
+              min="1"
+              max={MAX_RECORDING_LENGTH_MINUTES}
+              value={recordingLengthInMinutes}
+              onChange={event =>
+                setRecordingLengthInMinutes(event.target.value)
+              }
+              required
+            />
+            minutes of
+            <select
+              id="piece-select"
+              value={selectedPieceId}
+              onChange={event => selectPiece(event.target.value)}
+            >
+              {pieces.map(({ title, id, isRecordable }) => (
+                <option key={id} value={id} disabled={!isRecordable}>
+                  {title}
+                </option>
+              ))}
+            </select>
+          </span>
+          {isRecordingValid && (
+            <ControlButtonComponent
+              faIcon={faPlus}
+              onClick={() =>
+                queueRecordingGeneration({
+                  pieceId: selectedPieceId,
+                  lengthInMinutes: recordingLengthInMinutes,
+                })
+              }
+            />
+          )}
         </div>
+        {!selectedPiece.isRecordable && (
+          <div className="form-group invalid-msg">{`${
+            selectedPiece.title
+          } is not recordable.`}</div>
+        )}
+        {(recordingLengthInMinutes <= 0 ||
+          recordingLengthInMinutes > MAX_RECORDING_LENGTH_MINUTES) && (
+          <div className="form-group invalid-msg">
+            Recording length must be between 1 and 240 minutes
+          </div>
+        )}
         <div className="form-group">
-          <label htmlFor="length-input">Minutes:</label>
-          <input
-            type="number"
-            id="length-input"
-            min="1"
-            max="240"
-            value={recordingLengthInMinutes}
-            onChange={event => setRecordingLengthInMinutes(event.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <button type="submit">Add to Queue</button>
           {generatedRecordingsQueue.filter(({ url }) => url === '').length >
             0 &&
             !isGenerationInProgress && (
-              <button type="button">Start Generation</button>
+              <button
+                className="btn"
+                type="button"
+                onClick={() =>
+                  startRecordingGeneration(
+                    generatedRecordingsQueue[0].recordingId
+                  )
+                }
+              >
+                Resume Generation
+              </button>
             )}
         </div>
         <div className="form-group">
@@ -119,10 +169,13 @@ const RecordTabComponent = ({
                       {displayText}
                     </a>
                   )}
-                  <ControlButtonComponent
-                    faIcon={faTimes}
-                    onClick={() => removeRecordingGeneration(recordingId)}
-                  />
+                  {!isInProgress && (
+                    <ControlButtonComponent
+                      faIcon={faTimes}
+                      onClick={() => removeRecordingGeneration(recordingId)}
+                    />
+                  )}
+                  {isInProgress && <div className="btn-spacer" />}
                 </li>
               );
             })}

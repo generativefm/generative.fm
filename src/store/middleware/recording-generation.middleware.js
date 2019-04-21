@@ -8,6 +8,7 @@ import REMOVE_RECORDING_GENERATION from '@store/actions/types/remove-recording-g
 import RECORDING_GENERATION_COMPLETE from '@store/actions/types/recording-generation-complete.type';
 import recordingGenerationComplete from '@store/actions/creators/recording-generation-complete.creator';
 import startRecordingGeneration from '@store/actions/creators/start-recording-generation.creator';
+import stop from '@store/actions/creators/stop.creator';
 
 const sampleSource =
   location.hostname !== 'generative.fm' &&
@@ -50,10 +51,13 @@ const renderOffline = (makePiece, durationInSeconds) => {
 const recordingGenerationMiddleware = store => next => {
   return action => {
     if (action.type === START_RECORDING_GENERATION) {
-      const { generatedRecordings } = store.getState();
+      const { generatedRecordings, isPlaying } = store.getState();
       const recording = generatedRecordings[action.payload];
       const piece = piecesById[recording.pieceId];
       if (typeof piece !== 'undefined') {
+        if (isPlaying) {
+          store.dispatch(stop());
+        }
         renderOffline(piece.makePiece, recording.lengthInMinutes * 60).then(
           buffer => {
             const wavData = toWav(buffer);

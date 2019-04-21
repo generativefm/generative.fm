@@ -15,9 +15,9 @@ import './app.scss';
 
 const AppComponent = () => {
   return (
-    <div className="app">
-      <div className="app__content">
-        <Router>
+    <Router>
+      <div className="app">
+        <div className="app__content">
           <div>
             <nav>
               <TitleNavContainer />
@@ -38,12 +38,12 @@ const AppComponent = () => {
               </Switch>
             </main>
           </div>
-        </Router>
+        </div>
+        <footer className="app__controls">
+          <Controls />
+        </footer>
       </div>
-      <footer className="app__controls">
-        <Controls />
-      </footer>
-    </div>
+    </Router>
   );
 };
 

@@ -61,7 +61,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@generative-music/piece-a-viable-system": "^2.3.0",
-    "@generative-music/piece-aisatsana": "^2.3.0",
+    "@generative-music/piece-aisatsana": "^2.5.0",
     "@generative-music/piece-apoapsis": "^2.3.0",
     "@generative-music/piece-buttafingers": "^2.3.1",
     "@generative-music/piece-didgeridoobeats": "^2.4.1",
