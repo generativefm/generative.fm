@@ -9,14 +9,7 @@ import RECORDING_GENERATION_COMPLETE from '@store/actions/types/recording-genera
 import recordingGenerationComplete from '@store/actions/creators/recording-generation-complete.creator';
 import startRecordingGeneration from '@store/actions/creators/start-recording-generation.creator';
 import stop from '@store/actions/creators/stop.creator';
-
-const sampleSource =
-  location.hostname !== 'generative.fm' &&
-  location.hostname !== 'staging.generative.fm'
-    ? {
-        baseUrl: './',
-      }
-    : {};
+import sampleSource from '@config/sample-source';
 
 const renderOffline = (makePiece, durationInSeconds) => {
   const { sampleRate } = Tone.context;

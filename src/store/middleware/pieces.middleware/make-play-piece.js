@@ -1,5 +1,6 @@
 import Tone from 'tone';
 import sampleFormat from '@config/sample-format';
+import sampleSource from '@config/sample-source';
 import markPieceBuildLoading from '../../actions/creators/mark-piece-build-loading.creator';
 import markPieceBuildLoaded from '../../actions/creators/mark-piece-build-loaded.creator';
 import performance from './performance';
@@ -8,14 +9,6 @@ import stopPerformances from './stop-performances';
 let lastBuildId;
 let isPerformanceBuilding = false;
 let queuedPiece = null;
-
-const sampleSource =
-  location.hostname !== 'generative.fm' &&
-  location.hostname !== 'staging.generative.fm'
-    ? {
-        baseUrl: './',
-      }
-    : {};
 
 const makePlayPiece = (store, performances) => {
   const playPiece = piece => {
