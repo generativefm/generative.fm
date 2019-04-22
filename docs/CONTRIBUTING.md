@@ -8,7 +8,7 @@ For me, a large part of the appeal of working on personal projects is to build s
 
 In addition to my desire for absolute creative control, this project is special to me in that it's used for presenting my own artistic works. While the app is intended to be a _platform_ for artistic work rather than an artistic work in and of itself, there are decisions made for reasons which are more artistic than practical. One example would be the use of a stop button rather than a pause button; there is no technical reason for this, and in fact a pause button would probably be a better choice for a site presenting itself as a music player. However, I deliberately chose to omit pause functionality because I felt it was disruptive to the experience I want people to have with the music.
 
-For these reasons, while I'm grateful for the generosity of those who willing to spend their time writing code for the site, **for the time being it's unlikely I will be accepting any outside pull requests. See below for better ways you can contribute.**
+For these reasons, while I'm grateful for the generosity of those willing to spend their time writing code for the site, **for the time being it's unlikely I will be accepting any outside pull requests. See below for better ways you can contribute.**
 
 This project is a learning experience for me, and one thing I'd love to learn is how to manage an open source project. Eventually I will be more open to outside contributions, but not at the moment. If you like, keep an eye out for [issues labeled "help wanted,"](https://github.com/generative-music/generative.fm/labels/help%20wanted) but no promises.
 
