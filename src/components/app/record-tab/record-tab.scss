@@ -48,7 +48,11 @@
     padding: 0.5em 1em;
 
     &:hover {
-      background: #ddd;
+      background: #ccc;
+    }
+
+    &:active {
+      background: #999;
     }
   }
 
