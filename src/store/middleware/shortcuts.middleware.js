@@ -1,3 +1,4 @@
+import isRecordingGenerationInProgress from '@utils/is-recording-generation-in-progress';
 import previous from '../actions/creators/previous.creator';
 import next from '../actions/creators/next.creator';
 import play from '../actions/creators/play.creator';
@@ -22,8 +23,11 @@ const shortcutsMiddleware = store => nextMiddleware => {
     const keyHandler = keyHandlers[keyEvent.key];
     if (typeof keyHandler === 'function') {
       keyEvent.preventDefault();
-      const reduxAction = keyHandler(store.getState());
-      store.dispatch(reduxAction);
+      const state = store.getState();
+      if (!isRecordingGenerationInProgress(state.generatedRecordings)) {
+        const reduxAction = keyHandler(state);
+        store.dispatch(reduxAction);
+      }
     }
   };
   window.addEventListener('keydown', handleKeydown);

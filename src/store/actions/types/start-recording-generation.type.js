@@ -1,0 +1,1 @@
+export default 'START_RECORDING_GENERATION';

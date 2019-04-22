@@ -1,0 +1,73 @@
+@import '_colors';
+@import '_variables';
+
+.record-tab {
+  input:invalid {
+    border: 1px solid $highlightColor;
+  }
+
+  .form-group {
+    margin-top: 1em;
+  }
+
+  .recording-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.5em;
+
+    input,
+    select {
+      margin: 0 1em;
+    }
+  }
+
+  .generated-recordings-queue {
+    list-style: none;
+    padding: 0;
+
+    &__item {
+      padding: 0 0.5em;
+      border-top: 1px solid $secondaryColor;
+      border-left: 1px solid $secondaryColor;
+      border-right: 1px solid $secondaryColor;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &:last-of-type {
+        border-bottom: 1px solid $secondaryColor;
+      }
+    }
+  }
+
+  .btn {
+    background: $backgroundColor;
+    border: 1px solid $primaryColor;
+    cursor: pointer;
+    padding: 0.5em 1em;
+
+    &:hover {
+      background: #ccc;
+    }
+
+    &:active {
+      background: #999;
+    }
+  }
+
+  .btn-spacer {
+    height: $buttonWidth;
+  }
+
+  .invalid-msg {
+    font-style: italic;
+    color: $highlightColor;
+  }
+
+  .centered-content {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+  }
+}
