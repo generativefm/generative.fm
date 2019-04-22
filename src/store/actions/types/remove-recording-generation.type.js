@@ -1,0 +1,1 @@
+export default 'REMOVE_RECORDING_GENERATION';

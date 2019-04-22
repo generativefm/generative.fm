@@ -26,6 +26,7 @@ const PiecesTabComponent = ({
   playTime,
   filter,
   isLoading,
+  isRecordingGenerationInProgress,
 }) => {
   const filteredPieces = pieces.filter(
     ({ id, artist }) =>
@@ -38,6 +39,7 @@ const PiecesTabComponent = ({
   ) {
     onPieceClick(filteredPieces[0]);
   }
+
   return filteredPieces.length > 0 ? (
     <div className="pieces-tab">
       {typeof filter === 'string' && (
@@ -79,16 +81,17 @@ const PiecesTabComponent = ({
             >
               <div className="piece__image">
                 <img src={piece.image ? piece.image : defaultImage} />
-                {(!isLoading || !isSelected) && (
-                  <button
-                    className="piece__image__button"
-                    onClick={handleButtonClick}
-                  >
-                    <FontAwesomeIcon
-                      icon={isPlaying && isSelected ? faStop : faPlay}
-                    />
-                  </button>
-                )}
+                {!isRecordingGenerationInProgress &&
+                  (!isLoading || !isSelected) && (
+                    <button
+                      className="piece__image__button"
+                      onClick={handleButtonClick}
+                    >
+                      <FontAwesomeIcon
+                        icon={isPlaying && isSelected ? faStop : faPlay}
+                      />
+                    </button>
+                  )}
 
                 {isSelected && (isPlaying || isLoading) && (
                   <div
@@ -127,6 +130,7 @@ const PiecesTabComponent = ({
 PiecesTabComponent.propTypes = {
   selectedPieceId: propTypes.string,
   isPlaying: propTypes.bool.isRequired,
+  isRecordingGenerationInProgress: propTypes.bool.isRequired,
   onPieceClick: propTypes.func.isRequired,
   onPlayClick: propTypes.func.isRequired,
   onStopClick: propTypes.func.isRequired,

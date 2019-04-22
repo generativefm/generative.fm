@@ -9,7 +9,9 @@ const pieceLoader = source => {
     makePiece,
     title: '${pieceManifest.title}',
     id: '${pieceManifest.artistId}-${pieceManifest.id}',
-    artist: '${pieceManifest.artistId}'
+    artist: '${pieceManifest.artistId}',
+    isRecordable: ${typeof pieceManifest.isRecordable !== 'boolean' ||
+      pieceManifest.isRecordable}
   }`;
 
   return output;
