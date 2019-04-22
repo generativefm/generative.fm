@@ -106,6 +106,7 @@ const RecordTabComponent = ({
               }
             />
           )}
+          {!isRecordingValid && <div className="btn-spacer" />}
         </div>
         {!selectedPiece.isRecordable && (
           <div className="form-group invalid-msg">{`${
