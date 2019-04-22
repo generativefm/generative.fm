@@ -25,7 +25,7 @@ const HelpTabComponent = () => (
         {isMobile && ', like a desktop or laptop'}.
       </li>
     </ol>
-    You can also report the issue{' '}
+    You can also report issues{' '}
     <a
       href="https://github.com/generative-music/generative.fm/issues/new?title=The%20audio%20sucks&body=Please%20describe%20your%20device%2C%20operating%20system%2C%20and%20internet%20browser..."
       target="_blank"
@@ -34,7 +34,7 @@ const HelpTabComponent = () => (
       on Github
     </a>{' '}
     or by sending an email to{' '}
-    <a href="mailto:alex@alexbainter.com?Subject=Generative Music sucky audio">
+    <a href="mailto:alex@alexbainter.com?Subject=Generative.fm%20issue">
       alex@alexbainter.com
     </a>
     .
