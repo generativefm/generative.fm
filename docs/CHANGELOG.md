@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-(none)
+## Added
+
+- Users can now generate recordings of pieces
 
 ## [0.13.1] - 2019-04-06
 
