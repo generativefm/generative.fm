@@ -8,7 +8,11 @@ https://generative.fm
 
 ### Audio
 
-This site uses [Tone.js](https://tonejs.github.io/) to play audio in the browser through the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API). Most of the samples are provided by the [Versilian Studios Chamber Orchestra 2 Community Edition](https://vis.versilstudios.com/vsco-community.html). Other samples provided by the [Sonatina Symphonic Orchestra](https://github.com/peastman/sso). The [singing bowl samples](https://kasper.bandcamp.com/album/singing-bowls) were provided by [Kasper](https://kasper.bandcamp.com/). All other samples were specially recorded for the site. Sample files can be found in the [generative-music/samples.generative.fm] repository.
+This site uses [Tone.js](https://tonejs.github.io/) to play audio in the browser through the [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API).
+
+#### Samples
+
+Most of the samples are provided by the [Versilian Studios Chamber Orchestra 2 Community Edition](https://vis.versilstudios.com/vsco-community.html) and the [Versilian Community Sample Library](https://vis.versilstudios.com/vcsl.html). Other samples provided by the [Sonatina Symphonic Orchestra](https://github.com/peastman/sso). The [singing bowl samples](https://kasper.bandcamp.com/album/singing-bowls) were provided by [Kasper](https://kasper.bandcamp.com/). [Lo-Fi Hip-Hop Drum Kit samples are from ItsLucid](https://soundpacks.com/free-sound-packs/lo-fi-hip-hop-drum-kit/). All other samples were specially recorded for the site. Sample files can be found in the [generative-music/samples.generative.fm] repository.
 
 ### Music
 
