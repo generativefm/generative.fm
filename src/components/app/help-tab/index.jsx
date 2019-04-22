@@ -19,10 +19,7 @@ const HelpTabComponent = () => (
           volume down and using your speakers&apos; volume instead.
         </li>
       )}
-      <li>
-        Try listening to the pieces towards the end of the list. Some pieces
-        play better than others.
-      </li>
+      <li>Try another piece. Some pieces play better than others.</li>
       <li>
         Try using a more powerful device
         {isMobile && ', like a desktop or laptop'}.
