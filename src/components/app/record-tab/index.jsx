@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import propTypes from 'prop-types';
 import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
 import pieces from '@pieces';
 import piecesById from '@pieces/by-id';
@@ -223,6 +224,16 @@ const RecordTabComponent = ({
       )}
     </div>
   );
+};
+
+RecordTabComponent.propTypes = {
+  selectedPieceId: propTypes.string.isRequired,
+  selectPiece: propTypes.func.isRequired,
+  queueRecordingGeneration: propTypes.func.isRequired,
+  generatedRecordings: propTypes.object.isRequired,
+  lastRecordingGenerationLength: propTypes.string.isRequired,
+  removeRecordingGeneration: propTypes.func.isRequired,
+  startRecordingGeneration: propTypes.func.isRequired,
 };
 
 export default RecordTabComponent;
