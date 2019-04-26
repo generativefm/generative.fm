@@ -5,11 +5,12 @@
   border: 1px solid $primaryColor;
   background-color: $backgroundColor;
   padding: 1em;
-  position: fixed;
+  text-align: center;
 
   &__title {
     margin-top: 0;
     font-weight: normal;
+    font-size: 1.1em;
   }
 
   &__input {
@@ -17,10 +18,9 @@
     margin-right: 1em;
   }
 
-  &__start-btn {
+  &__btn {
     background: $primaryColor;
     color: $backgroundColor;
-    margin-left: 1em;
     border: none;
     padding: 0.5em 1em;
     cursor: pointer;
@@ -38,7 +38,11 @@
     }
   }
 
-  .last-durations {
+  &__btn--inline {
+    margin-left: 1em;
+  }
+
+  &__durations {
     @include borderedList();
 
     &__item {
@@ -63,5 +67,9 @@
         }
       }
     }
+  }
+
+  &__time {
+    margin: 0 2em;
   }
 }

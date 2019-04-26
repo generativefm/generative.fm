@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import propTypes from 'prop-types';
 import Popover from 'react-tiny-popover';
 import isMobile from '@config/is-mobile';
@@ -56,6 +56,7 @@ const MainControlsComponent = ({
   }
 
   const [isPopoverOpen, setIsPopoverOpen] = useState(true);
+  const timerConfigContainerRef = useRef(null);
 
   const toggleIsPopoverOpen = () => {
     setIsPopoverOpen(val => !val);
@@ -64,12 +65,27 @@ const MainControlsComponent = ({
     ? makePrimaryButton(faStop, onStopClick)
     : makePrimaryButton(faPlay, onPlayClick);
 
+  const isTimerButton = el =>
+    el &&
+    el.type === 'button' &&
+    typeof el.className === 'string' &&
+    el.className.includes('timer-box');
+
   return (
     <div className="main-controls">
       <Popover
         isOpen={isPopoverOpen}
-        content={<TimerConfigContainer done={() => setIsPopoverOpen(false)} />}
-        onClickOutside={toggleIsPopoverOpen}
+        content={
+          <div className="timer-popover-content" ref={timerConfigContainerRef}>
+            <TimerConfigContainer />
+          </div>
+        }
+        onClickOutside={event => {
+          if (!isTimerButton(event.target)) {
+            setIsPopoverOpen(false);
+          }
+        }}
+        transitionDuration="0"
         contentLocation={({ targetRect, popoverRect }) => ({
           top: targetRect.top - popoverRect.height - 5,
           left: targetRect.x + targetRect.width / 2 - popoverRect.width / 2,
