@@ -13,6 +13,7 @@ import stateId from './state-id.reducer';
 import loadingPieceBuildId from './loading-piece-build-id.reducer';
 import generatedRecordings from './generated-recordings.reducer';
 import lastRecordingGenerationLength from './last-recording-generation-length.reducer';
+import timer from './timer';
 
 const rootReducer = combineReducers({
   isMuted,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   loadingPieceBuildId,
   generatedRecordings,
   lastRecordingGenerationLength,
+  timer,
 });
 
 export default rootReducer;

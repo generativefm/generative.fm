@@ -1,0 +1,67 @@
+@import '_colors';
+@import '_mixins';
+
+.timer-box {
+  border: 1px solid $primaryColor;
+  background-color: $backgroundColor;
+  padding: 1em;
+  position: fixed;
+
+  &__title {
+    margin-top: 0;
+    font-weight: normal;
+  }
+
+  &__input {
+    width: 3em;
+    margin-right: 1em;
+  }
+
+  &__start-btn {
+    background: $primaryColor;
+    color: $backgroundColor;
+    margin-left: 1em;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+
+    &:hover {
+      background: $interactColor;
+    }
+
+    &:active {
+      background: $activeInteractColor;
+    }
+
+    &:disabled {
+      background: #ccc;
+    }
+  }
+
+  .last-durations {
+    @include borderedList();
+
+    &__item {
+      padding: 0;
+      justify-content: center;
+
+      &__btn {
+        width: 100%;
+        height: 100%;
+        padding: 0.5em;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1em;
+
+        &:hover {
+          background-color: #eee;
+        }
+
+        &:active {
+          background-color: #ccc;
+        }
+      }
+    }
+  }
+}

@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add active color to buttons
 
+### Removed
+
+- Shuffle removed from mobile devices to make room for timer button
+
 ## [0.14.0] - 2019-04-21
 
 ### Added

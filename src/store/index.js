@@ -46,11 +46,13 @@ const initialState = Object.assign({}, storedState, {
             return generatedRecordings;
           }, {})
       : {},
+  timer: Object.assign({}, storedState.timer, { remainingMS: 0 }),
 });
 
 if (isMobile) {
   initialState.volumePct = MOBILE_VOLUME_PCT;
   initialState.isMuted = false;
+  initialState.isShuffleActive = false;
 }
 
 const allMiddlewares = [

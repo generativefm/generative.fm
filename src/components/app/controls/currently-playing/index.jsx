@@ -1,8 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import VisualizerContainer from '../../../../containers/visualizer.container';
-import pieces from '../../../../pieces';
-import artists from '../../../../data/artists';
+import VisualizerContainer from '@containers/visualizer.container';
+import pieces from '@pieces';
+import artists from '@data/artists';
 import './currently-playing.scss';
 
 const CurrentlyPlayingComponent = ({ selectedPieceId }) => {
