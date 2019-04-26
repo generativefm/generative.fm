@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import Popover from 'react-tiny-popover';
 import isMobile from '@config/is-mobile';
@@ -55,8 +55,7 @@ const MainControlsComponent = ({
     return <div className="main-controls">Generating recording...</div>;
   }
 
-  const [isPopoverOpen, setIsPopoverOpen] = useState(true);
-  const timerConfigContainerRef = useRef(null);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const toggleIsPopoverOpen = () => {
     setIsPopoverOpen(val => !val);
@@ -76,7 +75,7 @@ const MainControlsComponent = ({
       <Popover
         isOpen={isPopoverOpen}
         content={
-          <div className="timer-popover-content" ref={timerConfigContainerRef}>
+          <div className="timer-popover-content">
             <TimerConfigContainer />
           </div>
         }
@@ -124,6 +123,7 @@ MainControlsComponent.propTypes = {
   onNextClick: propTypes.func.isRequired,
   onStopClick: propTypes.func.isRequired,
   onPlayClick: propTypes.func.isRequired,
+  timer: propTypes.object.isRequired,
 };
 
 export default MainControlsComponent;

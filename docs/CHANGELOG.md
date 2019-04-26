@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Add active color to buttons
+- Play timer
+- Change button color when they are pressed to signify actuation
 
 ### Removed
 

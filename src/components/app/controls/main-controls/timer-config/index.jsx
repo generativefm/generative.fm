@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import propTypes from 'prop-types';
 import './timer-config.scss';
 
 const StartTimerContent = ({ lastDurationsMS, startTimer }) => {
@@ -46,6 +47,11 @@ const StartTimerContent = ({ lastDurationsMS, startTimer }) => {
   );
 };
 
+StartTimerContent.propTypes = {
+  lastDurationsMS: propTypes.array.isRequired,
+  startTimer: propTypes.func.isRequired,
+};
+
 const ADD_MS = [1 * 60 * 1000, 3 * 60 * 1000, 5 * 60 * 1000];
 
 const InProgressContent = ({ remainingMS, updateTimer }) => {
@@ -80,6 +86,11 @@ const InProgressContent = ({ remainingMS, updateTimer }) => {
   );
 };
 
+InProgressContent.propTypes = {
+  remainingMS: propTypes.number.isRequired,
+  updateTimer: propTypes.func.isRequired,
+};
+
 const TimerConfigComponent = ({
   lastDurationsMS,
   remainingMS,
@@ -98,6 +109,13 @@ const TimerConfigComponent = ({
       />
     </div>
   );
+};
+
+TimerConfigComponent.propTypes = {
+  lastDurationsMS: propTypes.array.isRequired,
+  remainingMS: propTypes.number.isRequired,
+  startTimer: propTypes.func.isRequired,
+  updateTimer: propTypes.func.isRequired,
 };
 
 export default TimerConfigComponent;
