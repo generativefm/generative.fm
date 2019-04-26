@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change button color when they are pressed to signify actuation
 - Dismissable notifications which appear under the nav bar
 - Patreon link notification which appears after 10 hours of playtime
+- New piece: Drones II
 
 ### Removed
 
