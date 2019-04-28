@@ -12,9 +12,11 @@ const mapStateToProps = ({
   isPlaying,
   isShuffleActive,
   generatedRecordings,
+  timer,
 }) => ({
   isPlaying,
   isShuffleActive,
+  timer,
   isRecordingGenerationInProgress: isRecordingGenerationInProgress(
     generatedRecordings
   ),

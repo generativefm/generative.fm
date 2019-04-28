@@ -1,5 +1,6 @@
 @import '_colors';
 @import '_variables';
+@import '_mixins';
 
 .record-tab {
   input:invalid {
@@ -23,22 +24,7 @@
   }
 
   .generated-recordings-queue {
-    list-style: none;
-    padding: 0;
-
-    &__item {
-      padding: 0 0.5em;
-      border-top: 1px solid $secondaryColor;
-      border-left: 1px solid $secondaryColor;
-      border-right: 1px solid $secondaryColor;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      &:last-of-type {
-        border-bottom: 1px solid $secondaryColor;
-      }
-    }
+    @include borderedList();
   }
 
   .btn {

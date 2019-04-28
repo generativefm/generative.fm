@@ -20,6 +20,16 @@
     }
   }
 
+  &:active {
+    & > .svg-inline--fa {
+      color: $activeInteractColor;
+    }
+
+    &::after {
+      background: $activeInteractColor;
+    }
+  }
+
   &:focus {
     outline: none;
   }
@@ -31,6 +41,14 @@
 
     &:hover {
       background-color: $interactColor;
+
+      & > .svg-inline--fa {
+        color: white;
+      }
+    }
+
+    &:active {
+      background-color: $activeInteractColor;
 
       & > .svg-inline--fa {
         color: white;

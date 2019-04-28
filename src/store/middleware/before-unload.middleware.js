@@ -11,8 +11,11 @@ const beforeUnloadMiddleware = store => next => {
   if (isProduction) {
     return action => {
       const result = next(action);
-      const { isPlaying } = store.getState();
-      if (isPlaying) {
+      const { isPlaying, generatedRecordings } = store.getState();
+      const isRecordingInProgress = Reflect.ownKeys(generatedRecordings).some(
+        recordingId => generatedRecordings[recordingId].isInProgress
+      );
+      if (isPlaying || isRecordingInProgress) {
         if (!isListening) {
           isListening = true;
           window.addEventListener('beforeunload', handleBeforeUnload);

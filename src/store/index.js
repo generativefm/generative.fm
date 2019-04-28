@@ -9,6 +9,8 @@ import mediaSessionMiddleware from './middleware/media-session.middleware';
 import shortcutsMiddleware from './middleware/shortcuts.middleware';
 import onlineStatusMiddleware from './middleware/online-status.middleware';
 import recordingGenerationMiddleware from './middleware/recording-generation.middleware';
+import timerMiddleware from './middleware/timer.middleware';
+import notificationsMiddleware from './middleware/notifications.middleware';
 import STATE_STORAGE_KEY from './middleware/local-storage.middleware/key';
 import getOnlineStatus from './get-online-status';
 import pieces from '../pieces/index';
@@ -46,20 +48,24 @@ const initialState = Object.assign({}, storedState, {
             return generatedRecordings;
           }, {})
       : {},
+  timer: Object.assign({}, storedState.timer, { remainingMS: 0 }),
 });
 
 if (isMobile) {
   initialState.volumePct = MOBILE_VOLUME_PCT;
   initialState.isMuted = false;
+  initialState.isShuffleActive = false;
 }
 
 const allMiddlewares = [
+  timerMiddleware,
   piecesMiddleware,
   recordingGenerationMiddleware,
   silentHtml5AudioMiddleware,
   mediaSessionMiddleware,
   shortcutsMiddleware,
   onlineStatusMiddleware,
+  notificationsMiddleware,
   localStorageMiddleware,
 ];
 const desktopMiddlewares = allMiddlewares.concat([beforeUnloadMiddleware]);

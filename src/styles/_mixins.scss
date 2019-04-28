@@ -1,6 +1,27 @@
+@import '_colors';
+
 @mixin dot() {
   width: 0.5em;
   height: 0.5em;
   background-color: $highlightColor;
   border-radius: 50%;
+}
+
+@mixin borderedList() {
+  list-style: none;
+  padding: 0;
+
+  &__item {
+    padding: 0 0.5em;
+    border-top: 1px solid $secondaryColor;
+    border-left: 1px solid $secondaryColor;
+    border-right: 1px solid $secondaryColor;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:last-of-type {
+      border-bottom: 1px solid $secondaryColor;
+    }
+  }
 }

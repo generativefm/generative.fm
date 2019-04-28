@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [0.15.0] - 2019-04-28
+
+### Fixed
+
+- Desktop users will be asked to confirm when navigating away from the site while a recording is in progress
+
+### Added
+
+- Play timer
+- Change button color when they are pressed to signify actuation
+- Dismissable Patreon link notification which appears after 10 hours of playtime
+- New piece: Drones II
+
+### Removed
+
+- Shuffle removed from mobile devices to make room for timer button
+
 ## [0.14.0] - 2019-04-21
 
 ### Added
@@ -232,7 +249,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
-[unreleased]: https://github.com/generative-music/generative.fm/compare/v0.14.0...HEAD
+[unreleased]: https://github.com/generative-music/generative.fm/compare/v0.15.0...HEAD
+[0.15.0]: https://github.com/generative-music/generative.fm/compare/v0.14.0...v0.15.0
 [0.14.0]: https://github.com/generative-music/generative.fm/compare/v0.13.1...v0.14.0
 [0.13.1]: https://github.com/generative-music/generative.fm/compare/v0.13.0...v0.13.1
 [0.13.0]: https://github.com/generative-music/generative.fm/compare/v0.12.0...v0.13.0

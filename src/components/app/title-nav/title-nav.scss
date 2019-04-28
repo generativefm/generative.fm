@@ -2,83 +2,116 @@
 @import '_mixins.scss';
 
 .title-nav {
-  padding: 0 1em;
-  border-bottom: 1px solid $primaryColor;
+  &__header {
+    padding: 0 1em;
+    border-bottom: 1px solid $primaryColor;
 
-  &__title {
-    font-weight: inherit;
-    margin: 0.375em 0;
+    &__title {
+      font-weight: inherit;
+      margin: 0.375em 0;
 
-    &--primary {
-      font-size: 1.5em;
+      &--primary {
+        font-size: 1.5em;
+      }
+
+      &--secondary {
+        font-size: 1em;
+      }
     }
 
-    &--secondary {
-      font-size: 1em;
+    &__tab-list {
+      list-style: none;
+      padding: 0;
+
+      &__item {
+        display: inline-block;
+        font-size: 0.8em;
+        padding: 0 1em;
+        position: relative;
+
+        &:first-of-type {
+          padding-left: 0;
+        }
+
+        &__link {
+          border: none;
+          background: $backgroundColor;
+          cursor: pointer;
+          padding: 0;
+          color: $primaryColor;
+          text-decoration: none;
+          font-size: 1.1em;
+
+          &:hover {
+            color: $interactColor;
+
+            .title-nav__header__tab-list__item__active-indicator {
+              background-color: $highlightInteractColor;
+            }
+
+            .title-nav__header__tab-list__item__dot {
+              background-color: $highlightInteractColor;
+            }
+          }
+
+          &:focus {
+            outline: none;
+          }
+
+          &--is-active {
+            .title-nav__header__tab-list__item__active-indicator {
+              visibility: visible;
+            }
+          }
+        }
+
+        &__active-indicator {
+          width: 2.5em;
+          height: 0.15em;
+          background-color: $highlightColor;
+          margin: 0 auto;
+          visibility: hidden;
+        }
+
+        &__dot {
+          @include dot();
+          position: absolute;
+          top: -0.6em;
+          left: 50%;
+          transform: translate(-50%);
+          animation: 1s ease 1s 3 bounce;
+        }
+      }
     }
   }
 
-  &__tab-list {
-    list-style: none;
-    padding: 0;
+  &__notification {
+    border-bottom: 1px solid black;
+    padding: 0.25em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    &__item {
-      display: inline-block;
-      font-size: 0.8em;
-      padding: 0 1em;
-      position: relative;
+    &__msg {
+      margin: auto;
+    }
 
-      &:first-of-type {
-        padding-left: 0;
+    &__close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: $primaryColor;
+
+      &:hover {
+        color: $interactColor;
       }
 
-      &__link {
-        border: none;
-        background: $backgroundColor;
-        cursor: pointer;
-        padding: 0;
-        color: $primaryColor;
-        text-decoration: none;
-        font-size: 1.1em;
-
-        &:hover {
-          color: $interactColor;
-
-          .title-nav__tab-list__item__active-indicator {
-            background-color: $highlightInteractColor;
-          }
-
-          .title-nav__tab-list__item__dot {
-            background-color: $highlightInteractColor;
-          }
-        }
-
-        &:focus {
-          outline: none;
-        }
-
-        &--is-active {
-          .title-nav__tab-list__item__active-indicator {
-            visibility: visible;
-          }
-        }
+      &:active {
+        color: $activeInteractColor;
       }
 
-      &__active-indicator {
-        width: 2.5em;
-        height: 0.15em;
-        background-color: $highlightColor;
-        margin: 0 auto;
-        visibility: hidden;
-      }
-
-      &__dot {
-        @include dot();
-        position: absolute;
-        top: -0.6em;
-        left: 50%;
-        transform: translate(-50%);
-        animation: 1s ease 1s 3 bounce;
+      &:focus {
+        outline: none;
       }
     }
   }
