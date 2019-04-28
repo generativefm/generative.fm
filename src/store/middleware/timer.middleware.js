@@ -1,5 +1,6 @@
 import START_TIMER from '../actions/types/start-timer.type';
 import STOP from '../actions/types/stop.type';
+import CANCEL_TIMER from '../actions/types/cancel-timer.type';
 import updateTimer from '../actions/creators/update-timer.creator';
 import stop from '../actions/creators/stop.creator';
 import play from '../actions/creators/play.creator';
@@ -27,13 +28,13 @@ const timerMiddleware = store => next => {
         store.dispatch(updateTimer(-elapsedSinceLastUpdate));
         lastUpdate = now;
       }, 1000);
-    } else if (action.type === STOP) {
+    } else if (action.type === STOP || action.type === CANCEL_TIMER) {
       stopTimer();
     }
     const result = next(action);
     if (isRunning) {
       const { timer } = store.getState();
-      if (timer.remainingMS <= 0) {
+      if (timer.remainingMS <= 0 && action.type !== CANCEL_TIMER) {
         store.dispatch(stop());
       }
     }

@@ -54,7 +54,7 @@ StartTimerContent.propTypes = {
 
 const ADD_MS = [1 * 60 * 1000, 3 * 60 * 1000, 5 * 60 * 1000];
 
-const InProgressContent = ({ remainingMS, updateTimer }) => {
+const InProgressContent = ({ remainingMS, updateTimer, cancelTimer }) => {
   const remainingMinutes = Math.round(remainingMS / 60 / 1000);
   const remainingSeconds = Math.round(remainingMS / 1000);
   return (
@@ -78,7 +78,7 @@ const InProgressContent = ({ remainingMS, updateTimer }) => {
       <button
         type="button"
         className="timer-box__btn"
-        onClick={() => updateTimer(-remainingMS)}
+        onClick={() => cancelTimer()}
       >
         Cancel Timer
       </button>
@@ -89,6 +89,7 @@ const InProgressContent = ({ remainingMS, updateTimer }) => {
 InProgressContent.propTypes = {
   remainingMS: propTypes.number.isRequired,
   updateTimer: propTypes.func.isRequired,
+  cancelTimer: propTypes.func.isRequired,
 };
 
 const TimerConfigComponent = ({
@@ -96,6 +97,7 @@ const TimerConfigComponent = ({
   remainingMS,
   startTimer,
   updateTimer,
+  cancelTimer,
 }) => {
   const Content = remainingMS > 0 ? InProgressContent : StartTimerContent;
   return (
@@ -106,6 +108,7 @@ const TimerConfigComponent = ({
         startTimer={startTimer}
         remainingMS={remainingMS}
         updateTimer={updateTimer}
+        cancelTimer={cancelTimer}
       />
     </div>
   );
@@ -116,6 +119,7 @@ TimerConfigComponent.propTypes = {
   remainingMS: propTypes.number.isRequired,
   startTimer: propTypes.func.isRequired,
   updateTimer: propTypes.func.isRequired,
+  cancelTimer: propTypes.func.isRequired,
 };
 
 export default TimerConfigComponent;
