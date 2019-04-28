@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Play timer
 - Change button color when they are pressed to signify actuation
-- Patreon link notification which appears after 10 hours of playtime
+- Dismissable Patreon link notification which appears after 10 hours of playtime
 - New piece: Drones II
 
 ### Removed
