@@ -1,5 +1,5 @@
 const patreon = {
-  message: 'Consider supporting this project on Patreon',
+  message: 'Consider supporting Generative.fm on Patreon',
   link: 'https://www.patreon.com/bePatron?u=2484731',
   getIsTriggered: state =>
     Reflect.ownKeys(state.playTime).reduce(
