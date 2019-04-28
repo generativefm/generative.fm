@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.15.0] - 2019-04-28
 
+### Fixed
+
+- Desktop users will be asked to confirm when navigating away from the site while a recording is in progress
+
 ### Added
 
 - Play timer
@@ -21,10 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Shuffle removed from mobile devices to make room for timer button
-
-### Fixed
-
-- Desktop users will be asked to confirm when navigating away from the site while a recording is in progress
 
 ## [0.14.0] - 2019-04-21
 
