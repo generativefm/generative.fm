@@ -26,9 +26,12 @@ We can talk about it. This project is meant to be a platform capable of accommod
 
 ## Best Ways to Contribute
 
+### Patreon
+You can help support the site both financially and by providing direction by [becoming a Patron](https://www.patreon.com/bePatron?u=2484731).
+
 ### Github Issues
 
-Right now, it's most helpful for me when users interact with the repository's [issues](https://github.com/generative-music/generative.fm/issues). For anyone not familiar, "issues" sounds like it's just for bugs, but it's actually a system Github projects use to track all sorts of work, including new features and even requests for help. Anyone with a Github account can do the following:
+Engage with the repository's [issues](https://github.com/generative-music/generative.fm/issues). For anyone not familiar, "issues" sounds like it's just for bugs, but it's actually a system Github projects use to track all sorts of work, including new features and even requests for help. Anyone with a Github account can do the following:
 
 - [Report bugs](https://github.com/generative-music/generative.fm/issues/new?title=I%20found%20a%20bug%21)
 - [Request features](https://github.com/generative-music/generative.fm/issues/new?title=I%27ve%20got%20a%20great%20idea%21)
