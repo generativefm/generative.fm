@@ -166,7 +166,7 @@ const RecordTabComponent = ({
                   ) : (
                     <a
                       href={url}
-                      download={`${pieceId}-${lengthInMinutes}-minutes`}
+                      download={`${pieceId}-${lengthInMinutes}-minutes.wav`}
                     >
                       {displayText}
                     </a>
