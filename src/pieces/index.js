@@ -19,6 +19,7 @@ import didgeridooBeats from '@generative-music/piece-didgeridoobeats';
 import buttafingers from '@generative-music/piece-buttafingers';
 import returnToForm from '@generative-music/piece-return-to-form';
 import drones2 from '@generative-music/piece-drones-2';
+import awash from '@generative-music/piece-awash';
 
 const pieces = [
   enoMachine,
@@ -42,6 +43,7 @@ const pieces = [
   buttafingers,
   returnToForm,
   drones2,
+  awash,
 ].reverse();
 
 export default pieces;
