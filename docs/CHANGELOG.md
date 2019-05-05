@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [0.16.0] - 2019-05-05
+
+### Fixed
+
+- Recording generation for Drones
+- Recording generation for Drones II
+- Recording generation for Townsend
+- Generated recordings always have the proper ".wav" extension
+
+### Added
+
+- New piece: Awash
+
 ## [0.15.0] - 2019-04-28
 
 ### Fixed
@@ -249,7 +262,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
-[unreleased]: https://github.com/generative-music/generative.fm/compare/v0.15.0...HEAD
+[unreleased]: https://github.com/generative-music/generative.fm/compare/v0.16.0...HEAD
+[0.16.0]: https://github.com/generative-music/generative.fm/compare/v0.15.0...v0.16.0
 [0.15.0]: https://github.com/generative-music/generative.fm/compare/v0.14.0...v0.15.0
 [0.14.0]: https://github.com/generative-music/generative.fm/compare/v0.13.1...v0.14.0
 [0.13.1]: https://github.com/generative-music/generative.fm/compare/v0.13.0...v0.13.1
