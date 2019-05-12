@@ -20,6 +20,7 @@ import buttafingers from '@generative-music/piece-buttafingers';
 import returnToForm from '@generative-music/piece-return-to-form';
 import drones2 from '@generative-music/piece-drones-2';
 import awash from '@generative-music/piece-awash';
+import enough from '@generative-music/piece-enough';
 
 const pieces = [
   enoMachine,
@@ -44,6 +45,7 @@ const pieces = [
   returnToForm,
   drones2,
   awash,
+  enough,
 ].reverse();
 
 export default pieces;

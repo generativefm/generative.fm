@@ -69,6 +69,7 @@
     "@generative-music/piece-drones": "^2.7.1",
     "@generative-music/piece-drones-2": "^2.7.1",
     "@generative-music/piece-eno-machine": "^2.3.0",
+    "@generative-music/piece-enough": "^2.8.0",
     "@generative-music/piece-impact": "^2.3.0",
     "@generative-music/piece-lemniscate": "^2.3.0",
     "@generative-music/piece-little-bells": "^2.3.0",
