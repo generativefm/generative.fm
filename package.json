@@ -1,6 +1,6 @@
 {
   "name": "generative.fm",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "description": "A platform for playing generative music in the browser",
   "main": "index.js",
   "scripts": {
@@ -76,6 +76,7 @@
     "@generative-music/piece-meditation": "^2.3.0",
     "@generative-music/piece-observable-streams": "^2.3.0",
     "@generative-music/piece-otherness": "^2.3.0",
+    "@generative-music/piece-peace": "^2.9.0",
     "@generative-music/piece-pinwheels": "^2.3.0",
     "@generative-music/piece-return-to-form": "^2.4.0",
     "@generative-music/piece-sevenths": "^2.3.0",
@@ -83,7 +84,7 @@
     "@generative-music/piece-timbral-oscillations": "^2.3.0",
     "@generative-music/piece-townsend": "^2.7.1",
     "@generative-music/piece-trees": "^2.3.0",
-    "@generative-music/samples.generative.fm": "^1.8.0",
+    "@generative-music/samples.generative.fm": "^1.9.0",
     "audiobuffer-to-wav": "^1.0.0",
     "classnames": "^2.2.6",
     "clone": "^2.1.2",
