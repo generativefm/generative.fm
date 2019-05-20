@@ -21,6 +21,7 @@ import returnToForm from '@generative-music/piece-return-to-form';
 import drones2 from '@generative-music/piece-drones-2';
 import awash from '@generative-music/piece-awash';
 import enough from '@generative-music/piece-enough';
+import peace from '@generative-music/piece-peace';
 
 const pieces = [
   enoMachine,
@@ -46,6 +47,7 @@ const pieces = [
   drones2,
   awash,
   enough,
+  peace,
 ].reverse();
 
 export default pieces;
