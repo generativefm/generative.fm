@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [0.19.0] - 2019-05-26
+
+### Fixed
+
+- Possible recording issues with Didgeridoobeats, Little Bells, Meditation, Pinwheels, Sevenths, and Impact
+
+### Added
+
+- New piece: Neuroplasticity
+
 ## [0.18.0] - 2019-05-19
 
 ### Added
