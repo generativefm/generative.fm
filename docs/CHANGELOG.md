@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-(none)
+### Fixed
+
+- Recording generation for Observable streams
+
+### Added
+
+- New piece: Expand/Collapse
 
 ## [0.19.0] - 2019-05-26
 

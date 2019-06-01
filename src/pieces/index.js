@@ -23,6 +23,7 @@ import awash from '@generative-music/piece-awash';
 import enough from '@generative-music/piece-enough';
 import peace from '@generative-music/piece-peace';
 import neuroplasticity from '@generative-music/piece-neuroplasticity';
+import expandCollapse from '@generative-music/piece-expand-collapse';
 
 const pieces = [
   enoMachine,
@@ -50,6 +51,7 @@ const pieces = [
   enough,
   peace,
   neuroplasticity,
+  expandCollapse,
 ].reverse();
 
 export default pieces;
