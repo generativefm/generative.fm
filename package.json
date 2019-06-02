@@ -1,6 +1,6 @@
 {
   "name": "generative.fm",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "description": "A platform for playing generative music in the browser",
   "main": "index.js",
   "scripts": {
@@ -70,12 +70,13 @@
     "@generative-music/piece-drones-2": "^2.7.1",
     "@generative-music/piece-eno-machine": "^2.3.0",
     "@generative-music/piece-enough": "^2.8.0",
+    "@generative-music/piece-expand-collapse": "^2.11.0",
     "@generative-music/piece-impact": "^2.10.0",
     "@generative-music/piece-lemniscate": "^2.3.0",
     "@generative-music/piece-little-bells": "^2.10.0",
     "@generative-music/piece-meditation": "^2.10.0",
     "@generative-music/piece-neuroplasticity": "^2.10.0",
-    "@generative-music/piece-observable-streams": "^2.3.0",
+    "@generative-music/piece-observable-streams": "^2.11.0",
     "@generative-music/piece-otherness": "^2.3.0",
     "@generative-music/piece-peace": "^2.9.0",
     "@generative-music/piece-pinwheels": "^2.10.0",
