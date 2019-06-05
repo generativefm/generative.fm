@@ -5,7 +5,7 @@
   text-overflow: ellipsis;
 }
 
-$pieceWidth: 10em;
+$pieceWidth: 12em;
 
 @mixin statusIndicator {
   position: absolute;
@@ -31,6 +31,9 @@ $pieceWidth: 10em;
 
 .pieces-tab {
   position: relative;
+  background-color: hsl(0, 0%, 10%);
+  display: flex;
+  justify-content: center;
 
   .music-link {
     width: 100%;
@@ -55,13 +58,12 @@ $pieceWidth: 10em;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: 100em;
 
     .piece {
-      border: 1px solid #999;
       overflow: hidden;
       width: $pieceWidth;
-      cursor: pointer;
-      margin: 0.5em;
+      margin: 2em 1em;
       transition: box-shadow 150ms;
 
       &__image {
@@ -69,28 +71,18 @@ $pieceWidth: 10em;
         height: $pieceWidth;
         position: relative;
         background-color: #eee;
-        & > img {
-          max-width: 100%;
+        cursor: pointer;
+        transition: filter 150ms;
+
+        &:hover {
+          filter: invert(0.25);
         }
 
-        &__button {
-          @include statusIndicator;
-          cursor: pointer;
-          visibility: hidden;
+        // DO NOT MERGE
+        //filter: invert(1);
 
-          &:hover {
-            opacity: 0.95;
-            transform: translate(-50%, -50%) scale(1.2);
-          }
-
-          &:focus {
-            outline: none;
-          }
-
-          // Optically center the "play" icon
-          & > .fa-play {
-            transform: translate(-36%, -50%);
-          }
+        & > img {
+          max-width: 100%;
         }
 
         &__is-playing-indicator {
@@ -103,47 +95,113 @@ $pieceWidth: 10em;
       }
 
       &__info {
-        padding: 0 1em 0.5em;
-        line-height: 1.5;
-        white-space: nowrap;
+        color: white;
+
+        .btn--link {
+          border: none;
+          background: none;
+          padding: 0;
+          font-size: inherit;
+          cursor: pointer;
+          color: inherit;
+          text-align: left;
+
+          &:focus {
+            outline: none;
+          }
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
 
         &__title {
           margin-top: 0.5em;
-          @include textEllipsisOverflow;
+          margin-bottom: 0.2em;
         }
         &__artist {
           font-size: 0.9em;
-          margin-bottom: 0.5em;
-          @include textEllipsisOverflow;
+          margin-bottom: 0.2em;
+          color: #aaa;
+        }
+
+        &__tags {
+          font-size: 0.7em;
+          margin-bottom: 0.2em;
+          color: #aaa;
         }
 
         &__playtime {
           font-size: 0.7em;
-          color: #999;
+          color: #aaa;
         }
       }
 
-      &:hover {
-        box-shadow: 0 5px 15px 3px #bbb;
+      &__btns {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75em 0 0;
+        box-sizing: border-box;
 
-        .piece__image__button {
-          visibility: visible;
-        }
+        &__btn {
+          background: none;
+          color: white;
+          font-size: 1.25em;
+          border: none;
+          cursor: pointer;
 
-        .piece__image__is-playing-indicator {
-          visibility: hidden;
-        }
+          &:focus {
+            outline: none;
+          }
 
-        .piece__image__is-playing-indicator--is-spinning {
-          visibility: visible;
+          &:hover {
+            color: #999;
+          }
+
+          &:active {
+            color: #555;
+          }
+
+          &--heart {
+            &:hover {
+              color: #e0245e;
+            }
+
+            &:active {
+              color: #b31c4b;
+            }
+
+            &--is-filled {
+              color: #e0245e;
+
+              &:hover {
+                color: #b31c4b;
+              }
+
+              &:active {
+                color: #861538;
+              }
+            }
+          }
         }
       }
     }
   }
 
+  $mobilePieceWidth: 9em;
   @media (max-width: 768px) {
     .pieces {
-      padding: 0.5em;
+      padding: 0.25em;
+
+      .piece {
+        width: $mobilePieceWidth;
+        &__image {
+          width: $mobilePieceWidth;
+          height: $mobilePieceWidth;
+        }
+      }
     }
   }
 }

@@ -11,7 +11,12 @@ const pieceLoader = source => {
     id: '${pieceManifest.artistId}-${pieceManifest.id}',
     artist: '${pieceManifest.artistId}',
     isRecordable: ${typeof pieceManifest.isRecordable !== 'boolean' ||
-      pieceManifest.isRecordable}
+      pieceManifest.isRecordable},
+    tags: [${['dark', 'focus', 'electronic', 'melancholy', 'ambient', 'piano']
+      .sort(() => Math.random() - 0.5)
+      .slice(0, Math.ceil(Math.random() * 6))
+      .map(tag => `'${tag}'`)
+      .join(', ')}]
   }`;
 
   return output;

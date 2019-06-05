@@ -9,6 +9,8 @@ import {
   faStop,
   faChevronLeft,
   faCircleNotch,
+  faHeart,
+  faEllipsisH,
 } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames';
 import pieces from '../../../pieces';
@@ -16,6 +18,8 @@ import formatPlayTime from './format-play-time';
 import defaultImage from '@images/default.png';
 import artists from '../../../data/artists';
 import './pieces-tab.scss';
+
+const isFavorite = () => Math.random() < 0.5;
 
 const PiecesTabComponent = ({
   selectedPieceId,
@@ -77,21 +81,13 @@ const PiecesTabComponent = ({
               className="piece"
               key={piece.id}
               onClick={() => onPieceClick(piece)}
-              title={`${isPlaying ? 'Play' : 'Select'} ${piece.title}`}
             >
-              <div className="piece__image">
+              <div
+                className="piece__image"
+                onClick={() => onPieceClick(piece)}
+                title={`Select ${piece.title}`}
+              >
                 <img src={piece.image ? piece.image : defaultImage} />
-                {!isRecordingGenerationInProgress &&
-                  (!isLoading || !isSelected) && (
-                    <button
-                      className="piece__image__button"
-                      onClick={handleButtonClick}
-                    >
-                      <FontAwesomeIcon
-                        icon={isPlaying && isSelected ? faStop : faPlay}
-                      />
-                    </button>
-                  )}
 
                 {isSelected && (isPlaying || isLoading) && (
                   <div
@@ -108,10 +104,62 @@ const PiecesTabComponent = ({
                   </div>
                 )}
               </div>
+              <div className="piece__btns">
+                <button
+                  type="button"
+                  className={classNames(
+                    'piece__btns__btn',
+                    'piece__btns__btn--heart',
+                    {
+                      'piece__btns__btn--heart--is-filled': isFavorite(),
+                    }
+                  )}
+                >
+                  <FontAwesomeIcon icon={faHeart} />
+                </button>
+                <button
+                  type="button"
+                  className="piece__btns__btn"
+                  onClick={
+                    isPlaying ? () => onStopClick() : () => onPlayClick()
+                  }
+                >
+                  <FontAwesomeIcon
+                    icon={isPlaying && isSelected ? faStop : faPlay}
+                  />
+                </button>
+                <button type="button" className="piece__btns__btn">
+                  <FontAwesomeIcon icon={faEllipsisH} />
+                </button>
+              </div>
               <div className="piece__info">
-                <div className="piece__info__title">{piece.title}</div>
+                <div className="piece__info__title">
+                  <button
+                    type="button"
+                    className="btn--link"
+                    onClick={() => onPieceClick(piece)}
+                  >
+                    {piece.title}
+                  </button>
+                </div>
                 <div className="piece__info__artist">
                   {artists[piece.artist]}
+                </div>
+                <div className="piece__info__tags">
+                  {piece.tags.map((tag, i) =>
+                    i === piece.tags.length - 1 ? (
+                      <button type="button" className="btn--link" key={tag}>
+                        {tag}
+                      </button>
+                    ) : (
+                      <span key={tag}>
+                        <button type="button" className="btn--link">
+                          {tag}
+                        </button>
+                        ,{' '}
+                      </span>
+                    )
+                  )}
                 </div>
                 <div className="piece__info__playtime">
                   {formatPlayTime(playTime[piece.id])}
