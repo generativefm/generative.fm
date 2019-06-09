@@ -24,6 +24,7 @@ import enough from '@generative-music/piece-enough';
 import peace from '@generative-music/piece-peace';
 import neuroplasticity from '@generative-music/piece-neuroplasticity';
 import expandCollapse from '@generative-music/piece-expand-collapse';
+import quarterEyes from '@generative-music/piece-quarter-eyes';
 
 const pieces = [
   enoMachine,
@@ -52,6 +53,7 @@ const pieces = [
   peace,
   neuroplasticity,
   expandCollapse,
+  quarterEyes,
 ].reverse();
 
 export default pieces;
