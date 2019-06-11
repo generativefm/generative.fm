@@ -129,10 +129,10 @@ $pieceWidth: 12em;
 
       @include hoverStyle(#{&}) {
         &:hover {
-          color: #999;
+          color: $primaryHoverColor;
         }
         &:active {
-          color: #555;
+          color: $primaryActiveColor;
         }
       }
 

@@ -48,15 +48,29 @@
           text-decoration: none;
           font-size: 1.1em;
 
-          &:hover {
-            color: $interactColor;
+          @include hoverStyle(#{&}) {
+            &:hover {
+              color: $primaryHoverColor;
 
-            .title-nav__header__tab-list__item__active-indicator {
-              background-color: $highlightInteractColor;
+              .title-nav__header__tab-list__item__active-indicator {
+                background-color: $highlightHoverColor;
+              }
+
+              .title-nav__header__tab-list__item__dot {
+                background-color: $highlightHoverColor;
+              }
             }
 
-            .title-nav__header__tab-list__item__dot {
-              background-color: $highlightInteractColor;
+            &:active {
+              color: $primaryActiveColor;
+
+              .title-nav__header__tab-list__item__active-indicator {
+                background-color: $highlightActiveColor;
+              }
+
+              .title-nav__header__tab-list__item__dot {
+                background-color: $highlightActiveColor;
+              }
             }
           }
 
