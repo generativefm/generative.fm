@@ -61,16 +61,15 @@ const TitleNavComponent = ({
         </h2>
         <ul className="title-nav__header__tab-list">
           <TitleNavLink
-            text="MUSIC"
+            text="PLAY"
             parentClass="title-nav__header__tab-list"
             linkTo="/"
             isActive={matchRootOrMusic}
           />
           <TitleNavLink
-            text="ABOUT"
+            text="RECORD"
             parentClass="title-nav__header__tab-list"
-            linkTo="/about"
-            hasDot={isUpdateAvailable}
+            linkTo="/record"
           />
           <TitleNavLink
             text="HELP"
@@ -78,9 +77,10 @@ const TitleNavComponent = ({
             linkTo="/help"
           />
           <TitleNavLink
-            text="RECORD"
+            text="ABOUT"
             parentClass="title-nav__header__tab-list"
-            linkTo="/record"
+            linkTo="/about"
+            hasDot={isUpdateAvailable}
           />
         </ul>
       </div>

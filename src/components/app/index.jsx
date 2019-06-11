@@ -39,7 +39,7 @@ const AppComponent = () => {
 
   return (
     <Router>
-      <div className="app">
+      <div className={classNames('app', { 'has-hover': isHoverEnabled })}>
         <div className="app__content">
           <div>
             <nav>

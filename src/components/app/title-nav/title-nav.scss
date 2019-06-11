@@ -7,7 +7,7 @@
 
   &__header {
     padding: 0 1em;
-    border-bottom: 1px solid $primaryColor;
+    border-bottom: 1px solid $secondaryColor;
     overflow-y: auto;
 
     &__title {
@@ -92,7 +92,7 @@
   }
 
   &__notification {
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid $secondaryColor;
     padding: 0.25em;
     display: flex;
     justify-content: space-between;
