@@ -13,11 +13,11 @@
   transform: translate(-50%, -50%);
   background: black;
   opacity: 0.5;
-  color: white;
+  color: $primaryColor;
   padding: 1em;
   border-radius: 50%;
   font-size: 1.5em;
-  border: 1px solid white;
+  border: 1px solid $primaryColor;
 
   & > .svg-inline--fa {
     position: absolute;
@@ -33,7 +33,7 @@ $pieceWidth: 12em;
 .piece {
   overflow: hidden;
   width: $pieceWidth;
-  margin: 2em 1em;
+  margin: 1em;
   transition: box-shadow 150ms;
 
   &__image {
@@ -64,7 +64,7 @@ $pieceWidth: 12em;
   }
 
   &__info {
-    color: white;
+    color: $primaryColor;
 
     .btn--link {
       border: none;
@@ -118,7 +118,7 @@ $pieceWidth: 12em;
 
     &__btn {
       background: none;
-      color: white;
+      color: $primaryColor;
       font-size: 1.25em;
       border: none;
       cursor: pointer;
@@ -153,12 +153,12 @@ $pieceWidth: 12em;
     }
 
     &__menu {
-      border: 1px solid white;
+      border: 1px solid $primaryColor;
 
       &__btn {
         padding: 0.5em;
-        background-color: hsl(0, 0%, 10%);
-        color: white;
+        background-color: $backgroundColor;
+        color: $primaryColor;
         border: none;
         font-size: 0.9em;
         cursor: pointer;

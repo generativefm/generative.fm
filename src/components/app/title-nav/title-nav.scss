@@ -2,11 +2,16 @@
 @import '_mixins.scss';
 
 .title-nav {
+  background-color: $backgroundColor;
+  color: $primaryColor;
+
   &__header {
     padding: 0 1em;
     border-bottom: 1px solid $primaryColor;
+    overflow-y: auto;
 
     &__title {
+      font-family: 'Arimo', sans-serif;
       font-weight: inherit;
       margin: 0.375em 0;
 

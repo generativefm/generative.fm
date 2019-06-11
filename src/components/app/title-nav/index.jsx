@@ -57,7 +57,7 @@ const TitleNavComponent = ({
           Generative.fm
         </h1>
         <h2 className="title-nav__header__title title-nav__header__title--secondary">
-          Endlessly unique ambient music
+          Generative music by Alex Bainter
         </h2>
         <ul className="title-nav__header__tab-list">
           <TitleNavLink
