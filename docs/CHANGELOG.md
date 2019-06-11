@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+### Changed
+
+- Add a maximum piece history of 20
+
 ## [0.21.0] - 2019-06-09
 
 ### Added

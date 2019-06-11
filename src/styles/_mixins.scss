@@ -25,3 +25,9 @@
     }
   }
 }
+
+@mixin hoverStyle($child) {
+  @at-root .has-hover #{$child} {
+    @content;
+  }
+}

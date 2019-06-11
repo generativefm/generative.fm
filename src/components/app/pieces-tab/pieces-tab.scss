@@ -1,4 +1,5 @@
 @import '_colors.scss';
+@import '_mixins.scss';
 
 @mixin textEllipsisOverflow {
   overflow: hidden;
@@ -74,12 +75,11 @@ $pieceWidth: 12em;
         cursor: pointer;
         transition: filter 150ms;
 
-        &:hover {
-          filter: invert(0.25);
+        @include hoverStyle(#{&}) {
+          &:hover {
+            filter: invert(0.25);
+          }
         }
-
-        // DO NOT MERGE
-        //filter: invert(1);
 
         & > img {
           max-width: 100%;
@@ -110,8 +110,10 @@ $pieceWidth: 12em;
             outline: none;
           }
 
-          &:hover {
-            text-decoration: underline;
+          @include hoverStyle(#{&}) {
+            &:hover {
+              text-decoration: underline;
+            }
           }
         }
 
@@ -156,32 +158,26 @@ $pieceWidth: 12em;
             outline: none;
           }
 
-          &:hover {
-            color: #999;
-          }
-
-          &:active {
-            color: #555;
+          @include hoverStyle(#{&}) {
+            &:hover {
+              color: #999;
+            }
+            &:active {
+              color: #555;
+            }
           }
 
           &--heart {
-            &:hover {
-              color: #e0245e;
-            }
-
-            &:active {
-              color: #b31c4b;
-            }
-
             &--is-filled {
               color: #e0245e;
 
-              &:hover {
-                color: #b31c4b;
-              }
-
-              &:active {
-                color: #861538;
+              @include hoverStyle(#{&}) {
+                &:hover {
+                  color: #b31c4b;
+                }
+                &:active {
+                  color: #861538;
+                }
               }
             }
           }

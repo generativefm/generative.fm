@@ -49,6 +49,7 @@ const initialState = Object.assign({}, storedState, {
           }, {})
       : {},
   timer: Object.assign({}, storedState.timer, { remainingMS: 0 }),
+  favorites: new Set(storedState.favorites),
 });
 
 if (isMobile) {

@@ -16,10 +16,7 @@ import classNames from 'classnames';
 import pieces from '../../../pieces';
 import formatPlayTime from './format-play-time';
 import defaultImage from '@images/default.png';
-import artists from '../../../data/artists';
 import './pieces-tab.scss';
-
-const isFavorite = () => Math.random() < 0.5;
 
 const PiecesTabComponent = ({
   selectedPieceId,
@@ -31,6 +28,9 @@ const PiecesTabComponent = ({
   filter,
   isLoading,
   isRecordingGenerationInProgress,
+  favorites,
+  addFavorite,
+  removeFavorite,
 }) => {
   const filteredPieces = pieces.filter(
     ({ id, artist }) =>
@@ -60,6 +60,7 @@ const PiecesTabComponent = ({
       <div className="pieces">
         {filteredPieces.map(piece => {
           const isSelected = piece.id === selectedPieceId;
+          const isFavorite = favorites.has(piece.id);
           const handleButtonClick = event => {
             event.stopPropagation();
             if (isSelected) {
@@ -84,11 +85,14 @@ const PiecesTabComponent = ({
             >
               <div
                 className="piece__image"
-                onClick={() => onPieceClick(piece)}
-                title={`Select ${piece.title}`}
+                onClick={
+                  isPlaying
+                    ? () => onPieceClick(piece)
+                    : () => onPlayClick(piece)
+                }
+                title={isPlaying ? piece.title : `Play ${piece.title}`}
               >
                 <img src={piece.image ? piece.image : defaultImage} />
-
                 {isSelected && (isPlaying || isLoading) && (
                   <div
                     className={classNames(
@@ -111,9 +115,15 @@ const PiecesTabComponent = ({
                     'piece__btns__btn',
                     'piece__btns__btn--heart',
                     {
-                      'piece__btns__btn--heart--is-filled': isFavorite(),
+                      'piece__btns__btn--heart--is-filled': isFavorite,
                     }
                   )}
+                  onClick={
+                    isFavorite
+                      ? () => removeFavorite(piece.id)
+                      : () => addFavorite(piece.id)
+                  }
+                  title={isFavorite ? 'Unfavorite' : 'Favorite'}
                 >
                   <FontAwesomeIcon icon={faHeart} />
                 </button>
@@ -123,12 +133,17 @@ const PiecesTabComponent = ({
                   onClick={
                     isPlaying ? () => onStopClick() : () => onPlayClick()
                   }
+                  title={isPlaying ? 'Stop' : 'Play'}
                 >
                   <FontAwesomeIcon
                     icon={isPlaying && isSelected ? faStop : faPlay}
                   />
                 </button>
-                <button type="button" className="piece__btns__btn">
+                <button
+                  type="button"
+                  className="piece__btns__btn"
+                  title="More..."
+                >
                   <FontAwesomeIcon icon={faEllipsisH} />
                 </button>
               </div>
@@ -141,9 +156,6 @@ const PiecesTabComponent = ({
                   >
                     {piece.title}
                   </button>
-                </div>
-                <div className="piece__info__artist">
-                  {artists[piece.artist]}
                 </div>
                 <div className="piece__info__tags">
                   {piece.tags.map((tag, i) =>
