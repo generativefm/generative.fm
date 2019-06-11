@@ -3,19 +3,9 @@ import propTypes from 'prop-types';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faInfinity,
-  faPlay,
-  faStop,
-  faChevronLeft,
-  faCircleNotch,
-  faHeart,
-  faEllipsisH,
-} from '@fortawesome/free-solid-svg-icons';
-import classNames from 'classnames';
-import pieces from '../../../pieces';
-import formatPlayTime from './format-play-time';
-import defaultImage from '@images/default.png';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import pieces from '@pieces';
+import Piece from './piece';
 import './pieces-tab.scss';
 
 const PiecesTabComponent = ({
@@ -58,128 +48,23 @@ const PiecesTabComponent = ({
         </div>
       )}
       <div className="pieces">
-        {filteredPieces.map(piece => {
-          const isSelected = piece.id === selectedPieceId;
-          const isFavorite = favorites.has(piece.id);
-          const handleButtonClick = event => {
-            event.stopPropagation();
-            if (isSelected) {
-              if (isPlaying) {
-                onStopClick();
-              } else {
-                onPlayClick();
-              }
-            } else if (isPlaying) {
-              onPieceClick(piece);
-            } else {
-              onPieceClick(piece);
-              onPlayClick();
-            }
-          };
-
-          return (
-            <div
-              className="piece"
-              key={piece.id}
-              onClick={() => onPieceClick(piece)}
-            >
-              <div
-                className="piece__image"
-                onClick={
-                  isPlaying
-                    ? () => onPieceClick(piece)
-                    : () => onPlayClick(piece)
-                }
-                title={isPlaying ? piece.title : `Play ${piece.title}`}
-              >
-                <img src={piece.image ? piece.image : defaultImage} />
-                {isSelected && (isPlaying || isLoading) && (
-                  <div
-                    className={classNames(
-                      'piece__image__is-playing-indicator',
-                      {
-                        'piece__image__is-playing-indicator--is-spinning': isLoading,
-                      }
-                    )}
-                  >
-                    <FontAwesomeIcon
-                      icon={isLoading ? faCircleNotch : faInfinity}
-                    />
-                  </div>
-                )}
-              </div>
-              <div className="piece__btns">
-                <button
-                  type="button"
-                  className={classNames(
-                    'piece__btns__btn',
-                    'piece__btns__btn--heart',
-                    {
-                      'piece__btns__btn--heart--is-filled': isFavorite,
-                    }
-                  )}
-                  onClick={
-                    isFavorite
-                      ? () => removeFavorite(piece.id)
-                      : () => addFavorite(piece.id)
-                  }
-                  title={isFavorite ? 'Unfavorite' : 'Favorite'}
-                >
-                  <FontAwesomeIcon icon={faHeart} />
-                </button>
-                <button
-                  type="button"
-                  className="piece__btns__btn"
-                  onClick={
-                    isPlaying ? () => onStopClick() : () => onPlayClick()
-                  }
-                  title={isPlaying ? 'Stop' : 'Play'}
-                >
-                  <FontAwesomeIcon
-                    icon={isPlaying && isSelected ? faStop : faPlay}
-                  />
-                </button>
-                <button
-                  type="button"
-                  className="piece__btns__btn"
-                  title="More..."
-                >
-                  <FontAwesomeIcon icon={faEllipsisH} />
-                </button>
-              </div>
-              <div className="piece__info">
-                <div className="piece__info__title">
-                  <button
-                    type="button"
-                    className="btn--link"
-                    onClick={() => onPieceClick(piece)}
-                  >
-                    {piece.title}
-                  </button>
-                </div>
-                <div className="piece__info__tags">
-                  {piece.tags.map((tag, i) =>
-                    i === piece.tags.length - 1 ? (
-                      <button type="button" className="btn--link" key={tag}>
-                        {tag}
-                      </button>
-                    ) : (
-                      <span key={tag}>
-                        <button type="button" className="btn--link">
-                          {tag}
-                        </button>
-                        ,{' '}
-                      </span>
-                    )
-                  )}
-                </div>
-                <div className="piece__info__playtime">
-                  {formatPlayTime(playTime[piece.id])}
-                </div>
-              </div>
-            </div>
-          );
-        })}
+        {filteredPieces.map(piece => (
+          <Piece
+            key={piece.id}
+            piece={piece}
+            playTime={playTime[piece.id]}
+            isSelected={selectedPieceId === piece.id}
+            isPlaying={isPlaying}
+            isDisabled={isRecordingGenerationInProgress}
+            isFavorite={favorites.has(piece.id)}
+            isLoading={isLoading}
+            onPieceClick={onPieceClick}
+            onPlayClick={onPlayClick}
+            onStopClick={onStopClick}
+            addFavorite={addFavorite}
+            removeFavorite={removeFavorite}
+          />
+        ))}
       </div>
     </div>
   ) : (
