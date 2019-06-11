@@ -16,11 +16,12 @@
       margin: 0.375em 0;
 
       &--primary {
-        font-size: 1.5em;
+        font-size: 1.25em;
       }
 
       &--secondary {
         font-size: 1em;
+        color: $secondaryColor;
       }
     }
 
