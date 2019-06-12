@@ -27,21 +27,6 @@
     @include borderedList();
   }
 
-  .btn {
-    background: $backgroundColor;
-    border: 1px solid $primaryColor;
-    cursor: pointer;
-    padding: 0.5em 1em;
-
-    &:hover {
-      background: #ccc;
-    }
-
-    &:active {
-      background: #999;
-    }
-  }
-
   .btn-spacer {
     height: $buttonWidth;
   }

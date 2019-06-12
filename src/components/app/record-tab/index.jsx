@@ -4,6 +4,7 @@ import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
 import pieces from '@pieces';
 import piecesById from '@pieces/by-id';
 import ControlButtonComponent from '../controls/control-button';
+import TextButton from '@components/shared/text-button';
 import './record-tab.scss';
 
 const MAX_RECORDING_LENGTH_MINUTES = 240;
@@ -81,6 +82,7 @@ const RecordTabComponent = ({
               onChange={event =>
                 setRecordingLengthInMinutes(event.target.value)
               }
+              title="Length of the recording to generate, in miniutes"
               required
             />
             minutes of
@@ -88,6 +90,7 @@ const RecordTabComponent = ({
               id="piece-select"
               value={selectedPieceId}
               onChange={event => selectPiece(event.target.value)}
+              title="Piece to record"
             >
               {pieces.map(({ title, id, isRecordable }) => (
                 <option key={id} value={id} disabled={!isRecordable}>
@@ -99,6 +102,7 @@ const RecordTabComponent = ({
           {isRecordingValid && (
             <ControlButtonComponent
               faIcon={faPlus}
+              title="Add to queue"
               onClick={() =>
                 queueRecordingGeneration({
                   pieceId: selectedPieceId,
@@ -124,17 +128,16 @@ const RecordTabComponent = ({
           {generatedRecordingsQueue.filter(({ url }) => url === '').length >
             0 &&
             !isGenerationInProgress && (
-              <button
-                className="btn"
-                type="button"
+              <TextButton
+                title="Resume previously queued recording generation"
                 onClick={() =>
                   startRecordingGeneration(
                     generatedRecordingsQueue[0].recordingId
                   )
                 }
               >
-                Resume Generation
-              </button>
+                Resume generation
+              </TextButton>
             )}
         </div>
         <div className="form-group">
@@ -175,6 +178,7 @@ const RecordTabComponent = ({
                     <ControlButtonComponent
                       faIcon={faTimes}
                       onClick={() => removeRecordingGeneration(recordingId)}
+                      title="Remove"
                     />
                   )}
                   {isInProgress && <div className="btn-spacer" />}

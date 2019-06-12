@@ -2,7 +2,7 @@
 @import '_mixins';
 
 .timer-box {
-  border: 1px solid $primaryColor;
+  border: 1px solid $secondaryColor;
   background-color: $backgroundColor;
   color: $primaryColor;
   padding: 1em;
@@ -20,26 +20,18 @@
   }
 
   &__btn {
-    background: $primaryColor;
-    color: $backgroundColor;
-    border: none;
-    padding: 0.5em 1em;
-    cursor: pointer;
+    &:hover {
+      background: $primaryHoverColor;
+    }
 
-    @include hoverStyle(#{&}) {
-      &:hover {
-        background: $primaryHoverColor;
-      }
-
-      &:active {
-        background: $primaryActiveColor;
-      }
+    &:active {
+      background: $primaryActiveColor;
     }
 
     &:disabled {
-      color: $secondaryColor;
-      background: $primaryActiveColor;
-      cursor: not-allowed;
+      &:hover {
+        background: $primaryActiveColor;
+      }
     }
   }
 

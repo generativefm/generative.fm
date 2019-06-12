@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import propTypes from 'prop-types';
+import TextButton from '@components/shared/text-button';
 import './timer-config.scss';
 
 const StartTimerContent = ({ lastDurationsMS, startTimer }) => {
@@ -37,10 +38,9 @@ const StartTimerContent = ({ lastDurationsMS, startTimer }) => {
         title="Timer duration in minutes"
       />
       minutes
-      <button
-        type="button"
+      <TextButton
         className="timer-box__btn timer-box__btn--inline"
-        disabled={isStartDisabled}
+        isDisabled={isStartDisabled}
         onClick={() => handleDurationSelect(customDuration * 60 * 1000)}
         title={
           isStartDisabled
@@ -49,7 +49,7 @@ const StartTimerContent = ({ lastDurationsMS, startTimer }) => {
         }
       >
         Start
-      </button>
+      </TextButton>
     </div>
   );
 };
@@ -83,14 +83,13 @@ const InProgressContent = ({ remainingMS, updateTimer, cancelTimer }) => {
           </li>
         ))}
       </ul>
-      <button
-        type="button"
+      <TextButton
         className="timer-box__btn"
         onClick={() => cancelTimer()}
         title="Cancel timer and resume endless playback"
       >
         Cancel Timer
-      </button>
+      </TextButton>
     </div>
   );
 };

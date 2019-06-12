@@ -39,14 +39,14 @@
           padding-left: 0;
         }
 
-        &__link {
+        a#{&}__link {
           border: none;
           background: $backgroundColor;
           cursor: pointer;
           padding: 0;
-          color: $primaryColor;
           text-decoration: none;
           font-size: 1.1em;
+          color: $primaryColor;
 
           @include hoverStyle(#{&}) {
             &:hover {

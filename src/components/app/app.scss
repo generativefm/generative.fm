@@ -1,7 +1,14 @@
 @import '_variables.scss';
+@import '_colors.scss';
 
 .app {
   height: 100%;
+  background-color: $backgroundColor;
+  color: $primaryColor;
+
+  a {
+    color: $secondaryColor;
+  }
 
   &__content {
     display: flex;
