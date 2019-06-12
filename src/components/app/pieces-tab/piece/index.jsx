@@ -11,6 +11,9 @@ import {
   faEllipsisH,
 } from '@fortawesome/free-solid-svg-icons';
 import Popover from 'react-tiny-popover';
+import IconButton from '@components/shared/icon-button';
+import FavoriteButton from '@containers/favorite-button.container';
+import MoreButton from '@components/shared/more-button';
 import formatPlayTime from './format-play-time';
 import defaultImage from '@images/default.png';
 import './piece.scss';
@@ -68,7 +71,7 @@ const Piece = ({
   };
 
   return (
-    <div className="piece" key={piece.id} onClick={() => onPieceClick(piece)}>
+    <div className="piece" key={piece.id}>
       <div
         className="piece__image"
         onClick={
@@ -88,60 +91,14 @@ const Piece = ({
         )}
       </div>
       <div className="piece__btns">
-        <button
-          type="button"
-          className={classNames('piece__btns__btn', 'piece__btns__btn--heart', {
-            'piece__btns__btn--heart--is-filled': isFavorite,
-          })}
-          onClick={
-            isFavorite
-              ? () => removeFavorite(piece.id)
-              : () => addFavorite(piece.id)
-          }
-          title={isFavorite ? 'Unfavorite' : 'Favorite'}
-        >
-          <FontAwesomeIcon icon={faHeart} />
-        </button>
-        <button
-          type="button"
+        <FavoriteButton className="piece__btns__btn" pieceId={piece.id} />
+        <IconButton
           className="piece__btns__btn"
+          faIcon={isSelected && (isPlaying || isLoading) ? faStop : faPlay}
           onClick={isPlaying ? () => onStopClick() : () => onPlayClick()}
           title={isPlaying ? 'Stop' : 'Play'}
-        >
-          <FontAwesomeIcon icon={isPlaying && isSelected ? faStop : faPlay} />
-        </button>
-        <Popover
-          isOpen={isMenuOpen}
-          onClickOutside={() => setIsMenuOpen(false)}
-          content={
-            <div className="piece__btns__menu">
-              <button
-                type="button"
-                className="piece__btns__menu__btn"
-                onClick={() => copyLinkToClipboard()}
-              >
-                Copy link to piece
-              </button>
-            </div>
-          }
-          align="end"
-          disableReposition="true"
-          padding="-30"
-          transitionDuration="0"
-        >
-          <button
-            type="button"
-            className="piece__btns__btn"
-            title="More..."
-            onClick={
-              isMenuOpen
-                ? () => setIsMenuOpen(false)
-                : () => setIsMenuOpen(true)
-            }
-          >
-            <FontAwesomeIcon icon={faEllipsisH} />
-          </button>
-        </Popover>
+        />
+        <MoreButton className="piece__btns__btn" pieceId={piece.id} />
       </div>
       <div className="piece__info">
         <div className="piece__info__title">

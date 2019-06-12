@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import ControlButton from '../control-button';
 
-const IconComponent = ({ pct, onClick }) => {
+const IconComponent = ({ pct, onClick, title }) => {
   let icon;
   if (pct <= 0) {
     icon = faVolumeMute;
@@ -16,12 +16,13 @@ const IconComponent = ({ pct, onClick }) => {
   } else {
     icon = faVolumeUp;
   }
-  return <ControlButton faIcon={icon} onClick={onClick} />;
+  return <ControlButton faIcon={icon} onClick={onClick} title={title} />;
 };
 
 IconComponent.propTypes = {
   pct: propTypes.number.isRequired,
   onClick: propTypes.func.isRequired,
+  title: propTypes.string.isRequired,
 };
 
 export default IconComponent;

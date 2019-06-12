@@ -28,13 +28,14 @@ const getTimerIcon = ({ lastDurationsMS, remainingMS }) => {
   return faHourglassEnd;
 };
 
-const makePrimaryButton = (faIcon, onClick) =>
+const makePrimaryButton = (faIcon, onClick, title) =>
   function PrimaryButtonComponent() {
     return (
       <ControlButtonComponent
         faIcon={faIcon}
         onClick={onClick}
         isPrimary={true}
+        title={title}
       />
     );
   };
@@ -61,8 +62,8 @@ const MainControlsComponent = ({
     setIsPopoverOpen(val => !val);
   };
   const PrimaryButtonComponent = isPlaying
-    ? makePrimaryButton(faStop, onStopClick)
-    : makePrimaryButton(faPlay, onPlayClick);
+    ? makePrimaryButton(faStop, onStopClick, 'Stop')
+    : makePrimaryButton(faPlay, onPlayClick, 'Play');
 
   const isTimerButton = el =>
     el &&
@@ -94,19 +95,26 @@ const MainControlsComponent = ({
           faIcon={getTimerIcon(timer)}
           onClick={toggleIsPopoverOpen}
           isActive={timer.remainingMS > 0}
+          title="Play timer..."
         />
       </Popover>
       <ControlButtonComponent
         faIcon={faStepBackward}
         onClick={onPreviousClick}
+        title="Previous piece"
       />
       <PrimaryButtonComponent />
-      <ControlButtonComponent faIcon={faStepForward} onClick={onNextClick} />
+      <ControlButtonComponent
+        faIcon={faStepForward}
+        onClick={onNextClick}
+        title="Next piece"
+      />
       {!isMobile && (
         <ControlButtonComponent
           faIcon={faRandom}
           onClick={isShuffleActive ? disableShuffle : enableShuffle}
           isActive={isShuffleActive}
+          title={`${isShuffleActive ? 'Disable' : 'Enable'} shuffle`}
         />
       )}
     </div>

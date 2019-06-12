@@ -72,6 +72,7 @@ const SliderComponent = ({ pct, onChange }) => {
       onDragStart={preventDefault}
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
+      title="Click or drag to change volume"
     >
       <div
         className="slider__bar"

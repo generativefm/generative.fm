@@ -8,7 +8,11 @@ const VolumeComponent = ({ volumePct, isMuted, onChange, mute, unmute }) => {
   const displayPct = isMuted ? 0 : volumePct;
   return (
     <div className="volume">
-      <Icon pct={displayPct} onClick={isMuted ? unmute : mute} />
+      <Icon
+        pct={displayPct}
+        onClick={isMuted ? unmute : mute}
+        title={isMuted ? 'Unmute' : 'Mute'}
+      />
       <Slider pct={displayPct} onChange={onChange} />
     </div>
   );

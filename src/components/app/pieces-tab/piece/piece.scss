@@ -117,65 +117,7 @@ $pieceWidth: 12em;
     box-sizing: border-box;
 
     &__btn {
-      background: none;
-      color: $primaryColor;
       font-size: 1.25em;
-      border: none;
-      cursor: pointer;
-
-      &:focus {
-        outline: none;
-      }
-
-      @include hoverStyle(#{&}) {
-        &:hover {
-          color: $primaryHoverColor;
-        }
-        &:active {
-          color: $primaryActiveColor;
-        }
-      }
-
-      &--heart {
-        &--is-filled {
-          color: #e0245e;
-
-          @include hoverStyle(#{&}) {
-            &:hover {
-              color: #b31c4b;
-            }
-            &:active {
-              color: #861538;
-            }
-          }
-        }
-      }
-    }
-
-    &__menu {
-      border: 1px solid $primaryColor;
-
-      &__btn {
-        padding: 0.5em;
-        background-color: $backgroundColor;
-        color: $primaryColor;
-        border: none;
-        font-size: 0.9em;
-        cursor: pointer;
-
-        // don't need @include hoverStyle since the menu will close on click
-        &:hover {
-          background-color: hsl(0, 0%, 20%);
-        }
-
-        &:active {
-          background-color: hsl(0, 0%, 30%);
-        }
-
-        &:focus {
-          outline: none;
-        }
-      }
     }
   }
 }

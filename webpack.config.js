@@ -15,7 +15,7 @@ const log = msg => console.log(msg);
 const makeConfig = alias => ({
   mode: 'development',
   devtool: 'sourcemap',
-  entry: ['babel-polyfill', './src'],
+  entry: ['@babel/polyfill', './src'],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].[hash].js',

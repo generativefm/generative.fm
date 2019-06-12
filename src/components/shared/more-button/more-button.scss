@@ -1,0 +1,29 @@
+@import '_colors.scss';
+
+.more-btn {
+  &__menu {
+    border: 1px solid $primaryColor;
+
+    &__btn {
+      padding: 0.5em;
+      background-color: $backgroundColor;
+      color: $primaryColor;
+      border: none;
+      font-size: 0.9em;
+      cursor: pointer;
+
+      // don't need @include hoverStyle since the menu will close on click
+      &:hover {
+        background-color: hsl(0, 0%, 20%);
+      }
+
+      &:active {
+        background-color: hsl(0, 0%, 30%);
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
