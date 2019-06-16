@@ -1,0 +1,36 @@
+@import '_mixins.scss';
+@import '_colors.scss';
+
+.drop-down-menu {
+  background: $backgroundColor;
+  color: $primaryColor;
+
+  @include borderedList();
+
+  &__item {
+    padding: 0;
+    &__btn {
+      padding: 0.25em;
+      background: none;
+      border: none;
+      margin: 0;
+      width: 100%;
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
+
+      // don't need @include hoverStyle because clicking will close the menu
+      &:hover {
+        background-color: #444;
+      }
+
+      &:active {
+        background-color: #333;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}

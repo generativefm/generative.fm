@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
+import IconButton from '@components/shared/icon-button';
 import './title-nav.scss';
 
 const TitleNavLink = ({
@@ -94,13 +95,12 @@ const TitleNavComponent = ({
           >
             {notification.message}
           </a>
-          <button
-            type="button"
+          <IconButton
             className="title-nav__notification__close"
+            faIcon={faTimes}
+            title="Dismiss"
             onClick={() => dismissNotification(notification.id)}
-          >
-            <FontAwesomeIcon icon={faTimes} />
-          </button>
+          />
         </div>
       )}
     </div>

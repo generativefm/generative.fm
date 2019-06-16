@@ -1,0 +1,26 @@
+@import '_colors.scss';
+@import '_mixins.scss';
+
+.link-btn {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: $secondaryColor;
+
+  &:focus {
+    outline: none;
+  }
+
+  @include hoverStyle(#{&}) {
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: $secondaryActiveColor;
+    }
+  }
+}

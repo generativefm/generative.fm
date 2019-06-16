@@ -1,10 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import pieces from '@pieces';
+import LinkButton from '@components/shared/link-button';
+import Dropdown from './drop-down';
 import Piece from './piece';
 import './pieces-tab.scss';
 
@@ -18,9 +17,6 @@ const PiecesTabComponent = ({
   filter,
   isLoading,
   isRecordingGenerationInProgress,
-  favorites,
-  addFavorite,
-  removeFavorite,
 }) => {
   const filteredPieces = pieces.filter(
     ({ id, artist }) =>
@@ -36,35 +32,31 @@ const PiecesTabComponent = ({
 
   return filteredPieces.length > 0 ? (
     <div className="pieces-tab">
-      {typeof filter === 'string' && (
-        <div className="music-link">
-          <Link to="/">
-            <FontAwesomeIcon
-              icon={faChevronLeft}
-              className="music-link__icon"
+      <div className="filter-bar">
+        <span>
+          viewing{' '}
+          <Dropdown selected="all" options={['all', 'favorites', 'poop']} />{' '}
+          sorted by <LinkButton>release date</LinkButton> (
+          <LinkButton>newest first</LinkButton>)
+        </span>
+      </div>
+      <div className="pieces-container">
+        <div className="pieces">
+          {filteredPieces.map(piece => (
+            <Piece
+              key={piece.id}
+              piece={piece}
+              playTime={playTime[piece.id]}
+              isSelected={selectedPieceId === piece.id}
+              isPlaying={isPlaying}
+              isDisabled={isRecordingGenerationInProgress}
+              isLoading={isLoading}
+              onPieceClick={onPieceClick}
+              onPlayClick={onPlayClick}
+              onStopClick={onStopClick}
             />
-            All Music
-          </Link>
+          ))}
         </div>
-      )}
-      <div className="pieces">
-        {filteredPieces.map(piece => (
-          <Piece
-            key={piece.id}
-            piece={piece}
-            playTime={playTime[piece.id]}
-            isSelected={selectedPieceId === piece.id}
-            isPlaying={isPlaying}
-            isDisabled={isRecordingGenerationInProgress}
-            isFavorite={favorites.has(piece.id)}
-            isLoading={isLoading}
-            onPieceClick={onPieceClick}
-            onPlayClick={onPlayClick}
-            onStopClick={onStopClick}
-            addFavorite={addFavorite}
-            removeFavorite={removeFavorite}
-          />
-        ))}
       </div>
     </div>
   ) : (

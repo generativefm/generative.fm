@@ -117,22 +117,7 @@
     }
 
     &__close {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: $primaryColor;
-
-      &:hover {
-        color: $interactColor;
-      }
-
-      &:active {
-        color: $activeInteractColor;
-      }
-
-      &:focus {
-        outline: none;
-      }
+      margin-right: 0.25em;
     }
   }
 }

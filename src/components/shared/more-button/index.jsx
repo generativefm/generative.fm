@@ -52,9 +52,7 @@ const MoreButton = ({ pieceId, className }) => {
         faIcon={faEllipsisH}
         className={className}
         title="More..."
-        onClick={
-          isMenuOpen ? () => setIsMenuOpen(false) : () => setIsMenuOpen(true)
-        }
+        onClick={() => setIsMenuOpen(currentIsMenuOpen => !currentIsMenuOpen)}
       />
     </Popover>
   );
