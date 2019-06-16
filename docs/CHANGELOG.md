@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - New piece: Day/Dream
 
+### Changed
+
+- Reword help and about tabs
+
 ## [0.21.0] - 2019-06-09
 
 ### Added
