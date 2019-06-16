@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [0.22.0] - 2019-06-15
+
+### Added
+
+- New piece: Day/Dream
+
 ## [0.21.0] - 2019-06-09
 
 ### Added
