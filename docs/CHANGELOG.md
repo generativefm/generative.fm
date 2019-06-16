@@ -251,7 +251,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Routing
 
-## UNRELEASED
+## [0.3.0] - 2019-02-11
 
 ### Fixed
 
