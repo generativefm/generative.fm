@@ -4,7 +4,7 @@ import './help-tab.scss';
 
 const HelpTabComponent = () => (
   <div className="centered-tab help-tab">
-    <h2 className="help-tab__topic">The audio pops, crackles, or snaps</h2>
+    <h2 className="help-tab__topic">If the audio crackles or pops</h2>
     Here&apos;s some steps you can try:
     <ol>
       {!isMobile && (
@@ -20,6 +20,7 @@ const HelpTabComponent = () => (
         </li>
       )}
       <li>Try another piece. Some pieces play better than others.</li>
+      <li>Try using a different browser.</li>
       <li>
         Try using a more powerful device
         {isMobile && ', like a desktop or laptop'}.

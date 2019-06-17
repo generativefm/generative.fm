@@ -1,6 +1,6 @@
 {
   "name": "generative.fm",
-  "version": "0.21.0",
+  "version": "0.22.0",
   "description": "A platform for playing generative music in the browser",
   "main": "index.js",
   "scripts": {
@@ -67,6 +67,7 @@
     "@generative-music/piece-apoapsis": "^2.12.0",
     "@generative-music/piece-awash": "^2.12.0",
     "@generative-music/piece-buttafingers": "^2.12.0",
+    "@generative-music/piece-day-dream": "^2.13.1",
     "@generative-music/piece-didgeridoobeats": "^2.12.0",
     "@generative-music/piece-drones": "^2.12.0",
     "@generative-music/piece-drones-2": "^2.12.0",
