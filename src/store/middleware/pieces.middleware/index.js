@@ -49,6 +49,7 @@ const piecesMiddleware = store => next => {
       isShuffleActive,
       pieceHistory,
       isMuted,
+      visiblePieceIds,
     } = store.getState();
     if (action.type === UPDATE_VOLUME_PCT) {
       Tone.Master.volume.value = convertPctToDb(action.payload);
@@ -56,23 +57,22 @@ const piecesMiddleware = store => next => {
     } else if (action.type === NEXT) {
       let nextPieceId;
       if (isShuffleActive) {
-        const unselectedPieces = pieces.filter(
-          ({ id }) => id !== selectedPieceId
+        const unselectedPieces = visiblePieceIds.filter(
+          id => id !== selectedPieceId
         );
         nextPieceId =
-          unselectedPieces[Math.floor(Math.random() * unselectedPieces.length)]
-            .id;
+          unselectedPieces[Math.floor(Math.random() * unselectedPieces.length)];
       } else {
-        const selectedPieceIndex = pieces.findIndex(
-          ({ id }) => id === selectedPieceId
+        const selectedPieceIndex = visiblePieceIds.findIndex(
+          id => id === selectedPieceId
         );
         if (
           selectedPieceIndex === -1 ||
-          selectedPieceIndex === pieces.length - 1
+          selectedPieceIndex === visiblePieceIds.length - 1
         ) {
-          nextPieceId = pieces[0].id;
+          [nextPieceId] = visiblePieceIds;
         } else {
-          nextPieceId = pieces[selectedPieceIndex + 1].id;
+          nextPieceId = visiblePieceIds[selectedPieceIndex + 1];
         }
       }
       store.dispatch(selectPiece(nextPieceId));
@@ -83,16 +83,17 @@ const piecesMiddleware = store => next => {
         if (pieceHistory.length > 1) {
           nextPieceId = pieceHistory[pieceHistory.length - 2];
         } else {
-          nextPieceId = pieces[Math.floor(Math.random() * pieces.length)].id;
+          nextPieceId =
+            visiblePieceIds[Math.floor(Math.random() * visiblePieceIds.length)];
         }
       } else {
-        const selectedPieceIndex = pieces.findIndex(
-          ({ id }) => id === selectedPieceId
+        const selectedPieceIndex = visiblePieceIds.findIndex(
+          id => id === selectedPieceId
         );
         if (selectedPieceIndex <= 0) {
-          nextPieceId = pieces[pieces.length - 1].id;
+          nextPieceId = visiblePieceIds[visiblePieceIds.length - 1];
         } else {
-          nextPieceId = pieces[selectedPieceIndex - 1].id;
+          nextPieceId = visiblePieceIds[selectedPieceIndex - 1];
         }
       }
       store.dispatch(selectPiece(nextPieceId));
