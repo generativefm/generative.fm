@@ -13,7 +13,7 @@ const { Static, Animated } = react;
 
 const CurrentlyPlayingComponent = ({ selectedPieceId, isPlaying }) => {
   const hasSelection = selectedPieceId !== null;
-  const { artist, title } = hasSelection
+  const { title } = hasSelection
     ? pieces.find(({ id }) => id === selectedPieceId)
     : { artist: '', title: '' };
   const containerRef = useRef(null);
@@ -49,17 +49,21 @@ const CurrentlyPlayingComponent = ({ selectedPieceId, isPlaying }) => {
         {hasSelection && visualizer}
       </div>
       <div className="currently-playing__info">
-        <div className="currently-playing__info__title">{title}</div>
-        <div className="currently-playing__info__btns">
-          <FavoriteButton
-            className="currently-playing__info__btns__btn"
-            pieceId={selectedPieceId}
-          />
-          <MoreButton
-            className="currently-playing__info__btns__btn"
-            pieceId={selectedPieceId}
-          />
-        </div>
+        {hasSelection && (
+          <div className="currently-playing__info__title">{title}</div>
+        )}
+        {hasSelection && (
+          <div className="currently-playing__info__btns">
+            <FavoriteButton
+              className="currently-playing__info__btns__btn"
+              pieceId={selectedPieceId}
+            />
+            <MoreButton
+              className="currently-playing__info__btns__btn"
+              pieceId={selectedPieceId}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
