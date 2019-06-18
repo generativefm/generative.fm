@@ -17,6 +17,7 @@ import timer from './timer.reducer';
 import notifications from './notifications.reducer';
 import favorites from './favorites.reducer';
 import filter from './filter.reducer';
+import sorting from './sorting.reducer';
 
 const rootReducer = combineReducers({
   isMuted,
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
   notifications,
   favorites,
   filter,
+  sorting,
 });
 
 export default rootReducer;

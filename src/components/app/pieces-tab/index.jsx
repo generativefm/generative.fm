@@ -7,6 +7,7 @@ import LinkButton from '@components/shared/link-button';
 import Dropdown from './drop-down';
 import Piece from './piece';
 import tags from '@pieces/tags';
+import sortings from '@pieces/sortings';
 import './pieces-tab.scss';
 
 const PiecesTabComponent = ({
@@ -23,6 +24,9 @@ const PiecesTabComponent = ({
   changeFilter,
   favorites,
   history,
+  sorting,
+  changeSorting,
+  state,
 }) => {
   let isValidSinglePiece = false;
   let filteredPieces;
@@ -57,16 +61,24 @@ const PiecesTabComponent = ({
     return <Redirect to="/" />;
   }
 
+  const currentSorting = sortings[sorting.key];
+
+  filteredPieces = currentSorting.fn(filteredPieces, state);
+  if (sorting.isReversed) {
+    filteredPieces.reverse();
+  }
+
   return (
     <div className="pieces-tab">
       <div className="filter-bar">
         {isValidSinglePiece ? (
           <span>
+            viewing &quot;{piecesById[pieceId].title},&quot;{' '}
             <LinkButton
               title="Click to view all pieces"
               onClick={() => clearAndChangeFilter()}
             >
-              Click to view all pieces
+              click here to show all
             </LinkButton>
           </span>
         ) : (
@@ -82,8 +94,41 @@ const PiecesTabComponent = ({
             {filteredPieces.length > 1 && (
               <span>
                 {' '}
-                sorted by <LinkButton>release date</LinkButton> (
-                <LinkButton>newest first</LinkButton>)
+                sorted by{' '}
+                <Dropdown
+                  selected={currentSorting.label}
+                  options={Reflect.ownKeys(sortings).map(
+                    key => sortings[key].label
+                  )}
+                  onSelect={newSortingLabel => {
+                    if (newSortingLabel !== currentSorting.label) {
+                      const key = Reflect.ownKeys(sortings).find(
+                        sortingKey =>
+                          sortings[sortingKey].label === newSortingLabel
+                      );
+                      changeSorting(key);
+                    }
+                  }}
+                />{' '}
+                (
+                <Dropdown
+                  selected={
+                    sorting.isReversed
+                      ? currentSorting.reverseDirectionLabel
+                      : currentSorting.defaultDirectionLabel
+                  }
+                  options={[
+                    currentSorting.defaultDirectionLabel,
+                    currentSorting.reverseDirectionLabel,
+                  ]}
+                  onSelect={newDirectionLabel =>
+                    changeSorting(
+                      sorting.key,
+                      newDirectionLabel === currentSorting.reverseDirectionLabel
+                    )
+                  }
+                />
+                )
               </span>
             )}
           </span>
