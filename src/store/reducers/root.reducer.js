@@ -18,8 +18,9 @@ import notifications from './notifications.reducer';
 import favorites from './favorites.reducer';
 import filter from './filter.reducer';
 import sorting from './sorting.reducer';
+import visiblePieceIds from './visible-piece-ids.reducer';
 
-const rootReducer = combineReducers({
+const combinedReducer = combineReducers({
   isMuted,
   isPlaying,
   selectedPieceId,
@@ -40,5 +41,14 @@ const rootReducer = combineReducers({
   filter,
   sorting,
 });
+
+const rootReducer = (state = {}, action) => {
+  const combinedState = Object.assign({}, state);
+  delete combinedState.visiblePieceIds;
+  return Object.assign(
+    { visiblePieceIds: visiblePieceIds(state, action) },
+    combinedReducer(combinedState, action)
+  );
+};
 
 export default rootReducer;

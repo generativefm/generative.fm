@@ -26,7 +26,7 @@ const PiecesTabComponent = ({
   history,
   sorting,
   changeSorting,
-  state,
+  visiblePieceIds,
 }) => {
   let isValidSinglePiece = false;
   let filteredPieces;
@@ -39,14 +39,8 @@ const PiecesTabComponent = ({
     } else {
       return <Redirect to="/" />;
     }
-  } else if (filter === 'all') {
-    filteredPieces = pieces;
-  } else if (filter === 'favorites') {
-    filteredPieces = pieces.filter(({ id }) => favorites.has(id));
   } else {
-    filteredPieces = pieces.filter(piece =>
-      piece.tags.some(tag => tag === filter)
-    );
+    filteredPieces = visiblePieceIds.map(id => piecesById[id]);
   }
 
   const clearAndChangeFilter = (newFilter = 'all') => {
@@ -62,11 +56,6 @@ const PiecesTabComponent = ({
   }
 
   const currentSorting = sortings[sorting.key];
-
-  filteredPieces = currentSorting.fn(filteredPieces, state);
-  if (sorting.isReversed) {
-    filteredPieces.reverse();
-  }
 
   return (
     <div className="pieces-tab">
@@ -111,23 +100,16 @@ const PiecesTabComponent = ({
                   }}
                 />{' '}
                 (
-                <Dropdown
-                  selected={
-                    sorting.isReversed
-                      ? currentSorting.reverseDirectionLabel
-                      : currentSorting.defaultDirectionLabel
+                <LinkButton
+                  title="Change sort order"
+                  onClick={() =>
+                    changeSorting(sorting.key, !sorting.isReversed)
                   }
-                  options={[
-                    currentSorting.defaultDirectionLabel,
-                    currentSorting.reverseDirectionLabel,
-                  ]}
-                  onSelect={newDirectionLabel =>
-                    changeSorting(
-                      sorting.key,
-                      newDirectionLabel === currentSorting.reverseDirectionLabel
-                    )
-                  }
-                />
+                >
+                  {sorting.isReversed
+                    ? currentSorting.reverseDirectionLabel
+                    : currentSorting.defaultDirectionLabel}{' '}
+                </LinkButton>
                 )
               </span>
             )}

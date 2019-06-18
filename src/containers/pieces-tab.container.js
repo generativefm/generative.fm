@@ -9,31 +9,29 @@ import removeFavorite from '@store/actions/creators/remove-favorite.creator';
 import changeFilter from '@store/actions/creators/change-filter.creator';
 import changeSorting from '@store/actions/creators/change-sorting.creator';
 
-const mapStateToProps = state => {
-  const {
-    selectedPieceId,
-    isPlaying,
-    playTime,
-    loadingPieceBuildId,
-    generatedRecordings,
-    favorites,
-    filter,
-    sorting,
-  } = state;
-  return {
-    state,
-    selectedPieceId,
-    isPlaying,
-    playTime,
-    favorites,
-    filter,
-    sorting,
-    isLoading: loadingPieceBuildId !== '',
-    isRecordingGenerationInProgress: isRecordingGenerationInProgress(
-      generatedRecordings
-    ),
-  };
-};
+const mapStateToProps = ({
+  selectedPieceId,
+  isPlaying,
+  playTime,
+  loadingPieceBuildId,
+  generatedRecordings,
+  favorites,
+  filter,
+  sorting,
+  visiblePieceIds,
+}) => ({
+  selectedPieceId,
+  isPlaying,
+  playTime,
+  favorites,
+  filter,
+  sorting,
+  visiblePieceIds,
+  isLoading: loadingPieceBuildId !== '',
+  isRecordingGenerationInProgress: isRecordingGenerationInProgress(
+    generatedRecordings
+  ),
+});
 
 const mapDispatchToProps = {
   addFavorite,
