@@ -16,6 +16,7 @@ import lastRecordingGenerationLength from './last-recording-generation-length.re
 import timer from './timer.reducer';
 import notifications from './notifications.reducer';
 import favorites from './favorites.reducer';
+import filter from './filter.reducer';
 
 const rootReducer = combineReducers({
   isMuted,
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   timer,
   notifications,
   favorites,
+  filter,
 });
 
 export default rootReducer;

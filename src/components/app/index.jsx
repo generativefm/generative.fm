@@ -52,9 +52,12 @@ const AppComponent = () => {
                 <Route exact path="/help" component={HelpTabComponent} />
                 <Route exact path="/record" component={RecordTabContainer} />
                 <Route
-                  path="/music/:filter"
-                  render={({ match }) => (
-                    <PiecesTabContainer filter={match.params.filter} />
+                  path="/music/:pieceId"
+                  render={({ match, history }) => (
+                    <PiecesTabContainer
+                      pieceId={match.params.pieceId}
+                      history={history}
+                    />
                   )}
                 />
                 <Route render={() => <Redirect to="/" />} />

@@ -6,6 +6,7 @@ import stop from '../store/actions/creators/stop.creator';
 import play from '../store/actions/creators/play.creator';
 import addFavorite from '../store/actions/creators/add-favorite.creator';
 import removeFavorite from '../store/actions/creators/remove-favorite.creator';
+import changeFilter from '../store/actions/creators/change-filter.creator';
 
 const mapStateToProps = ({
   selectedPieceId,
@@ -14,11 +15,13 @@ const mapStateToProps = ({
   loadingPieceBuildId,
   generatedRecordings,
   favorites,
+  filter,
 }) => ({
   selectedPieceId,
   isPlaying,
   playTime,
   favorites,
+  filter,
   isLoading: loadingPieceBuildId !== '',
   isRecordingGenerationInProgress: isRecordingGenerationInProgress(
     generatedRecordings
@@ -28,6 +31,7 @@ const mapStateToProps = ({
 const mapDispatchToProps = {
   addFavorite,
   removeFavorite,
+  changeFilter,
   onPieceClick: ({ id }) => selectPiece(id),
   onStopClick: stop,
   onPlayClick: play,

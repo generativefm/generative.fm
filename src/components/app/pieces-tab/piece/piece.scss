@@ -70,8 +70,9 @@ $pieceWidth: 12em;
       margin-top: 0.5em;
       margin-bottom: 0.2em;
 
-      .primary-link {
+      &__btn {
         color: $primaryColor;
+        text-align: left;
 
         @include hoverStyle(#{&}) {
           &:hover {

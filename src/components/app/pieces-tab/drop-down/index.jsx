@@ -17,6 +17,7 @@ const Dropdown = ({ options, selected, onSelect, title }) => {
       onClickOutside={() => setIsOpen(false)}
       disableReposition="true"
       position="bottom"
+      padding={-15}
       transitionDuration="0"
       content={
         <ul className="drop-down-menu">

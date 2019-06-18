@@ -1,10 +1,12 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { Redirect } from 'react-router';
+import { Redirect, Link } from 'react-router';
 import pieces from '@pieces';
+import piecesById from '@pieces/by-id';
 import LinkButton from '@components/shared/link-button';
 import Dropdown from './drop-down';
 import Piece from './piece';
+import tags from '@pieces/tags';
 import './pieces-tab.scss';
 
 const PiecesTabComponent = ({
@@ -15,30 +17,77 @@ const PiecesTabComponent = ({
   onPlayClick,
   playTime,
   filter,
+  pieceId,
   isLoading,
   isRecordingGenerationInProgress,
+  changeFilter,
+  favorites,
+  history,
 }) => {
-  const filteredPieces = pieces.filter(
-    ({ id, artist }) =>
-      typeof filter !== 'string' || (id === filter || artist === filter)
-  );
-  if (
-    !isPlaying &&
-    filteredPieces.length === 1 &&
-    filteredPieces[0].id !== selectedPieceId
-  ) {
-    onPieceClick(filteredPieces[0]);
+  let isValidSinglePiece = false;
+  let filteredPieces;
+  if (typeof pieceId === 'string') {
+    const piece = pieces.find(({ id }) => id === pieceId);
+    if (piece) {
+      isValidSinglePiece = true;
+      filteredPieces = [piece];
+      onPieceClick(piece);
+    } else {
+      return <Redirect to="/" />;
+    }
+  } else if (filter === 'all') {
+    filteredPieces = pieces;
+  } else if (filter === 'favorites') {
+    filteredPieces = pieces.filter(({ id }) => favorites.has(id));
+  } else {
+    filteredPieces = pieces.filter(piece =>
+      piece.tags.some(tag => tag === filter)
+    );
   }
 
-  return filteredPieces.length > 0 ? (
+  const clearAndChangeFilter = (newFilter = 'all') => {
+    changeFilter(newFilter);
+    if (location.pathname !== '/') {
+      history.push('/');
+    }
+  };
+
+  if (filteredPieces.length === 0) {
+    changeFilter('all');
+    return <Redirect to="/" />;
+  }
+
+  return (
     <div className="pieces-tab">
       <div className="filter-bar">
-        <span>
-          viewing{' '}
-          <Dropdown selected="all" options={['all', 'favorites', 'poop']} />{' '}
-          sorted by <LinkButton>release date</LinkButton> (
-          <LinkButton>newest first</LinkButton>)
-        </span>
+        {isValidSinglePiece ? (
+          <span>
+            <LinkButton
+              title="Click to view all pieces"
+              onClick={() => clearAndChangeFilter()}
+            >
+              Click to view all pieces
+            </LinkButton>
+          </span>
+        ) : (
+          <span>
+            viewing{' '}
+            <Dropdown
+              selected={filter}
+              options={['all']
+                .concat(favorites.size > 0 ? ['favorites'] : [])
+                .concat(tags)}
+              onSelect={newFilter => clearAndChangeFilter(newFilter)}
+            />
+            {filteredPieces.length > 1 && (
+              <span>
+                {' '}
+                sorted by <LinkButton>release date</LinkButton> (
+                <LinkButton>newest first</LinkButton>)
+              </span>
+            )}
+          </span>
+        )}
       </div>
       <div className="pieces-container">
         <div className="pieces">
@@ -54,13 +103,12 @@ const PiecesTabComponent = ({
               onPieceClick={onPieceClick}
               onPlayClick={onPlayClick}
               onStopClick={onStopClick}
+              changeFilter={clearAndChangeFilter}
             />
           ))}
         </div>
       </div>
     </div>
-  ) : (
-    <Redirect to="/" />
   );
 };
 

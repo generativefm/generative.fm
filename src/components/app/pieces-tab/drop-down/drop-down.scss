@@ -4,6 +4,8 @@
 .drop-down-menu {
   background: $backgroundColor;
   color: $primaryColor;
+  max-height: 50vh;
+  overflow-y: auto;
 
   @include borderedList();
 

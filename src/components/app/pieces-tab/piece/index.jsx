@@ -26,6 +26,7 @@ const Piece = ({
   onPieceClick,
   onPlayClick,
   onStopClick,
+  changeFilter,
 }) => {
   const handlePieceClick = () => {
     if (!isSelected) {
@@ -71,7 +72,7 @@ const Piece = ({
       <div className="piece__info">
         <div className="piece__info__title">
           <LinkButton
-            className="primary-link"
+            className="piece__info__title__btn"
             onClick={handlePieceClick}
             title={`Play ${piece.title}`}
           >
@@ -81,12 +82,20 @@ const Piece = ({
         <div className="piece__info__tags">
           {piece.tags.map((tag, i) =>
             i === piece.tags.length - 1 ? (
-              <LinkButton key={tag} title={`View ${tag} pieces`}>
+              <LinkButton
+                key={tag}
+                title={`View ${tag} pieces`}
+                onClick={() => changeFilter(tag)}
+              >
                 {tag}
               </LinkButton>
             ) : (
               <span key={tag}>
-                <LinkButton className="btn--link" title={`View ${tag} pieces`}>
+                <LinkButton
+                  className="btn--link"
+                  title={`View ${tag} pieces`}
+                  onClick={() => changeFilter(tag)}
+                >
                   {tag}
                 </LinkButton>
                 ,{' '}
