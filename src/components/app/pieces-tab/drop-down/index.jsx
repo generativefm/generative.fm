@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import propTypes from 'prop-types';
 import Popover from 'react-tiny-popover';
 import LinkButton from '@components/shared/link-button';
 import './drop-down.scss';
@@ -43,6 +44,13 @@ const Dropdown = ({ options, selected, onSelect, title }) => {
       </LinkButton>
     </Popover>
   );
+};
+
+Dropdown.propTypes = {
+  options: propTypes.array.isRequired,
+  selected: propTypes.string.isRequired,
+  onSelect: propTypes.string.isRequired,
+  title: propTypes.string.isRequired,
 };
 
 export default Dropdown;

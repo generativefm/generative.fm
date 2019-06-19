@@ -1,6 +1,6 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { Redirect, Link } from 'react-router';
+import { Redirect } from 'react-router';
 import pieces from '@pieces';
 import piecesById from '@pieces/by-id';
 import LinkButton from '@components/shared/link-button';
@@ -23,7 +23,6 @@ const PiecesTabComponent = ({
   isRecordingGenerationInProgress,
   changeFilter,
   favorites,
-  history,
   sorting,
   changeSorting,
   visiblePieceIds,
@@ -79,6 +78,7 @@ const PiecesTabComponent = ({
                 .concat(favorites.size > 0 ? ['favorites'] : [])
                 .concat(tags)}
               onSelect={newFilter => clearAndChangeFilter(newFilter)}
+              title="Change filter"
             />
             {filteredPieces.length > 1 && (
               <span>
@@ -98,6 +98,7 @@ const PiecesTabComponent = ({
                       changeSorting(key);
                     }
                   }}
+                  title="Change sorting"
                 />{' '}
                 (
                 <LinkButton
@@ -149,6 +150,12 @@ PiecesTabComponent.propTypes = {
   playTime: propTypes.object.isRequired,
   isLoading: propTypes.bool.isRequired,
   filter: propTypes.string,
+  pieceId: propTypes.string,
+  changeFilter: propTypes.func.isRequired,
+  favorites: propTypes.object.isRequired,
+  sorting: propTypes.object.isRequired,
+  changeSorting: propTypes.func.isRequired,
+  visiblePieceIds: propTypes.array.isRequired,
 };
 
 export default PiecesTabComponent;

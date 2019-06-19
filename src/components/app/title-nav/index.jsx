@@ -1,6 +1,5 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import IconButton from '@components/shared/icon-button';

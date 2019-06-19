@@ -21,7 +21,6 @@ const Piece = ({
   playTime,
   isSelected,
   isPlaying,
-  isDisabled,
   isLoading,
   onPieceClick,
   onPlayClick,
@@ -119,6 +118,7 @@ Piece.propTypes = {
   onPieceClick: propTypes.func.isRequired,
   onPlayClick: propTypes.func.isRequired,
   onStopClick: propTypes.func.isRequired,
+  changeFilter: propTypes.func.isRequired,
 };
 
 export default Piece;

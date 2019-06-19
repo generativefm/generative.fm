@@ -1,10 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import propTypes from 'prop-types';
 import { react, animators } from '@generative-music/visualizer';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faEllipsisH } from '@fortawesome/free-solid-svg-icons';
 import pieces from '@pieces';
-import artists from '@data/artists';
 import FavoriteButton from '@containers/favorite-button.container';
 import MoreButton from '@components/shared/more-button';
 import './currently-playing.scss';
