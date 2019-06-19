@@ -11,7 +11,7 @@
     "predeploy": "npm run lint && npm run build",
     "deploy:staging": "npm run predeploy && node node_scripts/deploy.js",
     "deploy:production": "npm run predeploy && node node_scripts/deploy.js -p",
-    "lint": "eslint .",
+    "lint": "eslint . --ext .js,.jsx",
     "postversion": "git push && git push --tags"
   },
   "repository": {
