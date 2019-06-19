@@ -10,6 +10,7 @@ const IconButton = ({
   title,
   className = '',
   isFilled = false,
+  isDisabled = false,
 }) => (
   <button
     type="button"
@@ -18,6 +19,7 @@ const IconButton = ({
     className={classNames('icon-button', className, {
       'icon-button--is-filled': isFilled,
     })}
+    disabled={isDisabled}
   >
     <FontAwesomeIcon icon={faIcon} />
   </button>
@@ -29,6 +31,7 @@ IconButton.propTypes = {
   title: propTypes.string.isRequired,
   className: propTypes.string,
   isFilled: propTypes.bool,
+  isDisabled: propTypes.bool,
 };
 
 export default IconButton;

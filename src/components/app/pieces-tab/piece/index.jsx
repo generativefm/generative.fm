@@ -22,26 +22,40 @@ const Piece = ({
   isSelected,
   isPlaying,
   isLoading,
+  isRecording,
   onPieceClick,
   onPlayClick,
   onStopClick,
   changeFilter,
 }) => {
   const handlePieceClick = () => {
-    if (!isSelected) {
+    if (isRecording) {
       onPieceClick(piece);
-    }
-    if (!isPlaying) {
-      onPlayClick();
+    } else {
+      if (!isSelected) {
+        onPieceClick(piece);
+      }
+      if (!isPlaying) {
+        onPlayClick();
+      }
     }
   };
+
+  let centerButtonTitle;
+  if (isRecording) {
+    centerButtonTitle = 'Playback is disabled while recordings are generated';
+  } else if (isPlaying) {
+    centerButtonTitle = 'Stop';
+  } else {
+    centerButtonTitle = `Play ${piece.title}`;
+  }
 
   return (
     <div className="piece" key={piece.id}>
       <div
         className="piece__image"
         onClick={handlePieceClick}
-        title={`Play ${piece.title}`}
+        title={`${isRecording ? 'Select' : 'Play'} ${piece.title}`}
       >
         <img src={piece.image ? piece.image : defaultImage} />
         {isSelected && (isPlaying || isLoading) && (
@@ -64,7 +78,8 @@ const Piece = ({
               ? () => onStopClick()
               : handlePieceClick
           }
-          title={isPlaying ? 'Stop' : `Play ${piece.title}`}
+          title={centerButtonTitle}
+          isDisabled={isRecording}
         />
         <MoreButton className="piece__btns__btn" pieceId={piece.id} />
       </div>
@@ -115,6 +130,7 @@ Piece.propTypes = {
   isPlaying: propTypes.bool.isRequired,
   isDisabled: propTypes.bool.isRequired,
   isLoading: propTypes.bool.isRequired,
+  isRecording: propTypes.bool.isRequired,
   onPieceClick: propTypes.func.isRequired,
   onPlayClick: propTypes.func.isRequired,
   onStopClick: propTypes.func.isRequired,

@@ -49,7 +49,7 @@ const Dropdown = ({ options, selected, onSelect, title }) => {
 Dropdown.propTypes = {
   options: propTypes.array.isRequired,
   selected: propTypes.string.isRequired,
-  onSelect: propTypes.string.isRequired,
+  onSelect: propTypes.func.isRequired,
   title: propTypes.string.isRequired,
 };
 

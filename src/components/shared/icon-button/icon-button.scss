@@ -12,6 +12,17 @@
     outline: none;
   }
 
+  &:disabled {
+    color: $primaryActiveColor;
+    cursor: not-allowed;
+
+    @include hoverStyle(#{&}) {
+      &:hover {
+        color: $primaryActiveColor;
+      }
+    }
+  }
+
   @include hoverStyle(#{&}) {
     &:hover {
       color: $primaryHoverColor;

@@ -132,6 +132,7 @@ const PiecesTabComponent = ({
               onPlayClick={onPlayClick}
               onStopClick={onStopClick}
               changeFilter={clearAndChangeFilter}
+              isRecording={isRecordingGenerationInProgress}
             />
           ))}
         </div>
