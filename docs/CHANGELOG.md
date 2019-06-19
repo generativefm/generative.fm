@@ -7,13 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Site is dark-themed
+- Hover effects removed on touch devices, site redesigned with this constraint
+
 ### Fixed
 
 - Add a maximum piece history of 20
+- Volume slider is exponential instead of linear
+- (dev) .jsx files are linted
 
 ### Added
 
-- Favorites
+- Pieces can be added to/removed from favorites and the piece list can be filtered to only show favorites
+- Piece tags are displayed and the piece list is filterable by tag
+- Piece links can be copied from the "more" menu
+- Configurable sorting (by release date or play time)
 
 ## [0.22.0] - 2019-06-15
 
