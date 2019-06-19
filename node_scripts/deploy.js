@@ -17,7 +17,7 @@ const { bucketName, cloudfrontDistributionId } =
 const DIST_DIR = 'dist';
 const S3_API_VERSION = '2006-03-01';
 const CLOUDFRONT_API_VERSION = '2018-11-05';
-const NON_DIST_FILENAMES = ['favicon.ico', 'manifest.json'];
+const NON_DIST_FILENAMES = ['favicon.ico'];
 const INVALIDATED_CACHE_FILES = ['/index.html', '/sw.js', '/'];
 
 const globPromise = (pattern, opts) =>
@@ -63,11 +63,7 @@ const getContentType = (filename = '') => {
 };
 
 const uploadDistItems = () =>
-  Promise.all(
-    [`${DIST_DIR}/!(*.map)`, 'icons/**/*.png'].map(pattern =>
-      globPromise(pattern)
-    )
-  )
+  Promise.all([`${DIST_DIR}/!(*.map)`].map(pattern => globPromise(pattern)))
     .then(fileGroups =>
       fileGroups.reduce((allFiles, fileGroup) => allFiles.concat(fileGroup), [])
     )
