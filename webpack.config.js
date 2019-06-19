@@ -63,8 +63,12 @@ const makeConfig = alias => ({
         type: 'javascript/auto',
       },
       {
-        test: /\.mp3$/,
+        test: [/\.mp3$/, /\.ico$/],
         use: 'file-loader',
+      },
+      {
+        test: /\.webmanifest/,
+        use: ['file-loader', 'app-manifest-loader'],
       },
     ],
   },
