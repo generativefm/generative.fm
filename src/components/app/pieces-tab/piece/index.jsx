@@ -50,12 +50,14 @@ const Piece = ({
     centerButtonTitle = `Play ${piece.title}`;
   }
 
+  const primaryTitle = `${isRecording ? 'Select' : 'Play'} ${piece.title}`;
+
   return (
     <div className="piece" key={piece.id}>
       <div
         className="piece__image"
         onClick={handlePieceClick}
-        title={`${isRecording ? 'Select' : 'Play'} ${piece.title}`}
+        title={primaryTitle}
       >
         <img src={piece.image ? piece.image : defaultImage} />
         {isSelected && (isPlaying || isLoading) && (
@@ -88,7 +90,7 @@ const Piece = ({
           <LinkButton
             className="piece__info__title__btn"
             onClick={handlePieceClick}
-            title={`Play ${piece.title}`}
+            title={primaryTitle}
           >
             {piece.title}
           </LinkButton>
