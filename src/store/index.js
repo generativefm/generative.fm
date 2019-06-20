@@ -12,6 +12,7 @@ import recordingGenerationMiddleware from './middleware/recording-generation.mid
 import timerMiddleware from './middleware/timer.middleware';
 import notificationsMiddleware from './middleware/notifications.middleware';
 import STATE_STORAGE_KEY from './middleware/local-storage.middleware/key';
+import installPromptMiddleware from './middleware/install-prompt.middleware';
 import getOnlineStatus from './get-online-status';
 import pieces from '../pieces/index';
 import { version } from '../../package.json';
@@ -73,6 +74,7 @@ const allMiddlewares = [
   shortcutsMiddleware,
   onlineStatusMiddleware,
   notificationsMiddleware,
+  installPromptMiddleware,
   localStorageMiddleware,
 ];
 const desktopMiddlewares = allMiddlewares.concat([beforeUnloadMiddleware]);
