@@ -1,7 +1,12 @@
 import KEY from './key';
 
 const stringify = state =>
-  JSON.stringify(Object.assign({}, state, { favorites: [...state.favorites] }));
+  JSON.stringify(
+    Object.assign({}, state, {
+      favorites: [...state.favorites],
+      cachedPieceIds: [...state.cachedPieceIds],
+    })
+  );
 
 const localStorageMiddleware = store => next => action => {
   const previousStateString = stringify(store.getState());

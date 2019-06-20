@@ -6,7 +6,7 @@ const loadingPieceBuildIdReducer = (state = '', action) => {
     return action.payload;
   } else if (
     action.type === MARK_PIECE_BUILD_LOADED &&
-    state === action.payload
+    state === action.payload.performanceId
   ) {
     return '';
   }

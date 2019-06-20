@@ -10,6 +10,17 @@
   font: inherit;
   color: $secondaryColor;
 
+  &--is-disabled {
+    cursor: not-allowed;
+    color: $secondaryActiveColor;
+
+    @include hoverStyle(#{&}) {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+
   &:focus {
     outline: none;
   }

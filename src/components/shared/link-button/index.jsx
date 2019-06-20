@@ -3,10 +3,18 @@ import propTypes from 'prop-types';
 import classNames from 'classnames';
 import './link-button.scss';
 
-const LinkButton = ({ onClick, title, children, className = '' }) => (
+const LinkButton = ({
+  onClick,
+  title,
+  children,
+  isDisabled = false,
+  className = '',
+}) => (
   <button
     type="button"
-    className={classNames('link-btn', className)}
+    className={classNames('link-btn', className, {
+      'link-btn--is-disabled': isDisabled,
+    })}
     title={title}
     onClick={onClick}
   >
@@ -21,6 +29,7 @@ LinkButton.propTypes = {
     propTypes.arrayOf(propTypes.node),
     propTypes.node,
   ]),
+  isDisabled: propTypes.bool,
   className: propTypes.string,
 };
 

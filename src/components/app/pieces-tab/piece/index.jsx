@@ -22,17 +22,14 @@ const Piece = ({
   isSelected,
   isPlaying,
   isLoading,
-  isRecording,
-  isDisabled,
   onPieceClick,
   onPlayClick,
   onStopClick,
   changeFilter,
+  isDisabled = false,
 }) => {
   const handlePieceClick = () => {
-    if (isRecording || isDisabled) {
-      onPieceClick(piece);
-    } else {
+    if (!isDisabled) {
       if (!isSelected) {
         onPieceClick(piece);
       }
@@ -46,8 +43,7 @@ const Piece = ({
   let primaryTitle = `Select ${piece.title}`;
   if (isDisabled) {
     centerButtonTitle = 'This piece is not currently available';
-  } else if (isRecording) {
-    centerButtonTitle = 'Playback is disabled while recordings are generated';
+    primaryTitle = centerButtonTitle;
   } else if (isPlaying) {
     centerButtonTitle = 'Stop';
     primaryTitle = `${piece.title} is playing`;
@@ -88,16 +84,19 @@ const Piece = ({
               : handlePieceClick
           }
           title={centerButtonTitle}
-          isDisabled={isRecording || isDisabled}
+          isDisabled={isDisabled}
         />
         <MoreButton className="piece__btns__btn" pieceId={piece.id} />
       </div>
       <div className="piece__info">
         <div className="piece__info__title">
           <LinkButton
-            className="piece__info__title__btn"
+            className={classNames('piece__info__title__btn', {
+              'piece__info__title__btn--is-disabled': isDisabled,
+            })}
             onClick={handlePieceClick}
             title={primaryTitle}
+            isDisabled={isDisabled}
           >
             {piece.title}
           </LinkButton>
@@ -137,13 +136,12 @@ Piece.propTypes = {
   playTime: propTypes.number,
   isSelected: propTypes.bool.isRequired,
   isPlaying: propTypes.bool.isRequired,
-  isDisabled: propTypes.bool.isRequired,
   isLoading: propTypes.bool.isRequired,
-  isRecording: propTypes.bool.isRequired,
   onPieceClick: propTypes.func.isRequired,
   onPlayClick: propTypes.func.isRequired,
   onStopClick: propTypes.func.isRequired,
   changeFilter: propTypes.func.isRequired,
+  isDisabled: propTypes.bool,
 };
 
 export default Piece;

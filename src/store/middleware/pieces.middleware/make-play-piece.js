@@ -51,7 +51,7 @@ const makePlayPiece = (store, performances) => {
           piecePerformance.isLoaded = true;
           isPerformanceBuilding = false;
           const { selectedPieceId, isPlaying } = store.getState();
-          store.dispatch(markPieceBuildLoaded(piecePerformance.performanceId));
+          store.dispatch(markPieceBuildLoaded(piecePerformance));
           if (
             lastBuildId === piecePerformance.performanceId &&
             selectedPieceId === piece.id &&

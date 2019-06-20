@@ -20,6 +20,7 @@ import filter from './filter.reducer';
 import sorting from './sorting.reducer';
 import visiblePieceIds from './visible-piece-ids.reducer';
 import isInstallable from './is-installable.reducer';
+import cachedPieceIds from './cached-piece-ids.reducer';
 
 const combinedReducer = combineReducers({
   isMuted,
@@ -42,6 +43,7 @@ const combinedReducer = combineReducers({
   filter,
   sorting,
   isInstallable,
+  cachedPieceIds,
 });
 
 const rootReducer = (state = {}, action) => {

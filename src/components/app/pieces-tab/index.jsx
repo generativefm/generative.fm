@@ -27,6 +27,8 @@ const PiecesTabComponent = ({
   sorting,
   changeSorting,
   visiblePieceIds,
+  isOnline,
+  cachedPieceIds,
 }) => {
   let isValidSinglePiece = false;
   let filteredPieces;
@@ -56,6 +58,11 @@ const PiecesTabComponent = ({
   }
 
   const currentSorting = sortings[sorting.key];
+
+  const isPieceDisabled = piece =>
+    !isSupported ||
+    isRecordingGenerationInProgress ||
+    (!isOnline && !cachedPieceIds.has(piece.id));
 
   return (
     <div className="pieces-tab">
@@ -127,13 +134,12 @@ const PiecesTabComponent = ({
               playTime={playTime[piece.id]}
               isSelected={selectedPieceId === piece.id}
               isPlaying={isPlaying}
-              isDisabled={!isSupported || isRecordingGenerationInProgress}
+              isDisabled={isPieceDisabled(piece)}
               isLoading={isLoading}
               onPieceClick={onPieceClick}
               onPlayClick={onPlayClick}
               onStopClick={onStopClick}
               changeFilter={clearAndChangeFilter}
-              isRecording={isRecordingGenerationInProgress}
             />
           ))}
         </div>

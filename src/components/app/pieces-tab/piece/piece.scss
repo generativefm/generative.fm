@@ -89,6 +89,16 @@ $pieceWidth: 12em;
             color: $primaryHoverColor;
           }
         }
+
+        &--is-disabled {
+          color: $primaryHoverColor;
+
+          @include hoverStyle(#{&}) {
+            &:hover {
+              text-decoration: none;
+            }
+          }
+        }
       }
     }
 

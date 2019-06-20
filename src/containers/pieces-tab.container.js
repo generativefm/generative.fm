@@ -19,6 +19,8 @@ const mapStateToProps = ({
   filter,
   sorting,
   visiblePieceIds,
+  isOnline,
+  cachedPieceIds,
 }) => ({
   selectedPieceId,
   isPlaying,
@@ -27,6 +29,8 @@ const mapStateToProps = ({
   filter,
   sorting,
   visiblePieceIds,
+  isOnline,
+  cachedPieceIds,
   isLoading: loadingPieceBuildId !== '',
   isRecordingGenerationInProgress: isRecordingGenerationInProgress(
     generatedRecordings
