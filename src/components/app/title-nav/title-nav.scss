@@ -25,8 +25,21 @@
           color: $secondaryColor;
         }
       }
+
       &__install-btn {
         float: right;
+      }
+
+      .secret-link {
+        @include hoverStyle(#{&}) {
+          & {
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
       }
     }
 

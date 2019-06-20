@@ -61,7 +61,10 @@ const TitleNavComponent = ({
             Generative.fm
           </h1>
           <h2 className="title-nav__header__info__title title-nav__header__info__title--secondary">
-            Generative music by Alex Bainter
+            Generative music by{' '}
+            <a href="https://alexbainter.com" className="secret-link">
+              Alex Bainter
+            </a>
           </h2>
 
           {isInstallable && (

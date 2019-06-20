@@ -6,6 +6,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import classNames from 'classnames';
+import isMobile from '@config/is-mobile';
 import Controls from './controls';
 import HelpTabComponent from './help-tab';
 import TitleNavContainer from '@containers/title-nav.container';
@@ -15,7 +16,7 @@ import RecordTabContainer from '@containers/record-tab.container';
 import './app.scss';
 
 const AppComponent = () => {
-  const [isHoverEnabled, setIsHoverEnabled] = useState(false);
+  const [isHoverEnabled, setIsHoverEnabled] = useState(!isMobile);
   useEffect(() => {
     let lastTouchTime = 0;
     const enableHover = () => {
