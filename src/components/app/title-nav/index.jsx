@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import IconButton from '@components/shared/icon-button';
+import TextButton from '@components/shared/text-button';
 import './title-nav.scss';
 
 const TitleNavLink = ({
@@ -43,7 +44,9 @@ const matchRootOrMusic = (match, location) =>
 const TitleNavComponent = ({
   isUpdateAvailable,
   notifications,
+  isInstallable,
   dismissNotification,
+  promptInstallation,
 }) => {
   let notification;
   if (notifications.length > 0) {
@@ -53,12 +56,25 @@ const TitleNavComponent = ({
   return (
     <div className="title-nav">
       <div className="title-nav__header">
-        <h1 className="title-nav__header__title title-nav__header__title--primary">
-          Generative.fm
-        </h1>
-        <h2 className="title-nav__header__title title-nav__header__title--secondary">
-          Generative music by Alex Bainter
-        </h2>
+        <div className="title-nav__header__info">
+          <h1 className="title-nav__header__info__title title-nav__header__info__title--primary">
+            Generative.fm
+          </h1>
+          <h2 className="title-nav__header__info__title title-nav__header__info__title--secondary">
+            Generative music by Alex Bainter
+          </h2>
+
+          {isInstallable && (
+            <TextButton
+              title="Add to home screen"
+              className="title-nav__header__info__install-btn"
+              onClick={() => promptInstallation()}
+            >
+              Install
+            </TextButton>
+          )}
+        </div>
+
         <ul className="title-nav__header__tab-list">
           <TitleNavLink
             text="PLAY"
@@ -109,7 +125,9 @@ const TitleNavComponent = ({
 TitleNavComponent.propTypes = {
   isUpdateAvailable: propTypes.bool.isRequired,
   notifications: propTypes.array.isRequired,
+  isInstallable: propTypes.bool.isRequired,
   dismissNotification: propTypes.func.isRequired,
+  promptInstallation: propTypes.func.isRequired,
 };
 
 export default TitleNavComponent;

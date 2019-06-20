@@ -10,18 +10,23 @@
     border-bottom: 1px solid $secondaryColor;
     overflow-y: auto;
 
-    &__title {
-      font-family: 'Arimo', sans-serif;
-      font-weight: inherit;
-      margin: 0.375em 0;
+    &__info {
+      &__title {
+        font-family: 'Arimo', sans-serif;
+        font-weight: inherit;
+        margin: 0.375em 0;
 
-      &--primary {
-        font-size: 1.25em;
+        &--primary {
+          font-size: 1.25em;
+        }
+
+        &--secondary {
+          font-size: 1em;
+          color: $secondaryColor;
+        }
       }
-
-      &--secondary {
-        font-size: 1em;
-        color: $secondaryColor;
+      &__install-btn {
+        float: right;
       }
     }
 

@@ -19,6 +19,7 @@ import favorites from './favorites.reducer';
 import filter from './filter.reducer';
 import sorting from './sorting.reducer';
 import visiblePieceIds from './visible-piece-ids.reducer';
+import isInstallable from './is-installable.reducer';
 
 const combinedReducer = combineReducers({
   isMuted,
@@ -40,6 +41,7 @@ const combinedReducer = combineReducers({
   favorites,
   filter,
   sorting,
+  isInstallable,
 });
 
 const rootReducer = (state = {}, action) => {
