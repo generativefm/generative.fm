@@ -23,13 +23,14 @@ const Piece = ({
   isPlaying,
   isLoading,
   isRecording,
+  isDisabled,
   onPieceClick,
   onPlayClick,
   onStopClick,
   changeFilter,
 }) => {
   const handlePieceClick = () => {
-    if (isRecording) {
+    if (isRecording || isDisabled) {
       onPieceClick(piece);
     } else {
       if (!isSelected) {
@@ -42,18 +43,24 @@ const Piece = ({
   };
 
   let centerButtonTitle;
-  if (isRecording) {
+  let primaryTitle = `Select ${piece.title}`;
+  if (isDisabled) {
+    centerButtonTitle = 'This piece is not currently available';
+  } else if (isRecording) {
     centerButtonTitle = 'Playback is disabled while recordings are generated';
   } else if (isPlaying) {
     centerButtonTitle = 'Stop';
+    primaryTitle = `${piece.title} is playing`;
   } else {
     centerButtonTitle = `Play ${piece.title}`;
+    primaryTitle = `Play ${piece.title}`;
   }
 
-  const primaryTitle = `${isRecording ? 'Select' : 'Play'} ${piece.title}`;
-
   return (
-    <div className="piece" key={piece.id}>
+    <div
+      className={classNames('piece', { 'piece--is-disabled': isDisabled })}
+      key={piece.id}
+    >
       <div
         className="piece__image"
         onClick={handlePieceClick}
@@ -81,7 +88,7 @@ const Piece = ({
               : handlePieceClick
           }
           title={centerButtonTitle}
-          isDisabled={isRecording}
+          isDisabled={isRecording || isDisabled}
         />
         <MoreButton className="piece__btns__btn" pieceId={piece.id} />
       </div>

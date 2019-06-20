@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import propTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
 import pieces from '@pieces';
 import piecesById from '@pieces/by-id';
 import ControlButtonComponent from '../controls/control-button';
 import TextButton from '@components/shared/text-button';
+import isSupported from '@config/is-supported';
 import './record-tab.scss';
 
 const MAX_RECORDING_LENGTH_MINUTES = 240;
@@ -69,125 +71,133 @@ const RecordTabComponent = ({
       generation may take a while, and longer recordings require more time to
       generate. Music playback is not supported while recording generation is in
       progress.
-      <form onSubmit={handleSubmit}>
-        <div className="form-group recording-entry">
-          <span>
-            Record
-            <input
-              type="number"
-              id="length-input"
-              min="1"
-              max={MAX_RECORDING_LENGTH_MINUTES}
-              value={recordingLengthInMinutes}
-              onChange={event =>
-                setRecordingLengthInMinutes(event.target.value)
-              }
-              title="Length of the recording to generate, in miniutes"
-              required
-            />
-            minutes of
-            <select
-              id="piece-select"
-              value={selectedPieceId}
-              onChange={event => selectPiece(event.target.value)}
-              title="Piece to record"
-            >
-              {pieces.map(({ title, id, isRecordable }) => (
-                <option key={id} value={id} disabled={!isRecordable}>
-                  {title}
-                </option>
-              ))}
-            </select>
-          </span>
-          {isRecordingValid && (
-            <ControlButtonComponent
-              faIcon={faPlus}
-              title="Add to queue"
-              onClick={() =>
-                queueRecordingGeneration({
-                  pieceId: selectedPieceId,
-                  lengthInMinutes: recordingLengthInMinutes,
-                })
-              }
-            />
-          )}
-          {!isRecordingValid && <div className="btn-spacer" />}
-        </div>
-        {!selectedPiece.isRecordable && (
-          <div className="form-group invalid-msg">{`${
-            selectedPiece.title
-          } is not recordable.`}</div>
-        )}
-        {(recordingLengthInMinutes <= 0 ||
-          recordingLengthInMinutes > MAX_RECORDING_LENGTH_MINUTES) && (
-          <div className="form-group invalid-msg">
-            Recording length must be between 1 and 240 minutes
-          </div>
-        )}
-        <div className="form-group">
-          {generatedRecordingsQueue.filter(({ url }) => url === '').length >
-            0 &&
-            !isGenerationInProgress && (
-              <TextButton
-                title="Resume previously queued recording generation"
-                onClick={() =>
-                  startRecordingGeneration(
-                    generatedRecordingsQueue[0].recordingId
-                  )
+      {isSupported && (
+        <form onSubmit={handleSubmit}>
+          <div className="form-group recording-entry">
+            <span>
+              Record
+              <input
+                type="number"
+                id="length-input"
+                min="1"
+                max={MAX_RECORDING_LENGTH_MINUTES}
+                value={recordingLengthInMinutes}
+                onChange={event =>
+                  setRecordingLengthInMinutes(event.target.value)
                 }
+                title="Length of the recording to generate, in miniutes"
+                required
+              />
+              minutes of
+              <select
+                id="piece-select"
+                value={selectedPieceId}
+                onChange={event => selectPiece(event.target.value)}
+                title="Piece to record"
               >
-                Resume generation
-              </TextButton>
+                {pieces.map(({ title, id, isRecordable }) => (
+                  <option key={id} value={id} disabled={!isRecordable}>
+                    {title}
+                  </option>
+                ))}
+              </select>
+            </span>
+            {isRecordingValid && (
+              <ControlButtonComponent
+                faIcon={faPlus}
+                title="Add to queue"
+                onClick={() =>
+                  queueRecordingGeneration({
+                    pieceId: selectedPieceId,
+                    lengthInMinutes: recordingLengthInMinutes,
+                  })
+                }
+              />
             )}
-        </div>
-        <div className="form-group">
-          <ul className="generated-recordings-queue">
-            {generatedRecordingsQueue.map(generatedRecording => {
-              const {
-                recordingId,
-                lengthInMinutes,
-                url,
-                pieceId,
-                isInProgress,
-              } = generatedRecording;
-              let status = '';
-              if (isInProgress) {
-                status = ' - generating...';
-              } else if (url === '') {
-                status = ' - waiting to generate';
-              }
-              const displayText = `${lengthInMinutes} minutes of ${
-                piecesById[pieceId].title
-              }${status}`;
-              return (
-                <li
-                  key={recordingId}
-                  className="generated-recordings-queue__item"
+            {!isRecordingValid && <div className="btn-spacer" />}
+          </div>
+          {!selectedPiece.isRecordable && (
+            <div className="form-group invalid-msg">{`${
+              selectedPiece.title
+            } is not recordable.`}</div>
+          )}
+          {(recordingLengthInMinutes <= 0 ||
+            recordingLengthInMinutes > MAX_RECORDING_LENGTH_MINUTES) && (
+            <div className="form-group invalid-msg">
+              Recording length must be between 1 and 240 minutes
+            </div>
+          )}
+          <div className="form-group">
+            {generatedRecordingsQueue.filter(({ url }) => url === '').length >
+              0 &&
+              !isGenerationInProgress && (
+                <TextButton
+                  title="Resume previously queued recording generation"
+                  onClick={() =>
+                    startRecordingGeneration(
+                      generatedRecordingsQueue[0].recordingId
+                    )
+                  }
                 >
-                  {url === '' ? (
-                    <span>{displayText} </span>
-                  ) : (
-                    <a
-                      href={url}
-                      download={`${pieceId}-${lengthInMinutes}-minutes.wav`}
-                    >
-                      {displayText}
-                    </a>
-                  )}
-                  {!isInProgress && (
-                    <ControlButtonComponent
-                      faIcon={faTimes}
-                      onClick={() => removeRecordingGeneration(recordingId)}
-                      title="Remove"
-                    />
-                  )}
-                  {isInProgress && <div className="btn-spacer" />}
-                </li>
-              );
-            })}
-          </ul>
+                  Resume generation
+                </TextButton>
+              )}
+          </div>
+          <div className="form-group">
+            <ul className="generated-recordings-queue">
+              {generatedRecordingsQueue.map(generatedRecording => {
+                const {
+                  recordingId,
+                  lengthInMinutes,
+                  url,
+                  pieceId,
+                  isInProgress,
+                } = generatedRecording;
+                let status = '';
+                if (isInProgress) {
+                  status = ' - generating...';
+                } else if (url === '') {
+                  status = ' - waiting to generate';
+                }
+                const displayText = `${lengthInMinutes} minutes of ${
+                  piecesById[pieceId].title
+                }${status}`;
+                return (
+                  <li
+                    key={recordingId}
+                    className="generated-recordings-queue__item"
+                  >
+                    {url === '' ? (
+                      <span>{displayText} </span>
+                    ) : (
+                      <a
+                        href={url}
+                        download={`${pieceId}-${lengthInMinutes}-minutes.wav`}
+                      >
+                        {displayText}
+                      </a>
+                    )}
+                    {!isInProgress && (
+                      <ControlButtonComponent
+                        faIcon={faTimes}
+                        onClick={() => removeRecordingGeneration(recordingId)}
+                        title="Remove"
+                      />
+                    )}
+                    {isInProgress && <div className="btn-spacer" />}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </form>
+      )}
+      {!isSupported && (
+        <div>
+          <br />
+          <Link to="/help">Browser not supported</Link>
         </div>
-      </form>
+      )}
       {selectedPiece.isRecordable && (
         <span>
           <br />

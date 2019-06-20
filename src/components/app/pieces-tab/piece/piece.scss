@@ -36,6 +36,12 @@ $pieceWidth: 12em;
   margin: 0 1em 2.5em;
   transition: box-shadow 150ms;
 
+  &--is-disabled {
+    .piece__image {
+      filter: invert(0.25);
+    }
+  }
+
   &__image {
     width: $pieceWidth;
     height: $pieceWidth;

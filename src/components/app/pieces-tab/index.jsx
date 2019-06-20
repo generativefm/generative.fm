@@ -8,6 +8,7 @@ import Dropdown from './drop-down';
 import Piece from './piece';
 import tags from '@pieces/tags';
 import sortings from '@pieces/sortings';
+import isSupported from '@config/is-supported';
 import './pieces-tab.scss';
 
 const PiecesTabComponent = ({
@@ -126,7 +127,7 @@ const PiecesTabComponent = ({
               playTime={playTime[piece.id]}
               isSelected={selectedPieceId === piece.id}
               isPlaying={isPlaying}
-              isDisabled={isRecordingGenerationInProgress}
+              isDisabled={!isSupported || isRecordingGenerationInProgress}
               isLoading={isLoading}
               onPieceClick={onPieceClick}
               onPlayClick={onPlayClick}
