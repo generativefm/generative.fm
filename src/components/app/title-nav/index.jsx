@@ -66,7 +66,7 @@ const TitleNavComponent = ({
 
           {isInstallable && (
             <TextButton
-              title="Add to home screen"
+              title="Install"
               className="title-nav__header__info__install-btn"
               onClick={() => promptInstallation()}
             >
