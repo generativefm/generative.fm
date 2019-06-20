@@ -164,6 +164,8 @@ PiecesTabComponent.propTypes = {
   sorting: propTypes.object.isRequired,
   changeSorting: propTypes.func.isRequired,
   visiblePieceIds: propTypes.array.isRequired,
+  isOnline: propTypes.bool.isRequired,
+  cachedPieceIds: propTypes.object.isRequired,
 };
 
 export default PiecesTabComponent;

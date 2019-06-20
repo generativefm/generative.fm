@@ -11,11 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Site is dark-themed
 - Hover effects removed on touch devices, site redesigned with this constraint
+- Instead of using Chrome's "mini-info toolbar" for PWA installs, use a custom Install button
 
 ### Fixed
 
 - Add a maximum piece history of 20
 - Volume slider is exponential instead of linear
+- Uncached pieces are displayed as disabled while offline
+- Users without Web Audio support are not able to initiate playback
 - (dev) .jsx files are linted
 
 ### Added
