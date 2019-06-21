@@ -9,6 +9,15 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
+    &__filters {
+      display: flex;
+      flex-wrap: wrap;
+
+      & > div {
+        padding: 0 0.15em;
+      }
+    }
   }
 
   .pieces-container {

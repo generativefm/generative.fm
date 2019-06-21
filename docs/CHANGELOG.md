@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Volume slider is exponential instead of linear
 - Uncached pieces are displayed as disabled while offline
 - Users without Web Audio support are not able to initiate playback
+- App won't crash when attempting to open the record tab without a piece selected
 - (dev) .jsx files are linted
 
 ### Added

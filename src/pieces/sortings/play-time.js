@@ -1,7 +1,7 @@
 const playTime = {
   label: 'play time',
-  defaultDirectionLabel: 'longest first',
-  reverseDirectionLabel: 'shortest first',
+  defaultDirectionLabel: 'longest',
+  reverseDirectionLabel: 'shortest',
   fn: (pieces, state) =>
     pieces.slice(0).sort((a, b) => {
       const aPlayTime =

@@ -4,7 +4,7 @@ import { Redirect } from 'react-router';
 import pieces from '@pieces';
 import piecesById from '@pieces/by-id';
 import LinkButton from '@components/shared/link-button';
-import Dropdown from './drop-down';
+import PieceFilter from './piece-filter';
 import Piece from './piece';
 import tags from '@pieces/tags';
 import sortings from '@pieces/sortings';
@@ -78,49 +78,50 @@ const PiecesTabComponent = ({
             </LinkButton>
           </span>
         ) : (
-          <span>
-            viewing{' '}
-            <Dropdown
-              selected={filter}
+          <span className="filter-bar__filters">
+            <PieceFilter
+              label="view"
+              value={filter}
               options={['all']
                 .concat(favorites.size > 0 ? ['favorites'] : [])
-                .concat(tags)}
-              onSelect={newFilter => clearAndChangeFilter(newFilter)}
+                .concat(tags)
+                .map(tag => ({ value: tag, name: tag }))}
+              onChange={newFilter => clearAndChangeFilter(newFilter)}
               title="Change filter"
             />
             {filteredPieces.length > 1 && (
-              <span>
-                {' '}
-                sorted by{' '}
-                <Dropdown
-                  selected={currentSorting.label}
-                  options={Reflect.ownKeys(sortings).map(
-                    key => sortings[key].label
-                  )}
-                  onSelect={newSortingLabel => {
-                    if (newSortingLabel !== currentSorting.label) {
-                      const key = Reflect.ownKeys(sortings).find(
-                        sortingKey =>
-                          sortings[sortingKey].label === newSortingLabel
-                      );
-                      changeSorting(key);
-                    }
-                  }}
-                  title="Change sorting"
-                />{' '}
-                (
-                <LinkButton
-                  title="Change sort order"
-                  onClick={() =>
-                    changeSorting(sorting.key, !sorting.isReversed)
-                  }
-                >
-                  {sorting.isReversed
-                    ? currentSorting.reverseDirectionLabel
-                    : currentSorting.defaultDirectionLabel}{' '}
-                </LinkButton>
-                )
-              </span>
+              <PieceFilter
+                label="sorted by"
+                value={sorting.key}
+                options={Reflect.ownKeys(sortings).map(key => ({
+                  name: sortings[key].label,
+                  value: key,
+                }))}
+                onChange={newSorting => {
+                  changeSorting(newSorting);
+                }}
+                title="Change sorting"
+              />
+            )}
+            {filteredPieces.length > 1 && (
+              <PieceFilter
+                label="start with"
+                value={sorting.isReversed}
+                options={[
+                  {
+                    value: false,
+                    name: currentSorting.defaultDirectionLabel,
+                  },
+                  {
+                    value: true,
+                    name: currentSorting.reverseDirectionLabel,
+                  },
+                ]}
+                onChange={isReversed =>
+                  changeSorting(sorting.key, isReversed === 'true')
+                }
+                title="Change order"
+              />
             )}
           </span>
         )}

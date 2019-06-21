@@ -1,0 +1,9 @@
+.piece-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__label {
+    margin-bottom: 0.25em;
+  }
+}

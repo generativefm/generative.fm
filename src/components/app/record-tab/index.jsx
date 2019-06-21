@@ -27,6 +27,7 @@ const RecordTabComponent = ({
 }) => {
   if (selectedPieceId === null) {
     selectPiece(pieces[0].id);
+    return <div />;
   }
   const [recordingLengthInMinutes, setRecordingLengthInMinutes] = useState(
     lastRecordingGenerationLength
