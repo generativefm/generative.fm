@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import Dropdown from '@components/shared/drop-down';
 import './piece-filter.scss';
 
@@ -13,5 +14,13 @@ const PieceFilter = ({ label, value, options, onChange, title }) => (
     />
   </div>
 );
+
+PieceFilter.propTypes = {
+  label: propTypes.string.isRequired,
+  value: propTypes.any.isRequired,
+  options: propTypes.array.isRequired,
+  onChange: propTypes.func.isRequired,
+  title: propTypes.string.isRequired,
+};
 
 export default PieceFilter;
