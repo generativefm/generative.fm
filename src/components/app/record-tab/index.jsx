@@ -22,6 +22,8 @@ const RecordTabComponent = ({
   queueRecordingGeneration,
   generatedRecordings,
   lastRecordingGenerationLength,
+  isOnline,
+  cachedPieceIds,
   removeRecordingGeneration,
   startRecordingGeneration,
 }) => {
@@ -49,8 +51,11 @@ const RecordTabComponent = ({
     setIsGenerationInProgress(queue.some(({ isInProgress }) => isInProgress));
   }, [generatedRecordings]);
 
+  const isPieceDisabled = piece =>
+    !piece.isRecordable || (!isOnline && !cachedPieceIds.has(piece.id));
+
   const getIsRecordingValid = () =>
-    selectedPiece.isRecordable &&
+    isPieceDisabled(selectedPiece) &&
     recordingLengthInMinutes > 0 &&
     recordingLengthInMinutes <= MAX_RECORDING_LENGTH_MINUTES;
 
@@ -96,9 +101,13 @@ const RecordTabComponent = ({
                 onChange={event => selectPiece(event.target.value)}
                 title="Piece to record"
               >
-                {pieces.map(({ title, id, isRecordable }) => (
-                  <option key={id} value={id} disabled={!isRecordable}>
-                    {title}
+                {pieces.map(piece => (
+                  <option
+                    key={piece.id}
+                    value={piece.id}
+                    disabled={isPieceDisabled(piece)}
+                  >
+                    {piece.title}
                   </option>
                 ))}
               </select>
@@ -117,10 +126,12 @@ const RecordTabComponent = ({
             )}
             {!isRecordingValid && <div className="btn-spacer" />}
           </div>
-          {!selectedPiece.isRecordable && (
-            <div className="form-group invalid-msg">{`${
-              selectedPiece.title
-            } is not recordable.`}</div>
+          {isPieceDisabled(selectedPiece) && (
+            <div className="form-group invalid-msg">
+              {`${selectedPiece.title} is not recordable${
+                selectedPiece.isRecordable ? ' right now.' : '.'
+              }`}
+            </div>
           )}
           {(recordingLengthInMinutes <= 0 ||
             recordingLengthInMinutes > MAX_RECORDING_LENGTH_MINUTES) && (
@@ -247,6 +258,8 @@ RecordTabComponent.propTypes = {
   queueRecordingGeneration: propTypes.func.isRequired,
   generatedRecordings: propTypes.object.isRequired,
   lastRecordingGenerationLength: propTypes.string.isRequired,
+  isOnline: propTypes.bool.isRequired,
+  cachedPieceIds: propTypes.bool.isRequired,
   removeRecordingGeneration: propTypes.func.isRequired,
   startRecordingGeneration: propTypes.func.isRequired,
 };
