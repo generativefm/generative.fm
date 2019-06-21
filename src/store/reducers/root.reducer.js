@@ -18,7 +18,7 @@ import notifications from './notifications.reducer';
 import favorites from './favorites.reducer';
 import filter from './filter.reducer';
 import sorting from './sorting.reducer';
-import visiblePieceIds from './visible-piece-ids.reducer';
+import visiblePieceIdsReducer from './visible-piece-ids.reducer';
 import isInstallable from './is-installable.reducer';
 import cachedPieceIds from './cached-piece-ids.reducer';
 
@@ -48,11 +48,16 @@ const combinedReducer = combineReducers({
 
 const rootReducer = (state = {}, action) => {
   const combinedState = Object.assign({}, state);
+  const { visiblePieceIds } = combinedState;
   delete combinedState.visiblePieceIds;
-  return Object.assign(
-    { visiblePieceIds: visiblePieceIds(state, action) },
-    combinedReducer(combinedState, action)
+  const newCombinedState = combinedReducer(combinedState, action);
+  const newVisiblePieceIds = visiblePieceIdsReducer(
+    Object.assign(newCombinedState, { visiblePieceIds }),
+    action
   );
+  return Object.assign(newCombinedState, {
+    visiblePieceIds: newVisiblePieceIds,
+  });
 };
 
 export default rootReducer;

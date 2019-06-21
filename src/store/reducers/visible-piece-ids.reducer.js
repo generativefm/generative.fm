@@ -1,13 +1,17 @@
 import CHANGE_FILTER from '../actions/types/change-filter.type';
 import CHANGE_SORTING from '../actions/types/change-sorting.type';
+import ADD_FAVORITE from '../actions/types/add-favorite.type';
+import REMOVE_FAVORITE from '../actions/types/remove-favorite.type';
 import pieces from '@pieces';
 import sortings from '@pieces/sortings';
+import FAVORITES_FILTER from '@config/favorites-filter';
+import ALL_FILTER from '@config/all-filter';
 
 const getSortedFilteredPieceIds = (filter, sorting, reduxState) => {
   let filteredPieces;
-  if (filter === 'all') {
+  if (filter === ALL_FILTER) {
     filteredPieces = pieces;
-  } else if (filter === 'favorites') {
+  } else if (filter === FAVORITES_FILTER) {
     filteredPieces = pieces.filter(({ id }) => reduxState.favorites.has(id));
   } else {
     filteredPieces = pieces.filter(({ tags }) => tags.includes(filter));
@@ -28,11 +32,17 @@ const visiblePieceIdsReducer = (reduxState = {}, action) => {
     const { filter } = reduxState;
     return getSortedFilteredPieceIds(filter, action.payload, reduxState);
   } else if (
+    reduxState.filter === FAVORITES_FILTER &&
+    [ADD_FAVORITE, REMOVE_FAVORITE].includes(action.type)
+  ) {
+    const { filter, sorting } = reduxState;
+    return getSortedFilteredPieceIds(filter, sorting, reduxState);
+  } else if (
     typeof reduxState.visiblePieceIds === 'undefined' ||
     typeof reduxState.sorting === 'undefined'
   ) {
     return getSortedFilteredPieceIds(
-      'all',
+      ALL_FILTER,
       { key: 'releaseDate', isReversed: false },
       reduxState
     );

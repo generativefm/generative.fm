@@ -9,6 +9,8 @@ import Piece from './piece';
 import tags from '@pieces/tags';
 import sortings from '@pieces/sortings';
 import isSupported from '@config/is-supported';
+import FAVORITES_FILTER from '@config/favorites-filter';
+import ALL_FILTER from '@config/all-filter';
 import './pieces-tab.scss';
 
 const PiecesTabComponent = ({
@@ -45,7 +47,7 @@ const PiecesTabComponent = ({
     filteredPieces = visiblePieceIds.map(id => piecesById[id]);
   }
 
-  const clearAndChangeFilter = (newFilter = 'all') => {
+  const clearAndChangeFilter = (newFilter = ALL_FILTER) => {
     changeFilter(newFilter);
     if (location.pathname !== '/') {
       history.push('/');
@@ -53,7 +55,7 @@ const PiecesTabComponent = ({
   };
 
   if (filteredPieces.length === 0) {
-    changeFilter('all');
+    changeFilter(ALL_FILTER);
     return <Redirect to="/" />;
   }
 
@@ -82,8 +84,8 @@ const PiecesTabComponent = ({
             <PieceFilter
               label="view"
               value={filter}
-              options={['all']
-                .concat(favorites.size > 0 ? ['favorites'] : [])
+              options={[ALL_FILTER]
+                .concat(favorites.size > 0 ? [FAVORITES_FILTER] : [])
                 .concat(tags)
                 .map(tag => ({ value: tag, name: tag }))}
               onChange={newFilter => clearAndChangeFilter(newFilter)}
