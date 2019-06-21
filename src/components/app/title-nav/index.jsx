@@ -62,7 +62,12 @@ const TitleNavComponent = ({
           </h1>
           <h2 className="title-nav__header__info__title title-nav__header__info__title--secondary">
             Generative music by{' '}
-            <a href="https://alexbainter.com" className="secret-link">
+            <a
+              href="https://alexbainter.com"
+              className="secret-link"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
               Alex Bainter
             </a>
           </h2>
