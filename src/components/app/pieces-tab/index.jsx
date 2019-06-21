@@ -40,7 +40,6 @@ const PiecesTabComponent = ({
     if (piece) {
       isValidSinglePiece = true;
       filteredPieces = [piece];
-      onPieceClick(piece);
     } else {
       return <Redirect to="/" />;
     }
