@@ -4,12 +4,12 @@
 .drop-down {
   background: none;
   font: inherit;
-  color: $primaryColor;
-  border: 1px solid $primaryColor;
+  color: $secondaryColor;
+  border: 1px solid $secondaryColor;
 
   @include hoverStyle(#{&}) {
     &:hover {
-      border-color: $primaryHoverColor;
+      border-color: $secondaryHoverColor;
     }
   }
 
