@@ -15,7 +15,13 @@
       flex-wrap: wrap;
 
       & > div {
-        padding: 0 0.15em;
+        padding: 0 2em;
+      }
+
+      @media (max-width: 768px) {
+        & > div {
+          padding: 0 0.5em;
+        }
       }
     }
   }

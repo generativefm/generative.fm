@@ -7,6 +7,12 @@
   color: $primaryColor;
   border: 1px solid $primaryColor;
 
+  @include hoverStyle(#{&}) {
+    &:hover {
+      border-color: $primaryHoverColor;
+    }
+  }
+
   &:focus {
     outline: none;
   }
