@@ -31,6 +31,7 @@ const PiecesTabComponent = ({
   visiblePieceIds,
   isOnline,
   cachedPieceIds,
+  history,
 }) => {
   let isValidSinglePiece = false;
   let filteredPieces;
@@ -169,6 +170,7 @@ PiecesTabComponent.propTypes = {
   visiblePieceIds: propTypes.array.isRequired,
   isOnline: propTypes.bool.isRequired,
   cachedPieceIds: propTypes.object.isRequired,
+  history: propTypes.object.isRequired,
 };
 
 export default PiecesTabComponent;
