@@ -11,5 +11,10 @@
   },
   "globals": {
     "MediaMetadata": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

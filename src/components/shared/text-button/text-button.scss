@@ -1,0 +1,36 @@
+@import '_mixins.scss';
+@import '_colors.scss';
+
+.text-btn {
+  background: $primaryColor;
+  color: $backgroundColor;
+  border: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+
+  &:disabled {
+    color: $secondaryColor;
+    background: $primaryActiveColor;
+    cursor: not-allowed;
+
+    @include hoverStyle(#{&}) {
+      &:hover {
+        background: $primaryActiveColor;
+      }
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  @include hoverStyle(#{&}) {
+    &:hover {
+      background: $primaryHoverColor;
+    }
+
+    &:active {
+      background: $primaryActiveColor;
+    }
+  }
+}

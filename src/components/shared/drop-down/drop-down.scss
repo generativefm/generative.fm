@@ -1,0 +1,23 @@
+@import '_mixins.scss';
+@import '_colors.scss';
+
+.drop-down {
+  background: none;
+  font: inherit;
+  color: $secondaryColor;
+  border: 1px solid $secondaryColor;
+
+  @include hoverStyle(#{&}) {
+    &:hover {
+      border-color: $secondaryHoverColor;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &__item {
+    background-color: $backgroundColor;
+  }
+}

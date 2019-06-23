@@ -1,20 +1,16 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import { Redirect } from 'react-router';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faInfinity,
-  faPlay,
-  faStop,
-  faChevronLeft,
-  faCircleNotch,
-} from '@fortawesome/free-solid-svg-icons';
-import classNames from 'classnames';
-import pieces from '../../../pieces';
-import formatPlayTime from './format-play-time';
-import defaultImage from '@images/default.png';
-import artists from '../../../data/artists';
+import pieces from '@pieces';
+import piecesById from '@pieces/by-id';
+import LinkButton from '@components/shared/link-button';
+import PieceFilter from './piece-filter';
+import Piece from './piece';
+import tags from '@pieces/tags';
+import sortings from '@pieces/sortings';
+import isSupported from '@config/is-supported';
+import FAVORITES_FILTER from '@config/favorites-filter';
+import ALL_FILTER from '@config/all-filter';
 import './pieces-tab.scss';
 
 const PiecesTabComponent = ({
@@ -25,105 +21,133 @@ const PiecesTabComponent = ({
   onPlayClick,
   playTime,
   filter,
+  pieceId,
   isLoading,
   isRecordingGenerationInProgress,
+  changeFilter,
+  favorites,
+  sorting,
+  changeSorting,
+  visiblePieceIds,
+  isOnline,
+  cachedPieceIds,
+  history,
 }) => {
-  const filteredPieces = pieces.filter(
-    ({ id, artist }) =>
-      typeof filter !== 'string' || (id === filter || artist === filter)
-  );
-  if (
-    !isPlaying &&
-    filteredPieces.length === 1 &&
-    filteredPieces[0].id !== selectedPieceId
-  ) {
-    onPieceClick(filteredPieces[0]);
+  let isValidSinglePiece = false;
+  let filteredPieces;
+  if (typeof pieceId === 'string') {
+    const piece = pieces.find(({ id }) => id === pieceId);
+    if (piece) {
+      isValidSinglePiece = true;
+      filteredPieces = [piece];
+    } else {
+      return <Redirect to="/" />;
+    }
+  } else {
+    filteredPieces = visiblePieceIds.map(id => piecesById[id]);
   }
 
-  return filteredPieces.length > 0 ? (
+  const clearAndChangeFilter = (newFilter = ALL_FILTER) => {
+    changeFilter(newFilter);
+    if (location.pathname !== '/') {
+      history.push('/');
+    }
+  };
+
+  if (filteredPieces.length === 0) {
+    changeFilter(ALL_FILTER);
+    return <Redirect to="/" />;
+  }
+
+  const currentSorting = sortings[sorting.key];
+
+  const isPieceDisabled = piece =>
+    !isSupported ||
+    isRecordingGenerationInProgress ||
+    (!isOnline && !cachedPieceIds.has(piece.id));
+
+  return (
     <div className="pieces-tab">
-      {typeof filter === 'string' && (
-        <div className="music-link">
-          <Link to="/">
-            <FontAwesomeIcon
-              icon={faChevronLeft}
-              className="music-link__icon"
-            />
-            All Music
-          </Link>
-        </div>
-      )}
-      <div className="pieces">
-        {filteredPieces.map(piece => {
-          const isSelected = piece.id === selectedPieceId;
-          const handleButtonClick = event => {
-            event.stopPropagation();
-            if (isSelected) {
-              if (isPlaying) {
-                onStopClick();
-              } else {
-                onPlayClick();
-              }
-            } else if (isPlaying) {
-              onPieceClick(piece);
-            } else {
-              onPieceClick(piece);
-              onPlayClick();
-            }
-          };
-
-          return (
-            <div
-              className="piece"
-              key={piece.id}
-              onClick={() => onPieceClick(piece)}
-              title={`${isPlaying ? 'Play' : 'Select'} ${piece.title}`}
+      <div className="filter-bar">
+        {isValidSinglePiece ? (
+          <span>
+            viewing &quot;{piecesById[pieceId].title},&quot;{' '}
+            <LinkButton
+              title="Click to view all pieces"
+              onClick={() => clearAndChangeFilter()}
             >
-              <div className="piece__image">
-                <img src={piece.image ? piece.image : defaultImage} />
-                {!isRecordingGenerationInProgress &&
-                  (!isLoading || !isSelected) && (
-                    <button
-                      className="piece__image__button"
-                      onClick={handleButtonClick}
-                    >
-                      <FontAwesomeIcon
-                        icon={isPlaying && isSelected ? faStop : faPlay}
-                      />
-                    </button>
-                  )}
-
-                {isSelected && (isPlaying || isLoading) && (
-                  <div
-                    className={classNames(
-                      'piece__image__is-playing-indicator',
-                      {
-                        'piece__image__is-playing-indicator--is-spinning': isLoading,
-                      }
-                    )}
-                  >
-                    <FontAwesomeIcon
-                      icon={isLoading ? faCircleNotch : faInfinity}
-                    />
-                  </div>
-                )}
-              </div>
-              <div className="piece__info">
-                <div className="piece__info__title">{piece.title}</div>
-                <div className="piece__info__artist">
-                  {artists[piece.artist]}
-                </div>
-                <div className="piece__info__playtime">
-                  {formatPlayTime(playTime[piece.id])}
-                </div>
-              </div>
-            </div>
-          );
-        })}
+              click here to show all
+            </LinkButton>
+          </span>
+        ) : (
+          <span className="filter-bar__filters">
+            <PieceFilter
+              label="view"
+              value={filter}
+              options={[ALL_FILTER]
+                .concat(favorites.size > 0 ? [FAVORITES_FILTER] : [])
+                .concat(tags)
+                .map(tag => ({ value: tag, name: tag }))}
+              onChange={newFilter => clearAndChangeFilter(newFilter)}
+              title="Change filter"
+            />
+            {filteredPieces.length > 1 && (
+              <PieceFilter
+                label="sorted by"
+                value={sorting.key}
+                options={Reflect.ownKeys(sortings).map(key => ({
+                  name: sortings[key].label,
+                  value: key,
+                }))}
+                onChange={newSorting => {
+                  changeSorting(newSorting);
+                }}
+                title="Change sorting"
+              />
+            )}
+            {filteredPieces.length > 1 && (
+              <PieceFilter
+                label="start with"
+                value={sorting.isReversed}
+                options={[
+                  {
+                    value: false,
+                    name: currentSorting.defaultDirectionLabel,
+                  },
+                  {
+                    value: true,
+                    name: currentSorting.reverseDirectionLabel,
+                  },
+                ]}
+                onChange={isReversed =>
+                  changeSorting(sorting.key, isReversed === 'true')
+                }
+                title="Change order"
+              />
+            )}
+          </span>
+        )}
+      </div>
+      <div className="pieces-container">
+        <div className="pieces">
+          {filteredPieces.map(piece => (
+            <Piece
+              key={piece.id}
+              piece={piece}
+              playTime={playTime[piece.id]}
+              isSelected={selectedPieceId === piece.id}
+              isPlaying={isPlaying}
+              isDisabled={isPieceDisabled(piece)}
+              isLoading={isLoading}
+              onPieceClick={onPieceClick}
+              onPlayClick={onPlayClick}
+              onStopClick={onStopClick}
+              changeFilter={clearAndChangeFilter}
+            />
+          ))}
+        </div>
       </div>
     </div>
-  ) : (
-    <Redirect to="/" />
   );
 };
 
@@ -137,6 +161,15 @@ PiecesTabComponent.propTypes = {
   playTime: propTypes.object.isRequired,
   isLoading: propTypes.bool.isRequired,
   filter: propTypes.string,
+  pieceId: propTypes.string,
+  changeFilter: propTypes.func.isRequired,
+  favorites: propTypes.object.isRequired,
+  sorting: propTypes.object.isRequired,
+  changeSorting: propTypes.func.isRequired,
+  visiblePieceIds: propTypes.array.isRequired,
+  isOnline: propTypes.bool.isRequired,
+  cachedPieceIds: propTypes.object.isRequired,
+  history: propTypes.object.isRequired,
 };
 
 export default PiecesTabComponent;

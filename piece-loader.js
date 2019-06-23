@@ -11,7 +11,9 @@ const pieceLoader = source => {
     id: '${pieceManifest.artistId}-${pieceManifest.id}',
     artist: '${pieceManifest.artistId}',
     isRecordable: ${typeof pieceManifest.isRecordable !== 'boolean' ||
-      pieceManifest.isRecordable}
+      pieceManifest.isRecordable},
+    tags: [${pieceManifest.tags.map(tag => `"${tag}"`)}],
+    releaseDate: new Date('${pieceManifest.releaseDate}'),
   }`;
 
   return output;

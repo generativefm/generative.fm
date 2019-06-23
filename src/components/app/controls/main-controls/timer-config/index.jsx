@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import propTypes from 'prop-types';
+import TextButton from '@components/shared/text-button';
 import './timer-config.scss';
 
 const StartTimerContent = ({ lastDurationsMS, startTimer }) => {
@@ -23,6 +24,7 @@ const StartTimerContent = ({ lastDurationsMS, startTimer }) => {
               type="button"
               className="timer-box__durations__item__btn"
               onClick={() => handleDurationSelect(durationMS)}
+              title={`Start ${durationMS / 60000}-minute timer`}
             >{`${durationMS / 60000} minutes`}</button>
           </li>
         ))}
@@ -33,16 +35,21 @@ const StartTimerContent = ({ lastDurationsMS, startTimer }) => {
         className="timer-box__input"
         value={customDuration}
         onChange={event => setCustomDuration(event.target.value)}
+        title="Timer duration in minutes"
       />
       minutes
-      <button
-        type="button"
+      <TextButton
         className="timer-box__btn timer-box__btn--inline"
-        disabled={isStartDisabled}
+        isDisabled={isStartDisabled}
         onClick={() => handleDurationSelect(customDuration * 60 * 1000)}
+        title={
+          isStartDisabled
+            ? 'Please select or enter a duration'
+            : `Start ${customDuration}-minute timer`
+        }
       >
         Start
-      </button>
+      </TextButton>
     </div>
   );
 };
@@ -71,17 +78,18 @@ const InProgressContent = ({ remainingMS, updateTimer, cancelTimer }) => {
               type="button"
               className="timer-box__durations__item__btn"
               onClick={() => updateTimer(addMS)}
+              title={`Add ${addMS / 60000} minutes to timer`}
             >{`+ ${addMS / 60 / 1000} minutes`}</button>
           </li>
         ))}
       </ul>
-      <button
-        type="button"
+      <TextButton
         className="timer-box__btn"
         onClick={() => cancelTimer()}
+        title="Cancel timer and resume endless playback"
       >
         Cancel Timer
-      </button>
+      </TextButton>
     </div>
   );
 };

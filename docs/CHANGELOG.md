@@ -7,7 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-(none)
+### Changed
+
+- Site is dark-themed
+- Hover effects removed on touch devices, site redesigned with this constraint
+- Instead of using Chrome's "mini-info toolbar" for PWA installs, use a custom Install button
+
+### Fixed
+
+- Add a maximum piece history of 20
+- Volume slider is exponential instead of linear
+- Uncached pieces are displayed as disabled while offline
+- Users without Web Audio support are not able to initiate playback
+- App won't crash when attempting to open the record tab without a piece selected
+- (dev) .jsx files are linted
+
+### Added
+
+- Pieces can be added to/removed from favorites and the piece list can be filtered to only show favorites
+- Piece tags are displayed and the piece list is filterable by tag
+- Piece links can be copied from the "more" menu
+- Configurable sorting (by release date or play time)
 
 ## [0.22.0] - 2019-06-15
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
+import IconButton from '@components/shared/icon-button';
+import TextButton from '@components/shared/text-button';
 import './title-nav.scss';
 
 const TitleNavLink = ({
@@ -43,7 +44,9 @@ const matchRootOrMusic = (match, location) =>
 const TitleNavComponent = ({
   isUpdateAvailable,
   notifications,
+  isInstallable,
   dismissNotification,
+  promptInstallation,
 }) => {
   let notification;
   if (notifications.length > 0) {
@@ -53,24 +56,44 @@ const TitleNavComponent = ({
   return (
     <div className="title-nav">
       <div className="title-nav__header">
-        <h1 className="title-nav__header__title title-nav__header__title--primary">
-          Generative.fm
-        </h1>
-        <h2 className="title-nav__header__title title-nav__header__title--secondary">
-          Endlessly unique ambient music
-        </h2>
+        <div className="title-nav__header__info">
+          <h1 className="title-nav__header__info__title title-nav__header__info__title--primary">
+            Generative.fm
+          </h1>
+          <h2 className="title-nav__header__info__title title-nav__header__info__title--secondary">
+            Generative music by{' '}
+            <a
+              href="https://alexbainter.com"
+              className="secret-link"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              Alex Bainter
+            </a>
+          </h2>
+
+          {isInstallable && (
+            <TextButton
+              title="Install"
+              className="title-nav__header__info__install-btn"
+              onClick={() => promptInstallation()}
+            >
+              Install
+            </TextButton>
+          )}
+        </div>
+
         <ul className="title-nav__header__tab-list">
           <TitleNavLink
-            text="MUSIC"
+            text="PLAY"
             parentClass="title-nav__header__tab-list"
             linkTo="/"
             isActive={matchRootOrMusic}
           />
           <TitleNavLink
-            text="ABOUT"
+            text="RECORD"
             parentClass="title-nav__header__tab-list"
-            linkTo="/about"
-            hasDot={isUpdateAvailable}
+            linkTo="/record"
           />
           <TitleNavLink
             text="HELP"
@@ -78,9 +101,10 @@ const TitleNavComponent = ({
             linkTo="/help"
           />
           <TitleNavLink
-            text="RECORD"
+            text="ABOUT"
             parentClass="title-nav__header__tab-list"
-            linkTo="/record"
+            linkTo="/about"
+            hasDot={isUpdateAvailable}
           />
         </ul>
       </div>
@@ -94,13 +118,12 @@ const TitleNavComponent = ({
           >
             {notification.message}
           </a>
-          <button
-            type="button"
+          <IconButton
             className="title-nav__notification__close"
+            faIcon={faTimes}
+            title="Dismiss"
             onClick={() => dismissNotification(notification.id)}
-          >
-            <FontAwesomeIcon icon={faTimes} />
-          </button>
+          />
         </div>
       )}
     </div>
@@ -110,7 +133,9 @@ const TitleNavComponent = ({
 TitleNavComponent.propTypes = {
   isUpdateAvailable: propTypes.bool.isRequired,
   notifications: propTypes.array.isRequired,
+  isInstallable: propTypes.bool.isRequired,
   dismissNotification: propTypes.func.isRequired,
+  promptInstallation: propTypes.func.isRequired,
 };
 
 export default TitleNavComponent;

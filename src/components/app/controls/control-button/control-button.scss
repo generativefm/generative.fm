@@ -1,32 +1,32 @@
 @import '_colors.scss';
 @import '_variables.scss';
+@import '_mixins.scss';
 
 .control-button {
   width: $buttonWidth;
   height: $buttonWidth;
-  background: $backgroundColor;
+  background: transparent;
   border: none;
   position: relative;
   cursor: pointer;
   margin: 0.25rem;
+  color: $primaryColor;
 
-  &:hover {
-    & > .svg-inline--fa {
-      color: $interactColor;
+  @include hoverStyle(#{&}) {
+    &:hover {
+      color: $primaryHoverColor;
+
+      &::after {
+        background: $primaryHoverColor;
+      }
     }
 
-    &::after {
-      background: $interactColor;
-    }
-  }
+    &:active {
+      color: $primaryActiveColor;
 
-  &:active {
-    & > .svg-inline--fa {
-      color: $activeInteractColor;
-    }
-
-    &::after {
-      background: $activeInteractColor;
+      &::after {
+        background: $primaryActiveColor;
+      }
     }
   }
 
@@ -35,23 +35,16 @@
   }
 
   &--is-primary {
-    background-color: $primaryColor;
-    color: white;
+    border: 1px solid $primaryColor;
     border-radius: 50%;
 
-    &:hover {
-      background-color: $interactColor;
-
-      & > .svg-inline--fa {
-        color: white;
+    @include hoverStyle(#{&}) {
+      &:hover {
+        border-color: $primaryHoverColor;
       }
-    }
 
-    &:active {
-      background-color: $activeInteractColor;
-
-      & > .svg-inline--fa {
-        color: white;
+      &:active {
+        border-color: $primaryActiveColor;
       }
     }
   }
@@ -59,13 +52,21 @@
   &--is-active {
     color: $highlightColor;
 
-    &:hover {
-      & > .svg-inline--fa {
-        color: $highlightInteractColor;
+    @include hoverStyle(#{&}) {
+      &:hover {
+        color: $highlightHoverColor;
+
+        &::after {
+          background: $highlightHoverColor;
+        }
       }
 
-      &::after {
-        background: $highlightInteractColor;
+      &:active {
+        color: $highlightActiveColor;
+
+        &::after {
+          background: $highlightActiveColor;
+        }
       }
     }
   }
@@ -93,6 +94,6 @@
 
   // Optically center the "play" icon
   & > .fa-play {
-    transform: translate(-36%, -50%);
+    transform: translate(-37%, -50%);
   }
 }

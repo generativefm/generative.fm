@@ -15,14 +15,14 @@ $overflow: 1em;
   &__bar {
     width: $sliderWidth;
     height: $sliderHeight;
-    background: $secondaryColor;
+    background: $primaryActiveColor;
     cursor: inherit;
     display: flex;
     align-items: center;
 
     &__level {
       height: $sliderHeight;
-      background: $primaryColor;
+      background: $primaryHoverColor;
       cursor: inherit;
       display: inline-block;
 

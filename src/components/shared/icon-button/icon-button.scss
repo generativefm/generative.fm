@@ -1,0 +1,47 @@
+@import '_mixins.scss';
+@import '_colors.scss';
+
+.icon-button {
+  padding: 0;
+  background: none;
+  color: $primaryColor;
+  border: none;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    color: $primaryActiveColor;
+    cursor: not-allowed;
+
+    @include hoverStyle(#{&}) {
+      &:hover {
+        color: $primaryActiveColor;
+      }
+    }
+  }
+
+  @include hoverStyle(#{&}) {
+    &:hover {
+      color: $primaryHoverColor;
+    }
+    &:active {
+      color: $primaryActiveColor;
+    }
+  }
+
+  &--is-filled {
+    color: #e0245e;
+
+    @include hoverStyle(#{&}) {
+      &:hover {
+        color: #b31c4b;
+      }
+      &:active {
+        color: #861538;
+      }
+    }
+  }
+}

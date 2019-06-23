@@ -2,6 +2,8 @@ import SELECT_PIECE from '../actions/types/select-piece.type';
 import ENABLE_SHUFFLE from '../actions/types/enable-shuffle.type';
 import PREVIOUS from '../actions/types/previous.type';
 
+const MAX_PIECE_HISTORY = 20;
+
 const pieceHistoryReducer = (state = [], action) => {
   switch (action.type) {
     case SELECT_PIECE: {
@@ -9,7 +11,7 @@ const pieceHistoryReducer = (state = [], action) => {
         action.payload !== null &&
         action.payload !== state[state.length - 1]
       ) {
-        return state.slice().concat([action.payload]);
+        return state.slice(0, MAX_PIECE_HISTORY - 1).concat([action.payload]);
       }
       return state;
     }

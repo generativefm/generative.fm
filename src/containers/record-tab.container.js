@@ -9,10 +9,14 @@ const mapStateToProps = ({
   selectedPieceId,
   generatedRecordings,
   lastRecordingGenerationLength,
+  isOnline,
+  cachedPieceIds,
 }) => ({
   selectedPieceId,
   generatedRecordings,
   lastRecordingGenerationLength,
+  isOnline,
+  cachedPieceIds,
 });
 
 export default connect(

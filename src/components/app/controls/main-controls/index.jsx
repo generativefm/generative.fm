@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Popover from 'react-tiny-popover';
 import isMobile from '@config/is-mobile';
 import TimerConfigContainer from '@containers/timer-config.container';
@@ -13,6 +14,7 @@ import {
   faHourglassHalf,
   faHourglassEnd,
 } from '@fortawesome/free-solid-svg-icons';
+import isSupported from '@config/is-supported';
 import ControlButtonComponent from '../control-button';
 import './main-controls.scss';
 
@@ -28,13 +30,14 @@ const getTimerIcon = ({ lastDurationsMS, remainingMS }) => {
   return faHourglassEnd;
 };
 
-const makePrimaryButton = (faIcon, onClick) =>
+const makePrimaryButton = (faIcon, onClick, title) =>
   function PrimaryButtonComponent() {
     return (
       <ControlButtonComponent
         faIcon={faIcon}
         onClick={onClick}
         isPrimary={true}
+        title={title}
       />
     );
   };
@@ -51,8 +54,20 @@ const MainControlsComponent = ({
   isRecordingGenerationInProgress,
   timer,
 }) => {
+  if (!isSupported) {
+    return (
+      <div className="main-controls">
+        <Link to="/help">Browser not supported</Link>
+      </div>
+    );
+  }
+
   if (isRecordingGenerationInProgress) {
-    return <div className="main-controls">Generating recording...</div>;
+    return (
+      <div className="main-controls">
+        <Link to="/record">Generating recording...</Link>
+      </div>
+    );
   }
 
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -61,8 +76,8 @@ const MainControlsComponent = ({
     setIsPopoverOpen(val => !val);
   };
   const PrimaryButtonComponent = isPlaying
-    ? makePrimaryButton(faStop, onStopClick)
-    : makePrimaryButton(faPlay, onPlayClick);
+    ? makePrimaryButton(faStop, onStopClick, 'Stop')
+    : makePrimaryButton(faPlay, onPlayClick, 'Play');
 
   const isTimerButton = el =>
     el &&
@@ -94,19 +109,26 @@ const MainControlsComponent = ({
           faIcon={getTimerIcon(timer)}
           onClick={toggleIsPopoverOpen}
           isActive={timer.remainingMS > 0}
+          title="Play timer..."
         />
       </Popover>
       <ControlButtonComponent
         faIcon={faStepBackward}
         onClick={onPreviousClick}
+        title="Previous piece"
       />
       <PrimaryButtonComponent />
-      <ControlButtonComponent faIcon={faStepForward} onClick={onNextClick} />
+      <ControlButtonComponent
+        faIcon={faStepForward}
+        onClick={onNextClick}
+        title="Next piece"
+      />
       {!isMobile && (
         <ControlButtonComponent
           faIcon={faRandom}
           onClick={isShuffleActive ? disableShuffle : enableShuffle}
           isActive={isShuffleActive}
+          title={`${isShuffleActive ? 'Disable' : 'Enable'} shuffle`}
         />
       )}
     </div>

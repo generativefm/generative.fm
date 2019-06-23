@@ -2,8 +2,9 @@
 @import '_mixins';
 
 .timer-box {
-  border: 1px solid $primaryColor;
+  border: 1px solid $secondaryColor;
   background-color: $backgroundColor;
+  color: $primaryColor;
   padding: 1em;
   text-align: center;
 
@@ -19,22 +20,18 @@
   }
 
   &__btn {
-    background: $primaryColor;
-    color: $backgroundColor;
-    border: none;
-    padding: 0.5em 1em;
-    cursor: pointer;
-
     &:hover {
-      background: $interactColor;
+      background: $primaryHoverColor;
     }
 
     &:active {
-      background: $activeInteractColor;
+      background: $primaryActiveColor;
     }
 
     &:disabled {
-      background: #ccc;
+      &:hover {
+        background: $primaryActiveColor;
+      }
     }
   }
 
@@ -57,13 +54,20 @@
         border: none;
         cursor: pointer;
         font-size: 1em;
+        color: $primaryColor;
 
+        // no need for @include hoverStyle since clicking
+        // will hide these
         &:hover {
-          background-color: #eee;
+          background-color: #444;
         }
 
         &:active {
-          background-color: #ccc;
+          background-color: #333;
+        }
+
+        &:focus {
+          outline: none;
         }
       }
     }
