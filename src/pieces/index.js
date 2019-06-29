@@ -26,6 +26,7 @@ import neuroplasticity from '@generative-music/piece-neuroplasticity';
 import expandCollapse from '@generative-music/piece-expand-collapse';
 import quarterEyes from '@generative-music/piece-quarter-eyes';
 import dayDream from '@generative-music/piece-day-dream';
+import homage from '@generative-music/piece-homage';
 
 const pieces = [
   enoMachine,
@@ -56,6 +57,7 @@ const pieces = [
   expandCollapse,
   quarterEyes,
   dayDream,
+  homage,
 ].reverse();
 
 export default pieces;
