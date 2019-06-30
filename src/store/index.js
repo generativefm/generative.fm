@@ -13,11 +13,8 @@ import timerMiddleware from './middleware/timer.middleware';
 import notificationsMiddleware from './middleware/notifications.middleware';
 import STATE_STORAGE_KEY from './middleware/local-storage.middleware/key';
 import installPromptMiddleware from './middleware/install-prompt.middleware';
-import getOnlineStatus from './get-online-status';
 import pieces from '../pieces/index';
-import { version } from '../../package.json';
-
-const MOBILE_VOLUME_PCT = 95;
+import getInitialState from './get-initial-state';
 
 const storedStateJSON = window.localStorage.getItem(STATE_STORAGE_KEY);
 const storedState =
@@ -29,41 +26,7 @@ if (!pieces.map(({ id }) => id).includes(storedState.selectedPieceId)) {
   delete storedState.selectedPieceId;
 }
 
-const initialState = Object.assign({}, storedState, {
-  isPlaying: false,
-  isUpdateAvailable: false,
-  isOnline: getOnlineStatus(),
-  loadingPieceBuildId: '',
-  generatedRecordings:
-    typeof storedState.generatedRecordings === 'object'
-      ? Reflect.ownKeys(storedState.generatedRecordings)
-          .filter(
-            recordingId =>
-              storedState.generatedRecordings[recordingId].url === ''
-          )
-          .reduce((generatedRecordings, recordingId) => {
-            const recording = storedState.generatedRecordings[recordingId];
-            generatedRecordings[recordingId] = Object.assign(recording, {
-              url: '',
-              isInProgress: false,
-            });
-            return generatedRecordings;
-          }, {})
-      : {},
-  timer: Object.assign({}, storedState.timer, { remainingMS: 0 }),
-  favorites: new Set(storedState.favorites),
-  isInstallable: false,
-  cachedPieceIds:
-    storedState.version === version
-      ? new Set(storedState.cachedPieceIds)
-      : new Set(),
-});
-
-if (isMobile) {
-  initialState.volumePct = MOBILE_VOLUME_PCT;
-  initialState.isMuted = false;
-  initialState.isShuffleActive = false;
-}
+const initialState = getInitialState(storedState);
 
 const allMiddlewares = [
   timerMiddleware,
