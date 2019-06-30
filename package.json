@@ -1,6 +1,6 @@
 {
   "name": "generative.fm",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A platform for playing generative music in the browser",
   "main": "index.js",
   "scripts": {
@@ -75,6 +75,7 @@
     "@generative-music/piece-eno-machine": "^2.13.0",
     "@generative-music/piece-enough": "^2.13.0",
     "@generative-music/piece-expand-collapse": "^2.13.0",
+    "@generative-music/piece-homage": "^2.14.0",
     "@generative-music/piece-impact": "^2.13.0",
     "@generative-music/piece-lemniscate": "^2.13.0",
     "@generative-music/piece-little-bells": "^2.13.0",
