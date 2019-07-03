@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [1.1.2] - 2019-07-03
+
+### Fixed
+
+- The button for queueing a record job will show up properly
+
 ## [1.1.1] - 2019-06-30
 
 ### Fixed
@@ -346,7 +352,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
-[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.1.1...HEAD
+[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.1.2...HEAD
+[1.1.2]: https://github.com/generative-music/generative.fm/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/generative-music/generative.fm/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/generative-music/generative.fm/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/generative-music/generative.fm/compare/v0.22.0...v1.0.0

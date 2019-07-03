@@ -55,7 +55,7 @@ const RecordTabComponent = ({
     !piece.isRecordable || (!isOnline && !cachedPieceIds.has(piece.id));
 
   const getIsRecordingValid = () =>
-    isPieceDisabled(selectedPiece) &&
+    !isPieceDisabled(selectedPiece) &&
     recordingLengthInMinutes > 0 &&
     recordingLengthInMinutes <= MAX_RECORDING_LENGTH_MINUTES;
 
@@ -65,7 +65,7 @@ const RecordTabComponent = ({
 
   useEffect(() => {
     setIsRecordingValid(getIsRecordingValid());
-  }, [selectedPiece, recordingLengthInMinutes]);
+  }, [selectedPiece, recordingLengthInMinutes, isOnline]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -259,7 +259,7 @@ RecordTabComponent.propTypes = {
   generatedRecordings: propTypes.object.isRequired,
   lastRecordingGenerationLength: propTypes.string.isRequired,
   isOnline: propTypes.bool.isRequired,
-  cachedPieceIds: propTypes.bool.isRequired,
+  cachedPieceIds: propTypes.object.isRequired,
   removeRecordingGeneration: propTypes.func.isRequired,
   startRecordingGeneration: propTypes.func.isRequired,
 };
