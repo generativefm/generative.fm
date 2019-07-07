@@ -35,9 +35,10 @@ const getInitialState = storedState => {
       ? new Set(storedState.cachedPieceIds)
       : new Set(),
   });
-  if (isNewVersion) {
-    initialState.visiblePieceIds = getSortedFilteredPieceIds(initialState);
-  }
+
+  // must be done after previous step (converting favorites to Set)
+  initialState.visiblePieceIds = getSortedFilteredPieceIds(initialState);
+
   if (isMobile) {
     initialState.volumePct = MOBILE_VOLUME_PCT;
     initialState.isMuted = false;
