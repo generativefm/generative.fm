@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [1.2.1] - 2019-07-07
+
+### Fixed
+
+- Always recalculate visiblePieceIds on load so new pieces are displayed right away
+
 ## [1.2.0] - 2019-07-07
 
 ### Added
@@ -358,7 +364,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
-[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.2.0...HEAD
+[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/generative-music/generative.fm/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/generative-music/generative.fm/compare/v1.1.2...v1.2.0
 [1.1.2]: https://github.com/generative-music/generative.fm/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/generative-music/generative.fm/compare/v1.1.0...v1.1.1
