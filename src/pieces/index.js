@@ -27,6 +27,7 @@ import expandCollapse from '@generative-music/piece-expand-collapse';
 import quarterEyes from '@generative-music/piece-quarter-eyes';
 import dayDream from '@generative-music/piece-day-dream';
 import homage from '@generative-music/piece-homage';
+import moment from '@generative-music/piece-moment';
 
 const pieces = [
   enoMachine,
@@ -58,6 +59,7 @@ const pieces = [
   quarterEyes,
   dayDream,
   homage,
+  moment,
 ].reverse();
 
 export default pieces;
