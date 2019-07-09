@@ -81,6 +81,7 @@ const TitleNavComponent = ({
               Install
             </TextButton>
           )}
+          <google-cast-launcher />
         </div>
 
         <ul className="title-nav__header__tab-list">
