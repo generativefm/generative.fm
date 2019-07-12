@@ -1,5 +1,6 @@
 import castApplicationId from '@config/cast-application-id';
 import streamDestination from './stream-destination';
+import piecesById from '@pieces/by-id';
 
 const CUSTOM_MESSAGE_NAMESPACE = 'urn:x-cast:fm.generative';
 
@@ -7,7 +8,7 @@ const makeHandleIceCandidate = castSession => ({ candidate }) => {
   if (candidate !== null) {
     castSession.sendMessage(
       CUSTOM_MESSAGE_NAMESPACE,
-      JSON.stringify(candidate)
+      JSON.stringify({ type: 'ice_candidate', candidate })
     );
   }
 };
@@ -23,17 +24,36 @@ const makeHandleNegotiationNeeded = (castSession, peerConnection) => () => {
   });
 };
 
-const handleCastStateConnected = castContext => {
-  console.log('connected');
+const updateReceiverMetadata = (castSession, currentPieceId) => {
+  // TODO handle nothing selected
+  const { title, image } = piecesById[currentPieceId];
+  castSession.sendMessage(
+    CUSTOM_MESSAGE_NAMESPACE,
+    JSON.stringify({
+      type: 'metadata',
+      title,
+      imageUrl: image,
+    })
+  );
+};
+
+const handleCastStateConnected = (castContext, store) => {
   const peerConnection = new RTCPeerConnection(null);
   const castSession = castContext.getCurrentSession();
   castSession.addMessageListener(CUSTOM_MESSAGE_NAMESPACE, (ns, message) => {
     const data = JSON.parse(message);
-    if (data.type === 'answer') {
-      console.log('answer received');
-      peerConnection.setRemoteDescription(data);
-    } else {
-      peerConnection.addIceCandidate(data);
+    console.log(data);
+    switch (data.type) {
+      case 'answer': {
+        console.log('answer received');
+        return peerConnection.setRemoteDescription(data);
+      }
+      case 'ice_candidate': {
+        return peerConnection.addIceCandidate(data.candidate);
+      }
+      default: {
+        // nothing
+      }
     }
   });
 
@@ -46,17 +66,20 @@ const handleCastStateConnected = castContext => {
   streamDestination.stream.getAudioTracks().forEach(track => {
     peerConnection.addTrack(track, streamDestination.stream);
   });
+  const connectTime = Date.now();
 
   const { cast } = window;
   const handleCastStateChanged = ({ castState }) => {
     if (castState === cast.framework.CastState.NOT_CONNECTED) {
+      const disconnectTime = Date.now();
+      console.log(`Disconnected after ${disconnectTime - connectTime}ms`);
       castContext.removeEventListener(
         cast.framework.CastContextEventType.CAST_STATE_CHANGED,
         handleCastStateChanged
       );
       console.log('reattaching listener');
       //eslint-disable-next-line no-use-before-define
-      attachConnectedListener(castContext);
+      attachConnectedListener(castContext, store);
     }
   };
 
@@ -64,9 +87,13 @@ const handleCastStateConnected = castContext => {
     cast.framework.CastContextEventType.CAST_STATE_CHANGED,
     handleCastStateChanged
   );
+
+  const { selectedPieceId } = store.getState();
+
+  updateReceiverMetadata(castSession, selectedPieceId);
 };
 
-const attachConnectedListener = castContext => {
+const attachConnectedListener = (castContext, store) => {
   const { cast } = window;
   const handleCastStateChanged = ({ castState }) => {
     if (castState === cast.framework.CastState.CONNECTED) {
@@ -74,7 +101,7 @@ const attachConnectedListener = castContext => {
         cast.framework.CastContextEventType.CAST_STATE_CHANGED,
         handleCastStateChanged
       );
-      handleCastStateConnected(castContext);
+      handleCastStateConnected(castContext, store);
     }
   };
 
@@ -85,6 +112,7 @@ const attachConnectedListener = castContext => {
 };
 
 const castMiddleware = store => next => {
+  let isCasting = () => false;
   window['__onGCastApiAvailable'] = isAvailable => {
     if (isAvailable) {
       const { cast } = window;
@@ -93,11 +121,25 @@ const castMiddleware = store => next => {
         receiverApplicationId: castApplicationId,
         autoJoinPolicy: window.chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED,
       });
-      attachConnectedListener(castContext);
+      attachConnectedListener(castContext, store);
+      isCasting = () =>
+        castContext.getCastState() === cast.framework.CastState.CONNECTED;
     }
   };
 
-  return action => next(action);
+  return action => {
+    if (isCasting()) {
+      const currentState = store.getState();
+      const result = next(action);
+      const nextState = store.getState();
+      if (currentState.selectedPieceId !== nextState.selectedPieceId) {
+        const castSession = window.cast.framework.CastContext.getInstance().getCurrentSession();
+        updateReceiverMetadata(castSession, nextState.selectedPieceId);
+      }
+      return result;
+    }
+    return next(action);
+  };
 };
 
 export default castMiddleware;
