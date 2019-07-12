@@ -13,6 +13,7 @@ import timerMiddleware from './middleware/timer.middleware';
 import notificationsMiddleware from './middleware/notifications.middleware';
 import STATE_STORAGE_KEY from './middleware/local-storage.middleware/key';
 import installPromptMiddleware from './middleware/install-prompt.middleware';
+import castMiddleware from './middleware/cast.middleware';
 import pieces from '../pieces/index';
 import getInitialState from './get-initial-state';
 
@@ -29,6 +30,7 @@ if (!pieces.map(({ id }) => id).includes(storedState.selectedPieceId)) {
 const initialState = getInitialState(storedState);
 
 const allMiddlewares = [
+  castMiddleware,
   timerMiddleware,
   piecesMiddleware,
   recordingGenerationMiddleware,
