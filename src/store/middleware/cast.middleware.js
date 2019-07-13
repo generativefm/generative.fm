@@ -26,13 +26,14 @@ const makeHandleNegotiationNeeded = (castSession, peerConnection) => () => {
 
 const updateReceiverMetadata = (castSession, currentPieceId) => {
   // TODO handle nothing selected
-  const { title, image } = piecesById[currentPieceId];
+  const { title, image, releaseDate } = piecesById[currentPieceId];
   castSession.sendMessage(
     CUSTOM_MESSAGE_NAMESPACE,
     JSON.stringify({
-      type: 'metadata',
       title,
+      releaseDate: releaseDate.toISOString(),
       imageUrl: image,
+      type: 'metadata',
     })
   );
 };
