@@ -55,7 +55,6 @@ const piecesMiddleware = store => next => {
       isPlaying,
       isShuffleActive,
       pieceHistory,
-      isMuted,
       visiblePieceIds,
     } = store.getState();
     if (action.type === UPDATE_VOLUME_PCT) {

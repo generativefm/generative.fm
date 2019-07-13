@@ -16,7 +16,6 @@ const makeHandleIceCandidate = castSession => ({ candidate }) => {
 
 const makeHandleNegotiationNeeded = (castSession, peerConnection) => () => {
   peerConnection.createOffer().then(offer => {
-    console.log('sending offer');
     peerConnection
       .setLocalDescription(offer)
       .then(() =>
@@ -44,14 +43,14 @@ const handleCastStateConnected = (castContext, store) => {
   const castSession = castContext.getCurrentSession();
   castSession.addMessageListener(CUSTOM_MESSAGE_NAMESPACE, (ns, message) => {
     const data = JSON.parse(message);
-    console.log(data);
     switch (data.type) {
       case 'answer': {
-        console.log('answer received');
-        return peerConnection.setRemoteDescription(data);
+        peerConnection.setRemoteDescription(data);
+        break;
       }
       case 'ice_candidate': {
-        return peerConnection.addIceCandidate(data.candidate);
+        peerConnection.addIceCandidate(data.candidate);
+        break;
       }
       default: {
         // nothing
@@ -77,7 +76,6 @@ const handleCastStateConnected = (castContext, store) => {
         cast.framework.CastContextEventType.CAST_STATE_CHANGED,
         handleCastStateChanged
       );
-      console.log('reattaching listener');
       //eslint-disable-next-line no-use-before-define
       attachConnectedListener(castContext, store);
     }
@@ -114,7 +112,7 @@ const attachConnectedListener = (castContext, store) => {
 
 const castMiddleware = store => next => {
   let isCasting = () => false;
-  window['__onGCastApiAvailable'] = isAvailable => {
+  window.__onGCastApiAvailable = isAvailable => {
     if (isAvailable) {
       const { cast } = window;
       const castContext = cast.framework.CastContext.getInstance();
