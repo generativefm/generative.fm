@@ -2,6 +2,7 @@ import Tone from 'tone';
 import castApplicationId from '@config/cast-application-id';
 import streamDestination from './stream-destination';
 import piecesById from '@pieces/by-id';
+import artists from '@data/artists';
 
 const CUSTOM_MESSAGE_NAMESPACE = 'urn:x-cast:fm.generative';
 
@@ -25,11 +26,12 @@ const makeHandleNegotiationNeeded = (castSession, peerConnection) => () => {
 };
 
 const updateReceiverMetadata = (castSession, currentPieceId) => {
-  const { title, image, releaseDate } = piecesById[currentPieceId];
+  const { title, image, releaseDate, artist } = piecesById[currentPieceId];
   castSession.sendMessage(
     CUSTOM_MESSAGE_NAMESPACE,
     JSON.stringify({
       title,
+      artist: artists[artist],
       releaseDate: releaseDate.toISOString(),
       imageUrl: image,
       type: 'metadata',
