@@ -1,8 +1,9 @@
 import Tone from 'tone';
 import castApplicationId from '@config/cast-application-id';
-import streamDestination from './stream-destination';
 import piecesById from '@pieces/by-id';
 import artists from '@data/artists';
+import play from '@store/actions/creators/play.creator';
+import streamDestination from './stream-destination';
 
 const CUSTOM_MESSAGE_NAMESPACE = 'urn:x-cast:fm.generative';
 
@@ -88,9 +89,12 @@ const handleCastStateConnected = (castContext, store) => {
     handleCastStateChanged
   );
 
-  const { selectedPieceId } = store.getState();
+  const { selectedPieceId, isPlaying } = store.getState();
   if (selectedPieceId !== null) {
     updateReceiverMetadata(castSession, selectedPieceId);
+  }
+  if (!isPlaying) {
+    store.dispatch(play());
   }
 };
 
