@@ -1,3 +1,4 @@
+import Tone from 'tone';
 import castApplicationId from '@config/cast-application-id';
 import streamDestination from './stream-destination';
 import piecesById from '@pieces/by-id';
@@ -25,7 +26,6 @@ const makeHandleNegotiationNeeded = (castSession, peerConnection) => () => {
 };
 
 const updateReceiverMetadata = (castSession, currentPieceId) => {
-  // TODO handle nothing selected
   const { title, image, releaseDate } = piecesById[currentPieceId];
   castSession.sendMessage(
     CUSTOM_MESSAGE_NAMESPACE,
@@ -39,6 +39,7 @@ const updateReceiverMetadata = (castSession, currentPieceId) => {
 };
 
 const handleCastStateConnected = (castContext, store) => {
+  Tone.Master.mute = true;
   const peerConnection = new RTCPeerConnection(null);
   const castSession = castContext.getCurrentSession();
   castSession.addMessageListener(CUSTOM_MESSAGE_NAMESPACE, (ns, message) => {
@@ -67,13 +68,11 @@ const handleCastStateConnected = (castContext, store) => {
   streamDestination.stream.getAudioTracks().forEach(track => {
     peerConnection.addTrack(track, streamDestination.stream);
   });
-  const connectTime = Date.now();
 
   const { cast } = window;
   const handleCastStateChanged = ({ castState }) => {
     if (castState === cast.framework.CastState.NOT_CONNECTED) {
-      const disconnectTime = Date.now();
-      console.log(`Disconnected after ${disconnectTime - connectTime}ms`);
+      Tone.Master.mute = false;
       castContext.removeEventListener(
         cast.framework.CastContextEventType.CAST_STATE_CHANGED,
         handleCastStateChanged
@@ -90,8 +89,9 @@ const handleCastStateConnected = (castContext, store) => {
   );
 
   const { selectedPieceId } = store.getState();
-
-  updateReceiverMetadata(castSession, selectedPieceId);
+  if (selectedPieceId !== null) {
+    updateReceiverMetadata(castSession, selectedPieceId);
+  }
 };
 
 const attachConnectedListener = (castContext, store) => {
@@ -133,7 +133,10 @@ const castMiddleware = store => next => {
       const currentState = store.getState();
       const result = next(action);
       const nextState = store.getState();
-      if (currentState.selectedPieceId !== nextState.selectedPieceId) {
+      if (
+        currentState.selectedPieceId !== nextState.selectedPieceId &&
+        nextState.selectedPieceId !== null
+      ) {
         const castSession = window.cast.framework.CastContext.getInstance().getCurrentSession();
         updateReceiverMetadata(castSession, nextState.selectedPieceId);
       }

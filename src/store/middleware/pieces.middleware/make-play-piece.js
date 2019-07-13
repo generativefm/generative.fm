@@ -5,6 +5,7 @@ import markPieceBuildLoading from '../../actions/creators/mark-piece-build-loadi
 import markPieceBuildLoaded from '../../actions/creators/mark-piece-build-loaded.creator';
 import performance from './performance';
 import stopPerformances from './stop-performances';
+import convertPctToDb from './convert-pct-to-db';
 import streamDestination from '../stream-destination';
 
 let lastBuildId;
@@ -16,7 +17,10 @@ const makePlayPiece = (store, performances) => {
     if (!isPerformanceBuilding) {
       queuedPiece = null;
       isPerformanceBuilding = true;
-      const pieceVol = new Tone.Volume().toMaster();
+      const { volumePct, isMuted } = store.getState();
+      const pieceVol = new Tone.Volume(convertPctToDb(volumePct))
+        .set({ mute: isMuted })
+        .toMaster();
       pieceVol.connect(streamDestination);
       const piecePerformance = performance(piece, pieceVol);
       performances.push(piecePerformance);
