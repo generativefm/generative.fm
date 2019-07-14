@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
 import { applyUpdate } from 'offline-plugin/runtime';
 import patronImage from '@images/patron.png';
+import Credits from './credits';
 import './about.scss';
 
 const handleUpdateClick = e => {
@@ -110,6 +111,8 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
           Alex Bainter
         </a>
       </p>
+      <br />
+      <Credits />
     </div>
   );
 };
