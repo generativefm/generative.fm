@@ -90,15 +90,6 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
         </a>
         .
       </p>
-      <p>
-        <a
-          href="https://www.patreon.com/bePatron?u=2484731"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <img src={patronImage} width="150" />
-        </a>
-      </p>
       <br />
       <p>{`v${version}`}</p>
       <p>
@@ -112,7 +103,18 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
         </a>
       </p>
       <br />
-      <Credits />
+      <p>
+        <Credits />
+      </p>
+      <p className="center">
+        <a
+          href="https://www.patreon.com/bePatron?u=2484731"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <img src={patronImage} width="150" />
+        </a>
+      </p>
     </div>
   );
 };

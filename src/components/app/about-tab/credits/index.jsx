@@ -5,13 +5,14 @@ const supporters = [
   'theunis',
   'Lisa Sieverts',
   'Phil Langlois',
-  'Price Comstock',
-  'Romain',
   'Casper Lourens',
-  'Anton Mironov',
   'James',
+  'Anton Mironov',
+  'Romain',
+  'Price Comstock',
   'Jay Zehngebot',
-  'Bruz Marzof',
+  'Bruz Marzolf',
+  'Laurent Baumann',
 ];
 const majorSupporters = ['Brian Fountain', 'Mike Smith'];
 
