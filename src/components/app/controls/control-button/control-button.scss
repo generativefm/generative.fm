@@ -97,3 +97,10 @@
     transform: translate(-37%, -50%);
   }
 }
+
+@media (max-width: 768px) {
+  .control-button {
+    margin: 0;
+    padding: 0;
+  }
+}

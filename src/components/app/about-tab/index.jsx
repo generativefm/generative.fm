@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
 import { applyUpdate } from 'offline-plugin/runtime';
 import patronImage from '@images/patron.png';
+import Credits from './credits';
 import './about.scss';
 
 const handleUpdateClick = e => {
@@ -89,15 +90,6 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
         </a>
         .
       </p>
-      <p>
-        <a
-          href="https://www.patreon.com/bePatron?u=2484731"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <img src={patronImage} width="150" />
-        </a>
-      </p>
       <br />
       <p>{`v${version}`}</p>
       <p>
@@ -108,6 +100,19 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
           rel="noreferrer noopener"
         >
           Alex Bainter
+        </a>
+      </p>
+      <br />
+      <p>
+        <Credits />
+      </p>
+      <p className="center">
+        <a
+          href="https://www.patreon.com/bePatron?u=2484731"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <img src={patronImage} width="150" />
         </a>
       </p>
     </div>

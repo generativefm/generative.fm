@@ -1,0 +1,15 @@
+.credits {
+  &__supporters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__name {
+    margin: 1em;
+
+    &--major {
+      font-size: 1.5em;
+    }
+  }
+}

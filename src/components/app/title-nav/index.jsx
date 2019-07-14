@@ -53,12 +53,16 @@ const TitleNavComponent = ({
     //eslint-disable-next-line prefer-destructuring
     notification = notifications[0];
   }
+
   return (
     <div className="title-nav">
       <div className="title-nav__header">
         <div className="title-nav__header__info">
           <h1 className="title-nav__header__info__title title-nav__header__info__title--primary">
             Generative.fm
+            <span className="title-nav__header__info__title__cast-btn">
+              <google-cast-launcher />
+            </span>
           </h1>
           <h2 className="title-nav__header__info__title title-nav__header__info__title--secondary">
             Generative music by{' '}

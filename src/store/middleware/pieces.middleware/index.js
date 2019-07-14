@@ -20,11 +20,6 @@ const UPDATE_PLAY_TIME_INTERVAL_MS = 5000;
 
 const piecesMiddleware = store => next => {
   Tone.context.latencyHint = 'balanced';
-  const initialState = store.getState();
-  Tone.Master.volume.value = convertPctToDb(initialState.volumePct);
-  if (initialState.isMuted) {
-    Tone.Master.mute = true;
-  }
   let playTimeInterval;
 
   const startTrackingPlayTimeForPieceId = pieceId => {
@@ -42,18 +37,28 @@ const piecesMiddleware = store => next => {
   const performances = [];
   const playPiece = makePlayPiece(store, performances);
 
+  const updateVolume = (isMuted, pctParam) => {
+    let pct = pctParam;
+    if (typeof pct === 'undefined') {
+      const { volumePct } = store.getState();
+      pct = volumePct;
+    }
+    const volume = convertPctToDb(pct);
+    performances
+      .filter(({ isStopped }) => !isStopped())
+      .forEach(({ volumeNode }) => volumeNode.set({ volume, mute: isMuted }));
+  };
+
   return action => {
     const {
       selectedPieceId,
       isPlaying,
       isShuffleActive,
       pieceHistory,
-      isMuted,
       visiblePieceIds,
     } = store.getState();
     if (action.type === UPDATE_VOLUME_PCT) {
-      Tone.Master.volume.value = convertPctToDb(action.payload);
-      Tone.Master.mute = false;
+      updateVolume(false, action.payload);
     } else if (action.type === NEXT) {
       let nextPieceId;
       if (isShuffleActive) {
@@ -110,9 +115,6 @@ const piecesMiddleware = store => next => {
       }
     } else if (action.type === PLAY) {
       startAudioContext();
-      if (!isMuted) {
-        Tone.Master.mute = false;
-      }
       let piece;
       if (selectedPieceId === null) {
         piece = isShuffleActive
@@ -126,12 +128,11 @@ const piecesMiddleware = store => next => {
       startTrackingPlayTimeForPieceId(piece.id);
     } else if (action.type === STOP) {
       clearInterval(playTimeInterval);
-      Tone.Master.mute = true;
       stopPerformances(performances, true);
     } else if (action.type === MUTE) {
-      Tone.Master.mute = true;
-    } else if (action.type === UNMUTE && isPlaying) {
-      Tone.Master.mute = false;
+      updateVolume(true);
+    } else if (action.type === UNMUTE) {
+      updateVolume(false);
     }
     return next(action);
   };

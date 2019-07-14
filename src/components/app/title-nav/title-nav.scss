@@ -24,6 +24,13 @@
           font-size: 1em;
           color: $secondaryColor;
         }
+
+        &__cast-btn {
+          display: inline-block;
+          max-width: 1.75em;
+          float: right;
+          cursor: pointer;
+        }
       }
 
       &__install-btn {
@@ -138,6 +145,10 @@
       margin-right: 0.25em;
     }
   }
+}
+
+google-cast-launcher {
+  --connected-color: #{$highlightColor};
 }
 
 @keyframes bounce {
