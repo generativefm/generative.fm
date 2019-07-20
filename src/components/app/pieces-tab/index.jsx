@@ -11,6 +11,7 @@ import sortings from '@pieces/sortings';
 import isSupported from '@config/is-supported';
 import FAVORITES_FILTER from '@config/favorites-filter';
 import ALL_FILTER from '@config/all-filter';
+import formatPlayTime from './piece/format-play-time';
 import './pieces-tab.scss';
 
 const PiecesTabComponent = ({
@@ -146,6 +147,14 @@ const PiecesTabComponent = ({
             />
           ))}
         </div>
+      </div>
+      <div className="pieces-playtime">
+        {formatPlayTime(
+          Reflect.ownKeys(playTime).reduce(
+            (totalPlayTime, key) => (totalPlayTime += playTime[key]),
+            0
+          )
+        )}
       </div>
     </div>
   );
