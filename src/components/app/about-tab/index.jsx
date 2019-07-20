@@ -103,9 +103,7 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
         </a>
       </p>
       <br />
-      <p>
-        <Credits />
-      </p>
+      <Credits />
       <p className="center">
         <a
           href="https://www.patreon.com/bePatron?u=2484731"
