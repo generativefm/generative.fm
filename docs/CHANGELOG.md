@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [1.4.0] - 2019-07-21
+
+### Fixed
+
+- Meditation doesn't stutter
+- Spring again piano doesn't stop
+
+### Added
+
+- New piece: Pulse-code Modulation
+
 ## [1.3.0] - 2019-07-14
 
 ### Fixed
@@ -376,7 +387,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
-[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.3.0...HEAD
+[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.4.0...HEAD
+[1.4.0]: https://github.com/generative-music/generative.fm/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/generative-music/generative.fm/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/generative-music/generative.fm/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/generative-music/generative.fm/compare/v1.1.2...v1.2.0
