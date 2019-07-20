@@ -29,6 +29,7 @@ import dayDream from '@generative-music/piece-day-dream';
 import homage from '@generative-music/piece-homage';
 import moment from '@generative-music/piece-moment';
 import substrate from '@generative-music/piece-substrate';
+import pulseCodeModulation from '@generative-music/piece-pulse-code-modulation';
 
 const pieces = [
   enoMachine,
@@ -62,6 +63,7 @@ const pieces = [
   homage,
   moment,
   substrate,
+  pulseCodeModulation,
 ].reverse();
 
 export default pieces;
