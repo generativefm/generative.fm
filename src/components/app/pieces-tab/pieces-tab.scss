@@ -47,9 +47,11 @@
     }
   }
 
-  .no-results-message {
-    margin: 1em auto;
-    display: flex;
-    justify-content: center;
+  .pieces-playtime {
+    width: 100%;
+    text-align: center;
+    color: $secondaryColor;
+    padding-bottom: 1em;
+    font-size: 0.75em;
   }
 }
