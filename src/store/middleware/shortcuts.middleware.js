@@ -11,6 +11,8 @@ const NEXT_KEY = 'ArrowRight';
 const PLAY_STOP_KEY = ' ';
 const MUTE_KEY = 'm';
 
+const MODIFIER_KEYS = ['Alt', 'AltGraph', 'Control', 'OS', 'Meta', 'Shift'];
+
 const keyHandlers = {
   [PLAY_STOP_KEY]: ({ isPlaying }) => (isPlaying ? stop() : play()),
   [PREVIOUS_KEY]: () => previous(),
@@ -21,7 +23,10 @@ const keyHandlers = {
 const shortcutsMiddleware = store => nextMiddleware => {
   const handleKeydown = keyEvent => {
     const keyHandler = keyHandlers[keyEvent.key];
-    if (typeof keyHandler === 'function') {
+    if (
+      typeof keyHandler === 'function' &&
+      !MODIFIER_KEYS.some(key => keyEvent.getModifierState(key))
+    ) {
       keyEvent.preventDefault();
       const state = store.getState();
       if (!isRecordingGenerationInProgress(state.generatedRecordings)) {
