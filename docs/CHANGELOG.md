@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-(none)
+### Change
+
+- Ignore keyboard shortcuts if a modifier key is also pressed
 
 ## [1.4.0] - 2019-07-21
 
