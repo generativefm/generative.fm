@@ -13,6 +13,7 @@ const supporters = [
   'Jay Zehngebot',
   'Bruz Marzolf',
   'Laurent Baumann',
+  'Matthew William Whisennand',
 ];
 const majorSupporters = ['Brian Fountain', 'Mike Smith'];
 
