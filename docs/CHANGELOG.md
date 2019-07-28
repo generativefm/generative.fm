@@ -7,9 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Change
+### Fixed
 
 - Ignore keyboard shortcuts if a modifier key is also pressed
+
+### Changed
+
+- Update Patron list
+
+### Added
+
+- New piece: "Bhairav"
 
 ## [1.4.0] - 2019-07-21
 
