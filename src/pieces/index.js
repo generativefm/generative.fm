@@ -30,6 +30,7 @@ import homage from '@generative-music/piece-homage';
 import moment from '@generative-music/piece-moment';
 import substrate from '@generative-music/piece-substrate';
 import pulseCodeModulation from '@generative-music/piece-pulse-code-modulation';
+import bhairav from '@generative-music/piece-bhairav';
 
 const pieces = [
   enoMachine,
@@ -64,6 +65,7 @@ const pieces = [
   moment,
   substrate,
   pulseCodeModulation,
+  bhairav,
 ].reverse();
 
 export default pieces;
