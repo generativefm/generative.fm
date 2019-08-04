@@ -9,12 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [1.6.1] - 2019-08-04
+
+### Fixed
+
+- Add missing Patrons
+
 ## [1.6.0] - 2019-08-04
 
 ### Changed
 
 - Include "ambient" in site descriptions
-- Add new piece: "Stratospheric"
+
+### Added
+
+- New piece: "Stratospheric"
 
 ## [1.5.0] - 2019-07-28
 
@@ -409,7 +418,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
-[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.6.0...HEAD
+[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.6.1...HEAD
+[1.6.1]: https://github.com/generative-music/generative.fm/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/generative-music/generative.fm/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/generative-music/generative.fm/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/generative-music/generative.fm/compare/v1.3.0...v1.4.0
