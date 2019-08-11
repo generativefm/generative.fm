@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [1.7.0] - 2019-08-11
+
+### Changed
+
+- Update Patron list
+
+### Added
+
+- New piece: "Yesterday"
+
 ## [1.6.1] - 2019-08-04
 
 ### Fixed

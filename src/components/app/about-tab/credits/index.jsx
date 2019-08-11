@@ -17,6 +17,7 @@ const supporters = [
   'Dan Carr',
   'Stephen Turner',
   'Lorenzo Burgio',
+  'Tim Van Damme',
 ];
 const majorSupporters = ['Brian Fountain', 'Mike Smith'];
 
