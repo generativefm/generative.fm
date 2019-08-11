@@ -32,6 +32,7 @@ import substrate from '@generative-music/piece-substrate';
 import pulseCodeModulation from '@generative-music/piece-pulse-code-modulation';
 import bhairav from '@generative-music/piece-bhairav';
 import stratospheric from '@generative-music/piece-stratospheric';
+import yesterday from '@generative-music/piece-yesterday';
 
 const pieces = [
   enoMachine,
@@ -68,6 +69,7 @@ const pieces = [
   pulseCodeModulation,
   bhairav,
   stratospheric,
+  yesterday,
 ].reverse();
 
 export default pieces;
