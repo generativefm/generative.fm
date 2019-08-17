@@ -14,17 +14,19 @@ const CurrentlyPlayingComponent = ({ selectedPieceId, isPlaying }) => {
   const { title, visualizationType } = hasSelection
     ? pieces.find(({ id }) => id === selectedPieceId)
     : { title: '', visualizationType: DEFAULT_VISUALIZATION_TYPE };
-  const { drawCanvas } = visualizations[visualizationType];
   const containerRef = useRef(null);
   const [animator, setAnimator] = useState(null);
   const [height, setHeight] = useState(null);
+  const [drawCanvas, setDrawCanvas] = useState(
+    () => visualizations[visualizationType].drawCanvas
+  );
   useEffect(() => {
     if (isPlaying) {
       setAnimator(
         visualizations[visualizationType].animators.makeEndlessAnimator({
           height, // used for partialLattice
           width: height, // used for partialLattice
-          getAnimationDuration: Math.random() * 10000 + 10000, // used for partialLattice
+          getAnimationDuration: () => Math.random() * 10000 + 10000, // used for partialLattice
           animationDuration: 30 * 1000, // used for squareCut
           now: Date.now,
         })
@@ -32,6 +34,7 @@ const CurrentlyPlayingComponent = ({ selectedPieceId, isPlaying }) => {
     } else {
       setAnimator(null);
     }
+    setDrawCanvas(() => visualizations[visualizationType].drawCanvas);
   }, [isPlaying, visualizationType]);
 
   useEffect(() => {
@@ -47,7 +50,12 @@ const CurrentlyPlayingComponent = ({ selectedPieceId, isPlaying }) => {
         drawCanvas={drawCanvas}
       />
     ) : (
-      <Static width={height} height={height} drawCanvas={drawCanvas} />
+      <Static
+        width={height}
+        height={height}
+        drawCanvas={drawCanvas}
+        config={{}}
+      />
     );
 
   return (
