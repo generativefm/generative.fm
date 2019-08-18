@@ -18,6 +18,8 @@ const supporters = [
   'Stephen Turner',
   'Lorenzo Burgio',
   'Tim Van Damme',
+  'Michael Gehrmann',
+  'Martin Stubbs',
 ];
 const majorSupporters = ['Brian Fountain', 'Mike Smith'];
 

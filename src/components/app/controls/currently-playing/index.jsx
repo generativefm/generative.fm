@@ -1,33 +1,41 @@
 import React, { useEffect, useState, useRef } from 'react';
 import propTypes from 'prop-types';
-import { react, animators } from '@generative-music/visualizer';
+import { react, visualizations } from '@generative-music/visualizer';
 import pieces from '@pieces';
 import FavoriteButton from '@containers/favorite-button.container';
 import MoreButton from '@components/shared/more-button';
 import './currently-playing.scss';
 
+const DEFAULT_VISUALIZATION_TYPE = 'squareCut';
 const { Static, Animated } = react;
 
 const CurrentlyPlayingComponent = ({ selectedPieceId, isPlaying }) => {
   const hasSelection = selectedPieceId !== null;
-  const { title } = hasSelection
+  const { title, visualizationType } = hasSelection
     ? pieces.find(({ id }) => id === selectedPieceId)
-    : { artist: '', title: '' };
+    : { title: '', visualizationType: DEFAULT_VISUALIZATION_TYPE };
   const containerRef = useRef(null);
   const [animator, setAnimator] = useState(null);
   const [height, setHeight] = useState(null);
+  const [drawCanvas, setDrawCanvas] = useState(
+    () => visualizations[visualizationType].drawCanvas
+  );
   useEffect(() => {
     if (isPlaying) {
       setAnimator(
-        animators.makeEndlessAnimator({
-          animationDuration: 30 * 1000,
+        visualizations[visualizationType].animators.makeEndlessAnimator({
+          height, // used for partialLattice
+          width: height, // used for partialLattice
+          getAnimationDuration: () => Math.random() * 10000 + 10000, // used for partialLattice
+          animationDuration: 30 * 1000, // used for squareCut
           now: Date.now,
         })
       );
     } else {
       setAnimator(null);
     }
-  }, [isPlaying]);
+    setDrawCanvas(() => visualizations[visualizationType].drawCanvas);
+  }, [isPlaying, visualizationType]);
 
   useEffect(() => {
     setHeight(containerRef.current.clientHeight);
@@ -35,9 +43,19 @@ const CurrentlyPlayingComponent = ({ selectedPieceId, isPlaying }) => {
 
   const visualizer =
     isPlaying && animator !== null ? (
-      <Animated width={height} height={height} animator={animator} />
+      <Animated
+        width={height}
+        height={height}
+        animator={animator}
+        drawCanvas={drawCanvas}
+      />
     ) : (
-      <Static width={height} height={height} />
+      <Static
+        width={height}
+        height={height}
+        drawCanvas={drawCanvas}
+        config={{}}
+      />
     );
 
   return (
