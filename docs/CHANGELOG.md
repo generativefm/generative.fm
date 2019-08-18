@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [1.8.0] - 2019-08-18
+
+### Changed
+
+- Update Patron list
+- Reword site descriptions for better SEO ranking
+
+### Added
+
+- New piece: "Last Transit"
+- Alternative visualization
+
 ## [1.7.0] - 2019-08-11
 
 ### Changed
