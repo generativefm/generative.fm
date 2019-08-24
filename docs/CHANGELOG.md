@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [1.9.0] - 2019-08-24
+
+### Fixed
+
+- App background covers entire About tab
+
 ## [1.8.0] - 2019-08-18
 
 ### Changed
