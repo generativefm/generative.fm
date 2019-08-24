@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - App background covers entire About tab
 
+### Changed
+
+- Update Patron list
+
 ## [1.8.0] - 2019-08-18
 
 ### Changed
