@@ -19,6 +19,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Update Patron list
 
+### Added
+
+- New piece: "At Sunrise"
+
 ## [1.8.0] - 2019-08-18
 
 ### Changed
