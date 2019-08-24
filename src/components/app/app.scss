@@ -14,6 +14,7 @@
     display: flex;
     flex-direction: column;
     padding-bottom: $controlsHeight;
+    background-color: $backgroundColor;
   }
 
   &__controls {
