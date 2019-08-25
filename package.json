@@ -1,6 +1,6 @@
 {
   "name": "generative.fm",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "A platform for playing generative music in the browser",
   "main": "index.js",
   "scripts": {
@@ -66,6 +66,7 @@
     "@generative-music/piece-a-viable-system": "^2.13.0",
     "@generative-music/piece-aisatsana": "^2.13.2",
     "@generative-music/piece-apoapsis": "^2.13.0",
+    "@generative-music/piece-at-sunrise": "^2.21.0",
     "@generative-music/piece-awash": "^2.13.0",
     "@generative-music/piece-bhairav": "^2.18.0",
     "@generative-music/piece-buttafingers": "^2.13.0",

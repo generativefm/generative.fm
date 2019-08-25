@@ -20,6 +20,7 @@ const supporters = [
   'Tim Van Damme',
   'Michael Gehrmann',
   'Martin Stubbs',
+  'Oleksandr Bugor',
 ];
 const majorSupporters = ['Brian Fountain', 'Mike Smith'];
 
