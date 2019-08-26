@@ -1,0 +1,19 @@
+@import '_colors.scss';
+
+.airplay {
+  enable-background: new 0 0 125 125;
+  .st0 {
+    fill: #fafafa;
+    fill-opacity: 0;
+  }
+
+  .st1 {
+    fill: #7d7d7d;
+  }
+}
+
+.airplay--is-connected {
+  .st1 {
+    fill: $highlightColor;
+  }
+}
