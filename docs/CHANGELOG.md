@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-(none)
+### Removed
+
+- "Consider supporting on Patreon" notification will no longer appear
 
 ## [1.9.0] - 2019-08-24
 
