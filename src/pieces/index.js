@@ -35,6 +35,7 @@ import stratospheric from '@generative-music/piece-stratospheric';
 import yesterday from '@generative-music/piece-yesterday';
 import lastTransit from '@generative-music/piece-last-transit';
 import atSunrise from '@generative-music/piece-at-sunrise';
+import noRefrain from '@generative-music/piece-no-refrain';
 
 const pieces = [
   enoMachine,
@@ -74,6 +75,7 @@ const pieces = [
   yesterday,
   lastTransit,
   atSunrise,
+  noRefrain,
 ].reverse();
 
 export default pieces;

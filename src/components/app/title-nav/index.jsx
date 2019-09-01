@@ -4,6 +4,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
 import IconButton from '@components/shared/icon-button';
 import TextButton from '@components/shared/text-button';
+//import AirPlay from './air-play';
 import './title-nav.scss';
 
 const TitleNavLink = ({

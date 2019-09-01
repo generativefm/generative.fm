@@ -1,6 +1,6 @@
 {
   "name": "generative.fm",
-  "version": "1.9.0",
+  "version": "1.10.1",
   "description": "A platform for playing generative music in the browser",
   "main": "index.js",
   "scripts": {
@@ -85,6 +85,7 @@
     "@generative-music/piece-meditation": "^2.17.0",
     "@generative-music/piece-moment": "^2.16.0",
     "@generative-music/piece-neuroplasticity": "^2.13.0",
+    "@generative-music/piece-no-refrain": "^2.22.1",
     "@generative-music/piece-observable-streams": "^2.13.0",
     "@generative-music/piece-otherness": "^2.13.0",
     "@generative-music/piece-peace": "^2.13.0",
