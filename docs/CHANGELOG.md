@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+### [1.10.1] - 2019-09-01
+
+### Fixed
+
+- Update "No Refrain" to latest patch version
+
 ### [1.10.0] - 2019-09-01
 
 ### Changed
