@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Tone from 'tone';
 import classNames from 'classnames';
 import streamDestination from '@store/middleware/stream-destination';
 import './air-play.scss';
@@ -23,7 +24,9 @@ const AirPlay = () => {
   };
 
   const makeHandleWebkitCurrentPlaybackTargetIsWirelessChanged = audio => () => {
-    setIsConnected(Boolean(audio.webkitCurrentPlaybackTargetIsWireless));
+    const isWireless = Boolean(audio.webkitCurrentPlaybackTargetIsWireless);
+    Tone.master.mute = isWireless;
+    setIsConnected(isWireless);
   };
 
   useEffect(() => {
