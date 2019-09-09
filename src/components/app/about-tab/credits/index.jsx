@@ -9,7 +9,6 @@ const supporters = [
   'Anton Mironov',
   'Romain',
   'Price Comstock',
-  'Jay Zehngebot',
   'Bruz Marzolf',
   'Laurent Baumann',
   'Matthew William Whisennand',
@@ -20,8 +19,12 @@ const supporters = [
   'Michael Gehrmann',
   'Martin Stubbs',
   'Oleksandr Bugor',
+  'Zarremgregarrok',
+  'Catherine Desrochers',
+  'Douglas Fils',
+  'Christian Benstein',
 ];
-const majorSupporters = ['Brian Fountain', 'Mike Smith'];
+const majorSupporters = ['Brian Fountain', 'Mike Smith', 'Christian DeWolf'];
 
 const Credits = () => (
   <div className="credits">
