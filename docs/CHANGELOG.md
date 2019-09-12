@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-(none)
+### Removed
+
+- Analytics
+
+### Added
+
+- Send state data to database on page unload
 
 ## [1.11.1] - 2019-09-09
 
