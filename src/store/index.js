@@ -14,6 +14,7 @@ import notificationsMiddleware from './middleware/notifications.middleware';
 import STATE_STORAGE_KEY from './middleware/local-storage.middleware/key';
 import installPromptMiddleware from './middleware/install-prompt.middleware';
 import castMiddleware from './middleware/cast.middleware';
+import saveStateBeaconMiddleware from './middleware/save-state-beacon.middleware';
 import pieces from '../pieces/index';
 import getInitialState from './get-initial-state';
 
@@ -41,6 +42,7 @@ const allMiddlewares = [
   notificationsMiddleware,
   installPromptMiddleware,
   localStorageMiddleware,
+  saveStateBeaconMiddleware,
 ];
 const desktopMiddlewares = allMiddlewares.concat([interruptUnloadMiddleware]);
 
