@@ -3,7 +3,7 @@ import isMobile from '@config/is-mobile';
 import rootReducer from './reducers/root.reducer';
 import piecesMiddleware from './middleware/pieces.middleware';
 import localStorageMiddleware from './middleware/local-storage.middleware';
-import beforeUnloadMiddleware from './middleware/before-unload.middleware';
+import interruptUnloadMiddleware from './middleware/interrupt-unload.middleware';
 import silentHtml5AudioMiddleware from './middleware/silent-html5-audio.middleware';
 import mediaSessionMiddleware from './middleware/media-session.middleware';
 import shortcutsMiddleware from './middleware/shortcuts.middleware';
@@ -42,7 +42,7 @@ const allMiddlewares = [
   installPromptMiddleware,
   localStorageMiddleware,
 ];
-const desktopMiddlewares = allMiddlewares.concat([beforeUnloadMiddleware]);
+const desktopMiddlewares = allMiddlewares.concat([interruptUnloadMiddleware]);
 
 const store = createStore(
   rootReducer,
