@@ -11,9 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Analytics
 
+### Changed
+
+- Update Patron list
+
 ### Added
 
 - Send state data to database on page unload
+- New piece: Animalia Chordata
 
 ## [1.11.1] - 2019-09-09
 

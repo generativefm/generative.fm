@@ -23,8 +23,14 @@ const supporters = [
   'Catherine Desrochers',
   'Douglas Fils',
   'Christian Benstein',
+  'John',
 ];
-const majorSupporters = ['Brian Fountain', 'Mike Smith', 'Christian DeWolf'];
+const majorSupporters = [
+  'Brian Fountain',
+  'Mike Smith',
+  'Christian DeWolf',
+  'Sam Roelants',
+];
 
 const Credits = () => (
   <div className="credits">
