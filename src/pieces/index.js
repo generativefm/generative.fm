@@ -37,6 +37,7 @@ import lastTransit from '@generative-music/piece-last-transit';
 import atSunrise from '@generative-music/piece-at-sunrise';
 import noRefrain from '@generative-music/piece-no-refrain';
 import aguaRavine from '@generative-music/piece-agua-ravine';
+import animaliaChordata from '@generative-music/piece-animalia-chordata';
 
 const pieces = [
   enoMachine,
@@ -78,6 +79,7 @@ const pieces = [
   atSunrise,
   noRefrain,
   aguaRavine,
+  animaliaChordata,
 ].reverse();
 
 export default pieces;
