@@ -3,7 +3,7 @@ import isMobile from '@config/is-mobile';
 import rootReducer from './reducers/root.reducer';
 import piecesMiddleware from './middleware/pieces.middleware';
 import localStorageMiddleware from './middleware/local-storage.middleware';
-import beforeUnloadMiddleware from './middleware/before-unload.middleware';
+import interruptUnloadMiddleware from './middleware/interrupt-unload.middleware';
 import silentHtml5AudioMiddleware from './middleware/silent-html5-audio.middleware';
 import mediaSessionMiddleware from './middleware/media-session.middleware';
 import shortcutsMiddleware from './middleware/shortcuts.middleware';
@@ -14,6 +14,7 @@ import notificationsMiddleware from './middleware/notifications.middleware';
 import STATE_STORAGE_KEY from './middleware/local-storage.middleware/key';
 import installPromptMiddleware from './middleware/install-prompt.middleware';
 import castMiddleware from './middleware/cast.middleware';
+import saveStateBeaconMiddleware from './middleware/save-state-beacon.middleware';
 import pieces from '../pieces/index';
 import getInitialState from './get-initial-state';
 
@@ -41,8 +42,9 @@ const allMiddlewares = [
   notificationsMiddleware,
   installPromptMiddleware,
   localStorageMiddleware,
+  saveStateBeaconMiddleware,
 ];
-const desktopMiddlewares = allMiddlewares.concat([beforeUnloadMiddleware]);
+const desktopMiddlewares = allMiddlewares.concat([interruptUnloadMiddleware]);
 
 const store = createStore(
   rootReducer,

@@ -1,6 +1,6 @@
 {
   "name": "generative.fm",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "description": "A platform for playing generative music in the browser",
   "main": "index.js",
   "scripts": {
@@ -66,6 +66,7 @@
     "@generative-music/piece-a-viable-system": "^2.13.0",
     "@generative-music/piece-agua-ravine": "^2.23.0",
     "@generative-music/piece-aisatsana": "^2.13.2",
+    "@generative-music/piece-animalia-chordata": "^2.24.0",
     "@generative-music/piece-apoapsis": "^2.13.0",
     "@generative-music/piece-at-sunrise": "^2.21.0",
     "@generative-music/piece-awash": "^2.13.0",
@@ -102,8 +103,8 @@
     "@generative-music/piece-townsend": "^2.13.0",
     "@generative-music/piece-trees": "^2.13.0",
     "@generative-music/piece-yesterday": "^2.19.0",
-    "@generative-music/samples.generative.fm": "^1.16.0",
-    "@generative-music/visualizer": "^2.3.4",
+    "@generative-music/samples.generative.fm": "^1.17.0",
+    "@generative-music/visualizer": "^2.3.5",
     "audiobuffer-to-wav": "^1.0.0",
     "classnames": "^2.2.6",
     "clone": "^2.1.2",

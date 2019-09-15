@@ -6,7 +6,7 @@ const handleBeforeUnload = event => {
   return '';
 };
 
-const beforeUnloadMiddleware = store => next => {
+const interruptUnloadMiddleware = store => next => {
   let isListening = false;
   if (isProduction) {
     return action => {
@@ -31,4 +31,4 @@ const beforeUnloadMiddleware = store => next => {
   return action => next(action);
 };
 
-export default beforeUnloadMiddleware;
+export default interruptUnloadMiddleware;
