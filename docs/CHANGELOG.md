@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (unreleased)
 
+## [1.13.0] - 2019-09-22
+
+### Added
+
+- New piece: "Above the Rain"
+
 ## [1.12.0] - 2019-09-15
 
 ### Fixed
