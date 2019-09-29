@@ -103,6 +103,7 @@
     "@generative-music/piece-timbral-oscillations": "^2.13.0",
     "@generative-music/piece-townsend": "^2.13.0",
     "@generative-music/piece-trees": "^2.13.0",
+    "@generative-music/piece-western-medicine": "^2.26.0",
     "@generative-music/piece-yesterday": "^2.19.0",
     "@generative-music/samples.generative.fm": "^1.19.0",
     "@generative-music/visualizer": "^2.3.5",
