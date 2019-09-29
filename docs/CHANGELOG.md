@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (unreleased)
 
+## [1.14.0] - 2019-09-29
+
+### Added
+
+- New piece: "Western Medicine"
+
 ## [1.13.0] - 2019-09-22
 
 ### Added
