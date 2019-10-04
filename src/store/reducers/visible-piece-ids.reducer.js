@@ -24,10 +24,6 @@ const visiblePieceIdsReducer = (reduxState = {}, action) => {
   ) {
     return getSortedFilteredPieceIds(reduxState);
   }
-  const { sorting } = reduxState;
-  if (sorting.key === 'playTime') {
-    return getSortedFilteredPieceIds(reduxState);
-  }
   return reduxState.visiblePieceIds;
 };
 
