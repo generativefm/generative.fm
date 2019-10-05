@@ -51,7 +51,7 @@ const fetchStatsMiddleware = store => next => action => {
         Date.now() - lastFavoriteCountFetch > 1000 * 60 * 60 * 24
       ) {
         favoriteCountFetching = true;
-        fetch(`${API_ENDPOINT}/playtime`)
+        fetch(`${API_ENDPOINT}/favoritecount`)
           .then(resp => resp.json())
           .then(({ Item }) => {
             favoriteCountFetching = false;
