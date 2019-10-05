@@ -42,7 +42,7 @@ const fetchStatsMiddleware = store => next => action => {
             playTimeFetching = false;
           });
       }
-    } else if (sorting.key === 'globalFavorites') {
+    } else if (sorting.key === 'favoriteCount') {
       const lastFavoriteCountFetch = new Date(
         localStorage.getItem(lastFavoriteCountFetchKey)
       );

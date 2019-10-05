@@ -35,15 +35,15 @@ const getInitialState = storedState => {
     cachedPieceIds: isNewVersion
       ? new Set(storedState.cachedPieceIds)
       : new Set(),
-    globalPlayTime:
-      typeof storedState.globalPlayTime === 'object'
-        ? objToMap(storedState.globalPlayTime)
-        : new Map(),
-    favoriteCount:
-      typeof storedState.favoriteCount === 'object'
-        ? objToMap(storedState.favoriteCount)
-        : new Map(),
   });
+
+  if (typeof storedState.globalPlayTime === 'object') {
+    initialState.globalPlayTime = objToMap(storedState.globalPlayTime);
+  }
+
+  if (typeof storedState.favoriteCount === 'object') {
+    initialState.favoriteCount = objToMap(storedState.favoriteCount);
+  }
 
   // must be done after previous step (converting favorites to Set)
   initialState.visiblePieceIds = getSortedFilteredPieceIds(initialState);
