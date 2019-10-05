@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-(unreleased)
+### Changed
+
+- Pieces will no longer resort by playtime while a piece is playing
 
 ## [1.14.0] - 2019-09-29
 
