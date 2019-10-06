@@ -10,7 +10,6 @@ const supporters = [
   'Romain',
   'Price Comstock',
   'Bruz Marzolf',
-  'Laurent Baumann',
   'Matthew William Whisennand',
   'Dan Carr',
   'Stephen Turner',
@@ -22,7 +21,7 @@ const supporters = [
   'Zarremgregarrok',
   'Catherine Desrochers',
   'Douglas Fils',
-  'Christian Benstein',
+  'KingOfHearts',
   'John',
 ];
 const majorSupporters = [
