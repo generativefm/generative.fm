@@ -1,5 +1,6 @@
 import isMobile from '@config/is-mobile';
-import getOnlineStatus from './get-online-status';
+import getOnlineStatus from '@utils/get-online-status';
+import objToMap from '@utils/obj-to-map';
 import getSortedFilteredPieceIds from './get-sorted-filtered-piece-ids';
 import { version } from '../../package.json';
 
@@ -35,6 +36,14 @@ const getInitialState = storedState => {
       ? new Set(storedState.cachedPieceIds)
       : new Set(),
   });
+
+  if (typeof storedState.globalPlayTime === 'object') {
+    initialState.globalPlayTime = objToMap(storedState.globalPlayTime);
+  }
+
+  if (typeof storedState.favoriteCount === 'object') {
+    initialState.favoriteCount = objToMap(storedState.favoriteCount);
+  }
 
   // must be done after previous step (converting favorites to Set)
   initialState.visiblePieceIds = getSortedFilteredPieceIds(initialState);

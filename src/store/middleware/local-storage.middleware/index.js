@@ -1,5 +1,5 @@
 import KEY from './key';
-import stringify from '../stringify-state';
+import stringify from '@utils/stringify-state';
 
 const localStorageMiddleware = store => next => action => {
   const previousStateString = stringify(store.getState());
