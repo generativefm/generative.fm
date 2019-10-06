@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Pieces will no longer resort by playtime while a piece is playing
+- Update Patron list
 
 ### Added
 
