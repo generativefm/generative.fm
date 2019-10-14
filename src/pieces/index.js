@@ -41,6 +41,7 @@ import animaliaChordata from '@generative-music/piece-animalia-chordata';
 import aboveTheRain from '@generative-music/piece-above-the-rain';
 import westernMedicine from '@generative-music/piece-western-medicine';
 import soundtrack from '@generative-music/piece-soundtrack';
+import nakaii from '@generative-music/piece-nakaii';
 
 const pieces = [
   enoMachine,
@@ -86,6 +87,7 @@ const pieces = [
   aboveTheRain,
   westernMedicine,
   soundtrack,
+  nakaii,
 ].reverse();
 
 export default pieces;
