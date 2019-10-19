@@ -9,6 +9,8 @@ import pipe from '@utils/pipe';
 const lastPlayTimeFetchKey = 'LAST_PLAY_TIME_FETCH';
 const lastFavoriteCountFetchKey = 'LAST_FAVORITE_COUNT_FETCH';
 
+const getTimeStampFromLocalStorage = key => Number(localStorage.getItem(key));
+
 const fetchStatsMiddleware = store => next => action => {
   const result = next(action);
   let playTimeFetching = false;
@@ -18,8 +20,8 @@ const fetchStatsMiddleware = store => next => action => {
 
   if (isProduction && isOnline()) {
     if (sorting.key === 'globalPlayTime' || sorting.key === 'trending') {
-      const lastPlayTimeFetch = new Date(
-        localStorage.getItem(lastPlayTimeFetchKey)
+      const lastPlayTimeFetch = getTimeStampFromLocalStorage(
+        lastPlayTimeFetchKey
       );
       if (
         !playTimeFetching &&
@@ -43,8 +45,8 @@ const fetchStatsMiddleware = store => next => action => {
           });
       }
     } else if (sorting.key === 'favoriteCount') {
-      const lastFavoriteCountFetch = new Date(
-        localStorage.getItem(lastFavoriteCountFetchKey)
+      const lastFavoriteCountFetch = getTimeStampFromLocalStorage(
+        lastFavoriteCountFetchKey
       );
       if (
         !favoriteCountFetching &&
