@@ -42,6 +42,7 @@ import aboveTheRain from '@generative-music/piece-above-the-rain';
 import westernMedicine from '@generative-music/piece-western-medicine';
 import soundtrack from '@generative-music/piece-soundtrack';
 import nakaii from '@generative-music/piece-nakaii';
+import remembering from '@generative-music/piece-remembering';
 
 const pieces = [
   enoMachine,
@@ -88,6 +89,7 @@ const pieces = [
   westernMedicine,
   soundtrack,
   nakaii,
+  remembering,
 ].reverse();
 
 export default pieces;
