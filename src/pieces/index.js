@@ -43,6 +43,7 @@ import westernMedicine from '@generative-music/piece-western-medicine';
 import soundtrack from '@generative-music/piece-soundtrack';
 import nakaii from '@generative-music/piece-nakaii';
 import remembering from '@generative-music/piece-remembering';
+import eyesClosed from '@generative-music/piece-eyes-closed';
 
 const pieces = [
   enoMachine,
@@ -90,6 +91,7 @@ const pieces = [
   soundtrack,
   nakaii,
   remembering,
+  eyesClosed,
 ].reverse();
 
 export default pieces;
