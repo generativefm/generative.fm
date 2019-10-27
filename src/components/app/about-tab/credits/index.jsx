@@ -31,6 +31,7 @@ const majorSupporters = [
   'Christian DeWolf',
   'Sam Roelants',
   'Papuna Gagnidze',
+  "Anthony O'Neill",
 ];
 
 const Credits = () => (

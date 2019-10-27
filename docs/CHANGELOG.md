@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [1.18.1] - 2019-10-27
+
+### Fixed
+
+- Add missing patron
+
 ## [1.18.0] - 2019-10-27
 
 ### Changed
