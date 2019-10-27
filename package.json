@@ -12,7 +12,8 @@
     "deploy:staging": "npm run predeploy && node node_scripts/deploy.js",
     "deploy:production": "npm run predeploy && node node_scripts/deploy.js -p",
     "lint": "eslint . --ext .js,.jsx",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "update-stats": "node node_scripts/update-stats.js"
   },
   "repository": {
     "type": "git",
