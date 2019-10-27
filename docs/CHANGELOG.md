@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [1.18.0] - 2019-10-27
+
+### Changed
+
+- Update default global sortings
+
+### Added
+
+- New piece: "Eyes Closed"
+
 ## [1.17.0] - 2019-10-20
 
 ### Changed

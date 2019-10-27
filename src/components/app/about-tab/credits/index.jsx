@@ -23,6 +23,7 @@ const supporters = [
   'Douglas Fils',
   'KingOfHearts',
   'John',
+  'Fred - FLQ',
 ];
 const majorSupporters = [
   'Brian Fountain',
