@@ -8,7 +8,7 @@ import './about.scss';
 const handleUpdateClick = e => {
   e.preventDefault();
   applyUpdate(() => {
-    window.location.reload();
+    window.location.reload(true);
   });
 };
 
