@@ -20,10 +20,10 @@ const supporters = [
   'Oleksandr Bugor',
   'Zarremgregarrok',
   'Catherine Desrochers',
-  'Douglas Fils',
   'KingOfHearts',
   'John',
   'Fred - FLQ',
+  'Eric Turner',
 ];
 const majorSupporters = [
   'Brian Fountain',
@@ -31,6 +31,7 @@ const majorSupporters = [
   'Christian DeWolf',
   'Sam Roelants',
   'Papuna Gagnidze',
+  "Anthony O'Neill",
 ];
 
 const Credits = () => (
