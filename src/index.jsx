@@ -16,6 +16,9 @@ if (isProduction) {
     onUpdateReady: () => {
       store.dispatch(indicateUpdateAvailable());
     },
+    onUpdated: () => {
+      window.location.reload();
+    },
   });
 
   if (navigator.sendBeacon) {
