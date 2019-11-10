@@ -7,9 +7,7 @@ import './about.scss';
 
 const handleUpdateClick = e => {
   e.preventDefault();
-  applyUpdate(() => {
-    window.location.reload(true);
-  });
+  applyUpdate();
 };
 
 const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
