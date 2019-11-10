@@ -20,6 +20,7 @@ const supporters = [
   'Oleksandr Bugor',
   'Zarremgregarrok',
   'Catherine Desrochers',
+  'Douglas Fils',
   'KingOfHearts',
   'John',
   'Fred - FLQ',
