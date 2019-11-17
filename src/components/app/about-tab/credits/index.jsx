@@ -33,6 +33,7 @@ const majorSupporters = [
   'Sam Roelants',
   'Papuna Gagnidze',
   "Anthony O'Neill",
+  'Russ Creech',
 ];
 
 const Credits = () => (
