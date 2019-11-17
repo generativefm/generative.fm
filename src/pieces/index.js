@@ -46,6 +46,7 @@ import remembering from '@generative-music/piece-remembering';
 import eyesClosed from '@generative-music/piece-eyes-closed';
 import uun from '@generative-music/piece-uun';
 import ritual from '@generative-music/piece-ritual';
+import transmission from '@generative-music/piece-transmission';
 
 const pieces = [
   enoMachine,
@@ -96,6 +97,7 @@ const pieces = [
   eyesClosed,
   uun,
   ritual,
+  transmission,
 ].reverse();
 
 export default pieces;
