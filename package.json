@@ -1,6 +1,6 @@
 {
   "name": "generative.fm",
-  "version": "1.21.0",
+  "version": "1.22.0",
   "description": "A platform for playing generative music in the browser",
   "main": "index.js",
   "scripts": {
@@ -76,6 +76,7 @@
     "@generative-music/piece-buttafingers": "^2.13.0",
     "@generative-music/piece-day-dream": "^2.13.1",
     "@generative-music/piece-didgeridoobeats": "^2.13.0",
+    "@generative-music/piece-documentary-films": "^2.34.0",
     "@generative-music/piece-drones": "^2.13.0",
     "@generative-music/piece-drones-2": "^2.13.0",
     "@generative-music/piece-eno-machine": "^2.13.0",
@@ -113,7 +114,7 @@
     "@generative-music/piece-uun": "^2.31.1",
     "@generative-music/piece-western-medicine": "^2.26.0",
     "@generative-music/piece-yesterday": "^2.19.0",
-    "@generative-music/samples.generative.fm": "^1.21.1",
+    "@generative-music/samples.generative.fm": "^1.22.0",
     "@generative-music/visualizer": "^2.3.5",
     "audiobuffer-to-wav": "^1.0.0",
     "classnames": "^2.2.6",

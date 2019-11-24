@@ -47,6 +47,7 @@ import eyesClosed from '@generative-music/piece-eyes-closed';
 import uun from '@generative-music/piece-uun';
 import ritual from '@generative-music/piece-ritual';
 import transmission from '@generative-music/piece-transmission';
+import documentaryFilms from '@generative-music/piece-documentary-films';
 
 const pieces = [
   enoMachine,
@@ -98,6 +99,7 @@ const pieces = [
   uun,
   ritual,
   transmission,
+  documentaryFilms,
 ].reverse();
 
 export default pieces;
