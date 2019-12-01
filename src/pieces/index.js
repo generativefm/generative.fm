@@ -48,6 +48,7 @@ import uun from '@generative-music/piece-uun';
 import ritual from '@generative-music/piece-ritual';
 import transmission from '@generative-music/piece-transmission';
 import documentaryFilms from '@generative-music/piece-documentary-films';
+import beneathWaves from '@generative-music/piece-beneath-waves';
 
 const pieces = [
   enoMachine,
@@ -100,6 +101,7 @@ const pieces = [
   ritual,
   transmission,
   documentaryFilms,
+  beneathWaves,
 ].reverse();
 
 export default pieces;
