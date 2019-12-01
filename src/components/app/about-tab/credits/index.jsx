@@ -25,13 +25,14 @@ const supporters = [
   'John',
   'Fred - FLQ',
   'Eric Turner',
+  'Emily M Kaplan',
 ];
 const majorSupporters = [
   'Brian Fountain',
   'Mike Smith',
   'Christian DeWolf',
   'Sam Roelants',
-  'Papuna Gagnidze',
+  // 'Papuna Gagnidze',
   "Anthony O'Neill",
   'Russ Creech',
 ];

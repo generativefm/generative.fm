@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [1.23.0] - 2019-12-01
+
+### Fixed
+
+- "Above the Rain" releases all resources when stopped
+
+### Changed
+
+- Update Patron list
+
+### Added
+
+- New piece: "Beneath Waves"
+
 ## [1.22.0] - 2019-11-24
 
 ### Added
@@ -613,7 +627,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
-[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.22.0...HEAD
+[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.23.0...HEAD
+[1.23.0]: https://github.com/generative-music/generative.fm/compare/v1.22.0...v1.23.0
 [1.22.0]: https://github.com/generative-music/generative.fm/compare/v1.21.0...v1.22.0
 [1.21.0]: https://github.com/generative-music/generative.fm/compare/v1.20.0...v1.21.0
 [1.20.0]: https://github.com/generative-music/generative.fm/compare/v1.19.0...v1.20.0
