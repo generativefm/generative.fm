@@ -32,8 +32,7 @@ const majorSupporters = [
   'Mike Smith',
   'Christian DeWolf',
   'Sam Roelants',
-  // 'Papuna Gagnidze',
-  "Anthony O'Neill",
+  'Papuna Gagnidze',
   'Russ Creech',
 ];
 
