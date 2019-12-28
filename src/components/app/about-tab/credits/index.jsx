@@ -26,10 +26,11 @@ const supporters = [
   'Fred - FLQ',
   'Eric Turner',
   'Emily M Kaplan',
+  'James Finazzo',
+  'Tommy Dylan',
 ];
 const majorSupporters = [
   'Brian Fountain',
-  'Mike Smith',
   'Christian DeWolf',
   'Sam Roelants',
   'Papuna Gagnidze',
