@@ -15,6 +15,8 @@ import STATE_STORAGE_KEY from './middleware/local-storage.middleware/key';
 import installPromptMiddleware from './middleware/install-prompt.middleware';
 import castMiddleware from './middleware/cast.middleware';
 import fetchStatsMiddleware from './middleware/fetch-stats.middleware';
+import authenticationMiddleware from './middleware/authentication.middleware';
+import syncMiddleware from './middleware/sync.middleware';
 import pieces from '../pieces/index';
 import getInitialState from './get-initial-state';
 
@@ -31,6 +33,8 @@ if (!pieces.map(({ id }) => id).includes(storedState.selectedPieceId)) {
 const initialState = getInitialState(storedState);
 
 const allMiddlewares = [
+  authenticationMiddleware,
+  syncMiddleware,
   castMiddleware,
   timerMiddleware,
   piecesMiddleware,

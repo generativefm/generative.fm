@@ -8,9 +8,11 @@ const mapStateToProps = ({
   isUpdateAvailable,
   notifications,
   isInstallable,
+  isUserSignedIn,
 }) => ({
   isUpdateAvailable,
   isInstallable,
+  isUserSignedIn,
   notifications: notifications.filter(({ isDismissed }) => !isDismissed),
 });
 

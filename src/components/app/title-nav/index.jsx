@@ -46,6 +46,7 @@ const TitleNavComponent = ({
   isUpdateAvailable,
   notifications,
   isInstallable,
+  isUserSignedIn,
   dismissNotification,
   promptInstallation,
 }) => {
@@ -101,6 +102,11 @@ const TitleNavComponent = ({
             linkTo="/record"
           />
           <TitleNavLink
+            text={isUserSignedIn ? 'LOG OUT' : 'LOG IN'}
+            parentClass="title-nav__header__tab-list"
+            linkTo="/user"
+          />
+          <TitleNavLink
             text="HELP"
             parentClass="title-nav__header__tab-list"
             linkTo="/help"
@@ -139,6 +145,7 @@ TitleNavComponent.propTypes = {
   isUpdateAvailable: propTypes.bool.isRequired,
   notifications: propTypes.array.isRequired,
   isInstallable: propTypes.bool.isRequired,
+  isUserSignedIn: propTypes.bool.isRequired,
   dismissNotification: propTypes.func.isRequired,
   promptInstallation: propTypes.func.isRequired,
 };

@@ -13,6 +13,7 @@ import TitleNavContainer from '@containers/title-nav.container';
 import AboutTabContainer from '@containers/about-tab.container';
 import PiecesTabContainer from '@containers/pieces-tab.container';
 import RecordTabContainer from '@containers/record-tab.container';
+import UserTab from './user-tab';
 import './app.scss';
 
 const AppComponent = () => {
@@ -52,6 +53,7 @@ const AppComponent = () => {
                 <Route exact path="/about" component={AboutTabContainer} />
                 <Route exact path="/help" component={HelpTabComponent} />
                 <Route exact path="/record" component={RecordTabContainer} />
+                <Route exact path="/user" component={UserTab} />
                 <Route
                   path="/music/:pieceId"
                   render={({ match, history }) => (

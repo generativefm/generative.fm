@@ -23,6 +23,8 @@ import isInstallable from './is-installable.reducer';
 import cachedPieceIds from './cached-piece-ids.reducer';
 import globalPlayTime from './global-play-time.reducer';
 import favoriteCount from './favorite-count.reducer';
+import isUserSignedIn from './is-user-signed-in.reducer';
+import userData from './user-data.reducer';
 
 const combinedReducer = combineReducers({
   isMuted,
@@ -48,6 +50,8 @@ const combinedReducer = combineReducers({
   cachedPieceIds,
   globalPlayTime,
   favoriteCount,
+  isUserSignedIn,
+  userData,
 });
 
 const rootReducer = (state = {}, action) => {

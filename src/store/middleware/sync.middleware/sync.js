@@ -1,29 +1,37 @@
 import { CognitoSync, CognitoIdentityCredentials } from 'aws-sdk';
 import userPoolId from '@config/cognito-user-pool-id';
-import identityPoolId from '@config/cognito-identity-poolid';
+import identityPoolId from '@config/cognito-identity-pool-id';
+import fetch from './fetch';
+import playTimeKey from './play-time-key';
+import favoritesKey from './favorites-key';
+import getCognitoSync from './get-cognito-sync';
+import datasetName from './dataset-name';
 
-const DATASET_NAME = 'SYNC_DATA';
-const FAVORITES_KEY = `${DATASET_NAME}_FAVORITES`;
-const PLAY_TIME_KEY = `${DATASET_NAME}_PLAY_TIME`;
+// const credentialsCache = new Map();
 
-const getCognitoSync = (identityId, idJwtToken) =>
-  new CognitoSync({
-    credentials: new CognitoIdentityCredentials(
-      {
-        IdentityId: identityId,
-        Logins: {
-          [`cognito-idp.us-west-2.amazonaws.com/${userPoolId}`]: idJwtToken,
-        },
-      },
-      { region: 'us-west-2' }
-    ),
-    params: { IdentityPoolId: identityPoolId, IdentityId: identityId },
-    region: 'us-west-2',
-    apiVersion: '2014-06-30',
-  });
-
+// const getCognitoCredentials = (identityId, idJwtToken) => {
+//   const cacheKey = `${identityId}|${idJwtToken}`;
+//   if (credentialsCache.has(cacheKey)) {
+//     return credentialsCache.get(cacheKey);
+//   }
+//   credentialsCache.clear();
+//   const credentials = new CognitoIdentityCredentials(
+//     {
+//       IdentityId: identityId,
+//       Logins: {
+//         [`cognito-idp.us-west-2.amazonaws.com/${userPoolId}`]: idJwtToken,
+//       },
+//     },
+//     { region: 'us-west-2' }
+//   );
+//   credentialsCache.set(cacheKey, credentials);
+//   return credentials;
+// };
 const getJSONFromLocalStorage = (key, defaultValue) => {
-  const jsonStr = localStorage.get(key);
+  const jsonStr = window.localStorage.getItem(key);
+  if (jsonStr === null) {
+    return defaultValue;
+  }
   try {
     return JSON.parse(jsonStr);
   } catch (err) {
@@ -31,43 +39,12 @@ const getJSONFromLocalStorage = (key, defaultValue) => {
   }
 };
 
-const getStringFromDataset = (records, key, defaultValue) => {
-  const record = records.find(({ Key }) => Key === key);
-  if (!record) {
-    return JSON.stringify(defaultValue);
-  }
-  return record.Value;
-};
-
-const getJSONFromDataset = (records, key, defaultValue) => {
-  const record = records.find(({ Key }) => Key === key);
-  if (!record) {
-    return [defaultValue, 0];
-  }
-  try {
-    return [JSON.parse(record.Value), record.SyncCount];
-  } catch (err) {
-    return [defaultValue, 0];
-  }
-};
-
-const sync = (currentUserInfo, currentSession, reduxState) => {
-  const cognitoSync = getCognitoSync(
-    currentUserInfo.id,
-    currentSession.idToken.jwtToken
-  );
-  return cognitoSync
-    .listRecords({
-      DatasetName: DATASET_NAME,
-    })
-    .promise()
-    .then(response => {
-      if (response.data === null) {
-        throw new Error('List response data was null');
-      }
-      const { favorites, playTime } = reduxState;
-      const lastSyncedFavorites = getJSONFromLocalStorage(FAVORITES_KEY, []);
-      const lastSyncedPlayTime = getJSONFromLocalStorage(PLAY_TIME_KEY, {});
+const sync = (currentCredentials, store) =>
+  fetch(currentCredentials, store.dispatch)
+    .then(remoteData => {
+      const { favorites, playTime } = store.getState();
+      const lastSyncedFavorites = getJSONFromLocalStorage(favoritesKey, []);
+      const lastSyncedPlayTime = getJSONFromLocalStorage(playTimeKey, {});
       const addedPlayTime = Reflect.ownKeys(playTime).reduce(
         (addedPlayTimeObj, pieceId) => {
           const current = playTime[pieceId];
@@ -77,87 +54,69 @@ const sync = (currentUserInfo, currentSession, reduxState) => {
         },
         {}
       );
-      const addedFavorites = favorites.filter(
+      const addedFavorites = Array.from(favorites).filter(
         pieceId => !lastSyncedFavorites.includes(pieceId)
       );
       const removedFavorites = lastSyncedFavorites.filter(
-        pieceId => !favorites.includes(pieceId)
-      );
-      const [remotePlayTime, playTimeSyncCount] = getJSONFromDataset(
-        response.data.Records,
-        PLAY_TIME_KEY,
-        {}
-      );
-      const [remoteFavorites, favoritesSyncCount] = getJSONFromDataset(
-        response.data.Records,
-        FAVORITES_KEY,
-        []
+        pieceId => !favorites.has(pieceId)
       );
       const newPlayTime = Array.from(
         new Set([
-          ...Reflect.ownKeys(remoteFavorites),
+          ...Reflect.ownKeys(remoteData.playTime),
           ...Reflect.ownKeys(addedPlayTime),
         ])
       ).reduce((newPlayTimeObj, pieceId) => {
         const added = addedPlayTime[pieceId] || 0;
-        const remote = remotePlayTime[pieceId] || 0;
-        newPlayTime[pieceId] = added + remote;
+        const remote = remoteData.playTime[pieceId] || 0;
+        newPlayTimeObj[pieceId] = added + remote;
         return newPlayTimeObj;
       }, {});
       const newFavorites = Array.from([
         new Set([
           ...addedFavorites,
-          remoteFavorites.filter(
+          ...remoteData.favorites.filter(
             pieceId => !removedFavorites.includes(pieceId)
           ),
         ]),
       ]);
-      return cognitoSync
+      return getCognitoSync(currentCredentials)
         .updateRecords({
-          DatasetName: DATASET_NAME,
+          DatasetName: datasetName,
           RecordPatches: [
             {
-              Key: PLAY_TIME_KEY,
+              Key: playTimeKey,
               Op: 'replace',
               Value: JSON.stringify(newPlayTime),
-              SyncCount: playTimeSyncCount + 1,
+              SyncCount: remoteData.playTimeSyncCount + 1,
             },
             {
-              Key: FAVORITES_KEY,
+              Key: favoritesKey,
               Op: 'replace',
               Value: JSON.stringify(newFavorites),
-              SyncCount: favoritesSyncCount + 1,
+              SyncCount: remoteData.favoritesSyncCount + 1,
             },
           ],
-          SyncSessionToken: response.SyncSessionToken,
+          SyncSessionToken: remoteData.syncSessionToken,
         })
         .promise()
-        .then(updateResponse => {
-          if (updateResponse.data === null) {
+        .then(response => {
+          if (response === null) {
             throw new Error('Update response data was null');
           }
-          const updatedPlayTimeStr = getStringFromDataset(
-            updateResponse,
-            PLAY_TIME_KEY,
-            newPlayTime
+          window.localStorage.setItem(playTimeKey, JSON.stringify(playTime));
+          window.localStorage.setItem(
+            favoritesKey,
+            JSON.stringify(Array.from(favorites))
           );
-          const updatedFavoritesStr = getStringFromDataset(
-            updateResponse,
-            FAVORITES_KEY,
-            newFavorites
-          );
-          localStorage.set(PLAY_TIME_KEY, updatedPlayTimeStr);
-          localStorage.set(FAVORITES_KEY, updatedFavoritesStr);
         })
         .catch(err => {
           //eslint-disable-next-line no-console
-          console.error('Failed to sync data:', err);
+          console.error('Failed to update data:', err);
         });
     })
     .catch(err => {
       //eslint-disable-next-line no-console
-      console.error('Failed to sync data:', err);
+      console.error('Failed to fetch data:', err);
     });
-};
 
 export default sync;

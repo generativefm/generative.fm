@@ -60,4 +60,4 @@ typings/
 # distribution files
 dist
 
-node_scripts/secrets.js
+secrets.js

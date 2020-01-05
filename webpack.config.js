@@ -22,7 +22,7 @@ const makeConfig = alias => ({
   },
   resolve: {
     alias,
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.mjs', '.js', '.jsx', '.json'],
     mainFields: ['generativeFmManifest', 'browser', 'module', 'main'],
   },
   devServer: {
