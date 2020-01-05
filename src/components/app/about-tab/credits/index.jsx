@@ -35,6 +35,8 @@ const majorSupporters = [
   'Sam Roelants',
   'Papuna Gagnidze',
   'Russ Creech',
+  'Adam M. Smith',
+  'Joël Franusic',
 ];
 
 const Credits = () => (

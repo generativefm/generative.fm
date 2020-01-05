@@ -9,13 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
-## [1.25.0] - 2019-12-27
+## [1.25.0] - 2020-01-05
 
 ### Changed
 
 - Update Patron list
 
-## [1.24.0] - 2019-12-11
+## [1.24.0] - 2019-12-27
 
 ### Changed
 
