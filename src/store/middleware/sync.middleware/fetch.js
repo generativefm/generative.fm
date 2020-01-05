@@ -9,6 +9,9 @@ const getJSONFromDataset = (records, key, defaultValue) => {
   if (!record) {
     return [defaultValue, 0];
   }
+  if (record.Value === null) {
+    return [defaultValue, record.SyncCount];
+  }
   try {
     return [JSON.parse(record.Value), record.SyncCount];
   } catch (err) {

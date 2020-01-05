@@ -60,6 +60,13 @@ const sync = (currentCredentials, store) =>
       const removedFavorites = lastSyncedFavorites.filter(
         pieceId => !favorites.has(pieceId)
       );
+      if (
+        Object.values(addedPlayTime).every(time => time <= 0) &&
+        addedFavorites.length === 0 &&
+        removedFavorites.length === 0
+      ) {
+        return Promise.resolve();
+      }
       const newPlayTime = Array.from(
         new Set([
           ...Reflect.ownKeys(remoteData.playTime),
@@ -71,14 +78,14 @@ const sync = (currentCredentials, store) =>
         newPlayTimeObj[pieceId] = added + remote;
         return newPlayTimeObj;
       }, {});
-      const newFavorites = Array.from([
+      const newFavorites = Array.from(
         new Set([
           ...addedFavorites,
           ...remoteData.favorites.filter(
             pieceId => !removedFavorites.includes(pieceId)
           ),
-        ]),
-      ]);
+        ])
+      );
       return getCognitoSync(currentCredentials)
         .updateRecords({
           DatasetName: datasetName,
