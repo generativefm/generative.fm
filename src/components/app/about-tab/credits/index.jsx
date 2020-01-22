@@ -7,7 +7,6 @@ const supporters = [
   'Casper Lourens',
   'James',
   'Anton Mironov',
-  'Romain',
   'Price Comstock',
   'Bruz Marzolf',
   'Matthew William Whisennand',
@@ -26,14 +25,17 @@ const supporters = [
   'Fred - FLQ',
   'Eric Turner',
   'Emily M Kaplan',
+  'James Finazzo',
+  'Tommy Dylan',
 ];
 const majorSupporters = [
   'Brian Fountain',
-  'Mike Smith',
   'Christian DeWolf',
   'Sam Roelants',
   'Papuna Gagnidze',
   'Russ Creech',
+  'Adam M. Smith',
+  'Joël Franusic',
 ];
 
 const Credits = () => (

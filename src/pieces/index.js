@@ -49,6 +49,7 @@ import ritual from '@generative-music/piece-ritual';
 import transmission from '@generative-music/piece-transmission';
 import documentaryFilms from '@generative-music/piece-documentary-films';
 import beneathWaves from '@generative-music/piece-beneath-waves';
+import fourtwentyHzGammaWaves from '@generative-music/piece-420hz-gamma-waves-for-big-brain';
 
 const pieces = [
   enoMachine,
@@ -102,6 +103,7 @@ const pieces = [
   transmission,
   documentaryFilms,
   beneathWaves,
+  fourtwentyHzGammaWaves,
 ].reverse();
 
 export default pieces;
