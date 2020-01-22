@@ -7,7 +7,6 @@ const supporters = [
   'Casper Lourens',
   'James',
   'Anton Mironov',
-  'Romain',
   'Price Comstock',
   'Bruz Marzolf',
   'Matthew William Whisennand',
