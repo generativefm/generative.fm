@@ -1,5 +1,6 @@
-import { context } from 'tone';
+import Tone from 'tone';
 
+const { context } = Tone;
 // "inspired by" (read: ripped off) https://github.com/tambien/StartAudioContext/blob/master/StartAudioContext.js
 const startAudioContext = () => {
   if (context.state && context.state !== 'running') {

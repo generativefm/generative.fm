@@ -38,9 +38,11 @@ const makePlayPiece = (store, performances) => {
       //     maxDb = db;
       //   }
       // };
-      // setInterval(() => {
-      //   updateMaxDb();
-      // }, 0);
+      // setTimeout(() => {
+      //   setInterval(() => {
+      //     updateMaxDb();
+      //   }, 0);
+      // }, 1000);
       // setInterval(() => {
       //   console.log(maxDb);
       // }, 1000);
