@@ -70,25 +70,25 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
         on Twitter for updates about the site.{' '}
       </p>
       <p>
-        If you enjoy this project, consider supporting it by{' '}
-        <a
-          href="https://www.patreon.com/bePatron?u=2484731"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          becoming a Patron
-        </a>{' '}
-        or through{' '}
-        <a
-          href="https://paypal.me/alexbainter"
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          PayPal
-        </a>
-        .
+        If you enjoy this project, consider supporting it:
+        <div className="support-methods">
+          <a
+            href="https://www.patreon.com/bePatron?u=2484731"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            Patreon
+          </a>
+          <a
+            href="https://paypal.me/alexbainter"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            PayPal
+          </a>
+          <span>BTC: 3DMb8BQVTtfVv59pMLmZmHr6xSoJsb3P4Z</span>
+        </div>
       </p>
-      <br />
       <p>{`v${version}`}</p>
       <p>
         Made by{' '}
