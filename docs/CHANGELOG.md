@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [1.26.1] - 2020-01-25
+
+### Fixed
+
+- `Uncaught TypeError: Failed to execute 'connect' on 'AudioNode': No function was found that matched the signature provided.`
+
 ## [1.26.0] - 2020-01-21
 
 ### Changed
@@ -650,7 +656,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
-[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.26.0...HEAD
+[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.26.1...HEAD
+[1.26.1]: https://github.com/generative-music/generative.fm/compare/v1.25.0...v1.26.1
 [1.26.0]: https://github.com/generative-music/generative.fm/compare/v1.25.0...v1.26.0
 [1.25.0]: https://github.com/generative-music/generative.fm/compare/v1.24.0...v1.25.0
 [1.24.0]: https://github.com/generative-music/generative.fm/compare/v1.23.0...v1.24.0
