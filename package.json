@@ -127,7 +127,7 @@
     "react-render-html": "^0.6.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-tiny-popover": "^3.4.5",
+    "react-tiny-popover": "3.4.1",
     "redux": "^4.0.5",
     "svg.js": "^2.7.1",
     "tone": "^13.8.25",
