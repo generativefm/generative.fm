@@ -1,18 +1,18 @@
-import Tone from 'tone';
+import { context, connect } from 'tone';
 
 // "inspired by" (read: ripped off) https://github.com/tambien/StartAudioContext/blob/master/StartAudioContext.js
 const startAudioContext = () => {
-  if (Tone.context.state && Tone.context.state !== 'running') {
+  if (context.state && context.state !== 'running') {
     // this accomplishes the iOS specific requirement
-    const buffer = Tone.context.createBuffer(1, 1, Tone.context.sampleRate);
-    const source = Tone.context.createBufferSource();
+    const buffer = context.createBuffer(1, 1, context.sampleRate);
+    const source = context.createBufferSource();
     source.buffer = buffer;
-    source.connect(Tone.context.destination);
+    connect(source, context.destination);
     source.start(0);
 
     // resume the audio context
-    if (Tone.context.resume) {
-      Tone.context.resume();
+    if (context.resume) {
+      context.resume();
     }
   }
 };

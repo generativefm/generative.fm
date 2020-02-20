@@ -4,7 +4,6 @@ import './credits.scss';
 const supporters = [
   'theunis',
   'Lisa Sieverts',
-  'Casper Lourens',
   'James',
   'Anton Mironov',
   'Price Comstock',

@@ -6,6 +6,7 @@ const { R_OK } = require('fs').constants;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { EnvironmentPlugin } = require('webpack');
 
 const adjacentSamplePath = path.resolve('../samples.generative.fm/public');
 
@@ -80,6 +81,9 @@ const makeConfig = alias => ({
       template: './index.template.html',
     }),
     new CleanWebpackPlugin(['dist']),
+    new EnvironmentPlugin({
+      SAMPLE_FILE_HOST: '//localhost:6969',
+    }),
   ],
 });
 
@@ -107,8 +111,9 @@ const checkSamplesPromise = fs.access(adjacentSamplePath, R_OK).catch(() => {
   log('Then, run this script again.');
 });
 
-const configPromise = Promise.all([aliasPromise, checkSamplesPromise]).then(
-  ([alias]) => makeConfig(alias)
-);
+const configPromise = Promise.all([
+  aliasPromise,
+  checkSamplesPromise,
+]).then(([alias]) => makeConfig(alias));
 
 module.exports = configPromise;
