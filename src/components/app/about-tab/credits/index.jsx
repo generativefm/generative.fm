@@ -26,6 +26,7 @@ const supporters = [
   'Emily M Kaplan',
   'James Finazzo',
   'Tommy Dylan',
+  'adnan chowdhury',
 ];
 const majorSupporters = [
   'Brian Fountain',

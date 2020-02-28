@@ -1,6 +1,6 @@
 import Tone from 'tone';
+import getSamplesByFormat from '@generative-music/samples-alex-bainter';
 import sampleFormat from '@config/sample-format';
-import sampleSource from '@config/sample-source';
 import markPieceBuildLoading from '../../actions/creators/mark-piece-build-loading.creator';
 import markPieceBuildLoaded from '../../actions/creators/mark-piece-build-loaded.creator';
 import performance from './performance';
@@ -11,6 +11,8 @@ import streamDestination from '../stream-destination';
 let lastBuildId;
 let isPerformanceBuilding = false;
 let queuedPiece = null;
+
+const sampleIndex = getSamplesByFormat()[sampleFormat];
 
 const makePlayPiece = (store, performances) => {
   const playPiece = piece => {
@@ -51,8 +53,7 @@ const makePlayPiece = (store, performances) => {
         .makePiece({
           destination: pieceVol,
           audioContext: Tone.context,
-          preferredFormat: sampleFormat,
-          sampleSource,
+          samples: sampleIndex,
         })
         .then(cleanUp => {
           piecePerformance.addCleanupFn(cleanUp);
