@@ -1,5 +1,6 @@
 import Tone from 'tone';
 import toWav from 'audiobuffer-to-wav';
+import getSamplesByFormat from '@generative-music/samples-alex-bainter';
 import piecesById from '@pieces/by-id';
 import preferredFormat from '@config/sample-format';
 import START_RECORDING_GENERATION from '@store/actions/types/start-recording-generation.type';
@@ -9,7 +10,8 @@ import RECORDING_GENERATION_COMPLETE from '@store/actions/types/recording-genera
 import recordingGenerationComplete from '@store/actions/creators/recording-generation-complete.creator';
 import startRecordingGeneration from '@store/actions/creators/start-recording-generation.creator';
 import stop from '@store/actions/creators/stop.creator';
-import sampleSource from '@config/sample-source';
+
+const samplesByFormat = getSamplesByFormat();
 
 const renderOffline = (makePiece, durationInSeconds) => {
   const { sampleRate } = Tone.context;
@@ -24,8 +26,7 @@ const renderOffline = (makePiece, durationInSeconds) => {
   );
   Tone.context = offlineContext;
   return makePiece({
-    preferredFormat,
-    sampleSource,
+    samples: samplesByFormat[preferredFormat],
     audioContext: offlineContext,
     destination: Tone.Master,
   }).then(cleanup => {
