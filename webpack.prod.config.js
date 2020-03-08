@@ -9,11 +9,7 @@ const getConfig = configPromise.then(config => {
   config.plugins.push(
     new OfflinePlugin({
       appShell: '/',
-      externals: [
-        'favicon.ico',
-        'manifest.json',
-        'https://platform.twitter.com/widgets.js',
-      ],
+      externals: ['favicon.ico', 'https://platform.twitter.com/widgets.js'],
       autoUpdate: true,
       ServiceWorker: {
         events: true,
