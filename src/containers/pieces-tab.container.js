@@ -20,7 +20,6 @@ const mapStateToProps = ({
   sorting,
   visiblePieceIds,
   isOnline,
-  cachedPieceIds,
 }) => ({
   selectedPieceId,
   isPlaying,
@@ -30,7 +29,6 @@ const mapStateToProps = ({
   sorting,
   visiblePieceIds,
   isOnline,
-  cachedPieceIds,
   isLoading: loadingPieceBuildId !== '',
   isRecordingGenerationInProgress: isRecordingGenerationInProgress(
     generatedRecordings
@@ -47,7 +45,4 @@ const mapDispatchToProps = {
   onPlayClick: play,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PiecesTabComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(PiecesTabComponent);

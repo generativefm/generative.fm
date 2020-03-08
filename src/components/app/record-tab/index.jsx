@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
 import pieces from '@pieces';
 import piecesById from '@pieces/by-id';
+import provider from '@pieces/provider';
 import ControlButtonComponent from '../controls/control-button';
 import TextButton from '@components/shared/text-button';
 import isSupported from '@config/is-supported';
@@ -23,7 +24,6 @@ const RecordTabComponent = ({
   generatedRecordings,
   lastRecordingGenerationLength,
   isOnline,
-  cachedPieceIds,
   removeRecordingGeneration,
   startRecordingGeneration,
 }) => {
@@ -51,8 +51,32 @@ const RecordTabComponent = ({
     setIsGenerationInProgress(queue.some(({ isInProgress }) => isInProgress));
   }, [generatedRecordings]);
 
+  const [isPieceCachedMap, setIsPieceCachedMap] = useState(new Map());
+
+  useEffect(() => {
+    if (!isOnline) {
+      Promise.all(
+        pieces.map(({ id, sampleNames }) =>
+          provider.canProvide(sampleNames).then(result => [id, result])
+        )
+      ).then(results => {
+        setIsPieceCachedMap(new Map(results));
+      });
+    }
+  }, [isOnline]);
+
+  useEffect(() => {
+    Promise.all(
+      pieces.map(({ id, sampleNames }) =>
+        provider.canProvide(sampleNames).then(result => [id, result])
+      )
+    ).then(results => {
+      setIsPieceCachedMap(new Map(results));
+    });
+  }, []);
+
   const isPieceDisabled = piece =>
-    !piece.isRecordable || (!isOnline && !cachedPieceIds.has(piece.id));
+    !piece.isRecordable || (!isOnline && !isPieceCachedMap.get(piece.id));
 
   const getIsRecordingValid = () =>
     !isPieceDisabled(selectedPiece) &&
@@ -171,9 +195,7 @@ const RecordTabComponent = ({
                 } else if (url === '') {
                   status = ' - waiting to generate';
                 }
-                const displayText = `${lengthInMinutes} minutes of ${
-                  piecesById[pieceId].title
-                }${status}`;
+                const displayText = `${lengthInMinutes} minutes of ${piecesById[pieceId].title}${status}`;
                 return (
                   <li
                     key={recordingId}
@@ -259,7 +281,6 @@ RecordTabComponent.propTypes = {
   generatedRecordings: propTypes.object.isRequired,
   lastRecordingGenerationLength: propTypes.string.isRequired,
   isOnline: propTypes.bool.isRequired,
-  cachedPieceIds: propTypes.object.isRequired,
   removeRecordingGeneration: propTypes.func.isRequired,
   startRecordingGeneration: propTypes.func.isRequired,
 };

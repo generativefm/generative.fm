@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { Redirect } from 'react-router';
 import pieces from '@pieces';
+import provider from '@pieces/provider';
 import piecesById from '@pieces/by-id';
 import LinkButton from '@components/shared/link-button';
 import PieceFilter from './piece-filter';
@@ -31,7 +32,6 @@ const PiecesTabComponent = ({
   changeSorting,
   visiblePieceIds,
   isOnline,
-  cachedPieceIds,
   history,
 }) => {
   let isValidSinglePiece = false;
@@ -61,11 +61,34 @@ const PiecesTabComponent = ({
   }
 
   const currentSorting = sortings[sorting.key];
+  const [isPieceCachedMap, setIsPieceCachedMap] = useState(new Map());
 
   const isPieceDisabled = piece =>
     !isSupported ||
     isRecordingGenerationInProgress ||
-    (!isOnline && !cachedPieceIds.has(piece.id));
+    (!isOnline && !isPieceCachedMap.get(piece.id));
+
+  useEffect(() => {
+    if (!isOnline) {
+      Promise.all(
+        pieces.map(({ id, sampleNames }) =>
+          provider.canProvide(sampleNames).then(result => [id, result])
+        )
+      ).then(results => {
+        setIsPieceCachedMap(new Map(results));
+      });
+    }
+  }, [isOnline]);
+
+  useEffect(() => {
+    Promise.all(
+      pieces.map(({ id, sampleNames }) =>
+        provider.canProvide(sampleNames).then(result => [id, result])
+      )
+    ).then(results => {
+      setIsPieceCachedMap(new Map(results));
+    });
+  }, []);
 
   return (
     <div className="pieces-tab">
@@ -177,7 +200,6 @@ PiecesTabComponent.propTypes = {
   changeSorting: propTypes.func.isRequired,
   visiblePieceIds: propTypes.array.isRequired,
   isOnline: propTypes.bool.isRequired,
-  cachedPieceIds: propTypes.object.isRequired,
   history: propTypes.object.isRequired,
 };
 
