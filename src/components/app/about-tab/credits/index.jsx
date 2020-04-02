@@ -7,11 +7,12 @@ const supporters = [
   'James',
   'Anton Mironov',
   'Price Comstock',
+  //   'Jay Zehngebot',
   'Bruz Marzolf',
   'Matthew William Whisennand',
   'Dan Carr',
   'Stephen Turner',
-  'Lorenzo Burgio',
+  //   'Lorenzo Burgio',
   'Tim Van Damme',
   'Michael Gehrmann',
   'Martin Stubbs',
@@ -32,10 +33,11 @@ const majorSupporters = [
   'Brian Fountain',
   'Christian DeWolf',
   'Sam Roelants',
-  'Papuna Gagnidze',
+  // 'Papuna Gagnidze',
   'Russ Creech',
   'Adam M. Smith',
   'Joël Franusic',
+  'Vijay Das',
 ];
 
 const Credits = () => (
