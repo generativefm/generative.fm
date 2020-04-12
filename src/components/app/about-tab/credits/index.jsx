@@ -28,12 +28,13 @@ const supporters = [
   'James Finazzo',
   'Tommy Dylan',
   'adnan chowdhury',
+  'Denis Lebel',
 ];
 const majorSupporters = [
   'Brian Fountain',
   'Christian DeWolf',
   'Sam Roelants',
-  // 'Papuna Gagnidze',
+  'Papuna Gagnidze',
   'Russ Creech',
   'Adam M. Smith',
   'Joël Franusic',
