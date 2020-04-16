@@ -39,6 +39,8 @@ const majorSupporters = [
   'Adam M. Smith',
   'Joël Franusic',
   'Vijay Das',
+  'Milos Stojanovic',
+  'Snooks',
 ];
 
 const Credits = () => (
