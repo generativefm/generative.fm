@@ -36,12 +36,11 @@ You will need [Node.js](https://nodejs.org/en/) installed on your machine.
 
 Requests for sample files from the generative.fm sample CDN are blocked, see [#38](https://github.com/generative-music/generative.fm/issues/38). In order to play music locally, you will need to follow these instructions:
 
-1. Install the build prerequisites specified in [BUILD_README.md](https://github.com/generative-music/samples.generative.fm/blob/master/BUILD_README.md).
-2. Clone the [generative-music/samples.generative.fm] repository to a directory adjacent to the one this project was cloned to.
-3. Run `npm i`.
-4. Run `npm run build:samples`.
+1. Clone [generative-music/samples-alex-bainter](https://github.com/generative-music/samples-alex-bainter) to your machine.
+2. Follow the instructions for [building the sample files](https://github.com/generative-music/samples-alex-bainter#building).
+3. Follow the instructions for [serving the sample files locally with Docker](https://github.com/generative-music/samples-alex-bainter#serving-locally-with-docker).
 
-This will create the sample files on your machine to be served during local development.
+With the sample files served on your local network, you should be able to play the pieces locally.
 
 ## Contributing
 
