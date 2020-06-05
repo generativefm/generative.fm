@@ -33,8 +33,7 @@ You will need [Node.js](https://nodejs.org/en/) installed on your machine.
 5. Navigate to [localhost:9999](http://localhost:9999).
 
 ### Local Sample Files
-
-Requests for sample files from the generative.fm sample CDN are blocked, see [#38](https://github.com/generative-music/generative.fm/issues/38). In order to play music locally, you will need to follow these instructions:
+To play music locally, first you need to follow these instructions:
 
 1. Clone [generative-music/samples-alex-bainter](https://github.com/generative-music/samples-alex-bainter) to your machine.
 2. Follow the instructions for [building the sample files](https://github.com/generative-music/samples-alex-bainter#building).
