@@ -65,16 +65,6 @@ const RecordTabComponent = ({
     }
   }, [isOnline]);
 
-  useEffect(() => {
-    Promise.all(
-      pieces.map(({ id, sampleNames }) =>
-        provider.canProvide(sampleNames).then(result => [id, result])
-      )
-    ).then(results => {
-      setIsPieceCachedMap(new Map(results));
-    });
-  }, []);
-
   const isPieceDisabled = piece =>
     !piece.isRecordable || (!isOnline && !isPieceCachedMap.get(piece.id));
 

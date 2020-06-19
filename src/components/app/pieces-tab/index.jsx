@@ -80,16 +80,6 @@ const PiecesTabComponent = ({
     }
   }, [isOnline]);
 
-  useEffect(() => {
-    Promise.all(
-      pieces.map(({ id, sampleNames }) =>
-        provider.canProvide(sampleNames).then(result => [id, result])
-      )
-    ).then(results => {
-      setIsPieceCachedMap(new Map(results));
-    });
-  }, []);
-
   return (
     <div className="pieces-tab">
       <div className="filter-bar">
