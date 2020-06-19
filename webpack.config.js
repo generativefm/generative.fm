@@ -64,6 +64,12 @@ const makeConfig = alias => ({
         test: /\.webmanifest/,
         use: ['file-loader', 'app-manifest-loader'],
       },
+      {
+        test: /\.js$/,
+        include: /node_modules\/tone/,
+        use: 'source-map-loader',
+        enforce: 'pre',
+      },
     ],
   },
   plugins: [
