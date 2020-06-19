@@ -47,7 +47,7 @@
     "mini-css-extract-plugin": "^0.4.5",
     "node-gzip": "^1.1.2",
     "node-lame": "^1.2.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "offline-plugin": "^5.0.7",
     "prettier": "^1.19.1",
     "prop-types": "^15.7.2",
@@ -58,7 +58,7 @@
     "url-loader": "^1.1.2",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1"
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
