@@ -46,6 +46,7 @@ const renderOffline = (piece, durationInSeconds) => {
 
   hackFn(Tone, 'disconnect', Tone);
   hackFn(window.AudioBufferSourceNode.prototype, 'disconnect');
+  hackFn(Tone.BufferSource.prototype, 'dispose');
 
   return provider
     .provide(piece.sampleNames, offlineContext)
