@@ -87,6 +87,17 @@ const RecordTabComponent = ({
 
   return (
     <div className="centered-tab record-tab">
+      <a
+        className="alert"
+        href="https://record.generative.fm"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        Try the new{' '}
+        <span className="fake-link">Generative.fm recording app</span>. Add fade
+        ins and outs, with more consistent waiting times—often faster—and
+        smaller file sizes.
+      </a>
       This page enables you to generate and download recordings. Recording
       generation may take a while, and longer recordings require more time to
       generate. Music playback is not supported while recording generation is in
