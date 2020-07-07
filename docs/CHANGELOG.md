@@ -9,6 +9,74 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [1.34.0] - 2020-07-05
+
+### Added
+
+- Link to [record.generative.fm](https://record.generative.fm) from the record page
+
+## [1.33.1] - 2020-06-18
+
+### Fixed
+
+- Prevent early disconnects/disposals of AudioNodes during recording
+
+## [1.33.0] - 2020-05-18
+
+### Changed
+
+- Fetch Patron list via API instead of hardcoding names
+
+## [1.32.0] - 2020-04-15
+
+### Changed
+
+- Update Patron list
+
+## [1.31.0] - 2020-04-11
+
+### Changed
+
+- Update Patron list
+
+## [1.30.0] - 2020-04-02
+
+### Changed
+
+- Update Patron list
+
+### Added
+
+- New piece: Oxalis 1
+
+## [1.29.0] - 2020-03-08
+
+### Changed
+
+- Don't clear sample files on upgrade
+- Detect piece cache status based on sample files
+
+### Added
+
+- Use IndexedDB to cache sample files if the Cache API is not available
+
+## [1.28.1] - 2020-02-28
+
+### Fix
+
+- Recording
+
+## [1.28.0] - 2020-02-27
+
+### Changed
+
+- Update Patron list
+- Use new sample CDN
+
+### Added
+
+- New piece: "Stream of Consciousness"
+
 ## [1.27.1] - 2020-02-19
 
 ### Fixed
@@ -672,7 +740,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
-[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.27.1...HEAD
+[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.34.0...HEAD
+[1.34.0]: https://github.com/generative-music/generative.fm/compare/v1.33.1...v1.34.0
+[1.33.1]: https://github.com/generative-music/generative.fm/compare/v1.33.0...v1.33.1
+[1.33.0]: https://github.com/generative-music/generative.fm/compare/v1.32.0...v1.33.0
+[1.32.0]: https://github.com/generative-music/generative.fm/compare/v1.31.0...v1.32.0
+[1.31.0]: https://github.com/generative-music/generative.fm/compare/v1.30.0...v1.31.0
+[1.30.0]: https://github.com/generative-music/generative.fm/compare/v1.29.0...v1.30.0
+[1.29.0]: https://github.com/generative-music/generative.fm/compare/v1.28.1...v1.29.0
+[1.28.1]: https://github.com/generative-music/generative.fm/compare/v1.28.0...v1.28.1
+[1.28.0]: https://github.com/generative-music/generative.fm/compare/v1.27.1...v1.28.0
 [1.27.1]: https://github.com/generative-music/generative.fm/compare/v1.27.0...v1.27.1
 [1.27.0]: https://github.com/generative-music/generative.fm/compare/v1.26.1...v1.27.0
 [1.26.1]: https://github.com/generative-music/generative.fm/compare/v1.25.0...v1.26.1

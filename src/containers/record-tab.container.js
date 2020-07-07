@@ -10,21 +10,16 @@ const mapStateToProps = ({
   generatedRecordings,
   lastRecordingGenerationLength,
   isOnline,
-  cachedPieceIds,
 }) => ({
   selectedPieceId,
   generatedRecordings,
   lastRecordingGenerationLength,
   isOnline,
-  cachedPieceIds,
 });
 
-export default connect(
-  mapStateToProps,
-  {
-    selectPiece,
-    queueRecordingGeneration,
-    removeRecordingGeneration,
-    startRecordingGeneration,
-  }
-)(recordTabComponent);
+export default connect(mapStateToProps, {
+  selectPiece,
+  queueRecordingGeneration,
+  removeRecordingGeneration,
+  startRecordingGeneration,
+})(recordTabComponent);

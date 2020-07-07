@@ -20,7 +20,6 @@ import filter from './filter.reducer';
 import sorting from './sorting.reducer';
 import visiblePieceIdsReducer from './visible-piece-ids.reducer';
 import isInstallable from './is-installable.reducer';
-import cachedPieceIds from './cached-piece-ids.reducer';
 import globalPlayTime from './global-play-time.reducer';
 import favoriteCount from './favorite-count.reducer';
 
@@ -45,7 +44,6 @@ const combinedReducer = combineReducers({
   filter,
   sorting,
   isInstallable,
-  cachedPieceIds,
   globalPlayTime,
   favoriteCount,
 });

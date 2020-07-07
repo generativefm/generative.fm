@@ -17,7 +17,8 @@ const pieceLoader = source => {
     tags: [${pieceManifest.tags.map(tag => `"${tag}"`)}],
     releaseDate: new Date('${pieceManifest.releaseDate}'),
     visualizationType: '${pieceManifest.visualizationType ||
-      DEFAULT_VISUALIZATION_TYPE}'
+      DEFAULT_VISUALIZATION_TYPE}',
+    sampleNames: [${pieceManifest.sampleNames.map(name => `"${name}"`)}]
   }`;
 
   return output;

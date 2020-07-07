@@ -41,4 +41,17 @@
     text-align: center;
     display: inline-block;
   }
+
+  .alert {
+    padding: 1em;
+    background-color: $highlightColor;
+    margin-bottom: 1em;
+    display: block;
+    color: $primaryColor;
+    text-decoration: none;
+
+    .fake-link {
+      text-decoration: underline;
+    }
+  }
 }

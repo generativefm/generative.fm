@@ -1,7 +1,6 @@
 import Tone from 'tone';
 import toWav from 'audiobuffer-to-wav';
 import piecesById from '@pieces/by-id';
-import preferredFormat from '@config/sample-format';
 import START_RECORDING_GENERATION from '@store/actions/types/start-recording-generation.type';
 import QUEUE_RECORDING_GENERATION from '@store/actions/types/queue-recording-generation.type';
 import REMOVE_RECORDING_GENERATION from '@store/actions/types/remove-recording-generation.type';
@@ -9,9 +8,9 @@ import RECORDING_GENERATION_COMPLETE from '@store/actions/types/recording-genera
 import recordingGenerationComplete from '@store/actions/creators/recording-generation-complete.creator';
 import startRecordingGeneration from '@store/actions/creators/start-recording-generation.creator';
 import stop from '@store/actions/creators/stop.creator';
-import sampleSource from '@config/sample-source';
+import provider from '@pieces/provider';
 
-const renderOffline = (makePiece, durationInSeconds) => {
+const renderOffline = (piece, durationInSeconds) => {
   const { sampleRate } = Tone.context;
   const originalContext = Tone.context;
   if (!originalContext.Transport) {
@@ -23,22 +22,53 @@ const renderOffline = (makePiece, durationInSeconds) => {
     sampleRate
   );
   Tone.context = offlineContext;
-  return makePiece({
-    preferredFormat,
-    sampleSource,
-    audioContext: offlineContext,
-    destination: Tone.Master,
-  }).then(cleanup => {
-    Tone.Transport.start();
-    const renderPromise = offlineContext.render();
-    return renderPromise.then(recordingBuffer => {
-      Tone.Transport.stop();
-      Tone.Transport.cancel();
-      cleanup();
-      Tone.context = originalContext;
-      return recordingBuffer;
+
+  /*
+   * SUPER HACK ALERT―TRULY DISGUSTING
+   * In some cases, Tone will disconnect audio nodes too early.
+   * For example, when stopping a BufferSource Tone calls disconnect on a
+   * couple different AudioNodes. This happens before the audio is actually
+   * rendered. So, delay those disconnects until after the audio has been rendered.
+   */
+
+  const fnAttempts = [];
+  const restoreFns = [];
+  const hackFn = (target, fnName, returnValue) => {
+    const originalFn = target[fnName];
+    restoreFns.push(() => {
+      target[fnName] = originalFn;
     });
-  });
+    target[fnName] = function hacked(...args) {
+      fnAttempts.push(originalFn.bind(this, ...args));
+      return returnValue;
+    };
+  };
+
+  hackFn(Tone, 'disconnect', Tone);
+  hackFn(window.AudioBufferSourceNode.prototype, 'disconnect');
+  hackFn(Tone.BufferSource.prototype, 'dispose');
+
+  return provider
+    .provide(piece.sampleNames, offlineContext)
+    .then(samples =>
+      piece.makePiece({
+        samples,
+        audioContext: offlineContext,
+        destination: Tone.Master,
+      })
+    )
+    .then(cleanup => {
+      Tone.Transport.start();
+      const renderPromise = offlineContext.render();
+      return renderPromise.then(recordingBuffer => {
+        fnAttempts.concat(restoreFns).forEach(fn => fn());
+        Tone.Transport.stop();
+        Tone.Transport.cancel();
+        cleanup();
+        Tone.context = originalContext;
+        return recordingBuffer;
+      });
+    });
 };
 
 const recordingGenerationMiddleware = store => next => {
@@ -51,21 +81,19 @@ const recordingGenerationMiddleware = store => next => {
         if (isPlaying) {
           store.dispatch(stop());
         }
-        renderOffline(piece.makePiece, recording.lengthInMinutes * 60).then(
-          buffer => {
-            const wavData = toWav(buffer);
-            const blob = new window.Blob([new DataView(wavData)], {
-              type: 'audio/wav',
-            });
-            const objectUrl = window.URL.createObjectURL(blob);
-            store.dispatch(
-              recordingGenerationComplete({
-                objectUrl,
-                recordingId: recording.recordingId,
-              })
-            );
-          }
-        );
+        renderOffline(piece, recording.lengthInMinutes * 60).then(buffer => {
+          const wavData = toWav(buffer);
+          const blob = new window.Blob([new DataView(wavData)], {
+            type: 'audio/wav',
+          });
+          const objectUrl = window.URL.createObjectURL(blob);
+          store.dispatch(
+            recordingGenerationComplete({
+              objectUrl,
+              recordingId: recording.recordingId,
+            })
+          );
+        });
       }
     } else if (action.type === REMOVE_RECORDING_GENERATION) {
       const { generatedRecordings } = store.getState();

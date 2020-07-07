@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { faTimes, faPlus } from '@fortawesome/free-solid-svg-icons';
 import pieces from '@pieces';
 import piecesById from '@pieces/by-id';
+import provider from '@pieces/provider';
 import ControlButtonComponent from '../controls/control-button';
 import TextButton from '@components/shared/text-button';
 import isSupported from '@config/is-supported';
@@ -23,7 +24,6 @@ const RecordTabComponent = ({
   generatedRecordings,
   lastRecordingGenerationLength,
   isOnline,
-  cachedPieceIds,
   removeRecordingGeneration,
   startRecordingGeneration,
 }) => {
@@ -51,8 +51,22 @@ const RecordTabComponent = ({
     setIsGenerationInProgress(queue.some(({ isInProgress }) => isInProgress));
   }, [generatedRecordings]);
 
+  const [isPieceCachedMap, setIsPieceCachedMap] = useState(new Map());
+
+  useEffect(() => {
+    if (!isOnline) {
+      Promise.all(
+        pieces.map(({ id, sampleNames }) =>
+          provider.canProvide(sampleNames).then(result => [id, result])
+        )
+      ).then(results => {
+        setIsPieceCachedMap(new Map(results));
+      });
+    }
+  }, [isOnline]);
+
   const isPieceDisabled = piece =>
-    !piece.isRecordable || (!isOnline && !cachedPieceIds.has(piece.id));
+    !piece.isRecordable || (!isOnline && !isPieceCachedMap.get(piece.id));
 
   const getIsRecordingValid = () =>
     !isPieceDisabled(selectedPiece) &&
@@ -73,6 +87,17 @@ const RecordTabComponent = ({
 
   return (
     <div className="centered-tab record-tab">
+      <a
+        className="alert"
+        href="https://record.generative.fm"
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        Try the new{' '}
+        <span className="fake-link">Generative.fm recording app</span>. Add fade
+        ins and outs, with more consistent waiting times—often faster—and
+        smaller file sizes.
+      </a>
       This page enables you to generate and download recordings. Recording
       generation may take a while, and longer recordings require more time to
       generate. Music playback is not supported while recording generation is in
@@ -171,9 +196,7 @@ const RecordTabComponent = ({
                 } else if (url === '') {
                   status = ' - waiting to generate';
                 }
-                const displayText = `${lengthInMinutes} minutes of ${
-                  piecesById[pieceId].title
-                }${status}`;
+                const displayText = `${lengthInMinutes} minutes of ${piecesById[pieceId].title}${status}`;
                 return (
                   <li
                     key={recordingId}
@@ -259,7 +282,6 @@ RecordTabComponent.propTypes = {
   generatedRecordings: propTypes.object.isRequired,
   lastRecordingGenerationLength: propTypes.string.isRequired,
   isOnline: propTypes.bool.isRequired,
-  cachedPieceIds: propTypes.object.isRequired,
   removeRecordingGeneration: propTypes.func.isRequired,
   startRecordingGeneration: propTypes.func.isRequired,
 };
