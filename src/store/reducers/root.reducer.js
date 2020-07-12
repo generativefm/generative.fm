@@ -22,6 +22,7 @@ import visiblePieceIdsReducer from './visible-piece-ids.reducer';
 import isInstallable from './is-installable.reducer';
 import globalPlayTime from './global-play-time.reducer';
 import favoriteCount from './favorite-count.reducer';
+import analytics from './analytics.reducer';
 
 const combinedReducer = combineReducers({
   isMuted,
@@ -46,6 +47,7 @@ const combinedReducer = combineReducers({
   isInstallable,
   globalPlayTime,
   favoriteCount,
+  analytics,
 });
 
 const rootReducer = (state = {}, action) => {
