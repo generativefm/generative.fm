@@ -5,10 +5,10 @@ const DEFAULT_VISUALIZATION_TYPE = 'squareCut';
 const pieceLoader = source => {
   const pieceManifest = JSON.parse(source);
   const output = `import image from '${pieceManifest.image}';
-  import makePiece from '${pieceManifest.makePiece}';
+  import activate from '${pieceManifest.makePiece}';
   export default {
     image,
-    makePiece,
+    activate,
     title: '${pieceManifest.title}',
     id: '${pieceManifest.artistId}-${pieceManifest.id}',
     artist: '${pieceManifest.artistId}',

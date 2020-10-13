@@ -65,10 +65,11 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.29",
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
     "@fortawesome/react-fontawesome": "^0.1.11",
-    "@generative-music/pieces-alex-bainter": "^3.4.0",
-    "@generative-music/samples-alex-bainter": "^1.1.0",
+    "@generative-music/pieces-alex-bainter": "^4.1.2",
+    "@generative-music/samples-alex-bainter": "^1.2.0",
     "@generative-music/visualizer": "^2.3.5",
-    "@generative-music/web-provider": "^1.1.0",
+    "@generative-music/web-library": "^0.2.0",
+    "@generative-music/web-provider": "^2.0.4",
     "audiobuffer-to-wav": "^1.0.0",
     "classnames": "^2.2.6",
     "clone": "^2.1.2",
@@ -81,7 +82,7 @@
     "react-tiny-popover": "3.4.1",
     "redux": "^4.0.5",
     "svg.js": "^2.7.1",
-    "tone": "^13.8.25",
+    "tone": "^14.7.58",
     "uuid": "^3.4.0"
   }
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { Redirect } from 'react-router';
 import pieces from '@pieces';
-import provider from '@pieces/provider';
+import library from '@pieces/library';
 import piecesById from '@pieces/by-id';
 import LinkButton from '@components/shared/link-button';
 import PieceFilter from './piece-filter';
@@ -72,7 +72,7 @@ const PiecesTabComponent = ({
     if (!isOnline) {
       Promise.all(
         pieces.map(({ id, sampleNames }) =>
-          provider.canProvide(sampleNames).then(result => [id, result])
+          library.canProvide(sampleNames).then(result => [id, result])
         )
       ).then(results => {
         setIsPieceCachedMap(new Map(results));

@@ -71,7 +71,7 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
       </p>
       <p>
         If you enjoy this project, consider supporting it:
-        <div className="support-methods">
+        <span className="support-methods">
           <a
             href="https://www.patreon.com/bePatron?u=2484731"
             target="_blank"
@@ -87,7 +87,7 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
             PayPal
           </a>
           <span>BTC: 3DMb8BQVTtfVv59pMLmZmHr6xSoJsb3P4Z</span>
-        </div>
+        </span>
       </p>
       <p>{`v${version}`}</p>
       <p>

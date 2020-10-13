@@ -1,11 +1,12 @@
-import Tone from 'tone';
-import provider from '@pieces/provider';
+import * as Tone from 'tone';
+import library from '@pieces/library';
 import markPieceBuildLoading from '../../actions/creators/mark-piece-build-loading.creator';
 import markPieceBuildLoaded from '../../actions/creators/mark-piece-build-loaded.creator';
 import performance from './performance';
 import stopPerformances from './stop-performances';
 import convertPctToDb from './convert-pct-to-db';
 import streamDestination from '../stream-destination';
+import noop from '@utils/noop';
 
 let lastBuildId;
 let isPerformanceBuilding = false;
@@ -46,33 +47,34 @@ const makePlayPiece = (store, performances) => {
       //   console.log(maxDb);
       // }, 1000);
 
-      provider.provide(piece.sampleNames, Tone.context).then(samples => {
-        piece
-          .makePiece({
-            destination: pieceVol,
-            audioContext: Tone.context,
-            samples,
-          })
-          .then(cleanUp => {
-            piecePerformance.addCleanupFn(cleanUp);
-            piecePerformance.isLoaded = true;
-            isPerformanceBuilding = false;
-            const { selectedPieceId, isPlaying } = store.getState();
-            store.dispatch(markPieceBuildLoaded(piecePerformance));
-            if (
-              lastBuildId === piecePerformance.performanceId &&
-              selectedPieceId === piece.id &&
-              isPlaying
-            ) {
-              Tone.Transport.start();
-            } else {
-              stopPerformances(performances);
-            }
-            if (isPlaying && queuedPiece !== null) {
-              playPiece(queuedPiece, store);
-            }
-          });
-      });
+      piece
+        .activate({
+          destination: pieceVol,
+          context: Tone.context,
+          sampleLibrary: library,
+          onProgress: noop,
+        })
+        .then(([deactivate, schedule]) => {
+          piecePerformance.addCleanupFn(deactivate);
+          const end = schedule();
+          piecePerformance.addCleanupFn(end);
+          piecePerformance.isLoaded = true;
+          isPerformanceBuilding = false;
+          const { selectedPieceId, isPlaying } = store.getState();
+          store.dispatch(markPieceBuildLoaded(piecePerformance));
+          if (
+            lastBuildId === piecePerformance.performanceId &&
+            selectedPieceId === piece.id &&
+            isPlaying
+          ) {
+            Tone.Transport.start();
+          } else {
+            stopPerformances(performances);
+          }
+          if (isPlaying && queuedPiece !== null) {
+            playPiece(queuedPiece, store);
+          }
+        });
     } else {
       queuedPiece = piece;
     }

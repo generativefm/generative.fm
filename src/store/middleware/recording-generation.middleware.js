@@ -1,4 +1,4 @@
-import Tone from 'tone';
+import * as Tone from 'tone';
 import toWav from 'audiobuffer-to-wav';
 import piecesById from '@pieces/by-id';
 import START_RECORDING_GENERATION from '@store/actions/types/start-recording-generation.type';
@@ -8,7 +8,8 @@ import RECORDING_GENERATION_COMPLETE from '@store/actions/types/recording-genera
 import recordingGenerationComplete from '@store/actions/creators/recording-generation-complete.creator';
 import startRecordingGeneration from '@store/actions/creators/start-recording-generation.creator';
 import stop from '@store/actions/creators/stop.creator';
-import provider from '@pieces/provider';
+import library from '@pieces/library';
+import noop from '@utils/noop';
 
 const renderOffline = (piece, durationInSeconds) => {
   const { sampleRate } = Tone.context;
@@ -21,7 +22,7 @@ const renderOffline = (piece, durationInSeconds) => {
     durationInSeconds,
     sampleRate
   );
-  Tone.context = offlineContext;
+  Tone.setContext(offlineContext);
 
   /*
    * SUPER HACK ALERT―TRULY DISGUSTING
@@ -31,41 +32,41 @@ const renderOffline = (piece, durationInSeconds) => {
    * rendered. So, delay those disconnects until after the audio has been rendered.
    */
 
-  const fnAttempts = [];
-  const restoreFns = [];
-  const hackFn = (target, fnName, returnValue) => {
-    const originalFn = target[fnName];
-    restoreFns.push(() => {
-      target[fnName] = originalFn;
-    });
-    target[fnName] = function hacked(...args) {
-      fnAttempts.push(originalFn.bind(this, ...args));
-      return returnValue;
-    };
-  };
+  // const fnAttempts = [];
+  // const restoreFns = [];
+  // const hackFn = (target, fnName, returnValue) => {
+  //   const originalFn = target[fnName];
+  //   restoreFns.push(() => {
+  //     target[fnName] = originalFn;
+  //   });
+  //   target[fnName] = function hacked(...args) {
+  //     fnAttempts.push(originalFn.bind(this, ...args));
+  //     return returnValue;
+  //   };
+  // };
+  //
+  // hackFn(Tone, 'disconnect', Tone);
+  // hackFn(window.AudioBufferSourceNode.prototype, 'disconnect');
+  // hackFn(Tone.ToneBufferSource.prototype, 'dispose');
 
-  hackFn(Tone, 'disconnect', Tone);
-  hackFn(window.AudioBufferSourceNode.prototype, 'disconnect');
-  hackFn(Tone.BufferSource.prototype, 'dispose');
-
-  return provider
-    .provide(piece.sampleNames, offlineContext)
-    .then(samples =>
-      piece.makePiece({
-        samples,
-        audioContext: offlineContext,
-        destination: Tone.Master,
-      })
-    )
-    .then(cleanup => {
+  return piece
+    .activate({
+      context: offlineContext,
+      destination: offlineContext.destination,
+      sampleLibrary: library,
+      onProgress: noop,
+    })
+    .then(([deactivate, schedule]) => {
+      const end = schedule();
       Tone.Transport.start();
       const renderPromise = offlineContext.render();
       return renderPromise.then(recordingBuffer => {
-        fnAttempts.concat(restoreFns).forEach(fn => fn());
+        //fnAttempts.concat(restoreFns).forEach(fn => fn());
+        end();
         Tone.Transport.stop();
         Tone.Transport.cancel();
-        cleanup();
-        Tone.context = originalContext;
+        deactivate();
+        Tone.setContext(originalContext);
         return recordingBuffer;
       });
     });

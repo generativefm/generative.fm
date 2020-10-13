@@ -1,3 +1,4 @@
+import piecesById from '@pieces/by-id';
 import isMobile from '@config/is-mobile';
 import getOnlineStatus from '@utils/get-online-status';
 import objToMap from '@utils/obj-to-map';
@@ -30,6 +31,9 @@ const getInitialState = storedState => {
     timer: Object.assign({}, storedState.timer, { remainingMS: 0 }),
     favorites: new Set(storedState.favorites),
     isInstallable: false,
+    selectedPieceId: piecesById[storedState.selectedPieceId]
+      ? storedState.selectedPieceId
+      : null,
   });
 
   if (typeof storedState.globalPlayTime === 'object') {

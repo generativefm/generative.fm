@@ -95,11 +95,16 @@ const TitleNavComponent = ({
             linkTo="/"
             isActive={matchRootOrMusic}
           />
-          <TitleNavLink
-            text="RECORD"
-            parentClass="title-nav__header__tab-list"
-            linkTo="/record"
-          />
+          <li className="title-nav__header__tab-list__item">
+            <a
+              href="https://record.generative.fm"
+              className="title-nav__header__tab-list__item__link"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              RECORD
+            </a>
+          </li>
           <TitleNavLink
             text="HELP"
             parentClass="title-nav__header__tab-list"

@@ -9,7 +9,7 @@ const { EnvironmentPlugin } = require('webpack');
 
 const makeConfig = alias => ({
   mode: 'development',
-  devtool: 'sourcemap',
+  devtool: 'source-map',
   entry: ['@babel/polyfill', './src'],
   output: {
     path: path.join(__dirname, 'dist'),
