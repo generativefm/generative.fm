@@ -4,7 +4,7 @@ import createLibrary from '@generative-music/web-library';
 import sampleFormat from '@config/sample-format';
 
 const provider = createProvider();
-const sampleIndex = getSamplesByFormat()[sampleFormat];
+const sampleIndex = getSamplesByFormat({ format: sampleFormat });
 const library = createLibrary({ sampleIndex, provider });
 
 export default library;
