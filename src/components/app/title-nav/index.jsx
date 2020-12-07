@@ -158,6 +158,7 @@ TitleNavComponent.propTypes = {
   isInstallable: propTypes.bool.isRequired,
   dismissNotification: propTypes.func.isRequired,
   promptInstallation: propTypes.func.isRequired,
+  isOnline: propTypes.bool.isRequired,
 };
 
 export default TitleNavComponent;

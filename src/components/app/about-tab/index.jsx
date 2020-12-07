@@ -102,8 +102,6 @@ const AboutTabComponent = ({ version }) => {
 
 AboutTabComponent.propTypes = {
   version: propTypes.string,
-  isUpdateAvailable: propTypes.bool,
-  isOnline: propTypes.bool,
 };
 
 export default AboutTabComponent;
