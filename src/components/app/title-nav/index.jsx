@@ -49,7 +49,6 @@ const TitleNavComponent = ({
   dismissNotification,
   promptInstallation,
 }) => {
-  notifications.push({ link: 'hi', message: 'beep boop beep boop' });
   let notification;
   if (notifications.length > 0) {
     //eslint-disable-next-line prefer-destructuring
