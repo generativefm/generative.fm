@@ -1,4 +1,4 @@
-import Tone from 'tone';
+import * as Tone from 'tone';
 import uuid from 'uuid';
 
 const performance = (piece, volumeNode) => {

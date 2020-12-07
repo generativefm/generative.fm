@@ -2,10 +2,17 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
+import { applyUpdate } from 'offline-plugin/runtime';
 import IconButton from '@components/shared/icon-button';
 import TextButton from '@components/shared/text-button';
+import noop from '@utils/noop';
 //import AirPlay from './air-play';
 import './title-nav.scss';
+
+const handleUpdateClick = e => {
+  e.preventDefault();
+  applyUpdate();
+};
 
 const TitleNavLink = ({
   text,
@@ -48,6 +55,7 @@ const TitleNavComponent = ({
   isInstallable,
   dismissNotification,
   promptInstallation,
+  isOnline,
 }) => {
   let notification;
   if (notifications.length > 0) {
@@ -55,8 +63,10 @@ const TitleNavComponent = ({
     notification = notifications[0];
   }
 
+  const canInstallUpdate = isUpdateAvailable && isOnline;
+
   return (
-    <div className="title-nav">
+    <nav className="title-nav">
       <div className="title-nav__header">
         <div className="title-nav__header__info">
           <h1 className="title-nav__header__info__title title-nav__header__info__title--primary">
@@ -95,11 +105,16 @@ const TitleNavComponent = ({
             linkTo="/"
             isActive={matchRootOrMusic}
           />
-          <TitleNavLink
-            text="RECORD"
-            parentClass="title-nav__header__tab-list"
-            linkTo="/record"
-          />
+          <li className="title-nav__header__tab-list__item">
+            <a
+              href="https://record.generative.fm"
+              className="title-nav__header__tab-list__item__link"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              RECORD
+            </a>
+          </li>
           <TitleNavLink
             text="HELP"
             parentClass="title-nav__header__tab-list"
@@ -109,29 +124,31 @@ const TitleNavComponent = ({
             text="ABOUT"
             parentClass="title-nav__header__tab-list"
             linkTo="/about"
-            hasDot={isUpdateAvailable}
           />
         </ul>
       </div>
-      {notification && (
+      {(notification || canInstallUpdate) && (
         <div className="title-nav__notification">
           <a
-            href={notification.link}
+            href={canInstallUpdate ? '/' : notification.link}
             target="_blank"
             rel="noreferrer noopener"
             className="title-nav__notification__msg"
+            onClick={canInstallUpdate ? handleUpdateClick : noop}
           >
-            {notification.message}
+            {canInstallUpdate ? 'Upgrade to new version' : notification.message}
           </a>
-          <IconButton
-            className="title-nav__notification__close"
-            faIcon={faTimes}
-            title="Dismiss"
-            onClick={() => dismissNotification(notification.id)}
-          />
+          {!canInstallUpdate && (
+            <IconButton
+              className="title-nav__notification__close"
+              faIcon={faTimes}
+              title="Dismiss"
+              onClick={() => dismissNotification(notification.id)}
+            />
+          )}
         </div>
       )}
-    </div>
+    </nav>
   );
 };
 
@@ -141,6 +158,7 @@ TitleNavComponent.propTypes = {
   isInstallable: propTypes.bool.isRequired,
   dismissNotification: propTypes.func.isRequired,
   promptInstallation: propTypes.func.isRequired,
+  isOnline: propTypes.bool.isRequired,
 };
 
 export default TitleNavComponent;

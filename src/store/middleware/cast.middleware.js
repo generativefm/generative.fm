@@ -1,4 +1,4 @@
-import Tone from 'tone';
+import * as Tone from 'tone';
 import castApplicationId from '@config/cast-application-id';
 import piecesById from '@pieces/by-id';
 import artists from '@data/artists';
@@ -41,7 +41,7 @@ const updateReceiverMetadata = (castSession, currentPieceId) => {
 };
 
 const handleCastStateConnected = (castContext, store) => {
-  Tone.Master.mute = true;
+  Tone.Destination.mute = true;
   const peerConnection = new RTCPeerConnection(null);
   const castSession = castContext.getCurrentSession();
   castSession.addMessageListener(CUSTOM_MESSAGE_NAMESPACE, (ns, message) => {
@@ -74,7 +74,7 @@ const handleCastStateConnected = (castContext, store) => {
   const { cast } = window;
   const handleCastStateChanged = ({ castState }) => {
     if (castState === cast.framework.CastState.NOT_CONNECTED) {
-      Tone.Master.mute = false;
+      Tone.Destination.mute = false;
       castContext.removeEventListener(
         cast.framework.CastContextEventType.CAST_STATE_CHANGED,
         handleCastStateChanged

@@ -11,6 +11,10 @@
   cursor: pointer;
   margin: 0.25rem;
   color: $primaryColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 200ms;
 
   @include hoverStyle(#{&}) {
     &:hover {
@@ -37,6 +41,8 @@
   &--is-primary {
     border: 1px solid $primaryColor;
     border-radius: 50%;
+    display: flex;
+    transition: border-color 200ms;
 
     @include hoverStyle(#{&}) {
       &:hover {
@@ -82,19 +88,16 @@
     left: 50%;
     transform: translate(-50%, -50%);
     margin-bottom: 0.8rem;
+    transition: background-color 200ms;
   }
 
   & > .svg-inline--fa {
-    position: absolute;
-    top: 50%;
-    left: 50%;
     font-size: 1.5em;
-    transform: translate(-50%, -50%);
   }
 
   // Optically center the "play" icon
   & > .fa-play {
-    transform: translate(-37%, -50%);
+    transform: translateX(14%);
   }
 }
 

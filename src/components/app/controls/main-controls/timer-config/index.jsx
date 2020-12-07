@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import propTypes from 'prop-types';
 import TextButton from '@components/shared/text-button';
 import './timer-config.scss';
@@ -14,6 +14,10 @@ const StartTimerContent = ({ lastDurationsMS, startTimer }) => {
   const handleDurationSelect = durationMS => {
     startTimer(durationMS);
   };
+
+  const handleDurationInputChange = useCallback(event => {
+    setCustomDuration(event.target.value);
+  }, []);
 
   return (
     <div>
@@ -34,7 +38,7 @@ const StartTimerContent = ({ lastDurationsMS, startTimer }) => {
         size={3}
         className="timer-box__input"
         value={customDuration}
-        onChange={event => setCustomDuration(event.target.value)}
+        onChange={handleDurationInputChange}
         title="Timer duration in minutes"
       />
       minutes
@@ -64,6 +68,9 @@ const ADD_MS = [1 * 60 * 1000, 3 * 60 * 1000, 5 * 60 * 1000];
 const InProgressContent = ({ remainingMS, updateTimer, cancelTimer }) => {
   const remainingMinutes = Math.round(remainingMS / 60 / 1000);
   const remainingSeconds = Math.round(remainingMS / 1000);
+
+  const handleCancelClick = useCallback(() => cancelTimer(), [cancelTimer]);
+
   return (
     <div>
       <span className="timer-box__time">
@@ -77,7 +84,7 @@ const InProgressContent = ({ remainingMS, updateTimer, cancelTimer }) => {
             <button
               type="button"
               className="timer-box__durations__item__btn"
-              onClick={() => updateTimer(addMS)}
+              onClick={() => updateTimer(addMS, true)}
               title={`Add ${addMS / 60000} minutes to timer`}
             >{`+ ${addMS / 60 / 1000} minutes`}</button>
           </li>
@@ -85,7 +92,7 @@ const InProgressContent = ({ remainingMS, updateTimer, cancelTimer }) => {
       </ul>
       <TextButton
         className="timer-box__btn"
-        onClick={() => cancelTimer()}
+        onClick={handleCancelClick}
         title="Cancel timer and resume endless playback"
       >
         Cancel Timer

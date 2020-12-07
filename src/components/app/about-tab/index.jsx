@@ -1,16 +1,10 @@
 import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
-import { applyUpdate } from 'offline-plugin/runtime';
 import patronImage from '@images/patron.png';
 import Credits from './credits';
 import './about.scss';
 
-const handleUpdateClick = e => {
-  e.preventDefault();
-  applyUpdate();
-};
-
-const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
+const AboutTabComponent = ({ version }) => {
   useEffect(() => {
     if (window.twttr) {
       window.twttr.ready(twttr => {
@@ -20,14 +14,6 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
   }, [window.twttr]);
   return (
     <div className="about-tab centered-tab">
-      {isUpdateAvailable && isOnline && (
-        <p className="update-alert">
-          <a href="/" onClick={handleUpdateClick}>
-            <span className="update-alert__dot" />
-            New Version Available
-          </a>
-        </p>
-      )}
       <p>
         This site is a collection of generative music pieces which can be
         listened to. The term &quot;generative music&quot; describes music which
@@ -71,7 +57,7 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
       </p>
       <p>
         If you enjoy this project, consider supporting it:
-        <div className="support-methods">
+        <span className="support-methods">
           <a
             href="https://www.patreon.com/bePatron?u=2484731"
             target="_blank"
@@ -80,14 +66,13 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
             Patreon
           </a>
           <a
-            href="https://paypal.me/alexbainter"
+            href="https://alexbainter.com/tip"
             target="_blank"
             rel="noreferrer noopener"
           >
-            PayPal
+            PayPal, Bandcamp, Crypto, etc
           </a>
-          <span>BTC: 3DMb8BQVTtfVv59pMLmZmHr6xSoJsb3P4Z</span>
-        </div>
+        </span>
       </p>
       <p>{`v${version}`}</p>
       <p>
@@ -117,8 +102,6 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
 
 AboutTabComponent.propTypes = {
   version: propTypes.string,
-  isUpdateAvailable: propTypes.bool,
-  isOnline: propTypes.bool,
 };
 
 export default AboutTabComponent;

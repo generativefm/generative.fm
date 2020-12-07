@@ -2,12 +2,13 @@
 @import '_mixins.scss';
 
 .title-nav {
-  background-color: $backgroundColor;
+  background-color: #1e1e1e;
   color: $primaryColor;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  position: relative;
 
   &__header {
     padding: 0 1em;
-    border-bottom: 1px solid $secondaryColor;
     overflow-y: auto;
 
     &__info {
@@ -36,18 +37,6 @@
       &__install-btn {
         float: right;
       }
-
-      .secret-link {
-        @include hoverStyle(#{&}) {
-          & {
-            text-decoration: none;
-
-            &:hover {
-              text-decoration: underline;
-            }
-          }
-        }
-      }
     }
 
     &__tab-list {
@@ -66,12 +55,12 @@
 
         a#{&}__link {
           border: none;
-          background: $backgroundColor;
           cursor: pointer;
           padding: 0;
           text-decoration: none;
           font-size: 1.1em;
           color: $primaryColor;
+          transition: color 200ms;
 
           @include hoverStyle(#{&}) {
             &:hover {
@@ -131,18 +120,30 @@
   }
 
   &__notification {
-    border-bottom: 1px solid $secondaryColor;
+    background-color: $highlightColor;
     padding: 0.25em;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 
-    &__msg {
+    a#{&}__msg {
       margin: auto;
+      color: $backgroundColor;
+      border-color: $backgroundColor;
     }
 
     &__close {
       margin-right: 0.25em;
+      color: $backgroundColor;
+
+      &:hover {
+        color: lighten($backgroundColor, 15%) !important;
+      }
+
+      &:active {
+        color: lighten($backgroundColor, 30%) !important;
+      }
     }
   }
 }

@@ -1,4 +1,3 @@
-import Tone from 'tone';
 import MUTE from '../../actions/types/mute.type';
 import UNMUTE from '../../actions/types/unmute.type';
 import NEXT from '../../actions/types/next.type';
@@ -19,7 +18,6 @@ import updatePlayTime from '../../actions/creators/update-play-time.creator';
 const UPDATE_PLAY_TIME_INTERVAL_MS = 5000;
 
 const piecesMiddleware = store => next => {
-  Tone.context.latencyHint = 'balanced';
   let playTimeInterval;
 
   const startTrackingPlayTimeForPieceId = pieceId => {

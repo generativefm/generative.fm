@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 (none)
 
+## [1.35.0] - 2020-07-11
+
+### Added
+
+- Feature analytics tracking
+
 ## [1.34.0] - 2020-07-05
 
 ### Added
@@ -740,7 +746,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sound files will no longer be fetched and cached during service worker installation. They'll be cached once they are fetched for the first time. This significantly reduces cache usage since only one audio format is used per client.
 
-[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.34.0...HEAD
+[unreleased]: https://github.com/generative-music/generative.fm/compare/v1.35.0...HEAD
+[1.35.0]: https://github.com/generative-music/generative.fm/compare/v1.34.0...v1.35.0
 [1.34.0]: https://github.com/generative-music/generative.fm/compare/v1.33.1...v1.34.0
 [1.33.1]: https://github.com/generative-music/generative.fm/compare/v1.33.0...v1.33.1
 [1.33.0]: https://github.com/generative-music/generative.fm/compare/v1.32.0...v1.33.0
