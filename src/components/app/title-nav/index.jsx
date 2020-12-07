@@ -49,6 +49,7 @@ const TitleNavComponent = ({
   dismissNotification,
   promptInstallation,
 }) => {
+  notifications.push({ link: 'hi', message: 'beep boop beep boop' });
   let notification;
   if (notifications.length > 0) {
     //eslint-disable-next-line prefer-destructuring
@@ -56,7 +57,7 @@ const TitleNavComponent = ({
   }
 
   return (
-    <div className="title-nav">
+    <nav className="title-nav">
       <div className="title-nav__header">
         <div className="title-nav__header__info">
           <h1 className="title-nav__header__info__title title-nav__header__info__title--primary">
@@ -136,7 +137,7 @@ const TitleNavComponent = ({
           />
         </div>
       )}
-    </div>
+    </nav>
   );
 };
 

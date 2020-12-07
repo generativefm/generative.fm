@@ -2,23 +2,26 @@
 
 .more-btn {
   &__menu {
-    border: 1px solid $secondaryColor;
+    background: #252525;
+    border-radius: 3px;
+    overflow: hidden;
 
     &__btn {
       padding: 0.5em;
-      background-color: $backgroundColor;
+      background-color: transparent;
       color: $primaryColor;
-      border: none;
       font-size: 0.9em;
       cursor: pointer;
+      border: none;
+      transition: background-color 200ms;
 
       // don't need @include hoverStyle since the menu will close on click
       &:hover {
-        background-color: hsl(0, 0%, 20%);
+        background-color: lighten(#252525, 15%);
       }
 
       &:active {
-        background-color: hsl(0, 0%, 30%);
+        background-color: lighten(#252525, 30%);
       }
 
       &:focus {

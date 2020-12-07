@@ -4,10 +4,9 @@
 $sideControlWidth: 33%;
 
 .controls {
-  background: $backgroundColor;
+  background: #1e1e1e;
   height: $controlsHeight;
   width: 100%;
-  border-top: 1px solid $secondaryColor;
   display: flex;
   justify-content: space-between;
   align-items: center;

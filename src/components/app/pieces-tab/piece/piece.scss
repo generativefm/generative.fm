@@ -34,7 +34,7 @@ $pieceWidth: 12em;
   overflow: hidden;
   width: $pieceWidth;
   margin: 0 1em 2.5em;
-  transition: box-shadow 150ms;
+  transition: filter 200ms;
 
   &--is-disabled {
     .piece__image {
@@ -46,18 +46,20 @@ $pieceWidth: 12em;
     width: $pieceWidth;
     height: $pieceWidth;
     position: relative;
-    background-color: #eee;
     cursor: pointer;
     transition: filter 150ms;
+    border-radius: 6px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 
     @include hoverStyle(#{&}) {
       &:hover {
-        filter: invert(0.25);
+        filter: brightness(33%);
       }
     }
 
     & > img {
       max-width: 100%;
+      border-radius: 6px;
     }
 
     &__is-playing-indicator {

@@ -49,9 +49,7 @@ const AppComponent = () => {
       <div className={classNames('app', { 'has-hover': isHoverEnabled })}>
         <div className="app__content">
           <div>
-            <nav>
-              <TitleNavContainer />
-            </nav>
+            <TitleNavContainer />
             <main>
               <Switch>
                 <Route exact path="/" component={PiecesTabContainer} />

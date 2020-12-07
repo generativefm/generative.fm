@@ -80,13 +80,12 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
             Patreon
           </a>
           <a
-            href="https://paypal.me/alexbainter"
+            href="https://alexbainter.com/tip"
             target="_blank"
             rel="noreferrer noopener"
           >
-            PayPal
+            PayPal, Bandcamp, Crypto, etc
           </a>
-          <span>BTC: 3DMb8BQVTtfVv59pMLmZmHr6xSoJsb3P4Z</span>
         </span>
       </p>
       <p>{`v${version}`}</p>
