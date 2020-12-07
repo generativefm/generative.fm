@@ -2,10 +2,17 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { NavLink } from 'react-router-dom';
+import { applyUpdate } from 'offline-plugin/runtime';
 import IconButton from '@components/shared/icon-button';
 import TextButton from '@components/shared/text-button';
+import noop from '@utils/noop';
 //import AirPlay from './air-play';
 import './title-nav.scss';
+
+const handleUpdateClick = e => {
+  e.preventDefault();
+  applyUpdate();
+};
 
 const TitleNavLink = ({
   text,
@@ -48,12 +55,15 @@ const TitleNavComponent = ({
   isInstallable,
   dismissNotification,
   promptInstallation,
+  isOnline,
 }) => {
   let notification;
   if (notifications.length > 0) {
     //eslint-disable-next-line prefer-destructuring
     notification = notifications[0];
   }
+
+  const canInstallUpdate = isUpdateAvailable && isOnline;
 
   return (
     <nav className="title-nav">
@@ -114,26 +124,28 @@ const TitleNavComponent = ({
             text="ABOUT"
             parentClass="title-nav__header__tab-list"
             linkTo="/about"
-            hasDot={isUpdateAvailable}
           />
         </ul>
       </div>
-      {notification && (
+      {(notification || canInstallUpdate) && (
         <div className="title-nav__notification">
           <a
-            href={notification.link}
+            href={canInstallUpdate ? '/' : notification.link}
             target="_blank"
             rel="noreferrer noopener"
             className="title-nav__notification__msg"
+            onClick={canInstallUpdate ? handleUpdateClick : noop}
           >
-            {notification.message}
+            {canInstallUpdate ? 'Upgrade to new version' : notification.message}
           </a>
-          <IconButton
-            className="title-nav__notification__close"
-            faIcon={faTimes}
-            title="Dismiss"
-            onClick={() => dismissNotification(notification.id)}
-          />
+          {!canInstallUpdate && (
+            <IconButton
+              className="title-nav__notification__close"
+              faIcon={faTimes}
+              title="Dismiss"
+              onClick={() => dismissNotification(notification.id)}
+            />
+          )}
         </div>
       )}
     </nav>

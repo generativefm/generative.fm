@@ -1,16 +1,10 @@
 import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
-import { applyUpdate } from 'offline-plugin/runtime';
 import patronImage from '@images/patron.png';
 import Credits from './credits';
 import './about.scss';
 
-const handleUpdateClick = e => {
-  e.preventDefault();
-  applyUpdate();
-};
-
-const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
+const AboutTabComponent = ({ version }) => {
   useEffect(() => {
     if (window.twttr) {
       window.twttr.ready(twttr => {
@@ -20,14 +14,6 @@ const AboutTabComponent = ({ version, isUpdateAvailable, isOnline }) => {
   }, [window.twttr]);
   return (
     <div className="about-tab centered-tab">
-      {isUpdateAvailable && isOnline && (
-        <p className="update-alert">
-          <a href="/" onClick={handleUpdateClick}>
-            <span className="update-alert__dot" />
-            New Version Available
-          </a>
-        </p>
-      )}
       <p>
         This site is a collection of generative music pieces which can be
         listened to. The term &quot;generative music&quot; describes music which

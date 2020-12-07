@@ -1,10 +1,8 @@
 import { connect } from 'react-redux';
 import AboutTabComponent from '../components/app/about-tab';
 
-const mapStateToProps = ({ version, isUpdateAvailable, isOnline }) => ({
+const mapStateToProps = ({ version }) => ({
   version,
-  isUpdateAvailable,
-  isOnline,
 });
 
 export default connect(mapStateToProps)(AboutTabComponent);

@@ -8,15 +8,16 @@ const mapStateToProps = ({
   isUpdateAvailable,
   notifications,
   isInstallable,
+  isOnline,
 }) => ({
   isUpdateAvailable,
   isInstallable,
+  isOnline,
   notifications: notifications.filter(({ isDismissed }) => !isDismissed),
 });
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    { dismissNotification, promptInstallation }
-  )(TitleNavComponent)
+  connect(mapStateToProps, { dismissNotification, promptInstallation })(
+    TitleNavComponent
+  )
 );
