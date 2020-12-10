@@ -70,7 +70,7 @@ const AboutTabComponent = ({ version }) => {
             target="_blank"
             rel="noreferrer noopener"
           >
-            PayPal, Bandcamp, Crypto, etc
+            PayPal, Bandcamp, crypto, etc
           </a>
         </span>
       </p>
