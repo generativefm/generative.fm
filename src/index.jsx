@@ -36,6 +36,16 @@ if (isProduction) {
   console.log('https://github.com/generative-music/generative.fm');
 }
 
+window.addEventListener('message', event => {
+  const { data, source, origin } = event;
+  if (origin !== 'https://play.generative.fm' || source !== window.opener) {
+    return;
+  }
+  if (data.type === 'export-request') {
+    source.postMessage({ type: 'export', state: store.getState() });
+  }
+});
+
 render(
   <Provider store={store}>
     <App />
