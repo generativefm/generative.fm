@@ -9,6 +9,7 @@ import store from './store';
 import indicateUpdateAvailable from './store/actions/creators/indicate-update-available.creator';
 import isProduction from './config/is-production';
 import App from './containers/app.container';
+import setImported from './store/actions/creators/set-imported.creator';
 import './styles/base-styles.scss';
 
 if (isProduction) {
@@ -43,6 +44,10 @@ window.addEventListener('message', event => {
   }
   if (data.type === 'export-request') {
     source.postMessage({ type: 'export', state: store.getState() });
+    return;
+  }
+  if (data.type === 'set-imported') {
+    store.dispatch(setImported());
   }
 });
 

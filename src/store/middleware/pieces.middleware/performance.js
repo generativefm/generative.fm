@@ -2,7 +2,6 @@ import * as Tone from 'tone';
 import uuid from 'uuid';
 
 const performance = (piece, volumeNode) => {
-  const performanceId = uuid();
   let isStopped = false;
   const cleanUpFns = [
     () => {
@@ -14,13 +13,13 @@ const performance = (piece, volumeNode) => {
     },
   ];
   return {
-    performanceId,
     piece,
     volumeNode,
+    performanceId: uuid(),
     isLoaded: false,
+    isStopped: () => isStopped,
     addCleanupFn: fn => cleanUpFns.push(fn),
     stop: () => cleanUpFns.forEach(fn => fn()),
-    isStopped: () => isStopped,
   };
 };
 

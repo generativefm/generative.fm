@@ -23,6 +23,7 @@ import isInstallable from './is-installable.reducer';
 import globalPlayTime from './global-play-time.reducer';
 import favoriteCount from './favorite-count.reducer';
 import analytics from './analytics.reducer';
+import isImported from './is-imported.reducer';
 
 const combinedReducer = combineReducers({
   isMuted,
@@ -48,6 +49,7 @@ const combinedReducer = combineReducers({
   globalPlayTime,
   favoriteCount,
   analytics,
+  isImported,
 });
 
 const rootReducer = (state = {}, action) => {

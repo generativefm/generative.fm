@@ -6,6 +6,7 @@ import performance from './performance';
 import stopPerformances from './stop-performances';
 import convertPctToDb from './convert-pct-to-db';
 import streamDestination from '../stream-destination';
+import logEmission from './log-emission';
 import noop from '@utils/noop';
 
 let lastBuildId;
@@ -55,6 +56,17 @@ const makePlayPiece = (store, performances) => {
           onProgress: noop,
         })
         .then(([deactivate, schedule]) => {
+          piecePerformance.addCleanupFn(() => {
+            if (piecePerformance.startTime) {
+              const { stateId } = store.getState();
+              logEmission({
+                startTime: piecePerformance.startTime,
+                endTime: Date.now(),
+                pieceId: piecePerformance.piece.id.replace('alex-bainter-', ''),
+                userId: `LEGACY__${stateId}`,
+              });
+            }
+          });
           piecePerformance.addCleanupFn(deactivate);
           const end = schedule();
           piecePerformance.addCleanupFn(end);
@@ -67,6 +79,7 @@ const makePlayPiece = (store, performances) => {
             selectedPieceId === piece.id &&
             isPlaying
           ) {
+            piecePerformance.startTime = Date.now();
             Tone.Transport.start();
           } else {
             stopPerformances(performances);
