@@ -72,7 +72,7 @@ const PiecesTabComponent = ({
     if (!isOnline) {
       Promise.all(
         pieces.map(({ id, sampleNames }) =>
-          library.canProvide(sampleNames).then(result => [id, result])
+          library.has(sampleNames).then(result => [id, result])
         )
       ).then(results => {
         setIsPieceCachedMap(new Map(results));
