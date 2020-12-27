@@ -10,6 +10,7 @@ import indicateUpdateAvailable from './store/actions/creators/indicate-update-av
 import isProduction from './config/is-production';
 import App from './containers/app.container';
 import setImported from './store/actions/creators/set-imported.creator';
+import STATE_STORAGE_KEY from './store/middleware/local-storage.middleware/key';
 import './styles/base-styles.scss';
 
 if (isProduction) {
@@ -37,17 +38,23 @@ if (isProduction) {
   console.log('https://github.com/generative-music/generative.fm');
 }
 
+const openerOrigin = isProduction
+  ? 'https://play.generative.fm'
+  : 'http://localhost:8080';
+
 window.addEventListener('message', event => {
   const { data, source, origin } = event;
-  if (origin !== 'https://play.generative.fm' || source !== window.opener) {
+  if (origin !== openerOrigin) {
     return;
   }
   if (data.type === 'export-request') {
-    source.postMessage({ type: 'export', state: store.getState() });
+    const state = window.localStorage.getItem(STATE_STORAGE_KEY);
+    source.postMessage({ type: 'export', state }, origin);
     return;
   }
-  if (data.type === 'set-imported') {
+  if (data.type === 'set-import-request') {
     store.dispatch(setImported());
+    source.postMessage({ type: 'import-set' }, origin);
   }
 });
 
