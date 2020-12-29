@@ -1,6 +1,6 @@
 {
   "name": "generative.fm",
-  "version": "1.38.0",
+  "version": "1.40.2",
   "description": "A platform for playing generative music in the browser",
   "main": "index.js",
   "scripts": {
